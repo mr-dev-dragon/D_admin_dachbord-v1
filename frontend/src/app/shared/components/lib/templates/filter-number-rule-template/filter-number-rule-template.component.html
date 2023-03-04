@@ -9,13 +9,15 @@
       </select>
       <hr *ngIf="sectiontow"  />
       <select class=" s-t-input-group form-select mt-3 mb-3" aria-label="Default select example">
-        <option value='starts with'> {{'starts with'   |translate |titlecase}}</option>
-        <option value='contains'> {{'contains' |translate |titlecase}}</option>
-        <option value='not Contains'> {{'not Contains'  |translate |titlecase}}</option>
-        <option value='end with'> {{'end with'      |translate |titlecase}}</option>
-        <option value='ends with'> {{'ends with'     |translate |titlecase}}</option>
         <option value='equals'> {{'equals' |translate |titlecase}}</option>
         <option value='not equals'> {{'not equals'    |translate |titlecase}}</option>
+
+        <option value='less then'> {{'less then'   |translate |titlecase}}</option>
+        <option value='less then or equals to'> {{'contains' |translate |titlecase}}</option>
+
+        <option value='greater then'> {{'greater then'   |translate |titlecase}}</option>
+        <option value='greater then or equals to'> {{'contains' |translate |titlecase}}</option>
+
       </select>
       <filter-by-number [type]="'text'" [label]="'search'" [path]="path" [inData]="inData"
         (outData)="outDataFunction($event)">

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { addArrays } from 'src/app/shared/global/filter-tool';
 
 @Component({
   selector: 'filter-number-rule-template',
@@ -17,7 +18,44 @@ export class FilterNumberRuleTemplateComponent {
     this.outData.emit(a);
   }
 
+
+  MatchType: any = 'match any';
+  filterTypeOne: any = 'starts with';
+  filterTypeTow: any = 'starts with';
+  filterOne!: any[];
+  filterTow!: any[];
+  allFeltedData!: any;
+
+  ngOnInit(): void {}
+
+  outDataFunctionOne(a: any) {
+    this.filterOne = a;
+  }
+
+  outDataFunctionTow(a: any) {
+    this.filterTow = a;
+  }
+
   sectiontowF() {
     this.sectiontow = !this.sectiontow;
   }
+  apply(a: any) {
+    console.log(this.filterTypeOne);
+    if (a) {
+      this.MatchType == 'match any'
+        ? (this.allFeltedData = addArrays<string>(
+            this.filterOne,
+            this.filterTow
+          ))
+        : (this.allFeltedData = addArrays<string>(
+            this.filterOne,
+            this.filterTow,
+            false
+          ));
+      this.outData.emit(this.allFeltedData);
+    } else {
+      this.outData.emit(this.filterOne);
+    }
+  }
+
 }
