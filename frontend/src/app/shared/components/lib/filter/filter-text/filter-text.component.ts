@@ -23,6 +23,7 @@ export class FilterTextComponent implements OnChanges {
         this.filterBy(this.inputVal);
     }
   }
+  
   @Input() inData!: any[];
   @Output() outData: EventEmitter<any[]> = new EventEmitter();
 
@@ -75,6 +76,13 @@ export class FilterTextComponent implements OnChanges {
 
   }
 }
+
+
+
+
+
+
+
 
 
 

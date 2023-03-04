@@ -1,5 +1,19 @@
  <section>
-
+      <br>
+        <label for="matchtype">{{ 'type Filer ' }}</label>
+        <select
+              *ngIf="showTypeFiler"
+              [(ngModel)]="typeFiler"
+              id="matchtype"
+              class=" s-t-input-group form-select mt-3 mb-1"
+              aria-label="Default select example"
+        >
+          <option value="lass then">{{'lass then'|translate|titlecase}}</option>
+          <option value="biger then">{{'biger then'|translate|titlecase}}</option>
+        </select>
+        <hr *ngIf="rule"  />
+ </section>
+ <section>
     <div class="lai range--">
       <div class="row"></div>
       <div class="row"></div>
@@ -9,7 +23,7 @@
           <h5 class="range_title ">value <span> : {{range_val}} % </span> </h5>
         </div>
         <div class="row m-1">
-          <p-slider [(ngModel)]="range_val"></p-slider>
+          <p-slider (onChange)="filterBy()" [(ngModel)]="range_val"></p-slider>
         </div>
         <div class="row">
           <div class="col-md-8"></div>
@@ -20,20 +34,16 @@
       </div>
     </div>
  </section>
-
-
-
-
-
-<footer class="mt-4">
+<!-- <footer class="mt-4">
   <div class="footer">
     <button
+     (click)=" clearFiler()"
           type="button"
           class="footer-btn">
-      <span
+        <span
          class="p-button-label">
-        Clear
-      </span>
+             Clear
+        </span>
     </button>
     <button
           type="button"
@@ -45,7 +55,7 @@
       </span>
     </button>
   </div>
-</footer>
+</footer> -->
 
 
 
