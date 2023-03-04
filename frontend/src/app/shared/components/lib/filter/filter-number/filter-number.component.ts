@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, SimpleChanges } from '@angular/core';
 import { g } from 'src/app/shared/global/filter-tool';
 @Component({
   selector: 'filter-by-number',
@@ -9,6 +9,20 @@ export class FilterNumberComponent {
   @Input() type: string | string[] = 'text';
   @Input() label: string | string[] = 'text';
   @Input() path: string | string[] = '';
+  @Input() rule:
+    | 'starts with'
+    | 'contains'
+    | 'not Contains'
+    | 'end with'
+    | 'equals'
+    | 'not equals' = 'starts with';
+  ngOnChanges(change: SimpleChanges): void {
+    if (change['rule']) {
+      console.log(this.rule);
+      this.filterBy(this.inputVal);
+    }
+  }
+
   @Input() inData!: any[];
   @Input() operator: string = '==';
   @Output() outData = new EventEmitter();
@@ -24,31 +38,29 @@ export class FilterNumberComponent {
     } else if (filterInputValue == '') this.outData.emit(this.inData);
   }
 
-  filter(filterInputValue: any, operator: string ) {
-    let reusltdata:any
-    let path =this.path
-       if (this.operator || filterInputValue) {
-             let reusltdata = this.inData.filter((item) => {
-               switch (operator) {
-                 case '==':
-                   return item.path === filterInputValue;
-                 case '!=':
-                   return item.path !== filterInputValue;
-                 case '>':
-                   return item.path > filterInputValue;
-                 case '>=':
-                   return item.path >= filterInputValue;
-                 case '<':
-                   return item.path < filterInputValue;
-                 case '<=':
-                   return item.path <= filterInputValue;
-                 default:
-                   return true;
-               }
-             });
-
+  filter(filterInputValue: any, operator: string) {
+    let reusltdata: any;
+    let path = this.path;
+    if (this.operator || filterInputValue) {
+      let reusltdata = this.inData.filter((item) => {
+        switch (operator) {
+          case '==':
+            return item.path === filterInputValue;
+          case '!=':
+            return item.path !== filterInputValue;
+          case '>':
+            return item.path > filterInputValue;
+          case '>=':
+            return item.path >= filterInputValue;
+          case '<':
+            return item.path < filterInputValue;
+          case '<=':
+            return item.path <= filterInputValue;
+          default:
+            return true;
         }
+      });
+    }
     return reusltdata;
-
   }
 }

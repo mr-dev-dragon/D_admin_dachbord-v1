@@ -11,17 +11,16 @@ export class FilterNumberRuleTemplateComponent {
   @Input() label: string | string[] = 'text';
   @Input() path: string | string[] = '';
   @Input() inData!: any[];
-  @Output() outData: EventEmitter<any> = new  EventEmitter();
+  @Output() outData: EventEmitter<any> = new EventEmitter();
   sectiontow: boolean = false;
 
   outDataFunction(a: any) {
     this.outData.emit(a);
   }
 
-
   MatchType: any = 'match any';
-  filterTypeOne: any = 'starts with';
-  filterTypeTow: any = 'starts with';
+  filterTypeOne: any = 'equals';
+  filterTypeTow: any = 'equals';
   filterOne!: any[];
   filterTow!: any[];
   allFeltedData!: any;
@@ -57,5 +56,4 @@ export class FilterNumberRuleTemplateComponent {
       this.outData.emit(this.filterOne);
     }
   }
-
 }
