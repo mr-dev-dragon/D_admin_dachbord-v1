@@ -1,0 +1,22 @@
+<container>
+  <s-dynamic-table
+      [data]="dummyDate"
+      [cols]="cols"
+      [captionConfig]="captionConfig"
+      (onEditClick)="onEditClick($event)"
+      (onDetailClick)="onDetailClick($event)"
+      (onCloneClick)="onCloneClick($event)"
+      (onAddClick)="onAddClick($event)"
+      (onDelete)="onDelete($event)"
+  >
+    <ng-template #expandedRow let-i>
+
+      <s-table-contianer>
+
+          <app-m-card></app-m-card>
+
+      </s-table-contianer>
+
+    </ng-template>
+  </s-dynamic-table>
+</container>

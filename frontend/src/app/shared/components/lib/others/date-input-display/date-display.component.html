@@ -1,0 +1,10 @@
+<div *ngIf="displayType === 'week'"> month==> </div>
+<div *ngIf="displayType === 'time'">
+    <div class="field col-12 lai md:col-4">
+      <label for="basic">{{label}}</label>
+      <p-calendar    (ngModelChange)="updateDAteValue($event)" inputId="basic"[minDate]="max" [minDate]="min" [(ngModel)]="dateValue"></p-calendar>
+    </div>
+</div>
+<div *ngIf="displayType === 'month'"> week==> <input (change)="updateDAteValue($event) " [(ngModel)]="dateValue" [value]="date" type="week"></div>
+
+

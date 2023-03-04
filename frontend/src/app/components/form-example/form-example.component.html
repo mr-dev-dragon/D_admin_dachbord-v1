@@ -1,0 +1,230 @@
+<form [formGroup]="personalInfoForm" class="form">
+  <section [ngClass]="stipes[0].active ? 's-d-block' : 's-d-none'" formGroupName="personalInfo"
+    class="row section personalInfo-section">
+    <div class="col-md-12 header-form">
+      <h1>personal Info</h1>
+    </div>
+
+    <div class="col-md-12">
+      <label>firstName:</label>
+      <input type="text" formControlName="firstName" />
+    </div>
+    <div class="col-md-12">
+      <label>lastName:</label>
+      <input type="text" formControlName="lastName" />
+    </div>
+    <div class="col-md-12">
+      <label>nivean scolaires:</label>
+      <input type="text" formControlName="niveanScolaires" />
+    </div>
+    <div class="col-md-12 d-flex">
+      <button (click)="pre(0)" class="p-button submit-btn text-center" type="button">
+        <span class="span">pre</span>
+      </button>
+      <button (click)="addpersonalInfo(0)" class="p-button submit-btn text-center" type="button">
+        <span class="span">Submit</span>
+      </button>
+      <button (click)="next(0)" class="p-button submit-btn text-center" type="button">
+        <span class="span">next</span>
+      </button>
+    </div>
+  </section>
+
+  <section [ngClass]="stipes[1].active ? 's-d-block' : 's-d-none'" formGroupName="coordonnee"
+    class="row section coordonnee-section">
+    <div class="col-md-12 header-form">
+      <h1>coordonnee</h1>
+    </div>
+    <div class="col-md-12">
+      <label>phone:</label>
+      <input type="tel" formControlName="phone" />
+    </div>
+    <div class="col-md-12">
+      <label>email:</label>
+      <input type="text" formControlName="email" />
+    </div>
+    <div class="col-md-12">
+      <label>ville:</label>
+      <input type="text" formControlName="ville" />
+    </div>
+    <div class="col-md-12">
+      <label>pays:</label>
+      <input type="text" formControlName="pays" />
+    </div>
+    <div class="col-md-12">
+      <label>address:</label>
+      <input type="text" formControlName="address" />
+    </div>
+    <div class="col-md-12 d-flex">
+      <button (click)="pre(1)" class="p-button submit-btn text-center" type="button">
+        <span class="span">pre</span>
+      </button>
+      <button (click)="addCoordonnee(1)" class="p-button submit-btn text-center" type="button">
+        <span class="span">Submit</span>
+      </button>
+      <button (click)="next(1)" class="p-button submit-btn text-center" type="button">
+        <span class="span">next</span>
+      </button>
+    </div>
+  </section>
+
+  <section [ngClass]="stipes[2].active ? 's-d-block' : 's-d-none'" formArrayName="educations"
+    class="section education-section">
+    <div class="col-md-12 header-form">
+      <h1>education</h1>
+    </div>
+    <div *ngFor="let education of educations.controls; index as i">
+      {{ i }}
+      <div class="row" [formGroupName]="i">
+        <div class="col-md-12">
+          <label>dataStart:</label>
+          <input class="col-md-12" type="text" formControlName="dataStart" />
+        </div>
+        <div class="col-md-12">
+          <label>dataEnd:</label>
+          <input class="col-md-12" type="text" formControlName="dataEnd" />
+        </div>
+        <div class="col-md-12">
+          <label>filde:</label>
+          <input class="col-md-12" type="text" formControlName="filde" />
+        </div>
+        <div class="col-md-12">
+          <label>school:</label>
+          <input type="text" formControlName="school" />
+        </div>
+        <div class="col-md-12 d-flex">
+          <div class="col-md-12 d-flex">
+            <button (click)="pre(2)" class="p-button submit-btn text-center" type="button">
+              <span class="span">pre</span>
+            </button>
+            <button *ngIf="i == 0" (click)="addEducations(2)" class="p-button submit-btn text-center" type="button">
+              <span class="span"> Submit</span>
+            </button>
+            <button *ngIf="i != 0" (click)="addEducations(2)" class="p-button submit-btn btn-2 text-center"
+              type="button">
+              <span class="span"><i class="pi pi-plus"></i> add itome </span>
+            </button>
+            <button (click)="next(2)" class="p-button submit-btn text-center" type="button">
+              <span class="span">next</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section [ngClass]="stipes[3].active ? 's-d-block' : 's-d-none'" formArrayName="experiences"
+    class="row section experiences-section">
+    <div class="col-md-12 header-form">
+      <h1>experiences</h1>
+    </div>
+    <div *ngFor="let experience of experiences.controls; index as i">
+      {{ i }}
+      <div class="row" [formGroupName]="i">
+        <div class="col-md-12">
+          <label>dataStart:</label>
+          <input class="col-md-12" type="text" formControlName="dataStart" />
+        </div>
+        <div class="col-md-12">
+          <label>dataEnd:</label>
+          <input class="col-md-12" type="text" formControlName="dataEnd" />
+        </div>
+        <div class="col-md-12">
+          <label>jobTitle:</label>
+          <input class="col-md-12" type="text" formControlName="jobTitle" />
+        </div>
+        <div class="col-md-12">
+          <label>Company:</label>
+          <input type="text" formControlName="company" />
+        </div>
+        <div class="col-md-12 d-flex">
+          <button (click)="pre(3)" class="p-button submit-btn text-center" type="button">
+            <span class="span">pre</span>
+          </button>
+          <button *ngIf="i == 0" (click)="addExperience(3)" class="p-button submit-btn text-center" type="button">
+            <span class="span"> Submit</span>
+          </button>
+          <button *ngIf="i != 0" (click)="addExperience(3)" class="p-button submit-btn btn-2 text-center" type="button">
+            <span class="span"><i class="pi pi-plus"></i> add itome </span>
+          </button>
+          <button (click)="next(3)" class="p-button submit-btn text-center" type="button">
+            <span class="span">next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section [ngClass]="stipes[4].active ? 's-d-block' : 's-d-none'" formArrayName="languges"
+    class="row section languges-section">
+    <div class="col-md-12 header-form">
+      <h1>languges</h1>
+    </div>
+    <div *ngFor="let languge of languges.controls; index as i">
+      {{ i }}
+      <div class="row" [formGroupName]="i">
+        <div class="col-md-12">
+          <label>languge:</label>
+          <input class="col-md-12" type="text" formControlName="languge" />
+        </div>
+        <div class="col-md-12">
+          <label>languge level:</label>
+          <input class="col-md-12" type="text" formControlName="langugeLevel" />
+        </div>
+
+        <div class="col-md-12 d-flex">
+          <button (click)="pre(4)" class="p-button submit-btn text-center" type="button">
+            <span class="span">pre</span>
+          </button>
+          <button *ngIf="i == 0" (click)="addlanguges(4)" class="p-button submit-btn text-center" type="button">
+            <span class="span"> Submit</span>
+          </button>
+          <button *ngIf="i != 0" (click)="addlanguges(4)" class="p-button submit-btn btn-2 text-center" type="button">
+            <span class="span"><i class="pi pi-plus"></i> add itome </span>
+          </button>
+          <button (click)="next(4)" class="p-button submit-btn text-center" type="button">
+            <span class="span">next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section [ngClass]="stipes[5].active ? 's-d-block' : 's-d-none'" formArrayName="skills"
+    class="row section skills-section">
+    <div class="col-md-12 header-form">
+      <h1>skills</h1>
+    </div>
+
+    <div *ngFor="let skill of skills.controls; index as i">
+      {{ i }}
+      <div class="row" [formGroupName]="i">
+        <div class="col-md-12">
+          <label>skill Name:</label>
+          <input class="col-md-12" type="text" formControlName="skillName" />
+        </div>
+        <div class="col-md-12">
+          <label>skill Level:</label>
+          <input class="col-md-12" type="text" formControlName="skillLevel" />
+        </div>
+
+        <div class="col-md-12 d-flex">
+          <button (click)="pre(5)" class="p-button submit-btn text-center" type="button">
+            <span class="span">pre</span>
+          </button>
+          <button *ngIf="i == 0" (click)="addskills(5)" class="p-button submit-btn text-center" type="button">
+            <span class="span"> Submit</span>
+          </button>
+          <button *ngIf="i != 0" (click)="addskills(5)" class="p-button submit-btn btn-2 text-center" type="button">
+            <span class="span"><i class="pi pi-plus"></i> add itome </span>
+          </button>
+          <button (click)="next(5)" class="p-button submit-btn text-center" type="button">
+            <span class="span">next</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <footer class="row">
+    <div class="col-md-8"></div>
+  </footer>
+</form>

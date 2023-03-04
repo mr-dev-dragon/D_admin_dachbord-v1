@@ -1,0 +1,142 @@
+<header class="header" [ngClass]="showSidebar ? 'open-sidebar' : ''">
+
+  <div class=" sidebar_header">
+    <div class="s-header " [ngClass]="{'d-none':!showSidebar}" >
+
+      <div [ngClass]="{'logo-container':showSidebar,'logo-container-closed':!showSidebar}" class="logo-container"
+        [routerLink]="['/dashboard']" style="cursor: pointer">
+
+          <div class="logoo"  *ngIf="showSidebar">Logo</div>
+      </div>
+
+
+
+    </div>
+    <!-- <div class="header-side">
+        <a class="sidebar-toggler w-w left-sidebar-toggler nav-toggler" #st (click)="toggleSidebar()">
+          <i class="w-w-icon  pi pi-align-right"></i>
+        </a>
+    </div> -->
+
+        <div class=" header-side ">
+        <div [ngClass]="{'s-footer':!showSidebar,'s-s-footer':showSidebar}">
+
+          <div class="close-footer ">
+                <a class="sidebar-toggler w-w left-sidebar-toggler nav-toggler" #st (click)="toggleSidebar()">
+                  <i class="w-w-icon  pi pi-align-justify"></i>
+                </a>
+          </div>
+            </div>
+        </div>
+
+  </div>
+
+  <nav
+    class="navbar user-menu"
+    #um
+    [ngClass]="showUserMenu && mobileSize ? 'open' : ''"
+  >
+    <ul class="navbar-nav">
+          <li class="nav-item fullscreen-icon-container">
+            <i class="fullscreen-icon bi">
+              <p-inputSwitch name="groupname" [trueValue]="true" [falseValue]="false"
+                (onChange)="darkModeFunction($event)"></p-inputSwitch>
+            </i>
+          </li>
+
+      <li class="nav-item fullscreen-icon-container">
+        <i
+          class="fullscreen-icon bi"
+          toggleFullscreen
+          [ngClass]="
+            fullScreen.isFullscreen
+              ? 'bi-arrows-angle-contract'
+              : 'bi-arrows-angle-expand'
+          "
+        ></i>
+      </li>
+
+      <!-- class="nav-item lang-container"
+      #lang
+      (click)="lang.classList.toggle('open')" -->
+      <li
+        [class]="'nav-item lang-container ' + (isLangListOpened ? 'open' : '')"
+        (click)="isLangListOpened = !isLangListOpened"
+      >
+        <div class="lang-inner-container">
+          <i [class]="'fi fi-' + langIcon"></i>
+          <ul class="langs-list">
+            <li
+              class="lang-item"
+              [ngClass]="{
+                hidden: lng.icon == langIcon
+              }"
+              (click)="changeLang(lng.code)"
+              *ngFor="let lng of langs"
+            >
+              <i [class]="'fi fi-' + lng.icon"></i>
+              <span class="lang-name">{{ lng.name }}</span>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item notificationcontainer">
+        <i
+          class="bi bi-bell"
+          #bell
+          (mouseover)="
+            bell.classList.toggle('bi-bell-fill');
+            bell.classList.toggle('bi-bell')
+          "
+          (mouseleave)="
+            bell.classList.toggle('bi-bell-fill');
+            bell.classList.toggle('bi-bell')
+          "
+        ></i>
+      </li>
+      <li class="nav-item" ngbDropdown placement="bottom-end">
+        <a
+          ngbDropdownToggle
+          class="nav-link waves-effect waves-dark pro-pic"
+          data-toggle="dropdown"
+          aria-haspopup="true"
+          aria-expanded="false"
+        >
+          <img
+            [defaultImage]="'assets/images/default_user_image.svg'"
+            [lazyLoad]="user?.photo"
+            alt="user"
+            class="rounded-circle"
+            width="31"
+          />
+          <span class="ms-2">
+            {{ user?.translations?.nom }} {{ user?.translations?.prenom }}
+          </span>
+        </a>
+        <div class="dropdown-menu-right" ngbDropdownMenu>
+          <a
+            class="dropdown-item"
+            (click)="showUserMenu = false"
+            [routerLink]="['/configuration/profile/myProfile', user._id]"
+          >
+            <i class="bi bi-person"></i>
+            My Profile
+          </a>
+          <div class="dropdown-divider"></div>
+          <a
+            class="dropdown-item"
+            (click)="showUserMenu = false"
+            [routerLink]="['/configuration/profile/edit', user._id]"
+          >
+            <i class="bi bi-gear"></i>
+            Account Setting
+          </a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="logOut()"
+            > <i class="bi bi-box-arrow-right"></i> Logout</a
+          >
+        </div>
+      </li>
+    </ul>
+  </nav>
+</header>

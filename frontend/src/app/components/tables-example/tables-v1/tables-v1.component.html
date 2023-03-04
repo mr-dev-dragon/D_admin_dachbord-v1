@@ -1,0 +1,13 @@
+
+
+<div class="mb-5"></div>
+<container>
+  <h1>tables modeles </h1>
+  <app-dynamic-table [data]="dummyDate" [cols]="cols" [captionConfig]="captionConfig"
+    (onEditClick)="onEditClick($event)" (onDetailClick)="onDetailClick($event)" (onCloneClick)="onCloneClick($event)"
+    (onAddClick)="onAddClick($event)" (onDelete)="onDelete($event)">
+  </app-dynamic-table>
+  <div class="mb-5"></div>
+
+</container>
+<div class="mb-5"></div>

@@ -1,0 +1,38 @@
+.footer {
+  margin: 20px;
+  display: flex;
+  justify-content: space-between;
+
+  button {
+
+    border-radius: 1rem;
+    padding: 0.8rem;
+
+  }
+
+  button:first-child {
+    border: 3px #1a78c084 solid;
+    color: #5d5d5d;
+
+    &:hover {
+      color: #373737;
+      border: 3px #1a78c0ed solid;
+
+    }
+  }
+
+  button:last-child {
+    border: none !important;
+    background-color: #6c28d98d;
+    color: #ffffffd1;
+
+    &:hover {
+
+      background-color: #6c28d9db;
+      color: #ffffff;
+    }
+
+
+  }
+
+}

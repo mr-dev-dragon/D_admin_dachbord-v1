@@ -1,0 +1,53 @@
+ <section>
+
+    <div class="lai range--">
+      <div class="row"></div>
+      <div class="row"></div>
+      <div class="row"></div>
+      <div class="row range-conteaner">
+        <div class="row m-1">
+          <h5 class="range_title ">value <span> : {{range_val}} % </span> </h5>
+        </div>
+        <div class="row m-1">
+          <p-slider [(ngModel)]="range_val"></p-slider>
+        </div>
+        <div class="row">
+          <div class="col-md-8"></div>
+          <div class="col-md-4">
+            <input class="range-input" type="number" #percentage pInputText [(ngModel)]="range_val" />
+          </div>
+        </div>
+      </div>
+    </div>
+ </section>
+
+
+
+
+
+<footer class="mt-4">
+  <div class="footer">
+    <button
+          type="button"
+          class="footer-btn">
+      <span
+         class="p-button-label">
+        Clear
+      </span>
+    </button>
+    <button
+          type="button"
+          class="footer-btn">
+      <span
+          class="p-button-label"
+      >
+        Apply
+      </span>
+    </button>
+  </div>
+</footer>
+
+
+
+
+

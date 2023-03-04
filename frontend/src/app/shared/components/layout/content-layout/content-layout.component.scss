@@ -1,0 +1,34 @@
+
+.app-wrapper {
+  width: 100vw;
+  height: 100vh;
+  .content-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding-top: 3.08rem;
+    .content-container {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 10px 20px 0;
+      border-radius: 7px 0px 0px 0px;
+      background-color: #ebebeb;
+      overflow-y: auto;
+      .main {
+        position: relative;
+        box-shadow: 0px 2px 5px 1px rgb(0 0 0 / 20%);
+        border-radius: 0.4rem;
+        // background-color: $body-bg;
+
+          background-color: #EFF3F8;
+        color: black;
+        flex-grow: 1;
+        margin-top: -1.25rem;
+        padding:  1rem ;
+      }
+    }
+  }
+}
+
+

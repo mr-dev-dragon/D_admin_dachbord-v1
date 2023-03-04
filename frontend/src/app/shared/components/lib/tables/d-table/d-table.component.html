@@ -1,0 +1,557 @@
+<div [ngClass]="tiblecontinerDiv ? 'table_container' : ''">
+  <div class="body">
+    <main class="s-t-main">
+      <section class="s-t-header">
+        <div class="header-container">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="w-6 s-t-t-icon h-6">
+            <path stroke-linecap="round" stroke-linejoin="round"
+              d="M20.893 13.393l-1.135-1.135a2.252 2.252 0 01-.421-.585l-1.08-2.16a.414.414 0 00-.663-.107.827.827 0 01-.812.21l-1.273-.363a.89.89 0 00-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.212.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 0 01-1.81 1.025 1.055 1.055 0 01-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.655-.261a2.25 2.25 0 01-1.383-2.46l.007-.042a2.25 2.25 0 01.29-.787l.09-.15a2.25 2.25 0 012.37-1.048l1.178.236a1.125 1.125 0 001.302-.795l.208-.73a1.125 1.125 0 00-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 01-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 01-1.458-1.137l1.411-2.353a2.25 2.25 0 00.286-.76m11.928 9.869A9 9 0 008.965 3.525m11.928 9.868A9 9 0 118.965 3.525" />
+          </svg>
+          <h1 class="s-t-t-title">{{ tibleTitale | titlecase }}</h1>
+        </div>
+        <div class="header-container">
+          <button type="button" *ngIf="captionConfig.addButton && !captionConfig.addButton.menuItem"
+            class="button green" (click)="onAdd()">
+            <i class="pi pi pi-plus s-t-h-b-icon"></i>
+          </button>
+          <div>
+            <p-tieredMenu #menu [model]="captionConfig.addButton.menuItem" [popup]="true" [appendTo]="'body'">
+            </p-tieredMenu>
+          </div>
+          <button type="button" *ngIf="captionConfig.clearTable" class="button red" (click)="showUndoDialog()"
+            [disabled]="
+                        selectedItems.map ? !selectedItems.length : !selectedItems
+                      ">
+            <i class="pi pi pi-trash s-t-h-b-icon"></i>
+          </button>
+        </div>
+        <div class="header-container">
+          <filter-by-text *ngIf="
+                        captionConfig.headerFilterType && captionConfig.headerFilterfield
+                      " [type]="captionConfig.headerFilterType" [inData]="data"
+            [path]="captionConfig.headerFilterfield" (outData)="
+                        outDataFunction(
+                          $event,
+                          captionConfig.headerFilterType,
+                          -1,
+                          captionConfig.headerFilterfield
+                        )
+                      ">
+          </filter-by-text>
+        </div>
+        <div class="header-container">
+          <button type="button" class="button gray" (click)="clear()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="s-t-h-b-icon" viewBox="0 0 24 24"
+              strokeWidth="{1.5}" stroke="currentColor" className="w-6 h-6">
+              <path strokeLinecap="round" strokeLinejoin="round"
+                d="M6 13.5V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 9.75V10.5" />
+            </svg>
+          </button>
+          <p-multiSelect *ngIf="captionConfig.displayedColumns" [appendTo]="'body'" [options]="columns"
+            [(ngModel)]="_selectedColumns" [ngStyle]="{ marginBlock: 'auto' }" [optionLabel]="'header'"
+            selectedItemsLabel="{0} columns selected" [style]="{
+              minWidth: '200px',
+              borderRadius: '10px ',
+              boxShadow: 'none',
+              width: '150%',
+              height: '45px',
+              marginTop: '-10px',
+              marginBottom: '-10px',
+              padding: '2px',
+              backgroundColor: '#fff5',
+              border: '1px  solid  #fff1'
+            }" placeholder="Choose Columns" (onChange)="test($event)">
+          </p-multiSelect>
+        </div>
+        <div *ngIf="captionConfig.sort" class="header-container">
+          <app-sort [data]="outData" [path]="'fullname'" [sortByName]="true" [sortByDate]="false"></app-sort>
+        </div>
+        <div class="header-container"></div>
+      </section>
+      <!-- </container> -->
+      <section class="s-t-body" [ngStyle]="{ width: tableWidth, borderRadius: tAbleborderRadius }">
+        <table class="s-t-table">
+          <div #tableBody *ngIf="show_file_data" class="show_file_data" [style.top]="top + 'px'"
+            [style.left]="left + 'px'">
+            <div class="close">
+              <i (click)="imageClikEvent_Close()" class="pi pi-times-circle" style="font-size: 2rem"></i>
+            </div>
+            <img class="zoomedImg" draggable="true" [lazyLoad]="zoomedImagModalsrc" />
+          </div>
+          <thead class="s-t-thead">
+            <tr class="s-t-tr">
+              <th class="s-t-th" *ngIf="
+                  captionConfig.expanded?.dataField ||
+                  captionConfig.expanded?.headers ||
+                  captionConfig.expanded?.captionConfig ||
+                  captionConfig.selectionType == 'multiple'
+                ">
+                <div class="s-t-th-conteainer">
+                  <ng-container *ngIf="captionConfig.selectionType == 'multiple'">
+                    <!-- <p-checkbox [(ngModel)]="checked" [binary]="true" inputId="binary"></p-checkbox> -->
+                  </ng-container>
+                  <ng-container *ngIf="
+                      captionConfig.expanded?.dataField ||
+                      captionConfig.expanded?.headers ||
+                      captionConfig.expanded?.captionConfig
+                    ">
+                    <h1 class="s-t-th-label">{{ "sadfsadf" | titlecase }}</h1>
+                  </ng-container>
+                </div>
+              </th>
+              <th *ngFor="let col of _selectedColumns; let i = index" class="s-t-th">
+                 <div class="s-t-th-conteainer">
+                  <ng-container *ngIf="SortDontWorkWithHeaders.includes(col.header)">
+                       <div *ngIf=" dateTypeSortDontWorkWith.includes(col.filterType) ">
+                         <div class="s-t-th-btn" >
+                         </div>
+                      </div>
+                  </ng-container>
+                   <ng-container *ngIf="!SortDontWorkWithHeaders.includes(col.header)">
+                        <ng-container *ngIf="!dateTypeSortDontWorkWith.includes(col.filterType) ">
+                             <button
+                                 (click)="sort.toggle($event)" class="s-t-th-btn" type="button"
+                                 tooltipPosition="left" pTooltip="{{'sort'| titlecase| translate}}">
+                              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 s-t-th-btn-icon h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                  d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25" />
+                              </svg>
+                            </button>
+                        </ng-container>
+                  </ng-container>
+                  <h1 class="s-t-th-label">{{ col?.header | titlecase }}</h1>
+                  <p-overlayPanel #sort [showCloseIcon]="true" [style]="{ width: '35erm' }">
+                    <ng-template pTemplate>
+                      <app-sort [data]="outData" [path]="col.field" [sortByName]="true" [sortByDate]="false"></app-sort>
+                    </ng-template>
+                  </p-overlayPanel>
+                  <p-overlayPanel #filter
+                     [showCloseIcon]="true"
+                     [style]="{ width: '300px', paddingLeft: '-10px' }">
+                    <ng-template pTemplate>
+                      <div class="filter">
+                        <ng-container *ngIf="col.filterType == 'boolean'">
+
+
+                          <filter-by-boolean  [type]="'boolean'" [label]="'date'" [path]="col.field" [inData]="data" (outData)="
+                                                        outDataFunction(
+                                                          $event,
+                                                          col.filterType,
+                                                          i,
+                                                          col.field
+                                                        )
+                           ">
+
+
+                          </filter-by-boolean>
+                        </ng-container>
+                        <ng-container *ngIf="col.filterType == 'chips'">
+                          <d-filter [type]="'chips'" [label]="'chips'" [path]="col.field" [inData]="data" (outData)="
+                                                        outDataFunction(
+                                                          $event,
+                                                          col.filterType,
+                                                          i,
+                                                          col.field
+                                                        )
+                                                      ">
+                          </d-filter>
+                        </ng-container>
+                        <ng-container *ngIf="col.filterType == 'date'">
+                          <filter-date-rule-template [label]="'date'" [path]="col.field" [inData]="data" (outData)="
+                          outDataFunction(
+                            $event,
+                            col.filterType,
+                            i,
+                            col.field
+                          )
+                                                      ">
+                          </filter-date-rule-template>
+                        </ng-container>
+                        <ng-container *ngIf="col.filterType == 'numeric'">
+                          <filter-number-rule-template [type]="'text'" [label]="'search'" [path]="col.field"
+                            [inData]="data" (outData)="
+                                                        outDataFunction(
+                                                          $event,
+                                                          col.filterType,
+                                                          i,
+                                                          col.field
+                                                        )
+                                                      ">
+                          </filter-number-rule-template>
+                        </ng-container>
+                        <ng-container *ngIf="col.filterType == 'template'">
+                        </ng-container>
+                        <ng-container *ngIf="col.filterType == 'multiSelect'">
+                          <d-filter [type]="'multiSelect'" [label]="'Choose'"
+                            [optionLabel]="[col.field, col.optionLabel]" [path]="col.field" [inData]="data" (outData)="
+                                                        outDataFunction(
+                                                          $event,
+                                                          col.filterType,
+                                                          i,
+                                                          col.field
+                                                        )
+                                                      ">
+                          </d-filter>
+                        </ng-container>
+                        <ng-container *ngIf="col.filterType == 'text'">
+                          <filter-text-rule-template [type]="'text'" [label]="'search'" [path]="col.field"
+                            [inData]="data" (outData)="
+                                                        outDataFunction(
+                                                          $event,
+                                                          col.filterType,
+                                                          i,
+                                                          col.field
+                                                        )
+                                                      ">
+                          </filter-text-rule-template>
+                        </ng-container>
+                        <ng-container *ngIf="col.filterType == 'percentage'">
+                          <filter-percentage [label]="'lable'" [path]="col.field" [inData]="data" (outData)="
+                                                        outDataFunction(
+                                                          $event,
+                                                          col.filterType,
+                                                          i,
+                                                          col.field
+                                                        )
+                                                      ">
+                          </filter-percentage>
+                        </ng-container>
+                        <ng-container *ngIf="col.filterType == 'range'">
+
+
+                          <filter-by-range
+                           [type]="'range'"
+                            [label]="'doubleRange'"
+                            [path]="col.field"
+                            [inData]="data"
+                            (outData)="
+                              outDataFunction(
+                                $event,
+                                col.filterType,
+                                i,
+                                col.field
+                              )
+                            "
+
+                          >
+                          </filter-by-range>
+                        </ng-container>
+                      </div>
+                      <!--
+                                    | 'price'
+                                    | 'phone'
+                                    | 'email'
+                                    | 'address'
+                                    | 'range'
+                                    | 'doubleRange'
+                        -->
+                    </ng-template>
+                  </p-overlayPanel>
+                  <!-- style="display: {{(col.filterType!= 'img' || col.filterType != 'file')? '':''}}" -->
+                     <ng-container *ngIf="filterDontWorkWithHeaders.includes(col.header)">
+
+                       <div *ngIf=" dateTypefilterDontWorkWith.includes(col.filterType)">
+                           <div class="s-t-th-btn" >
+                           </div>
+                      </div>
+
+                     </ng-container>
+                     <ng-container *ngIf="!filterDontWorkWithHeaders.includes(col.header)">
+                                      <ng-container *ngIf="!dateTypefilterDontWorkWith.includes(col.filterType) ">
+                                           <button
+                                           (click)="filter.toggle($event)" class="s-t-th-btn" type="button" label="Save"
+                                          tooltipPosition="right" pTooltip="{{'filter'| titlecase| translate}}">
+                                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                            stroke="currentColor" class="w-6 s-t-th-btn-icon h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                              d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z" />
+                                          </svg>
+                                        </button>
+                                      </ng-container>
+                    </ng-container>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          <ng-container *ngIf="this.outData.length != 0">
+            <tbody #tableBody data-selectedIndex class="s-t-tbody">
+              <ng-container *ngFor="
+                                let rowData of outData | paginate : o_config;
+                                let o = index
+                              ">
+                <tr  class="s-t-tbody-tr  s-t-tr" #tbody_tr data-tr data-showExpandedRow="false" [ngClass]="{ hide: outData[rowData] }">
+                  <!-- #region   this arry ooof the row expanttion tn -->
+                  <td *ngIf="
+                      captionConfig.expanded?.dataField ||
+                      captionConfig.expanded?.headers ||
+                      captionConfig.expanded?.captionConfig ||
+                      captionConfig.selectionType == 'multiple'
+                    ">
+                    <div style="
+                        margin: auto;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                      ">
+                      <ng-container *ngIf="captionConfig.selectionType == 'multiple'">
+                        <!-- <p-checkbox [(ngModel)]="checked" [binary]="true" inputId="a"></p-checkbox> -->
+                      </ng-container>
+                      <ng-container *ngIf="
+                          captionConfig.expanded?.dataField ||
+                          captionConfig.expanded?.headers ||
+                          captionConfig.expanded?.captionConfig
+                        ">
+                        <!-- <p-tableCheckbox  [value]="rowData"></p-tableCheckbox> -->
+                        <button (click)="
+                            accorditoinTableRowBtnIconF(rowData._id, i);
+                            tbody_tr.setAttribute(
+                              'showExpandedRow',
+                              tbody_tr.getAttribute('showExpandedRow') == 'true'
+                                ? 'false'
+                                : 'true'
+                            );
+                            tableBody.setAttribute(
+                              'data-selectedIndex',
+                              rowData._id
+                            )
+                          " type="button" [ngClass]="
+                            i.getAttribute('data-accorditionRow') === 'true'
+                              ? 'active-y'
+                              : ''
+                          " class=" button _button  info">
+                          <i #i data-accorditionRow="null" (click)="showExRow(o)" [ngClass]="
+                              tableBody.getAttribute('data-selectedIndex') ==
+                              rowData._id
+                                ? i.getAttribute('data-accorditionRow') ===
+                                  'true'
+                                  ? ' s-t-h--o-b-icon  pi pi-chevron-down'
+                                  : i.getAttribute('data-accorditionRow') ===
+                                    'false'
+                                  ? ' s-t-h--o-b-icon pi pi-chevron-right'
+                                  : i.getAttribute('data-accorditionRow') ===
+                                    'null'
+                                  ? ' s-t-h--o-b-icon pi pi pi-chevron-right'
+                                  : ''
+                                : 's-t-h--o-b-icon      pi pi-chevron-right'
+                            "></i>
+                        </button>
+                      </ng-container>
+                    </div>
+                  </td>
+                  <!-- #endregion -->
+                  <td *ngFor="let col of _selectedColumns; let p = index" class="s-t-td" data-td #tbody_main_td
+                    (mouseenter)="
+                      show_tbody_main_td_hover_f(p, rowData[col.field])
+                    " (mouseleave)="show_tbody_main_td_hover_f('')" [ngClass]="{
+                      show_tbody_main_td_hover: show_tbody_main_td_hover == p,
+                      show_tbody_main_td_hover_at:
+                        show_tbody_main_td_hover_at == p + rowData[col.field]
+                    }">
+                    <div class="s-next">
+                      <ng-container *ngIf="col.filterType == 'img'">
+                        <img (mouseenter)="
+                            imageClikEvent(rowData[col.field], o, $event)
+                          " [lazyLoad]="rowData[col.field]" [defaultImage]="
+                            '../../../../../../assets/images/logo/defaultImage.png'
+                          " />
+                        <img class="zoomedImg" *ngIf="zoomedImag && o == zoomedImagindex" draggable="true"
+                          (mouseleave)="imagemouseleaveEvent()" (click)="
+                            imageClikEvent(rowData[col.field], o, $event, true)
+                          " [lazyLoad]="zoomedImagsrc" />
+                      </ng-container>
+                      <ng-container *ngIf="col.filterType == 'chips'">
+                        <div class="dynamic-table-chipcontainer">
+                          <span *ngFor="
+                                                        let item of rowData | readDataTable : col.field
+                                                      " [class]="
+                                                        item | dynamicTableCellColor : col.colorize
+                                                      " [style]="
+                                                        item
+                                                          | dynamicTableCellColorStyle : col.colorizeStyle
+                                                      ">
+                            {{ item | translate | genericPipe : col.pipes }}
+                          </span>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="
+                                                !['file', 'img', 'chips', 'multiSelect'].includes(
+                                                  col.filterType || ''
+                                                )
+                                              ">
+                        <span [class]="
+                                                  rowData
+                                                    | readDataTable : col.field
+                                                    | dynamicTableCellColor : col.colorize
+                                                " [style]="
+                                                  rowData
+                                                    | readDataTable : col.field
+                                                    | dynamicTableCellColorStyle : col.colorizeStyle
+                                                ">
+                          {{
+                                                  rowData
+                                                    | readDataTable : col.field
+                                                    | translate
+                                                    | genericPipe : col.pipes
+                                                }}
+                        </span>
+                      </ng-container>
+                      <ng-container *ngIf="col.filterType == 'multiSelect'">
+                        <span [class]="
+                                                  rowData
+                                                    | readDataTable : col.field
+                                                    | dynamicTableCellColor : col.colorize
+                                                " [style]="
+                                                  rowData
+                                                    | readDataTable : col.field
+                                                    | dynamicTableCellColorStyle : col.colorizeStyle
+                                                ">
+                          {{
+                                                  rowData
+                              | readDataTable : col.field
+                              | translate
+                              | genericPipe : col.pipes
+                              }}
+                          <!--
+                                                                                                          <ng-container *ngFor=" let i of  rowData[col.field]">
+                                                                                                           <ng-container *ngFor=" let k of   col.templatePath" >
+                                                                                                           <ng-container *ngIf="checkIfImage(i[k])">
+                                                                                                           <img  src="{{i[k]}}" alt="">
+                                                                                                           </ng-container>
+                                                                                                          <ng-container *ngIf="!checkIfImage(i[k])">
+                                                                                                           <span>{{i[k]}}</span>
+                                                                                                           </ng-container>
+                                                                                                           </ng-container>
+                                                                                                          </ng-container>
+                                                                                                          -->
+                        </span>
+                      </ng-container>
+                    </div>
+                  </td>
+                </tr>
+                <tr  #showExpanded_child [attr.s-Expanded-child]="o"
+                  *ngIf="tbody_tr.getAttribute('showExpandedRow') == 'true'">
+                  <td class="row-expanded-container-out" [colSpan]="
+                                      _selectedColumns.length +
+                                      (columns.length
+                                        ? (captionConfig.actions?.clone ||
+                                          captionConfig.actions?.detail ||
+                                          captionConfig.actions?.edit
+                                            ? 1
+                                            : 0) +
+                                          (captionConfig.selectionType === 'multiple' ||
+                                          captionConfig.expanded
+                                            ? 1
+                                            : 0)
+                                        : 0)
+                                    ">
+                    <div class="row-expanded-container-in" [ngStyle]="{ backgroundColor: tableBgC }">
+                      <!-- <container> -->
+                      <ng-container *ngIf="expandedRow">
+                        <ng-container *ngTemplateOutlet="
+                                                    expandedRow;
+                                                    context: { $implicit: rowData }
+                                                  ">
+                        </ng-container>
+                      </ng-container>
+                      <ng-container *ngIf="!expandedRow">
+                        <d-table [data]="
+                                                    $any(captionConfig)?.expanded?.dataField
+                                                      ? (rowData
+                                | readDataTable
+                                  : $any(captionConfig).expanded.dataField)
+                              : [rowData]
+                          " [cols]="$any(captionConfig)?.expanded?.headers" [captionConfig]="
+                            $any(captionConfig)?.expanded?.captionConfig
+                          " [tiblecontinerDiv]="false" [tableWidth]="'100%'" [tAbleborderRadius]="'px'" [tibleTitale]="
+                            $any(captionConfig)?.expanded?.captionConfig
+                              .tibleTitale
+                          ">
+                        </d-table>
+                      </ng-container>
+                      <!-- </container> -->
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </ng-container>
+          <tbody *ngIf="this.outData.length == 0">
+            <tr class="s-t-tr">
+              <div class="div"></div>
+            </tr>
+            <tr class="s-t-tr">
+              <div class="div"></div>
+            </tr>
+            <tr class="s-t-tr">
+              <div class="div"></div>
+            </tr>
+            <tr class="s-t-tr">
+              <div class="div"></div>
+            </tr>
+            <tr class="s-t-tr">
+              <div class="div"></div>
+              <h1>data not found</h1>
+            </tr>
+            <tr class="s-t-tr">
+              <div class="div"></div>
+            </tr>
+            <tr class="s-t-tr">
+              <div class="div"></div>
+            </tr>
+            <tr class="s-t-tr">
+              <div class="div"></div>
+            </tr>
+            <tr class="s-t-tr">
+              <div class="div"></div>
+            </tr>
+            <tr class="s-t-tr">
+              <div class="div"></div>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <section *ngIf="tableDatalength >= o_config.itemsPerPage" class="s-t-footer">
+        <!-- <h1 class=" row s-t-d">{{'tible footer ' | titlecase}}</h1> -->
+        <pagination-template *ngIf="tableDatalength >= o_config.itemsPerPage" #p="paginationApi" [id]="o_config.id"
+          (pageChange)="o_config.currentPage = $event">
+          <div class="pagination">
+            <div class="in-custom-pagination">
+              <div class="in-in-custom-pagination">
+                <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
+                  <a class="pre" *ngIf="!p.isFirstPage()" (click)="p.previous()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                      class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                      <path
+                        d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+                    </svg>
+                  </a>
+                </div>
+                <div class="pagination-tiems" *ngFor="let page of p.pages"
+                  [class.current]="p.getCurrent() === page.value">
+                  <a class="pagination-a" (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+                    <span>{{ page.label }}</span>
+                  </a>
+                  <div class="pagination-active" *ngIf="p.getCurrent() === page.value">
+                    <span>{{ page.label }}</span>
+                  </div>
+                </div>
+                <div class="pagination-next" [class.disabled]="p.isLastPage()">
+                  <a class="next" *ngIf="!p.isLastPage()" (click)="p.next()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                      class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                      <path
+                        d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </pagination-template>
+      </section>
+    </main>
+  </div>
+</div>

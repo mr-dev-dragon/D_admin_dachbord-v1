@@ -1,0 +1,45 @@
+
+
+
+
+
+<!--
+      <d-table  [data]="data"></d-table>
+ -->
+
+
+
+  <d-table
+      [data]="data"
+      [cols]="cols"
+      [captionConfig]="captionConfig"
+      (onEditClick)="onEditClick($event)"
+      (onDetailClick)="onDetailClick($event)"
+      (onCloneClick)="onCloneClick($event)"
+      (onAddClick)="onAddClick($event)"
+      (onDelete)="onDelete($event)"
+
+
+  >
+    <!--
+    <ng-template #expandedRow let-i>
+      <s-table-contianer>
+        <app-m-card></app-m-card>
+      </s-table-contianer>
+    </ng-template>
+    -->
+
+<!-- <ng-template #expandedRow let-i> -->
+          <!-- <app-m-card></app-m-card> -->
+          <!-- <s-table-card></s-table-card> -->
+<!-- </ng-template> -->
+
+  </d-table>
+
+
+<app-d-card></app-d-card>
+<app-d-card></app-d-card>
+<app-d-card></app-d-card>
+<app-d-card></app-d-card>
+
+
