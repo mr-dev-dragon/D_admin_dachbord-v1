@@ -1,4 +1,7 @@
 
+<filter-by-price> </filter-by-price>
+
+
 
 
 
@@ -47,12 +50,14 @@
     <section    [ngClass]="{'show':sectiontow ,'hide':!sectiontow ,'sectiontow': !sectiontow ||sectiontow }">
 
       <select [(ngModel)]="filterTypeTow" class=" s-t-input-group form-select mt-3 mb-3" aria-label="Default select example">
-        <option value='starts with'> {{'starts with'    |translate |titlecase}}</option>
-        <option value='contains'> {{'contains'          |translate |titlecase}}</option>
-        <option value='not Contains'> {{'not Contains'  |translate |titlecase}}</option>
-        <option value='end with'> {{'end with'          |translate |titlecase}}</option>
-        <option value='equals'> {{'equals'              |translate |titlecase}}</option>
-        <option value='not equals'> {{'not equals'      |translate |titlecase}}</option>
+
+         <option value='starts with'> {{'starts with'    |translate |titlecase  }}</option>
+         <option value='contains'> {{'contains'          |translate |titlecase  }}</option>
+         <option value='not Contains'> {{'not Contains'  |translate |titlecase  }}</option>
+         <option value='end with'> {{'end with'          |translate |titlecase  }}</option>
+         <option value='equals'> {{'equals'              |translate |titlecase  }}</option>
+         <option value='not equals'> {{'not equals'      |translate |titlecase  }}</option>
+
       </select>
           <filter-by-text
               [type]="'text'"
@@ -63,6 +68,8 @@
               [rule]="filterTypeTow"
           >
           </filter-by-text>
+
+
     </section>
     </div>
     <section class=" mb-3 mt-3 add_remove_item">

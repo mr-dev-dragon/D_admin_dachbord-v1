@@ -2,36 +2,34 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { addArrays } from 'src/app/shared/global/filter-tool';
 
 @Component({
-  selector: 'filter-number-rule-template',
+  selector:    'filter-number-rule-template',
   templateUrl: './filter-number-rule-template.component.html',
-  styleUrls: ['./filter-number-rule-template.component.scss'],
+  styleUrls: [ './filter-number-rule-template.component.scss'],
 })
 export class FilterNumberRuleTemplateComponent {
   @Input() type: string | string[] = 'text';
   @Input() label: string | string[] = 'text';
-  @Input() path: string | string[] = '';
+  @Input() path: string = '';
   @Input() inData!: any[];
   @Output() outData: EventEmitter<any> = new EventEmitter();
   sectiontow: boolean = false;
-
-  outDataFunction(a: any) {
-    this.outData.emit(a);
-  }
-
   MatchType: any = 'match any';
-  filterTypeOne: any = 'equals';
-  filterTypeTow: any = 'equals';
+  filterTypeOne: any = '==';
+  filterTypeTow: any = '==';
   filterOne!: any[];
   filterTow!: any[];
   allFeltedData!: any;
 
   ngOnInit(): void {}
-
   outDataFunctionOne(a: any) {
+  console.log('+++++++++++++++++++++++++++++++++++++++',a);
+
     this.filterOne = a;
+
   }
 
   outDataFunctionTow(a: any) {
+    console.log('function tow' ,a);
     this.filterTow = a;
   }
 

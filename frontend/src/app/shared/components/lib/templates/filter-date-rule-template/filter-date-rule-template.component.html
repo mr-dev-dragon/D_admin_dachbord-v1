@@ -1,17 +1,79 @@
 <div>
 
   <div>
+    <section>
+      <br>
+        <label for="matchtype">{{ 'matching type' }}</label>
+        <select  *ngIf="sectiontow"    [(ngModel)]="MatchType" id="matchtype"  class=" s-t-input-group form-select mt-3 mb-3" aria-label="Default select example">
+        <option value="Match all">{{'Match all'|translate|titlecase}}</option>
+        <option value="match any">{{'match any'|translate|titlecase}}</option>
+      </select>
 
-<filter-date
- [label]="'search'" [path]="path" [inData]="inData"
- (outData)="outDataFunction($event)"
->
+      <hr *ngIf="sectiontow"  />
+         <label for="typefilter">{{ 'type filter' }}</label>
+      <select [(ngModel)]="filterTypeOne"class=" s-t-input-group form-select mt-3 mb-3" id="typefilter" aria-label="Default select example">
+        <option value='==' > {{'equals'                            |translate |titlecase}}</option>
+        <option value='!=' > {{'not equals'                        |translate |titlecase}}</option>
+        <option value='<'  > {{'less then'                         |translate |titlecase}}</option>
+        <option value='<=' > {{'less then or equl equals'          |translate |titlecase}}</option>
+        <option value='>'  > {{'greater then'                      |translate |titlecase}}</option>
+        <option value='>=' > {{'greater then or equl equals'       |translate |titlecase}}</option>
+      </select>
+      <filter-by-number
 
-</filter-date>
+        [label]="'search'"
+        [path]="path"
+        [inData]="inData"
+        [rule]="filterTypeOne"
+        (outData)="outDataFunctionOne($event)">
+      </filter-by-number>
+
+    </section>
+    <section class=" mb-3 mt-3 add_remove_item">
+      <button *ngIf="sectiontow" (click)="sectiontowF()" type="button" class="_btn ">
+        <span class="p-button-label">
+          <p>remove</p>
+          <i class="pi add-icon pi-times-circle"></i>
+        </span>
+      </button>
+    </section>
+    <section *ngIf="sectiontow">
+      <br>
+      <select [(ngModel)]="filterTypeTow" class=" s-t-input-group form-select mt-3 mb-3" aria-label="Default select example">
+        <option value='=='> {{ 'equals'                         |translate |titlecase}}</option>
+        <option value='!='> {{ 'not equals'                     |translate |titlecase}}</option>
+        <option value='<'>  {{ 'less then'                      |translate |titlecase}}</option>
+        <option value='<='> {{ 'less then or equl equals'       |translate |titlecase}}</option>
+        <option value='>'>  {{ 'greater then'                   |translate |titlecase}}</option>
+        <option value='>='> {{ 'greater then or equl equals'    |translate |titlecase}}</option>
+      </select>
+
+      <filter-by-date
+          [label]="'search'"
+          [path]="path"
+          [inData]="inData"
+          (outData)="outDataFunctionTow($event)">
+      </filter-by-date>
+
+
+    </section>
 
   </div>
 
-
+  <section class=" mb-3 mt-3 add_remove_item">
+    <button *ngIf="!sectiontow" (click)="sectiontowF()" type="button" class="__btn ">
+      <span class="p-button-label">
+        <i class="pi add-icon pi-plus-circle"></i>
+        <p>add</p>
+      </span>
+    </button>
+    <button *ngIf="sectiontow" (click)="sectiontowF()" type="button" class="_btn ">
+      <span class="p-button-label">
+        <p>remove</p>
+        <i class="pi add-icon pi-times-circle"></i>
+      </span>
+    </button>
+  </section>
 
   <footer>
     <div class="footer">
@@ -20,11 +82,19 @@
           Clear
         </span>
       </button>
-      <button type="button" class="footer-btn">
-        <span class="p-button-label">
+      <button (click)="apply(sectiontow)" type="button" class="footer-btn">
+        <span  class="p-button-label">
           Apply
         </span>
       </button>
     </div>
   </footer>
 </div>
+
+
+
+
+
+
+
+
