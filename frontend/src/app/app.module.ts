@@ -53,6 +53,10 @@ import { MobileMapComponent } from './components/others-example/map-examples/mob
 import { TableV3Component } from './components/tables-example/table-v3/table-v3.component';
 import { TableV4Component } from './components/tables-example/table-v4/table-v4.component';
 import { TableV5Component } from './components/tables-example/table-v5/table-v5.component';
+import { DColExComponent } from './components/section-ex/d-col-ex/d-col-ex.component';
+import { SelfCloseSectionExComponent } from './components/section-ex/self-close-section-ex/self-close-section-ex.component';
+import { DZoonSictionExComponent } from './components/section-ex/dzoon-siction-ex/dzoon-siction-ex.component';
+
 
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   url: 'http://localhost:8080/post',
@@ -96,8 +100,13 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     TableV3Component,
     TableV4Component,
     TableV5Component,
+    DColExComponent,
+
+    SelfCloseSectionExComponent,
+    DZoonSictionExComponent,
   ],
   imports: [
+
     BrowserModule,
     AppRoutingModule,
     SharedModule,

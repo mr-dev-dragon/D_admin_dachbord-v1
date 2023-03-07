@@ -113,6 +113,7 @@ export class SidebarComponent implements OnInit {
           },
         ],
       },
+
       {
         label: 'cards',
         icon: 'pi pi-id-card ',
@@ -152,18 +153,189 @@ export class SidebarComponent implements OnInit {
         ],
       },
       {
+        label: 'sections',
+        icon: 'pi pi-stop',
+        items: [
+          {
+            label: 'self-close',
+            icon: '',
+            routerLink: ['/sections/self-close-section'],
+          },
+
+          {
+            label: 'dynamic zoon',
+            icon: '',
+            routerLink: ['/sections/d-zoon-section'],
+          },
+          {
+            label: 'dynamic col',
+            icon: '',
+            routerLink: ['sections/d-col-section'],
+          },
+        ],
+      },
+
+      {
+        label: 'filters - sort',
+        icon: 'pi pi-filter',
+        items: [
+          {
+            label: 'filters',
+            icon: 'pi pi-filter',
+            items: [
+              {
+                label: 'dynamic filter',
+                icon: '',
+                routerLink: ['/sections/self-close-section'],
+              },
+              {
+                label: 'filter by price',
+                icon: '',
+                routerLink: ['url'],
+              },
+              {
+                label: 'filter by address',
+                icon: '',
+                routerLink: ['url'],
+              },
+              {
+                label: 'filter by date',
+                icon: '',
+                routerLink: ['url'],
+              },
+              {
+                label: 'filter by boolean',
+                icon: '',
+                routerLink: ['url'],
+              },
+              {
+                label: 'filter by percentage',
+                icon: '',
+                routerLink: ['url'],
+              },
+              {
+                label: 'filter by phone',
+                icon: '',
+                routerLink: ['url'],
+              },
+              {
+                label: 'filter by range',
+                icon: '',
+                routerLink: ['url'],
+              },
+              {
+                label: 'filter by number',
+                icon: '',
+                routerLink: ['url'],
+              },
+              {
+                label: 'filter by text',
+                icon: '',
+                routerLink: ['url'],
+              },
+              {
+                label: 'filter by template',
+                icon: '',
+                routerLink: ['url'],
+              },
+              {
+                label: 'filter by multi-select',
+                icon: '',
+                routerLink: ['url'],
+              },
+            ],
+          },
+          {
+            label: 'sort',
+            icon: 'pi pi-filter',
+            items: [
+              {
+                label: 'dynamic sort',
+                icon: '',
+                routerLink: ['url'],
+              },
+              {
+                label: 'sort by price',
+                icon: '',
+                routerLink: ['url'],
+              },
+              {
+                label: 'sort by address',
+                icon: '',
+                routerLink: ['url'],
+              },
+              {
+                label: 'sort by date',
+                icon: '',
+                routerLink: ['url'],
+              },
+              {
+                label: 'sort by boolean',
+                icon: '',
+                routerLink: ['url'],
+              },
+              {
+                label: 'sort by percentage',
+                icon: '',
+                routerLink: ['url'],
+              },
+              {
+                label: 'sort by phone',
+                icon: '',
+                routerLink: ['url'],
+              },
+              {
+                label: 'sort by range',
+                icon: '',
+                routerLink: ['url'],
+              },
+              {
+                label: 'sort by number',
+                icon: '',
+                routerLink: ['url'],
+              },
+              {
+                label: 'sort by text',
+                icon: '',
+                routerLink: ['url'],
+              },
+            ],
+          },
+        ],
+      },
+
+      {
         label: 'templetes',
         icon: 'pi pi-box',
         items: [
           {
-            label: 'templete v1',
+            label: 'filter',
             icon: '',
-            routerLink: ['/templete/templete-v1'],
+            items: [
+              {
+                label: 'filter address rule',
+                icon: '',
+                routerLink: ['rul'],
+              },
+              {
+                label: 'filter date rule',
+                icon: '',
+                routerLink: ['rul'],
+              },
+              {
+                label: 'filter number rule',
+                icon: '',
+                routerLink: ['rul'],
+              },
+              {
+                label: 'filter text rule',
+                icon: '',
+                routerLink: ['rul'],
+              },
+            ],
           },
           {
-            label: 'templete v2',
-            icon: '',
-            routerLink: ['/templete/templete-v2'],
+            label: 'templete v3',
           },
         ],
       },
@@ -287,6 +459,10 @@ export class SidebarComponent implements OnInit {
                 routerLink: ['/others/map/mobile-map'],
               },
             ],
+          },
+          {
+            label: 'date input display ',
+            routerLink: ['/others/date-input-display'],
           },
           {
             label: 'acorditions',
@@ -548,6 +724,6 @@ export class SidebarComponent implements OnInit {
   }
 }
 function output() {
-  throw new Error('Function not implemented.');
+
 }
 

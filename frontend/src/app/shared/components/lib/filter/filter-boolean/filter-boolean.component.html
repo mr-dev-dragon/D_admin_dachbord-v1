@@ -1,24 +1,28 @@
     <div class="lai">
-    <div class="row"></div>
-    <div class="row"></div>
-
-        <label for="checkboxValue">{{ label }}</label>
-        <div class="checkboxValueClass">
-          <div>
-            <samp class="ml-4">
-              {{ "filter by" |titlecase}}
-            </samp>
-          </div>
-          <label class=" form-switch">
-            <input  #boolean [(ngModel)]="checkboxValue" (change)="filterByBoolean()" id="checkboxValue" type="checkbox" />
-            <i></i>
-          </label>
-
-          <div [ngClass]="checkboxValue? 'false':'true' ">
-            {{checkboxValue}}
-          </div>
+      <div class="row"></div>
+      <div class="row"></div>
+      <label for="checkboxValue">{{ label }}</label>
+      <div class="checkboxValueClass">
+        <div>
+          <samp class="ml-4">
+            {{ "filter by" |titlecase}}
+          </samp>
+        </div>
+        <label class=" form-switch">
+          <input
+              #boolean
+              [(ngModel)]="checkboxValue"
+              (change)="  _filter()"
+              id="checkboxValue"
+              type="checkbox"
+          />
+          <i></i>
+        </label>
+        <div class="falseTrue"  [ngClass]="checkboxValue? 'false':'true' ">
+          {{checkboxValue}}
         </div>
       </div>
+  </div>
 
 
 

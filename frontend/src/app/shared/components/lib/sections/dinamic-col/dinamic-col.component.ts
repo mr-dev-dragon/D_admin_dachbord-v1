@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-dinamic-col',
+  selector: 'd-col',
   templateUrl: './dinamic-col.component.html',
   styleUrls: ['./dinamic-col.component.scss']
 })

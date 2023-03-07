@@ -32,6 +32,12 @@ import { ReadOnlyMapComponent } from 'src/app/components/others-example/map-exam
 import { TableV3Component } from     'src/app/components/tables-example/table-v3/table-v3.component';
 import { TableV4Component } from     'src/app/components/tables-example/table-v4/table-v4.component';
 import { TableV5Component } from     'src/app/components/tables-example/table-v5/table-v5.component';
+import { SelfCloseSectionComponent } from '../components/lib/sections/self-close-section/self-close-section.component';
+import { DZoonSictionComponent } from '../components/lib/sections/d-zoon-siction/d-zoon-siction.component';
+import { DinamicColComponent } from '../components/lib/sections/dinamic-col/dinamic-col.component';
+import { DColExComponent } from 'src/app/components/section-ex/d-col-ex/d-col-ex.component';
+import { SelfCloseSectionExComponent } from 'src/app/components/section-ex/self-close-section-ex/self-close-section-ex.component';
+import { DZoonSictionExComponent } from 'src/app/components/section-ex/dzoon-siction-ex/dzoon-siction-ex.component';
 export const content: Routes = [
   {
     path: 'dashboard',
@@ -236,6 +242,24 @@ export const content: Routes = [
             component: Page404Component,
           },
         ],
+      },
+    ],
+  },
+  {
+    path: 'sections',
+    children: [
+      {
+        path: 'self-close-section',
+
+        component: SelfCloseSectionExComponent,
+      },
+      {
+        path: 'd-zoon-section',
+        component: DZoonSictionExComponent,
+      },
+      {
+        path: 'd-col-section',
+        component: DColExComponent,
       },
     ],
   },

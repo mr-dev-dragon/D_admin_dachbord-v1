@@ -6,61 +6,76 @@ import { g } from 'src/app/shared/global/filter-tool';
   styleUrls: ['./filter-number.component.scss'],
 })
 export class FilterNumberComponent {
-  @Input() type: string | string[] = 'text';
   @Input() label: string | string[] = 'text';
-  @Input() path: string | string[] = '';
-  @Input() rule:
-    | 'starts with'
-    | 'contains'
-    | 'not Contains'
-    | 'end with'
-    | 'equals'
-    | 'not equals' = 'starts with';
+  @Input() path: string = '';
+  @Input() rule: '==' | '!=' | '>' | '>=' | '<' | '<=' = '==';
+  @Input() inData!: any[];
+  @Output() outData = new EventEmitter();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  inputVal!: number;
+
   ngOnChanges(change: SimpleChanges): void {
     if (change['rule']) {
       console.log(this.rule);
-      this.filterBy(this.inputVal);
+      this.filterBy(this.inputVal, true);
     }
   }
 
-  @Input() inData!: any[];
-  @Input() operator: string = '==';
-  @Output() outData = new EventEmitter();
   ngAfterViewInit(): void {
     this.outData.emit(this.inData);
   }
 
-  filterBy(event: any) {
-    let filterInputValue = event.target.value;
+  filterBy(event: any, fromTs: boolean = false) {
+    let filterInputValue: any;
+    fromTs
+      ? (filterInputValue = event)
+      : (filterInputValue = event.target.value);
+
     if (filterInputValue && this.path && this.inData) {
-      let reusltdata = this.filter(filterInputValue, this.operator);
+      let reusltdata = this.filter(filterInputValue, this.rule);
       this.outData.emit(reusltdata);
-    } else if (filterInputValue == '') this.outData.emit(this.inData);
+    } else if (!filterInputValue) this.outData.emit(this.inData);
   }
 
   filter(filterInputValue: any, operator: string) {
     let reusltdata: any;
-    let path = this.path;
-    if (this.operator || filterInputValue) {
-      let reusltdata = this.inData.filter((item) => {
+
+      reusltdata = this.inData.filter((item) => {
         switch (operator) {
           case '==':
-            return item.path === filterInputValue;
+            return item[this.path] == filterInputValue;
           case '!=':
-            return item.path !== filterInputValue;
+            return item[this.path] !== filterInputValue;
           case '>':
-            return item.path > filterInputValue;
+            return item[this.path] > filterInputValue;
           case '>=':
-            return item.path >= filterInputValue;
+            return item[this.path] >= filterInputValue;
           case '<':
-            return item.path < filterInputValue;
+            return item[this.path] < filterInputValue;
           case '<=':
-            return item.path <= filterInputValue;
+            return item[this.path] <= filterInputValue;
           default:
             return true;
         }
       });
-    }
+      console.log('========================>', 'operator ==> ' ,operator ,'kkkkkkk' ,reusltdata);
+
     return reusltdata;
   }
 }

@@ -31,6 +31,7 @@
           [ngClass]="{ active: options.getAttribute('data-index') == '7' }" class="option">
           <ng-content select="[seven]"></ng-content>
         </div>
+        
         <div *ngIf="i == 7" (click)="options.setAttribute('data-index', '8')"
           [ngClass]="{ active: options.getAttribute('data-index') == '8' }" class="option">
           <ng-content select="[eight]"></ng-content>

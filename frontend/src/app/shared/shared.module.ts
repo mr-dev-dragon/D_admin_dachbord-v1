@@ -97,7 +97,7 @@ import { FilterTextComponent } from './components/lib/filter/filter-text/filter-
 import { FilterNumberComponent } from './components/lib/filter/filter-number/filter-number.component';
 import { FilterPercentageComponent } from './components/lib/filter/filter-percentage/filter-percentage.component';
 import { FilterBooleanComponent } from './components/lib/filter/filter-boolean/filter-boolean.component';
-import { FilterChipsComponent } from './components/lib/filter/filter-chips/filter-chips.component';
+import { FilterChipsComponent } from './components/lib/filter/filter-tag/filter-chips.component';
 import { FilterDateComponent } from './components/lib/filter/filter-date/filter-date.component';
 import { FilterRangeComponent } from './components/lib/filter/filter-range/filter-range.component';
 import { FilterPhoneComponent } from './components/lib/filter/filter-phone/filter-phone.component';
@@ -109,6 +109,14 @@ import { FilterTextRuleTemplateComponent } from './components/lib/templates/filt
 import { FilterNumberRuleTemplateComponent } from './components/lib/templates/filter-number-rule-template/filter-number-rule-template.component';
 import { FilterDateRuleTemplateComponent } from './components/lib/templates/filter-date-rule-template/filter-date-rule-template.component';
 import { BgContainerComponent } from './components/lib/containers/bg-container/bg-container.component';
+import { FilterAddressRuleTemplateComponent } from './components/lib/templates/filter-address-rule-template/filter-address-rule-template.component';
+import { DZoonSictionComponent } from './components/lib/sections/d-zoon-siction/d-zoon-siction.component';
+
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { DndModule } from 'ngx-drag-drop';
+
 @NgModule({
   declarations: [
     CustomTemplateExampleComponent,
@@ -164,8 +172,17 @@ import { BgContainerComponent } from './components/lib/containers/bg-container/b
     FilterNumberRuleTemplateComponent,
     FilterDateRuleTemplateComponent,
     BgContainerComponent,
+    FilterAddressRuleTemplateComponent,
+    DZoonSictionComponent,
   ],
   imports: [
+
+
+    DndModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    DragDropModule,
+
     CheckboxModule,
     SplitButtonModule,
     NgxPaginationModule,
@@ -230,6 +247,11 @@ import { BgContainerComponent } from './components/lib/containers/bg-container/b
     TieredMenuModule,
   ],
   exports: [
+    DragDropModule,
+    DndModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    DZoonSictionComponent,
     DateDisplayComponent,
     SDynamicTableV2Component,
     DTableComponent,
@@ -315,6 +337,9 @@ import { BgContainerComponent } from './components/lib/containers/bg-container/b
     DynamicTableCellColorPipe,
     DynamicTableCellColorPipeStyle,
   ],
+
   providers: [ConfirmationService, MessageService],
 })
 export class SharedModule {}
+
+

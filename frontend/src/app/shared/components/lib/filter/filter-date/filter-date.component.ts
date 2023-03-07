@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'filter-date',
+  selector: 'filter-by-date',
   templateUrl: './filter-date.component.html',
   styleUrls: ['./filter-date.component.scss'],
 })

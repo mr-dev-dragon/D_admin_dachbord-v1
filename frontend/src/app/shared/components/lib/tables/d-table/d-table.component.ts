@@ -296,6 +296,7 @@ export class DTableComponent implements OnInit {
   tableBodyTotalHeight: any;
   tableBodyTotalWidth: any;
   ngAfterContentInit() {
+  console.log('================================' , this.tableBodyTotalHeight, this.tableBodyTotalWidth)
     this.cardFilled = !!this.cardNgContentElements;
     this.detailsFilled = !!this.detailsNgContentElements;
     this.unicFilled = !!this.unicNgContentElements;
@@ -399,15 +400,15 @@ export class DTableComponent implements OnInit {
   outDatav2: any[] = [];
   tableDatalength: number = 0;
   outDataFunction(fDAta: any, type: string, index: number, field: string) {
-    console.log(fDAta, 'kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
+
     this.outDatav2 = JSON.parse(JSON.stringify(fDAta));
     this.outData = fDAta;
     this.tableDatalength = fDAta.length;
-    console.log('ddddddddddddddddddddddddddddddddddd', fDAta.length);
+
   }
   public o_config: PaginationInstance = {
     id: 'custom',
-    itemsPerPage: 10,
+    itemsPerPage: 11,
     currentPage: 1,
   };
   ngDoCheck() {
@@ -458,6 +459,7 @@ export class DTableComponent implements OnInit {
         this.captionConfig = this.initialCaptionConfig;
       }
       this.speedDialItems = this.initSpeedDialItems.filter((item: any) => {
+
         // @ts-ignore
         return this.captionConfig[item.id];
       });

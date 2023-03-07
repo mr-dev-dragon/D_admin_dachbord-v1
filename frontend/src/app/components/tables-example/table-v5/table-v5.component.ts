@@ -233,7 +233,7 @@ export class TableV5Component {
           number: '$210.40',
         },
       ],
-      category: ['tag-1', 'tage-2', 'tag-3'],
+      category: ['ahmed', 'tag-1', 'tage-2', 'tag-3'],
       number: '$5350.50',
     },
     {
@@ -291,7 +291,7 @@ export class TableV5Component {
           number: '$210.40',
         },
       ],
-      category: ['tag-1', 'tage-2', 'tag-3'],
+      category: [, 'tag-1', 'tage-2', 'tag-3', '50kg'],
       number: '$5350.50',
     },
     {
@@ -447,7 +447,7 @@ export class TableV5Component {
           renge: 60,
           persentage: 60,
           age: 23,
-          category: ['tag-1', 'tage-2', 'tag-3'],
+          category: ['brahim', 'tag-1', 'tage-2', 'tag-3'],
           number: '$5350.50',
         },
         {
@@ -785,7 +785,7 @@ export class TableV5Component {
           renge: 60,
           persentage: 60,
           age: 24,
-          category: ['tag-1', 'tage-2', 'tag-3'],
+          category: ['50kg', 'tag-1', 'tage-2', 'tag-3'],
           number: '$5350.50',
         },
         {
@@ -844,7 +844,7 @@ export class TableV5Component {
           renge: 60,
           persentage: 60,
           age: 24,
-          category: ['tag-1', 'tage-2', 'tag-3'],
+          category: ['darck', 'tag-1', 'tage-2', 'tag-3'],
           number: '$5350.50',
         },
         {
@@ -917,7 +917,7 @@ export class TableV5Component {
           renge: 60,
           persentage: 60,
           age: 23,
-          category: ['tag-1', 'tage-2', 'tag-3'],
+          category: ['tag-1', 'smale', 'tage-2', 'tag-3'],
           number: '$5350.50',
         },
         {
@@ -2836,7 +2836,6 @@ export class TableV5Component {
   onCloneClick(i: any) {}
   onAddClick(i: any) {}
   onDelete(i: any) {}
-
   ngOnInit(): void {
     this.darkMode = JSON.parse(sessionStorage.getItem('darkMode') || 'false');
     console.log(this.darkMode);

@@ -12,9 +12,6 @@
               'dark-mode': darkMode,
               'leight-mode': !darkMode
             }">
-
-
-
         <main class="s-main">
           <div  class="s-ul ">
             <ng-container *ngFor=" let i of [showData]">
@@ -118,7 +115,7 @@
         'dark-mode': darkMode,
         'leight-mode': !darkMode
       }"
-      
+
 >
 
 
@@ -149,7 +146,7 @@
                 class="show_lable one_label"
                 >
 
-                1 {{i.label|titlecase}}</span>
+              {{i.label|titlecase}}</span>
 
                 </div>
                         <div
@@ -165,7 +162,7 @@
                           <span>
                             <i *ngIf="i.icon" class=" icon {{i?.icon}}"></i>
                           </span>
-                          <span *ngIf="showSidebar" class="show_lable one_label"> 1 {{i.label|titlecase}}</span>
+                          <span *ngIf="showSidebar" class="show_lable one_label">  {{i.label|titlecase}}</span>
                           </div>
               </div>
               <ng-template #elseBlock>
@@ -184,7 +181,7 @@
                       <i *ngIf="i.icon" class=" icon {{i?.icon}}"></i>
                     </span>
                     <span *ngIf="showSidebar"  class="show_lable one_label">
-                  2  {{i.label|titlecase}}
+                  {{i.label|titlecase}}
                     </span>
                     <div class="row init"></div>
                   </label>
@@ -200,7 +197,7 @@
       </div>
 
     </main>
-    <footer  class="s-footer">
+    <!-- <footer  class="s-footer">
       <div class="opened-footer">
        <div class="row">
          <div class="col-4 m-autoo ">
@@ -227,7 +224,7 @@
       </div>
     </div>
     </footer>
-</aside>
+</aside> -->
 
 <ng-template #childOpened let-items="items" let-i="index">
   <ul class="s-ul shecend_body">
@@ -245,7 +242,7 @@
                  [routerLink]="s?.routerLink" class="notlabel">
                        <span *ngIf="activeDataChicker==s" class="y"></span>
                        <span class=" show_lable secend_label">
-                     3 {{s.label |titlecase}}</span>
+                    {{s.label |titlecase}}</span>
                  </div>
 
             </div>
@@ -256,7 +253,7 @@
                     (mouseleave)="mouseLeave(i)"
               class="tab-label" for="{{s.length}}-{{i}}-{{ s.label}}">
 
-                <span class=" show_lable one_label"> 4 {{s.label|titlecase}}</span>
+                <span class=" show_lable one_label">  {{s.label|titlecase}}</span>
                 <div class="row init-2"></div>
               </label>
               <div *ngIf="s.items?.length" class="tab-content">
@@ -284,7 +281,7 @@
                  [routerLink]="s?.routerLink"
               class="notlabel">
              <span *ngIf="activeDataChicker==s" class="y"></span>
-              <span class=" show_lable secend_label">3 {{s.label |titlecase}}</span>
+              <span class=" show_lable secend_label"> {{s.label |titlecase}}</span>
             </div>
 
           </div>
@@ -293,7 +290,7 @@
             <label class="tab-label"
               for="{{s.length}}---{{i}}---{{ s.label}}">
 
-              <span class=" show_lable one_label"> 4 {{s.label|titlecase}}</span>
+              <span class=" show_lable one_label"> {{s.label|titlecase}}</span>
                   <div class="row init-2"></div>
             </label>
             <div *ngIf="s.items?.length" class="tab-content">

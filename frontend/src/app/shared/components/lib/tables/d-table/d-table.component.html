@@ -130,6 +130,8 @@
                   <p-overlayPanel #filter
                      [showCloseIcon]="true"
                      [style]="{ width: '300px', paddingLeft: '-10px' }">
+
+
                     <ng-template pTemplate>
                       <div class="filter">
                         <ng-container *ngIf="col.filterType == 'boolean'">
@@ -148,18 +150,28 @@
                           </filter-by-boolean>
                         </ng-container>
                         <ng-container *ngIf="col.filterType == 'chips'">
-                          <d-filter [type]="'chips'" [label]="'chips'" [path]="col.field" [inData]="data" (outData)="
-                                                        outDataFunction(
-                                                          $event,
-                                                          col.filterType,
-                                                          i,
-                                                          col.field
-                                                        )
-                                                      ">
-                          </d-filter>
+                          <filter-by-tag
+                           [label]="'chips'"
+                           [path]="col.field"
+                           [inData]="data"
+                           (outData)="
+                              outDataFunction(
+                                $event,
+                                col.filterType,
+                                i,
+                                col.field
+                              )
+                            "
+                          >
+
+
+
+                          </filter-by-tag>
+
                         </ng-container>
                         <ng-container *ngIf="col.filterType == 'date'">
-                          <filter-date-rule-template [label]="'date'" [path]="col.field" [inData]="data" (outData)="
+                          <filter-date-rule-template
+                          [label]="'date'" [path]="col.field" [inData]="data" (outData)="
                           outDataFunction(
                             $event,
                             col.filterType,
@@ -171,14 +183,15 @@
                         </ng-container>
                         <ng-container *ngIf="col.filterType == 'numeric'">
                           <filter-number-rule-template [type]="'text'" [label]="'search'" [path]="col.field"
-                            [inData]="data" (outData)="
-                                                        outDataFunction(
-                                                          $event,
-                                                          col.filterType,
-                                                          i,
-                                                          col.field
-                                                        )
-                                                      ">
+                            [inData]="data"
+                            (outData)="
+                                outDataFunction(
+                                  $event,
+                                  col.filterType,
+                                  i,
+                                  col.field
+                                )
+                              ">
                           </filter-number-rule-template>
                         </ng-container>
                         <ng-container *ngIf="col.filterType == 'template'">
@@ -186,13 +199,13 @@
                         <ng-container *ngIf="col.filterType == 'multiSelect'">
                           <d-filter [type]="'multiSelect'" [label]="'Choose'"
                             [optionLabel]="[col.field, col.optionLabel]" [path]="col.field" [inData]="data" (outData)="
-                                                        outDataFunction(
-                                                          $event,
-                                                          col.filterType,
-                                                          i,
-                                                          col.field
-                                                        )
-                                                      ">
+                            outDataFunction(
+                              $event,
+                              col.filterType,
+                              i,
+                              col.field
+                            )
+                          ">
                           </d-filter>
                         </ng-container>
                         <ng-container *ngIf="col.filterType == 'text'">
@@ -237,6 +250,24 @@
 
                           >
                           </filter-by-range>
+                        </ng-container>
+                        <ng-container *ngIf="col.filterType == 'address'">
+                              <filter-by-address
+
+                                [label]="'address'"
+                                [path]="col.field"
+                                [inData]="data"
+                                (outData)="
+                                  outDataFunction(
+                                    $event,
+                                    col.filterType,
+                                    i,
+                                    col.field
+                                  )
+                                "
+
+                              >
+                              </filter-by-address>
                         </ng-container>
                       </div>
                       <!--
