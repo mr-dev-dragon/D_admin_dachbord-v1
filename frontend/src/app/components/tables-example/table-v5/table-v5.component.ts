@@ -2416,6 +2416,7 @@ export class TableV5Component {
   ];
 
   cols: ListHeader[] = [
+  
     {
       field: 'img',
       header: 'img',

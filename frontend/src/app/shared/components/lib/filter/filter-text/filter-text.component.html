@@ -9,7 +9,11 @@
   <div class="lai">
     <label for="saerchBar">{{ label }}</label>
     <div class="s-t-input-group-s">
-      <input (ngModelChange)="filterBy($event)" [(ngModel)]="inputVal" id="saerchBar" aria-label="Search" aria-describedby="search-addon"
+      <input (ngModelChange)="filterBy($event)"
+      [(ngModel)]="inputVal"
+      id="saerchBar"
+      aria-label="Search"
+      aria-describedby="search-addon"
        type="search"
         placeholder="Search Data by {{label}}..." />
       <img src="../../assets/images/search.png" alt="search icon" />

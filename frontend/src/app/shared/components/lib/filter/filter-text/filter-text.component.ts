@@ -20,15 +20,15 @@ export class FilterTextComponent implements OnChanges {
   ngOnChanges(change: SimpleChanges): void {
     if (change['rule']) {
       console.log(this.rule);
-        this.filterBy(this.inputVal);
+      this.filterBy(this.inputVal);
     }
   }
-  
+
   @Input() inData!: any[];
   @Output() outData: EventEmitter<any[]> = new EventEmitter();
 
-  inputVal=''
-  setTimeOutId :any =-1
+  inputVal = '';
+  setTimeOutId: any = -1;
 
   ngAfterViewInit(): void {
     this.outData.emit(this.inData);
@@ -36,13 +36,13 @@ export class FilterTextComponent implements OnChanges {
   filterBy(event: any) {
     console.log(event);
 
-    clearTimeout(this.setTimeOutId)
-    this.setTimeOutId =setTimeout(() => {
-    let filterInputValue = event;
-          if (filterInputValue && this.path && this.inData) {
-            let reusltdata = this.filter(filterInputValue);
-            this.outData.emit(reusltdata);
-          } else if (filterInputValue == '') this.outData.emit(this.inData);
+    clearTimeout(this.setTimeOutId);
+    this.setTimeOutId = setTimeout(() => {
+      let filterInputValue = event;
+      if (filterInputValue && this.path && this.inData) {
+        let reusltdata = this.filter(filterInputValue);
+        this.outData.emit(reusltdata);
+      } else if (filterInputValue == '') this.outData.emit(this.inData);
     }, 150);
   }
   filter(filterInputValue: string) {
@@ -72,8 +72,6 @@ export class FilterTextComponent implements OnChanges {
       case 'contains':
         return findIn.includes(findBy);
     }
-
-
   }
 }
 

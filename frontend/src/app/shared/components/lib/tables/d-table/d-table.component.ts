@@ -36,6 +36,19 @@ import { UndoDeleteDialogService } from 'src/app/shared/services/undo-delete-dia
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class DTableComponent implements OnInit {
+  filterParameter = new Map();
+  outParameter(event: Event, i: number, filterType: string) {
+
+
+this.filterParameter.set(`${i}--${filterType}`, event)
+ console.log('##################', `${i}--${filterType}` ,this.filterParameter);
+
+    // this.filterParameter.find(o=>o.id == `${i}--${filterType}`)?
+    // this.filterParameter.map(o=>o.id == `${i}--${filterType}`? o.data = event :'' )
+    // : this.filterParameter.push({ data: event, id: `${i}--${filterType}` });
+
+
+  }
   // #region  call dom Elemants
   @ViewChild('dt') dataTable!: Table;
   @ViewChildren('i') exRowIcon!: QueryList<ElementRef>;
@@ -106,6 +119,9 @@ export class DTableComponent implements OnInit {
   selectedItems: any = [];
   speedDialItems: any[] = [];
   selected: any;
+
+  clearfilterActive: boolean = false;
+
   firstTime: any = true;
   currentWidth: number = window.innerWidth;
   showshowCurrentPageReport: boolean = true;
@@ -296,7 +312,11 @@ export class DTableComponent implements OnInit {
   tableBodyTotalHeight: any;
   tableBodyTotalWidth: any;
   ngAfterContentInit() {
-  console.log('================================' , this.tableBodyTotalHeight, this.tableBodyTotalWidth)
+    console.log(
+      '================================',
+      this.tableBodyTotalHeight,
+      this.tableBodyTotalWidth
+    );
     this.cardFilled = !!this.cardNgContentElements;
     this.detailsFilled = !!this.detailsNgContentElements;
     this.unicFilled = !!this.unicNgContentElements;
@@ -400,11 +420,9 @@ export class DTableComponent implements OnInit {
   outDatav2: any[] = [];
   tableDatalength: number = 0;
   outDataFunction(fDAta: any, type: string, index: number, field: string) {
-
     this.outDatav2 = JSON.parse(JSON.stringify(fDAta));
     this.outData = fDAta;
     this.tableDatalength = fDAta.length;
-
   }
   public o_config: PaginationInstance = {
     id: 'custom',
@@ -459,7 +477,6 @@ export class DTableComponent implements OnInit {
         this.captionConfig = this.initialCaptionConfig;
       }
       this.speedDialItems = this.initSpeedDialItems.filter((item: any) => {
-
         // @ts-ignore
         return this.captionConfig[item.id];
       });
@@ -515,7 +532,7 @@ export class DTableComponent implements OnInit {
   firstSortEvent() {}
   clear(table?: any) {
     this._selectedColumns = this.columns;
-    // table.clear();
+    this.clearfilterActive = !this.clearfilterActive;
   }
   saveSelectedItems() {
     this.ref.close(this.selectedItems);

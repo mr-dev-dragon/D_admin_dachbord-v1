@@ -1,3 +1,12 @@
+
+
+
+
+
+
+
+
+
 <div [ngClass]="tiblecontinerDiv ? 'table_container' : ''">
   <div class="body">
     <main class="s-t-main">
@@ -11,7 +20,7 @@
           <h1 class="s-t-t-title">{{ tibleTitale | titlecase }}</h1>
         </div>
         <div class="header-container">
-          <button type="button" *ngIf="captionConfig.addButton && !captionConfig.addButton.menuItem"
+          <button type="button"  *ngIf="captionConfig.addButton && !captionConfig.addButton.menuItem"
             class="button green" (click)="onAdd()">
             <i class="pi pi pi-plus s-t-h-b-icon"></i>
           </button>
@@ -20,15 +29,16 @@
             </p-tieredMenu>
           </div>
           <button type="button" *ngIf="captionConfig.clearTable" class="button red" (click)="showUndoDialog()"
-            [disabled]="
-                        selectedItems.map ? !selectedItems.length : !selectedItems
-                      ">
+            [disabled]="selectedItems.map ? !selectedItems.length : !selectedItems">
             <i class="pi pi pi-trash s-t-h-b-icon"></i>
           </button>
         </div>
         <div class="header-container">
           <filter-by-text *ngIf="
-                        captionConfig.headerFilterType && captionConfig.headerFilterfield
+            captionConfig.headerFilterType
+            &&
+            captionConfig.headerFilterfield
+
                       " [type]="captionConfig.headerFilterType" [inData]="data"
             [path]="captionConfig.headerFilterfield" (outData)="
                         outDataFunction(
@@ -42,15 +52,19 @@
         </div>
         <div class="header-container">
           <button type="button" class="button gray" (click)="clear()">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="s-t-h-b-icon" viewBox="0 0 24 24"
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+            class="s-t-h-b-icon" viewBox="0 0 24 24"
               strokeWidth="{1.5}" stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round"
                 d="M6 13.5V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 9.75V10.5" />
-            </svg>
+            </svg> -->
+
+            <i [ngClass]="clearfilterActive? 'pi-filter-slash ':'pi-filter '" class="filterIconSize pi  s-t-h-b-icon  "></i>
           </button>
           <p-multiSelect *ngIf="captionConfig.displayedColumns" [appendTo]="'body'" [options]="columns"
             [(ngModel)]="_selectedColumns" [ngStyle]="{ marginBlock: 'auto' }" [optionLabel]="'header'"
-            selectedItemsLabel="{0} columns selected" [style]="{
+            selectedItemsLabel="{0} columns selected"
+            [style]="{
               minWidth: '200px',
               borderRadius: '10px ',
               boxShadow: 'none',
@@ -81,7 +95,10 @@
           </div>
           <thead class="s-t-thead">
             <tr class="s-t-tr">
-              <th class="s-t-th" *ngIf="
+
+              <ng-container  *ngIf="!(_selectedColumns.length==0)" >
+
+               <th class="s-t-th" *ngIf="
                   captionConfig.expanded?.dataField ||
                   captionConfig.expanded?.headers ||
                   captionConfig.expanded?.captionConfig ||
@@ -96,10 +113,12 @@
                       captionConfig.expanded?.headers ||
                       captionConfig.expanded?.captionConfig
                     ">
-                    <h1 class="s-t-th-label">{{ "sadfsadf" | titlecase }}</h1>
+                    <h1 class="s-t-th-label">{{ "expantion" | titlecase }}</h1>
                   </ng-container>
                 </div>
               </th>
+
+              </ng-container>
               <th *ngFor="let col of _selectedColumns; let i = index" class="s-t-th">
                  <div class="s-t-th-conteainer">
                   <ng-container *ngIf="SortDontWorkWithHeaders.includes(col.header)">
@@ -111,8 +130,12 @@
                    <ng-container *ngIf="!SortDontWorkWithHeaders.includes(col.header)">
                         <ng-container *ngIf="!dateTypeSortDontWorkWith.includes(col.filterType) ">
                              <button
-                                 (click)="sort.toggle($event)" class="s-t-th-btn" type="button"
-                                 tooltipPosition="left" pTooltip="{{'sort'| titlecase| translate}}">
+                                   (click)="sort.toggle($event)"
+                                   class="s-t-th-btn"
+                                   type="button"
+                                   tooltipPosition="left"
+                                   pTooltip="{{'sort'| titlecase| translate}}"
+                                 >
                               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                                 stroke="currentColor" class="w-6 s-t-th-btn-icon h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -135,18 +158,20 @@
                     <ng-template pTemplate>
                       <div class="filter">
                         <ng-container *ngIf="col.filterType == 'boolean'">
-
-
-                          <filter-by-boolean  [type]="'boolean'" [label]="'date'" [path]="col.field" [inData]="data" (outData)="
-                                                        outDataFunction(
-                                                          $event,
-                                                          col.filterType,
-                                                          i,
-                                                          col.field
-                                                        )
+                          <filter-by-boolean
+                                    [type]="'boolean'"
+                                    [label]="'date'"
+                                    [path]="col.field"
+                                    [inData]="data"
+                                    (outParameter)="outParameter($event,i, col.filterType)"
+                                    (outData)="
+                                    outDataFunction(
+                                      $event,
+                                      col.filterType,
+                                      i,
+                                      col.field
+                                    )
                            ">
-
-
                           </filter-by-boolean>
                         </ng-container>
                         <ng-container *ngIf="col.filterType == 'chips'">
@@ -154,6 +179,7 @@
                            [label]="'chips'"
                            [path]="col.field"
                            [inData]="data"
+                           (outParameter)="outParameter($event,i, col.filterType)"
                            (outData)="
                               outDataFunction(
                                 $event,
@@ -171,7 +197,11 @@
                         </ng-container>
                         <ng-container *ngIf="col.filterType == 'date'">
                           <filter-date-rule-template
-                          [label]="'date'" [path]="col.field" [inData]="data" (outData)="
+                          [label]="'date'"
+                          [path]="col.field"
+                          (outParameter)="outParameter($event,i, col.filterType)"
+                          [inData]="data"
+                          (outData)="
                           outDataFunction(
                             $event,
                             col.filterType,
@@ -182,7 +212,11 @@
                           </filter-date-rule-template>
                         </ng-container>
                         <ng-container *ngIf="col.filterType == 'numeric'">
-                          <filter-number-rule-template [type]="'text'" [label]="'search'" [path]="col.field"
+                          <filter-number-rule-template
+                          (outParameter)="outParameter($event,i, col.filterType)"
+                          [type]="'text'"
+                          [label]="'search'"
+                          [path]="col.field"
                             [inData]="data"
                             (outData)="
                                 outDataFunction(
@@ -209,8 +243,14 @@
                           </d-filter>
                         </ng-container>
                         <ng-container *ngIf="col.filterType == 'text'">
-                          <filter-text-rule-template [type]="'text'" [label]="'search'" [path]="col.field"
-                            [inData]="data" (outData)="
+                          <filter-text-rule-template
+                          (outParameter)="outParameter($event,i, col.filterType )"
+                          [inParameter]="filterParameter.get('{{i}}--{{filterType}}')"
+                          [type]="'text'"
+                          [label]="'search'"
+                          [path]="col.field"
+                          [inData]="data"
+                          (outData)="
                                                         outDataFunction(
                                                           $event,
                                                           col.filterType,
@@ -221,7 +261,9 @@
                           </filter-text-rule-template>
                         </ng-container>
                         <ng-container *ngIf="col.filterType == 'percentage'">
-                          <filter-percentage [label]="'lable'" [path]="col.field" [inData]="data" (outData)="
+                          <filter-percentage
+                          (outParameter)="outParameter($event,i, col.filterType)"
+                          [label]="'lable'" [path]="col.field" [inData]="data" (outData)="
                                                         outDataFunction(
                                                           $event,
                                                           col.filterType,
@@ -235,6 +277,7 @@
 
 
                           <filter-by-range
+                          (outParameter)="outParameter($event,i, col.filterType)"
                            [type]="'range'"
                             [label]="'doubleRange'"
                             [path]="col.field"
@@ -253,7 +296,7 @@
                         </ng-container>
                         <ng-container *ngIf="col.filterType == 'address'">
                               <filter-by-address
-
+                                (outParameter)="outParameter($event,i, col.filterType)"
                                 [label]="'address'"
                                 [path]="col.field"
                                 [inData]="data"
@@ -314,64 +357,67 @@
                               ">
                 <tr  class="s-t-tbody-tr  s-t-tr" #tbody_tr data-tr data-showExpandedRow="false" [ngClass]="{ hide: outData[rowData] }">
                   <!-- #region   this arry ooof the row expanttion tn -->
-                  <td *ngIf="
-                      captionConfig.expanded?.dataField ||
-                      captionConfig.expanded?.headers ||
-                      captionConfig.expanded?.captionConfig ||
-                      captionConfig.selectionType == 'multiple'
-                    ">
-                    <div style="
-                        margin: auto;
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        text-align: center;
-                      ">
-                      <ng-container *ngIf="captionConfig.selectionType == 'multiple'">
-                        <!-- <p-checkbox [(ngModel)]="checked" [binary]="true" inputId="a"></p-checkbox> -->
-                      </ng-container>
-                      <ng-container *ngIf="
+
+                  <ng-container  *ngIf="!(_selectedColumns.length==0)" >
+                      <td *ngIf="
                           captionConfig.expanded?.dataField ||
                           captionConfig.expanded?.headers ||
-                          captionConfig.expanded?.captionConfig
+                          captionConfig.expanded?.captionConfig ||
+                          captionConfig.selectionType == 'multiple'
                         ">
-                        <!-- <p-tableCheckbox  [value]="rowData"></p-tableCheckbox> -->
-                        <button (click)="
-                            accorditoinTableRowBtnIconF(rowData._id, i);
-                            tbody_tr.setAttribute(
-                              'showExpandedRow',
-                              tbody_tr.getAttribute('showExpandedRow') == 'true'
-                                ? 'false'
-                                : 'true'
-                            );
-                            tableBody.setAttribute(
-                              'data-selectedIndex',
-                              rowData._id
-                            )
-                          " type="button" [ngClass]="
-                            i.getAttribute('data-accorditionRow') === 'true'
-                              ? 'active-y'
-                              : ''
-                          " class=" button _button  info">
-                          <i #i data-accorditionRow="null" (click)="showExRow(o)" [ngClass]="
-                              tableBody.getAttribute('data-selectedIndex') ==
-                              rowData._id
-                                ? i.getAttribute('data-accorditionRow') ===
-                                  'true'
-                                  ? ' s-t-h--o-b-icon  pi pi-chevron-down'
-                                  : i.getAttribute('data-accorditionRow') ===
-                                    'false'
-                                  ? ' s-t-h--o-b-icon pi pi-chevron-right'
-                                  : i.getAttribute('data-accorditionRow') ===
-                                    'null'
-                                  ? ' s-t-h--o-b-icon pi pi pi-chevron-right'
+                        <div style="
+                            margin: auto;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            text-align: center;
+                          ">
+                          <ng-container *ngIf="captionConfig.selectionType == 'multiple'">
+                            <!-- <p-checkbox [(ngModel)]="checked" [binary]="true" inputId="a"></p-checkbox> -->
+                          </ng-container>
+                          <ng-container *ngIf="
+                              captionConfig.expanded?.dataField ||
+                              captionConfig.expanded?.headers ||
+                              captionConfig.expanded?.captionConfig
+                            ">
+                            <!-- <p-tableCheckbox  [value]="rowData"></p-tableCheckbox> -->
+                            <button (click)="
+                                accorditoinTableRowBtnIconF(rowData._id, i);
+                                tbody_tr.setAttribute(
+                                  'showExpandedRow',
+                                  tbody_tr.getAttribute('showExpandedRow') == 'true'
+                                    ? 'false'
+                                    : 'true'
+                                );
+                                tableBody.setAttribute(
+                                  'data-selectedIndex',
+                                  rowData._id
+                                )
+                              " type="button" [ngClass]="
+                                i.getAttribute('data-accorditionRow') === 'true'
+                                  ? 'active-y'
                                   : ''
-                                : 's-t-h--o-b-icon      pi pi-chevron-right'
-                            "></i>
-                        </button>
-                      </ng-container>
-                    </div>
-                  </td>
+                              " class=" button _button  info">
+                              <i #i data-accorditionRow="null" (click)="showExRow(o)" [ngClass]="
+                                  tableBody.getAttribute('data-selectedIndex') ==
+                                  rowData._id
+                                    ? i.getAttribute('data-accorditionRow') ===
+                                      'true'
+                                      ? ' s-t-h--o-b-icon  pi pi-chevron-down'
+                                      : i.getAttribute('data-accorditionRow') ===
+                                        'false'
+                                      ? ' s-t-h--o-b-icon pi pi-chevron-right'
+                                      : i.getAttribute('data-accorditionRow') ===
+                                        'null'
+                                      ? ' s-t-h--o-b-icon pi pi pi-chevron-right'
+                                      : ''
+                                    : 's-t-h--o-b-icon      pi pi-chevron-right'
+                                "></i>
+                            </button>
+                          </ng-container>
+                        </div>
+                      </td>
+                  </ng-container>
                   <!-- #endregion -->
                   <td *ngFor="let col of _selectedColumns; let p = index" class="s-t-td" data-td #tbody_main_td
                     (mouseenter)="

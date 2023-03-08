@@ -66,21 +66,22 @@
                                   rgba(47, 47, 47, 0.12) 0px 4px   6px,
                                   rgba(37, 37, 37, 0.17) 0px 12px  13px,
                                   rgba(47, 47, 47, 0.09) 0px -3px  5px;
+
                                .s-t-h-b-icon {
-                                    font-size: 1.1rem;
-                                    width:  1.9rem !important;
+                                    font-size: 1rem;
+                                    font-weight: 900;
+                                    width:  2rem !important;
                                     height: 1.9rem !important;
-                                    color: #ffffff;
+                                    color: #ebebeb;
                                     margin: auto;
-
                                     padding: auto ;
-
-                                  padding: 0.08rem;
-                                  padding-bottom:10px ;
-
-
-
+                                    padding: 0.08rem;
+                                    padding-bottom:10px;
                       }
+
+                    .filterIconSize{
+                            font-size: 0.9rem;
+                    }
                   }
               }
     }

@@ -19,8 +19,34 @@ export class DZoonSictionComponent {
     { row: [20, [20, 80]], col: [20, [20, [20, 80]]] },
   ];
 
+  a = {
+    originalEvent: { isTrusted: true },
+    sizes: [44.307196562835664, 55.47798066595059],
+  };
+
+  resizwvalue: boolean = false;
+  type!: string;
+  index!: number | any[];
+
   ngOnInit() {}
 
-  onResizeEnd($event: any) {}
-  onResizeStart($event: any) {}
+  onResizeStart(
+    event: any,
+    type: 'col' | 'row',
+    index: number | any[],
+
+  ){
+    this.resizwvalue = event;
+  }
+
+  onResizeEnd(
+    event: any,
+    type: 'col' | 'row',
+    index: number | any[],
+  ) {
+    this.resizwvalue = event;
+    this.type = type
+    this.index = index
+  }
+
 }

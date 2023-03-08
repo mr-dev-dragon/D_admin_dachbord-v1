@@ -41,7 +41,7 @@ export interface ListHeader {
     | 'range'
     | 'percentage'
     | 'address';
-
+    
   filterData?: [];
   templatePath?: string[] | string;
   pipes?: pipe[];
@@ -51,6 +51,8 @@ export interface ListHeader {
     backgroundColor: string;
     color: string;
   }[];
+
+  filterParameter?: any;
 }
 
 export interface expanded extends  Partial<List> {
@@ -67,6 +69,7 @@ export interface Button {
 }
 
 export interface ListCaptionConfig {
+
   tibleTitale?: string;
   globalFilter?: boolean;
   csv?: boolean;
@@ -89,12 +92,14 @@ export interface ListCaptionConfig {
   };
   buttons?: Button[];
   actions?: {
-    clone?: boolean;
-    delete?: boolean;
-    edit?: boolean;
-    detail?: boolean;
-    close?: boolean;
+        clone?: boolean;
+        delete?: boolean;
+        edit?: boolean;
+        detail?: boolean;
+        close?: boolean;
   };
+
+
 }
 
 export interface List {

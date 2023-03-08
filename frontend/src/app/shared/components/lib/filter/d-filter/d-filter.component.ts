@@ -27,21 +27,22 @@ export class DFilterComponent implements OnInit, AfterViewInit {
   // #endregion
 
   // #region  call inputes from the DOM ELEMENTS
-      @ViewChild('search') searchDomElement!: any;
-      @ViewChild('text') textDomElement!: any;
-      @ViewChild('numeric') numericDomElement!: any;
-      @ViewChild('percentage') percentageDomElement!: any;
-      @ViewChild('boolean') booleanDomElement!: any;
-      @ViewChild('chips') chipsDomElement!: any;
-      @ViewChild('date') dateDomElement!: any;
-      @ViewChild('range') rangeDomElement!: any;
-      @ViewChild('phone') phoneDomElement!: any;
-      @ViewChild('address') addressDomElement!: any;
-      @ViewChild('price') priceDomElement!: any;
-      @ViewChild('multiSelect') multiSelectDomElement!: any;
-      @ViewChild('template') templateDomElement!: any;
 
-  // #endregion
+  @ViewChild('search') searchDomElement!: any;
+  @ViewChild('text') textDomElement!: any;
+  @ViewChild('numeric') numericDomElement!: any;
+  @ViewChild('percentage') percentageDomElement!: any;
+  @ViewChild('boolean') booleanDomElement!: any;
+  @ViewChild('chips') chipsDomElement!: any;
+  @ViewChild('date') dateDomElement!: any;
+  @ViewChild('range') rangeDomElement!: any;
+  @ViewChild('phone') phoneDomElement!: any;
+  @ViewChild('address') addressDomElement!: any;
+  @ViewChild('price') priceDomElement!: any;
+  @ViewChild('multiSelect') multiSelectDomElement!: any;
+  @ViewChild('template') templateDomElement!: any;
+
+  // #endregion 
 
   // #region  resulte frilters variables zoon
   filteredDataFrom_textHeader: any[] = [];

@@ -12,9 +12,13 @@ export class FilterTextRuleTemplateComponent implements OnInit {
   @Input() label: string | string[] = 'text';
   @Input() path: string | string[] = '';
   @Input() inData!: any[];
+  @Input() inParameter!: any;
   @Output() outData: EventEmitter<any> = new EventEmitter();
-  sectiontow: boolean = false;
 
+  @Output() outParameter: EventEmitter<any> = new EventEmitter();
+  parameter!: {};
+
+  sectiontow: boolean = false;
   MatchType: any = 'match any';
   filterTypeOne: any = 'starts with';
   filterTypeTow: any = 'starts with';
@@ -22,13 +26,25 @@ export class FilterTextRuleTemplateComponent implements OnInit {
   filterTow!: any[];
   allFeltedData!: any;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    this.parameter = {
+      sectiontow: this.sectiontow,
+      MatchType: this.MatchType,
+      filterTypeOne: this.filterTypeOne,
+      filterTypeTow: this.filterTypeTow,
+      filterOne: this.filterOne,
+      filterTow: this.filterTow,
+    };
+  }
 
   outDataFunctionOne(a: any) {
+    this.outParameter.emit(this.parameter);
     this.filterOne = a;
   }
 
   outDataFunctionTow(a: any) {
+    this.outParameter.emit(this.parameter);
     this.filterTow = a;
   }
 
@@ -36,7 +52,6 @@ export class FilterTextRuleTemplateComponent implements OnInit {
     this.sectiontow = !this.sectiontow;
   }
   apply(a: any) {
-   console.log(this.filterTypeOne);
     if (a) {
       this.MatchType == 'match any'
         ? (this.allFeltedData = addArrays<string>(
@@ -49,10 +64,10 @@ export class FilterTextRuleTemplateComponent implements OnInit {
             false
           ));
       this.outData.emit(this.allFeltedData);
+      this.outParameter.emit(this.parameter);
     } else {
-
       this.outData.emit(this.filterOne);
-
+      this.outParameter.emit(this.parameter);
     }
   }
 }
