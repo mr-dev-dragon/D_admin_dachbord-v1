@@ -1,3 +1,74 @@
+<!--
+
+
+
+<div class="continer">
+  <ng-container *ngTemplateOutlet="splitterRow ; context:{row:this.row,rowcols:this.col}"></ng-container>
+</div>
+
+<ng-template #splitterRow let-row="row" let-rowcols="rowcols">
+  <p-splitter
+    *ngIf="row.length > 1"
+    [panelSizes]="panelSizes"
+    [minSizes]="minSizes"
+    styleClass="mb-5"
+    [style]="{ height: '100%' }"
+     layout="vertical">
+    <ng-container *ngFor="let o of row">
+      <ng-container  *ngIf="o.map; else elseBlock">
+            <ng-template pTemplate>
+            <ng-container *ngTemplateOutlet="splitterRow ; context:{$implicit:o}"> </ng-container>
+        </ng-template>
+      </ng-container>
+      <ng-template #elseBlock>
+        <ng-template pTemplate>
+          <ng-container *ngTemplateOutlet="splitterCol ; context:{$implicit:rowcols}"></ng-container>
+        </ng-template>
+      </ng-template>
+    </ng-container>
+  </p-splitter>
+</ng-template>
+
+<ng-template #splitterCol let-col>
+  <p-splitter
+  *ngIf="col.length > 1"
+    [style]="{ height: '100%' }"
+    [panelSizes]="panelSizes"
+    [minSizes]="minSizes"
+    styleClass="mb-5"
+  >
+    <ng-container *ngFor="let o of col">
+      <ng-container  *ngIf="o.map; else elseBlock">
+            <ng-template pTemplate>
+            <ng-container *ngTemplateOutlet="splitterCol ; context:{$implicit:o}"> </ng-container>
+        </ng-template>
+      </ng-container>
+      <ng-template #elseBlock>
+        <ng-template pTemplate>
+        {{o}}
+        </ng-template>
+      </ng-template>
+    </ng-container>
+  </p-splitter>
+</ng-template> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -15,16 +86,12 @@
 <ng-template #splitterRow let-row>
 
   <p-splitter
-  *ngIf="row.length > 1"
-
+    *ngIf="row.length > 1"
     [panelSizes]="panelSizes"
     [minSizes]="minSizes"
     styleClass="mb-5"
-
-
-
-        [style]="{ height: '100%' }"
-  >
+    [style]="{ height: '100%' }"
+     layout="vertical">
     <ng-container *ngFor="let o of row">
       <ng-container  *ngIf="o.map; else elseBlock">
             <ng-template pTemplate>
@@ -33,29 +100,20 @@
       </ng-container>
       <ng-template #elseBlock>
         <ng-template pTemplate>
-        {{o}}
+          <ng-container *ngTemplateOutlet="splitterCol ; context:{$implicit:this.col}"></ng-container>
         </ng-template>
       </ng-template>
     </ng-container>
   </p-splitter>
-
 </ng-template>
-
-
-
-
-
-
-
-
 <ng-template #splitterCol let-col>
   <p-splitter
   *ngIf="col.length > 1"
-       [style]="{ height: '100%' }"
+    [style]="{ height: '100%' }"
     [panelSizes]="panelSizes"
     [minSizes]="minSizes"
     styleClass="mb-5"
-        layout="vertical"
+
   >
     <ng-container *ngFor="let o of col">
       <ng-container  *ngIf="o.map; else elseBlock">
@@ -71,4 +129,17 @@
     </ng-container>
   </p-splitter>
 </ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
