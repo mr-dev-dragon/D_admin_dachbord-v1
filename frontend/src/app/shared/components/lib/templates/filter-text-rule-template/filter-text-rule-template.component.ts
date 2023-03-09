@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, SimpleChanges, AfterViewInit } from '@angular/core';
 import { isThisQuarter } from 'date-fns';
 import { addArrays } from 'src/app/shared/global/filter-tool';
 // import { combineArraysWithoutDuplicates } from 'src/app/shared/global/filter-tool';
@@ -7,7 +7,7 @@ import { addArrays } from 'src/app/shared/global/filter-tool';
   templateUrl: './filter-text-rule-template.component.html',
   styleUrls: ['./filter-text-rule-template.component.scss'],
 })
-export class FilterTextRuleTemplateComponent implements OnInit {
+export class FilterTextRuleTemplateComponent implements OnInit ,AfterViewInit {
   @Input() type: string | string[] = 'text';
   @Input() label: string | string[] = 'text';
   @Input() path: string | string[] = '';
@@ -18,6 +18,22 @@ export class FilterTextRuleTemplateComponent implements OnInit {
   @Output() outParameter: EventEmitter<any> = new EventEmitter();
   parameter!: {};
 
+
+ ngAfterViewInit(): void {
+ console.log(this.inParameter);
+    this.parameter = {
+      sectiontow:    this.inParameter.sectiontow,
+      MatchType:     this.inParameter.MatchType,
+      filterTypeOne: this.inParameter.filterTypeOne,
+      filterTypeTow: this.inParameter.filterTypeTow,
+      filterOne:     this.inParameter.filterOne,
+      filterTow:     this.inParameter.filterTow,
+    };
+ }
+
+
+
+
   sectiontow: boolean = false;
   MatchType: any = 'match any';
   filterTypeOne: any = 'starts with';
@@ -27,7 +43,6 @@ export class FilterTextRuleTemplateComponent implements OnInit {
   allFeltedData!: any;
 
   ngOnInit(): void {
-
     this.parameter = {
       sectiontow: this.sectiontow,
       MatchType: this.MatchType,
