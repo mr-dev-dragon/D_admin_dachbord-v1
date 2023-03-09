@@ -36,18 +36,13 @@ import { UndoDeleteDialogService } from 'src/app/shared/services/undo-delete-dia
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class DTableComponent implements OnInit {
-  filterParameter = new Map();
-  outParameter(event: Event, i: number, filterType: string) {
-
-
-this.filterParameter.set(`${i}--${filterType}`, event)
- console.log('##################', `${i}--${filterType}` ,this.filterParameter);
-
-    // this.filterParameter.find(o=>o.id == `${i}--${filterType}`)?
-    // this.filterParameter.map(o=>o.id == `${i}--${filterType}`? o.data = event :'' )
-    // : this.filterParameter.push({ data: event, id: `${i}--${filterType}` });
-
-
+  gitFilerParameterNameId(i: number, filterType: any): string {
+  console.log(`${i}--${filterType}`);
+    return `${i}--${filterType}`;
+  }
+  filterParameter: Map<any, any> = new Map();
+  outParameter(event: Event, id: string) {
+      this.filterParameter.set(id, event);
   }
   // #region  call dom Elemants
   @ViewChild('dt') dataTable!: Table;

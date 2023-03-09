@@ -11,16 +11,17 @@
         <label class=" form-switch">
           <input
               #boolean
-              [(ngModel)]="checkboxValue"
+              [(ngModel)]=" this.parameter.value "
               (change)="  _filter()"
               id="checkboxValue"
               type="checkbox"
           />
           <i></i>
         </label>
-        <div class="falseTrue"  [ngClass]="checkboxValue? 'false':'true' ">
-          {{checkboxValue}}
+        <div class="falseTrue"  [ngClass]=" this.parameter.value && this.parameter.value != ''? 'false':'true' ">
+          {{ this.parameter.value }}
         </div>
+
       </div>
   </div>
 

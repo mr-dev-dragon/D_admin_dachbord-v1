@@ -10,13 +10,20 @@ export class FilterTextComponent implements OnChanges {
   @Input() type: string | string[] = 'text';
   @Input() label: string | string[] = 'text';
   @Input() path: string | string[] = '';
+  @Input() inputvalue: string = '';
+  @Output() outinputValue: EventEmitter<any> = new EventEmitter();
+  @Input() inData: any[] = [];
+  @Output() outData: EventEmitter<any[]> = new EventEmitter();
   @Input() rule:
     | 'starts with'
     | 'contains'
     | 'not Contains'
     | 'end with'
     | 'equals'
-    | 'not equals' = 'starts with';
+    | 'not equals'
+
+
+    = 'starts with';
   ngOnChanges(change: SimpleChanges): void {
     if (change['rule']) {
       console.log(this.rule);
@@ -24,18 +31,16 @@ export class FilterTextComponent implements OnChanges {
     }
   }
 
-  @Input() inData!: any[];
-  @Output() outData: EventEmitter<any[]> = new EventEmitter();
-
-  inputVal = '';
+  inputVal: string = '';
   setTimeOutId: any = -1;
-
   ngAfterViewInit(): void {
     this.outData.emit(this.inData);
+    this.inputvalue != '' ? (this.inputVal = this.inputvalue) : '';
   }
-  filterBy(event: any) {
-    console.log(event);
 
+  filterBy(event: any) {
+    this.outinputValue.emit(event);
+    console.log(event);
     clearTimeout(this.setTimeOutId);
     this.setTimeOutId = setTimeout(() => {
       let filterInputValue = event;
@@ -57,7 +62,6 @@ export class FilterTextComponent implements OnChanges {
     findIn = removeAccent(findIn.toLowerCase());
     findBy = removeAccent(findBy.toLowerCase());
     // let [first, ...other] = findBy.split('');
-
     switch (this.rule) {
       case 'starts with':
         return findIn.startsWith(findBy);
@@ -74,14 +78,3 @@ export class FilterTextComponent implements OnChanges {
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-

@@ -41,7 +41,7 @@ export interface ListHeader {
     | 'range'
     | 'percentage'
     | 'address';
-    
+
   filterData?: [];
   templatePath?: string[] | string;
   pipes?: pipe[];
@@ -54,6 +54,19 @@ export interface ListHeader {
 
   filterParameter?: any;
 }
+
+
+
+export interface filterParameter extends Partial<List> {
+  sectiontow?: boolean;
+  MatchType?: string;
+  filterTypeOne?: any;
+  inputValueOne?:any;
+  filterTypeTow?: any;
+  inputValueTow?:any;
+  value?: any;
+}
+
 
 export interface expanded extends  Partial<List> {
   dataField?: string;
