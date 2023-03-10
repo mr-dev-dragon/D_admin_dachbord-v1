@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { g, removeAccent } from 'src/app/shared/global/filter-tool';
+import { filterParameter } from 'src/app/shared/models/List.model';
 @Component({
   selector: 'filter-by-range',
   templateUrl: './filter-range.component.html',
@@ -12,27 +13,44 @@ export class FilterRangeComponent {
   @Input() inData!: any[];
   @Input() operator: string = '==';
   @Output() outData: EventEmitter<any> = new EventEmitter();
+  @Input() inParameter!: filterParameter;
+  @Output() outParameter: any = new EventEmitter();
+  parameter: filterParameter = {
+    inputValueOne: '',
+    inputValueTwo: '',
+    valueOne: '',
+    valueTwo: '',
+    values: [20, 80],
+  };
   @Input() rule!: 'lass then' | 'biger then';
   rangeValuesEnd: number = 80;
   rangeValuesStart: number = 20;
-  rangeValues: number[] = [20, 80];
+  rangeValues: any[] = [20, 80];
   event: any;
   rengeStart: number = 0;
   rengeEnd: number = 100;
+
+  ngAfterViewInit(): void {
+
+    this.rangeValuesEnd = this.parameter.inputValueOne;
+    this.rangeValuesStart = this.parameter.inputValueTwo;
+    this.rengeStart  = this.parameter.valueOne;
+    this.rengeEnd = this.parameter.valueTwo;
+    // this.rangeValues = this.parameter.values;
+    this.outData.emit(this.inData);
+  }
+
   ngOnChanges(change: SimpleChanges): void {
-      if (change['rangeValuesStart']) {
-       this.rangeValuesStart < this.rengeStart
-         ? (this.rangeValuesStart = this.rengeStart)
-         : '';
-
-      }
-    if (change['rangeValuesEnd']) {
-    this.rangeValuesEnd > this.rengeEnd
-      ? (this.rangeValuesEnd = this.rengeEnd)
-      : '';
-
+    if (change['rangeValuesStart']) {
+      this.rangeValuesStart < this.rengeStart
+        ? (this.rangeValuesStart = this.rengeStart)
+        : '';
     }
-
+    if (change['rangeValuesEnd']) {
+      this.rangeValuesEnd > this.rengeEnd
+        ? (this.rangeValuesEnd = this.rengeEnd)
+        : '';
+    }
   }
   handleChange(e: any) {
     this.event = e;
@@ -45,18 +63,29 @@ export class FilterRangeComponent {
       : '';
     e.values[1] > this.rengeEnd ? (this.rangeValuesEnd = this.rengeEnd) : '';
 
-
+    this.parameter = {
+      inputValueOne: this.rangeValuesStart,
+      inputValueTwo: this.rangeValuesEnd,
+      valueOne: this.rengeStart,
+      valueTwo: this.rengeEnd,
+      values: this.rangeValues,
+    };
   }
   rangeF() {
     this.rangeValues = [this.rangeValuesStart, this.rangeValuesEnd];
+    this.parameter = {
+      inputValueOne: this.rangeValuesStart,
+      inputValueTwo: this.rangeValuesEnd,
+      valueOne: this.rengeStart,
+      valueTwo: this.rengeEnd,
+      values: this.rangeValues,
+    };
   }
 
   ngOnInit(): void {}
   inputVal = '';
   setTimeOutId: any = -1;
-  ngAfterViewInit(): void {
-    this.outData.emit(this.inData);
-  }
+
   clearDataVar: boolean = false;
   clearFiler() {
     this.clearDataVar = true;
@@ -70,6 +99,14 @@ export class FilterRangeComponent {
         this.outData.emit(reusltdata);
       } else if (this.clearDataVar) this.outData.emit(this.inData);
     }, 150);
+
+    this.parameter = {
+      inputValueOne: this.rangeValuesStart,
+      inputValueTwo: this.rangeValuesEnd,
+      valueOne: this.rengeStart,
+      valueTwo: this.rengeEnd,
+      values: this.rangeValues,
+    };
   }
   filter(filterInputValue: number[]) {
     return this.inData.filter((i) =>
@@ -80,12 +117,15 @@ export class FilterRangeComponent {
   }
 
   find(findIn: number, findBy: number[]): boolean {
-
     if (!(findIn && findBy)) return false;
-    if (findBy[0] >= findIn && findIn <= findBy[1]) {return true;}
+    if (findBy[0] >= findIn && findIn <= findBy[1]) {
+      return true;
+    }
 
-  return  !!(findBy[0] >= findIn || findIn <= findBy[1])
+    return !!(findBy[0] >= findIn || findIn <= findBy[1]);
   }
+
+  sendParameter: any = () => this.outParameter.emit(this.parameter);
 }
 
 

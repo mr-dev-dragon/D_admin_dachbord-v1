@@ -73,4 +73,5 @@ export class FilterPercentageComponent implements OnInit, AfterViewInit {
         return false;
     }
   }
+
 }

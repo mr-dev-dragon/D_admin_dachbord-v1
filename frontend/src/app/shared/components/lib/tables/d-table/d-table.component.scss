@@ -29,61 +29,60 @@
       justify-content: space-between;
       align-items: center;
               .header-container{
-                          width: fit-content;
-                          text-align: center;
-                          display: flex;
-                          flex-direction: row;
-                          position: relative;
-                          gap: 4px !important;
-                          margin: 0;
-                          padding: 0;
-                          color: #575757;
-                            .s-t-t-title{
-                              color: #575757;
-                              flex-shrink:0;
-                              width: max-content;
-                              text-align: center;
-                              font-size: 1.5rem;
-                            }
-                            .s-t-t-icon{
-                              color: #545454;
-                               height: 2rem;
-                               width:  2rem;
-                            }
-                         .button {
-                              height: fit-content;
-                              margin-block: auto;
-                              border: none;
-                              padding: 0.08rem;
-                              padding-top: 0.7rem;
-                              border-radius: 0.3rem;
-                              margin: auto;
-                              align-items: center;
+                  width: fit-content;
+                  text-align: center;
+                  display: flex;
+                  flex-direction: row;
+                  position: relative;
+                  gap: 4px !important;
+                  margin: 0;
+                  padding: 0;
+                  color: #575757;
+                    .s-t-t-title{
+                      color: #575757;
+                      flex-shrink:0;
+                      width: max-content;
+                      text-align: center;
+                      font-size: 1.5rem;
+                    }
+                    .s-t-t-icon{
+                      color: #545454;
+                       height: 2rem;
+                       width:  2rem;
+                    }
+                       .button {
+                            height: fit-content;
+                            margin-block: auto;
+                            border: none;
+                            padding: 0.08rem;
+                            padding-top: 0.7rem;
+                            border-radius: 0.3rem;
+                            margin: auto;
+                            align-items: center;
+                            box-shadow:
+                                rgba(54, 54, 54, 0.25) 0px 54px  55px,
+                                rgba(50, 50, 50, 0.12) 0px -12px 30px,
+                                rgba(47, 47, 47, 0.12) 0px 4px   6px,
+                                rgba(37, 37, 37, 0.17) 0px 12px  13px,
+                                rgba(47, 47, 47, 0.09) 0px -3px  5px;
 
-                              box-shadow:
-                                  rgba(54, 54, 54, 0.25) 0px 54px  55px,
-                                  rgba(50, 50, 50, 0.12) 0px -12px 30px,
-                                  rgba(47, 47, 47, 0.12) 0px 4px   6px,
-                                  rgba(37, 37, 37, 0.17) 0px 12px  13px,
-                                  rgba(47, 47, 47, 0.09) 0px -3px  5px;
-
-                               .s-t-h-b-icon {
-                                    font-size: 1rem;
-                                    font-weight: 900;
-                                    width:  2rem !important;
-                                    height: 1.9rem !important;
-                                    color: #ebebeb;
-                                    margin: auto;
-                                    padding: auto ;
-                                    padding: 0.08rem;
-                                    padding-bottom:10px;
-                      }
+                             .s-t-h-b-icon {
+                                  font-size: 1rem;
+                                  font-weight: 900;
+                                  width:  2rem !important;
+                                  height: 1.9rem !important;
+                                  color: #ebebeb;
+                                  margin: auto;
+                                  padding: auto ;
+                                  padding: 0.08rem;
+                                  padding-bottom:10px;
+                    }
 
                     .filterIconSize{
                             font-size: 0.9rem;
                     }
-                  }
-              }
+                }
+      }
     }
     .s-t-body {
 

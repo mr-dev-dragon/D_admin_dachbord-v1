@@ -9,17 +9,17 @@
                  <div class="col-5"> <h5 class="range_title ">end at <span> :  {{ rangeValuesEnd}} </span></h5></div>
            </div>
            <div class="row ">
-             <p-slider [(ngModel)]="rangeValues"   (onChange)="handleChange($event);filterBy() " [range]="true"></p-slider>
+             <p-slider [(ngModel)]="rangeValues" (onChange)="handleChange($event);filterBy() ; sendParameter()" [range]="true"></p-slider>
            </div>
            <div class="row ">
-
                <div class="col-5">
-
-                     <input class="range-input" type="number"  (change)="rangeF(); filterBy()"  pInputText [(ngModel)]="rangeValuesStart" />
+                    <input class="range-input" type="number"  (change)="rangeF(); filterBy() ; sendParameter()"
+                    pInputText [(ngModel)]="rangeValuesStart" />
                </div>
                <div class="col-2"></div>
                <div class="col-5">
-                    <input class="range-input" type="number"    (change)="rangeF();filterBy()"  pInputText [(ngModel)]="rangeValuesEnd" />
+                    <input class="range-input" type="number"    (change)="rangeF();filterBy() ; sendParameter()"
+                    pInputText [(ngModel)]="rangeValuesEnd" />
                </div>
            </div>
      </div>

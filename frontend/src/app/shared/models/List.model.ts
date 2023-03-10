@@ -58,6 +58,9 @@ export interface filterParameter extends Partial<List> {
   filterTypeTwo?: any;
   inputValueTwo?: any;
   value?: any;
+  valueOne?: any;
+  valueTwo?: any;
+  values?: any[];
 }
 export interface expanded extends Partial<List> {
   dataField?: string;
