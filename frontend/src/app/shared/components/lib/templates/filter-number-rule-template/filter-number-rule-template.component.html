@@ -1,17 +1,24 @@
 <div>
 
+
   <div>
     <section>
       <br>
         <label for="matchtype">{{ 'matching type' }}</label>
-        <select  *ngIf="sectiontow"    [(ngModel)]="MatchType" id="matchtype"  class=" s-t-input-group form-select mt-3 mb-3" aria-label="Default select example">
+        <select
+        *ngIf=" parameter.sectiontwo"
+        (ngModelChange)="sendParamiter()"
+        [(ngModel)]=" parameter.MatchType"
+        id="matchtype"
+        class=" s-t-input-group form-select mt-3 mb-3"
+        aria-label="Default select example">
         <option value="Match all">{{'Match all'|translate|titlecase}}</option>
         <option value="match any">{{'match any'|translate|titlecase}}</option>
       </select>
-
-      <hr *ngIf="sectiontow"  />
+      <hr *ngIf=" parameter.sectiontwo"  />
          <label for="typefilter">{{ 'type filter' }}</label>
-      <select [(ngModel)]="filterTypeOne"class=" s-t-input-group form-select mt-3 mb-3" id="typefilter" aria-label="Default select example">
+      <select  (ngModelChange)="sendParamiter()" [(ngModel)]=" parameter.filterTypeOne"class=" s-t-input-group form-select mt-3 mb-3"
+               id="typefilter" aria-label="Default select example">
         <option value='==' > {{'equals'         |translate      |titlecase}}</option>
         <option value='!=' > {{'not equals'     |translate      |titlecase}}</option>
         <option value='<'  > {{'less then'      |translate      |titlecase}}</option>
@@ -19,27 +26,29 @@
         <option value='>'  > {{'greater then'   |translate      |titlecase}}</option>
         <option value='>=' > {{'greater then or equl equals'    |translate |titlecase}}</option>
       </select>
-      <filter-by-number
 
+      <filter-by-number
         [label]="'search'"
         [path]="path"
         [inData]="inData"
-        [rule]="filterTypeOne"
-        (outData)="outDataFunctionOne($event)">
+        (outData)="outDataFunctionOne($event)"
+          [rule]="parameter.filterTypeOne"
+          (outinputValue)=" inputVlueFunctionOne($event)"
+          [inputvalue]="parameter.inputValueOne"
+        >
       </filter-by-number>
-
     </section>
     <section class=" mb-3 mt-3 add_remove_item">
-      <button *ngIf="sectiontow" (click)="sectiontowF()" type="button" class="_btn ">
+      <button *ngIf=" parameter.sectiontwo"  (click)="sectiontwoF();sendParamiter()" type="button" class="_btn ">
         <span class="p-button-label">
           <p>remove</p>
           <i class="pi add-icon pi-times-circle"></i>
         </span>
       </button>
     </section>
-    <section *ngIf="sectiontow">
+    <section *ngIf=" parameter.sectiontwo">
       <br>
-      <select [(ngModel)]="filterTypeTow" class=" s-t-input-group form-select mt-3 mb-3" aria-label="Default select example">
+      <select (ngModelChange)="sendParamiter()" [(ngModel)]=" parameter.filterTypeTwo" class=" s-t-input-group form-select mt-3 mb-3" aria-label="Default select example">
         <option value='=='> {{ 'equals'                         |translate |titlecase    }}</option>
         <option value='!='> {{ 'not equals'                     |translate |titlecase    }}</option>
         <option value='<'>  {{ 'less then'                      |translate |titlecase    }}</option>
@@ -52,30 +61,28 @@
           [label]="'search'"
           [path]="path"
           [inData]="inData"
-          [rule]="filterTypeTow"
-          (outData)="outDataFunctionTow($event)">
+          (outData)="outDataFunctionTwo($event)"
+          [rule]="parameter.filterTypeTwo"
+          (outinputValue)="inputVlueFunctionTwo($event)"
+          [inputvalue]="parameter.inputValueTwo"
+          >
       </filter-by-number>
-
-
     </section>
-
   </div>
-
   <section class=" mb-3 mt-3 add_remove_item">
-    <button *ngIf="!sectiontow" (click)="sectiontowF()" type="button" class="__btn ">
+    <button *ngIf="! parameter.sectiontwo" (click)="sectiontwoF() ;sendParamiter()" type="button" class="__btn ">
       <span class="p-button-label">
         <i class="pi add-icon pi-plus-circle"></i>
         <p>add</p>
       </span>
     </button>
-    <button *ngIf="sectiontow" (click)="sectiontowF()" type="button" class="_btn ">
+    <button *ngIf=" parameter.sectiontwo" (click)="sectiontwoF() ;sendParamiter()" type="button" class="_btn ">
       <span class="p-button-label">
         <p>remove</p>
         <i class="pi add-icon pi-times-circle"></i>
       </span>
     </button>
   </section>
-
   <footer>
     <div class="footer">
       <button type="button" class="footer-btn">
@@ -83,7 +90,7 @@
           Clear
         </span>
       </button>
-      <button (click)="apply(sectiontow)" type="button" class="footer-btn">
+      <button (click)="apply( parameter.sectiontwo)" type="button" class="footer-btn">
         <span  class="p-button-label">
           Apply
         </span>
@@ -91,11 +98,3 @@
     </div>
   </footer>
 </div>
-
-
-
-
-
-
-
-

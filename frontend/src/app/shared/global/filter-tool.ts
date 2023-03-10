@@ -29,9 +29,12 @@ function  removeAccent(s: any) {
 
 
 
-function addArrays<T = any>(arr1: T[], arr2: T[],merge=true): T[] {
-
-  return Array.from(new Set(merge ?arr1.concat(arr2) :arr1.filter((e)=>arr2.find((i)=>i==e))))
+function addArrays<T = any>(arr1: T[], arr2: T[], merge = true): T[] {
+  return Array.from(
+    new Set(
+      merge ? arr1.concat(arr2) : arr1.filter((e) => arr2.find((i) => i == e))
+    )
+  );
 }
 
 

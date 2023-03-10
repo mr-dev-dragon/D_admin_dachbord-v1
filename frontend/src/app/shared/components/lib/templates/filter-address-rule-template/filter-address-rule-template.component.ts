@@ -12,13 +12,13 @@ export class FilterAddressRuleTemplateComponent {
   @Input() path: string | string[] = '';
   @Input() inData!: any[];
   @Output() outData: EventEmitter<any> = new EventEmitter();
-  sectiontow: boolean = false;
+  sectiontwo: boolean = false;
 
   MatchType: any = 'match any';
   filterTypeOne: any = 'starts with';
-  filterTypeTow: any = 'starts with';
+  filterTypeTwo: any = 'starts with';
   filterOne!: any[];
-  filterTow!: any[];
+  filterTwo!: any[];
   allFeltedData!: any;
 
   ngOnInit(): void {}
@@ -27,12 +27,12 @@ export class FilterAddressRuleTemplateComponent {
     this.filterOne = a;
   }
 
-  outDataFunctionTow(a: any) {
-    this.filterTow = a;
+  outDataFunctionTwo(a: any) {
+    this.filterTwo = a;
   }
 
-  sectiontowF() {
-    this.sectiontow = !this.sectiontow;
+  sectiontwoF() {
+    this.sectiontwo = !this.sectiontwo;
   }
   apply(a: any) {
     console.log(this.filterTypeOne);
@@ -40,11 +40,11 @@ export class FilterAddressRuleTemplateComponent {
       this.MatchType == 'match any'
         ? (this.allFeltedData = addArrays<string>(
             this.filterOne,
-            this.filterTow
+            this.filterTwo
           ))
         : (this.allFeltedData = addArrays<string>(
             this.filterOne,
-            this.filterTow,
+            this.filterTwo,
             false
           ));
       this.outData.emit(this.allFeltedData);

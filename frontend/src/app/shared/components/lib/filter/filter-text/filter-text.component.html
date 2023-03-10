@@ -1,7 +1,7 @@
 <ng-container *ngIf="type=='text-header'">
   <div class="s-t-input-group">
     <input
-      (ngModelChange)="filterBy($event)"
+      (ngModelChange)="filterBy($event);"
       [(ngModel)]="inputVal"
       id="saerchBar"
       aria-label="Search"
@@ -12,7 +12,7 @@
 </ng-container>
 <ng-container *ngIf="type=='text'">
   <div class="lai">
-    <label for="saerchBar">{{ label }} test val ::{{this.inputvalue}}</label>
+    <label for="saerchBar">{{ label }} test val </label>
     <div class="s-t-input-group-s">
       <input (ngModelChange)="filterBy($event) "
       [(ngModel)]="inputVal"

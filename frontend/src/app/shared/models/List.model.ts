@@ -1,24 +1,22 @@
 import { TempletesV1Component } from './../../components/templetes-example/templetes-v1/templetes-v1.component';
 import { pipe } from '../pipes/generic.pipe';
-
 export interface OnDeleteEvent {
   id: string[];
   etat: 'etatObjet.archive';
 }
-type ColorType = any
- type Colors =
- 'blue'
- |'brown'
- |'gray'
- |'green'
- |'indigo'
- |'lime'
- |'orange'
- |'purple'
- |'red'
- |'teal'
- |'yellow'
-
+type ColorType = any;
+type Colors =
+  | 'blue'
+  | 'brown'
+  | 'gray'
+  | 'green'
+  | 'indigo'
+  | 'lime'
+  | 'orange'
+  | 'purple'
+  | 'red'
+  | 'teal'
+  | 'yellow';
 export interface ListHeader {
   field: string;
   header: string;
@@ -41,7 +39,6 @@ export interface ListHeader {
     | 'range'
     | 'percentage'
     | 'address';
-
   filterData?: [];
   templatePath?: string[] | string;
   pipes?: pipe[];
@@ -51,28 +48,20 @@ export interface ListHeader {
     backgroundColor: string;
     color: string;
   }[];
-
   filterParameter?: any;
 }
-
-
-
 export interface filterParameter extends Partial<List> {
-  sectiontow?: boolean;
+  sectiontwo?: boolean;
   MatchType?: string;
   filterTypeOne?: any;
-  inputValueOne?:any;
-  filterTypeTow?: any;
-  inputValueTow?:any;
+  inputValueOne?: any;
+  filterTypeTwo?: any;
+  inputValueTwo?: any;
   value?: any;
 }
-
-
-export interface expanded extends  Partial<List> {
+export interface expanded extends Partial<List> {
   dataField?: string;
-
 }
-
 export interface Button {
   label?: string;
   icon?: string;
@@ -80,9 +69,7 @@ export interface Button {
   style?: { [key: string]: any };
   command?: (rowIndex: number, rowData: any) => void;
 }
-
 export interface ListCaptionConfig {
-
   tibleTitale?: string;
   globalFilter?: boolean;
   csv?: boolean;
@@ -105,16 +92,13 @@ export interface ListCaptionConfig {
   };
   buttons?: Button[];
   actions?: {
-        clone?: boolean;
-        delete?: boolean;
-        edit?: boolean;
-        detail?: boolean;
-        close?: boolean;
+    clone?: boolean;
+    delete?: boolean;
+    edit?: boolean;
+    detail?: boolean;
+    close?: boolean;
   };
-
-
 }
-
 export interface List {
   _id?: string;
   headers: ListHeader[];

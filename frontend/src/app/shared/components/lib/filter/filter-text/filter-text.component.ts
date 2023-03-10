@@ -11,19 +11,17 @@ export class FilterTextComponent implements OnChanges {
   @Input() label: string | string[] = 'text';
   @Input() path: string | string[] = '';
   @Input() inputvalue: string = '';
-  @Output() outinputValue: EventEmitter<any> = new EventEmitter();
   @Input() inData: any[] = [];
   @Output() outData: EventEmitter<any[]> = new EventEmitter();
+  @Output() outinputValue: EventEmitter<any> = new EventEmitter();
+
   @Input() rule:
     | 'starts with'
     | 'contains'
     | 'not Contains'
     | 'end with'
     | 'equals'
-    | 'not equals'
-
-
-    = 'starts with';
+    | 'not equals' = 'starts with';
   ngOnChanges(change: SimpleChanges): void {
     if (change['rule']) {
       console.log(this.rule);

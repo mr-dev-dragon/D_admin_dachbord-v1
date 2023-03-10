@@ -22,11 +22,12 @@ export class FilterPercentageComponent implements OnInit, AfterViewInit {
     filterTypeOne: 'lass then',
   };
   ngOnChanges(change: SimpleChanges): void {
-    if (change['parameter.value']) {
+    if (change['pinParameter']) {
       this.parameter.value < 0 ? (this.parameter.value = 0) : '';
       this.parameter.value > 100 ? (this.parameter.value = 100) : '';
     }
   }
+
   showTypeFiler: boolean = true;
   ngOnInit(): void {
     // this.rule ? (this.showTypeFiler = false) : (this.showTypeFiler = true);
@@ -36,6 +37,7 @@ export class FilterPercentageComponent implements OnInit, AfterViewInit {
   inputVal = '';
   setTimeOutId: any = -1;
   ngAfterViewInit(): void {
+    this.inParameter ? (this.parameter = this.inParameter) : '';
     this.outData.emit(this.inData);
   }
   clearDataVar: boolean = false;
@@ -45,6 +47,7 @@ export class FilterPercentageComponent implements OnInit, AfterViewInit {
   filterBy() {
     clearTimeout(this.setTimeOutId);
     this.setTimeOutId = setTimeout(() => {
+        this.outParameter.emit(this.parameter);
       let filterInputValue = this.parameter.value;
       if (!this.clearDataVar && this.path && this.inData) {
         let reusltdata = this.filter(filterInputValue);

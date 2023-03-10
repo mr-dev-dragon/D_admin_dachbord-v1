@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-tow-scection-containers',
+  selector: 'app-two-scection-containers',
   templateUrl: './scection-container.component.html',
   styleUrls: ['../style.contianer.scss'],
 })

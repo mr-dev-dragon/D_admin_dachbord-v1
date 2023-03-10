@@ -36,10 +36,9 @@ import { UndoDeleteDialogService } from 'src/app/shared/services/undo-delete-dia
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class DTableComponent implements OnInit {
-  gitFilerParameterNameId(i: number, filterType: any): string {
-  console.log(`${i}--${filterType}`);
-    return `${i}--${filterType}`;
-  }
+
+  gitFilerParameterNameId:(i:any,filterType:any)=>string=(i,filterType:any) => `${i}--${filterType}`;
+
   filterParameter: Map<any, any> = new Map();
   outParameter(event: Event, id: string) {
       this.filterParameter.set(id, event);

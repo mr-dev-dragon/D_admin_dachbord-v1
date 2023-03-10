@@ -215,9 +215,10 @@
                           </filter-date-rule-template>
                         </ng-container>
                         <ng-container *ngIf="col.filterType == 'numeric'">
+                                <!-- ::: {{filterParameter.get(gitFilerParameterNameId(i,col.filterType))|json}} -->
                           <filter-number-rule-template
-                          (outParameter)="outParameter($event,gitFilerParameterNameId(i,col.filterType))"
-                          [type]="'text'"
+                           (outParameter)="outParameter($event,gitFilerParameterNameId(i,col.filterType))"
+                           [inParameter]="filterParameter.get(gitFilerParameterNameId(i,col.filterType))"
                           [label]="'search'"
                           [path]="col.field"
                             [inData]="data"

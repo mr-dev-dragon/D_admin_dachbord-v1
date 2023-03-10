@@ -13,54 +13,44 @@ export class FilterTextRuleTemplateComponent implements OnInit, AfterViewInit {
   @Input() label: string | string[] = 'text';
   @Input() path: string | string[] = '';
   @Input() inData!: any[];
-  @Input() inParameter!: filterParameter;
   @Output() outData: EventEmitter<any> = new EventEmitter();
-
+  @Input() inParameter!: filterParameter;
   @Output() outParameter: EventEmitter<any> = new EventEmitter();
   parameter: filterParameter = {
-    sectiontow: false,
+    sectiontwo: false,
     MatchType: 'match any',
     filterTypeOne: 'starts with',
-    filterTypeTow: 'starts with',
+    filterTypeTwo: 'starts with',
     inputValueOne: '',
-    inputValueTow: '',
+    inputValueTwo: '',
   };
-
   ngAfterViewInit(): void {
     this.inParameter ? (this.parameter = this.inParameter) : '';
   }
-
-
-  // sectiontow: boolean = false;
+  // sectiontwo: boolean = false;
   // MatchType: any = 'match any';
   // filterTypeOne: any = 'starts with';
-  // filterTypeTow: any = 'starts with';
+  // filterTypeTwo: any = 'starts with';
   filterOne!: any[];
-  filterTow!: any[];
+  filterTwo!: any[];
   allFeltedData!: any;
   // inputValueOne: any;
-  // inputValueTow: any;
-
+  // inputValueTwo: any;
   inputVlueFunctionOne(a: any) {
     this.parameter.inputValueOne = a;
-    console.log('aaaaaaaaaaaaaaaaaaaaaaaa');
   }
-  inputVlueFunctionTow(a: any) {
-    this.parameter.inputValueTow = a;
+  inputVlueFunctionTwo(a: any) {
+    this.parameter.inputValueTwo = a;
   }
-
   ngOnInit(): void {}
-
   outDataFunctionOne(a: any) {
     this.filterOne = a;
   }
-
-  outDataFunctionTow(a: any) {
-    this.filterTow = a;
+  outDataFunctionTwo(a: any) {
+    this.filterTwo = a;
   }
-
-  sectiontowF() {
-    this.parameter.sectiontow = !this.parameter.sectiontow;
+  sectiontwoF() {
+    this.parameter.sectiontwo = !this.parameter.sectiontwo;
   }
   apply(a: any) {
     this.outParameter.emit(this.parameter);
@@ -68,11 +58,11 @@ export class FilterTextRuleTemplateComponent implements OnInit, AfterViewInit {
       this.parameter.MatchType == 'match any'
         ? (this.allFeltedData = addArrays<string>(
             this.filterOne,
-            this.filterTow
+            this.filterTwo
           ))
         : (this.allFeltedData = addArrays<string>(
             this.filterOne,
-            this.filterTow,
+            this.filterTwo,
             false
           ));
       this.outData.emit(this.allFeltedData);
@@ -81,18 +71,3 @@ export class FilterTextRuleTemplateComponent implements OnInit, AfterViewInit {
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -12,12 +12,12 @@ export class FilterDateRuleTemplateComponent {
   @Input() path: string = '';
   @Input() inData!: any[];
   @Output() outData: EventEmitter<any> = new EventEmitter();
-  sectiontow: boolean = false;
+  sectiontwo: boolean = false;
   MatchType: any = 'match any';
   filterTypeOne: any = '==';
-  filterTypeTow: any = '==';
+  filterTypeTwo: any = '==';
   filterOne!: any[];
-  filterTow!: any[];
+  filterTwo!: any[];
   allFeltedData!: any;
 
   ngOnInit(): void {}
@@ -27,13 +27,13 @@ export class FilterDateRuleTemplateComponent {
     this.filterOne = a;
   }
 
-  outDataFunctionTow(a: any) {
-    console.log('function tow', a);
-    this.filterTow = a;
+  outDataFunctionTwo(a: any) {
+    console.log('function two', a);
+    this.filterTwo = a;
   }
 
-  sectiontowF() {
-    this.sectiontow = !this.sectiontow;
+  sectiontwoF() {
+    this.sectiontwo = !this.sectiontwo;
   }
   apply(a: any) {
     console.log(this.filterTypeOne);
@@ -41,11 +41,11 @@ export class FilterDateRuleTemplateComponent {
       this.MatchType == 'match any'
         ? (this.allFeltedData = addArrays<string>(
             this.filterOne,
-            this.filterTow
+            this.filterTwo
           ))
         : (this.allFeltedData = addArrays<string>(
             this.filterOne,
-            this.filterTow,
+            this.filterTwo,
             false
           ));
       // this.outData.emit(this.allFeltedData);
