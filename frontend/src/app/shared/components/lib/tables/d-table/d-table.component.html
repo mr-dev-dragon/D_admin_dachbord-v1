@@ -136,7 +136,7 @@
             />
           </div>
           <thead class="s-t-thead">
-            <tr class="s-t-tr">
+            <tr #openedPopupTr data-openedPopup="-1" class="s-t-tr">
               <ng-container *ngIf="!(_selectedColumns.length == 0)">
                 <th
                   class="s-t-th"
@@ -229,14 +229,19 @@
                       ></app-sort>
                     </ng-template>
                   </p-overlayPanel>
-                  <p-overlayPanel
+                  <!-- <p-overlayPanel
                     #filter
                     [showCloseIcon]="true"
                     [style]="{ width: '300px', paddingLeft: '-10px' }"
-                  >
-                   kkkkkkkkkkkkkkkkkkkk
-                    <ng-template pTemplate>
-                      <div class="filter" [ngSwitch]="col.filterType">
+                  > -->
+
+                    <!-- <ng-template pTemplate> -->
+
+                      <div class="filter "[ngClass]=" { 'd-block':openedPopupTr.getAttribute('data-openedPopup') == (i+'') ,
+                                                         'd-none':openedPopupTr.getAttribute('data-openedPopup') != (i +'')
+
+
+                                                          }" [ngSwitch]="col.filterType">
                          <ng-container *ngSwitchCase="'text'">
                           <filter-text-rule-template
                             (outParameter)="
@@ -526,8 +531,10 @@
                           </filter-By-template>
                         </ng-container>
                       </div>
-                    </ng-template>
-                  </p-overlayPanel>
+
+                    <!-- </ng-template> -->
+
+                  <!-- </p-overlayPanel> -->
                   <!-- style="display: {{(col.filterType!= 'img' || col.filterType != 'file')? '':''}}" -->
                   <ng-container
                     *ngIf="filterDontWorkWithHeaders.includes(col.header)"
@@ -548,16 +555,18 @@
                         !dateTypefilterDontWorkWith.includes(col.filterType)
                       "
                     >
+                     <!-- >>filetreertewrtew -->
                       <button
+                        (click)="openedPopupTr.setAttribute('data-openedPopup',openedPopupTr.getAttribute('data-openedPopup')== i+''? '-1' : i+'')"
                         class="s-t-th-btn"
                         [ngClass]="
                           filterParameter.get(
                             gitFilerParameterNameId(i, col.filterType)
-                              ? 'filterActive'
+
+                          )    ? 'filterActive'
                               : 's-t-th-btn'
-                          )
                         "
-                        (click)="filter.toggle($event)"
+
                         class="s-t-th-btn"
                         type="button"
                         label="Save"
