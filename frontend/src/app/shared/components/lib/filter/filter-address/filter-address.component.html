@@ -1,15 +1,24 @@
 <ng-container *ngIf="type=='text-header'">
   <div class="s-t-input-group">
-    <input (ngModelChange)="filterBy($event)"  [(ngModel)]="inputVal"    id="saerchBar" aria-label="Search" aria-describedby="search-addon"
+    <input
+      (ngModelChange)="filterBy($event)"
+      [(ngModel)]="parameter.value"
+      id="saerchBar"
+      aria-label="Search"
+      aria-describedby="search-addon"
       type="search" placeholder="Search Data ..." />
     <img src="../../assets/images/search.png" alt="search icon" />
   </div>
 </ng-container>
 <ng-container *ngIf="type=='text'">
   <div class="lai">
-    <label for="saerchBar">{{ label }}</label>
+    <label for="saerchBar">{{ label }} test val </label>
     <div class="s-t-input-group-s">
-      <input (ngModelChange)="filterBy($event)" [(ngModel)]="inputVal" id="saerchBar" aria-label="Search" aria-describedby="search-addon"
+      <input (ngModelChange)="filterBy($event) "
+      [(ngModel)]="parameter.value"
+      id="saerchBar"
+      aria-label="Search"
+      aria-describedby="search-addon"
        type="search"
         placeholder="Search Data by {{label}}..." />
       <img src="../../assets/images/search.png" alt="search icon" />

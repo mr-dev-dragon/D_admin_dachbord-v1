@@ -17,13 +17,11 @@ type Colors =
   | 'red'
   | 'teal'
   | 'yellow';
-export interface ListHeader {
-  field: string;
-  header: string;
-  sort?: boolean;
-  filter?: boolean;
-  optionLabel?: string | string[];
-  filterType?:
+
+
+
+  export type FlterType=
+
     | 'file'
     | 'img'
     | 'chips'
@@ -39,6 +37,14 @@ export interface ListHeader {
     | 'range'
     | 'percentage'
     | 'address';
+
+export interface ListHeader {
+  field: string;
+  header: string;
+  sort?: boolean;
+  filter?: boolean;
+  optionLabel?: string | string[];
+  filterType?: FlterType;
   filterData?: [];
   templatePath?: string[] | string;
   pipes?: pipe[];

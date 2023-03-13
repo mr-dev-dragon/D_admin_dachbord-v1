@@ -1,12 +1,12 @@
 import { Page404Component } from './../../../page404/page404.component';
-import { Component, EventEmitter, Input, Output,  OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output,  OnChanges, SimpleChanges, DoCheck } from '@angular/core';
 import { g, removeAccent } from 'src/app/shared/global/filter-tool';
 @Component({
   selector: 'filter-by-text',
   templateUrl: './filter-text.component.html',
   styleUrls: ['./filter-text.component.scss'],
 })
-export class FilterTextComponent implements OnChanges {
+export class FilterTextComponent implements OnChanges, DoCheck {
   @Input() type: string | string[] = 'text';
   @Input() label: string | string[] = 'text';
   @Input() path: string | string[] = '';
@@ -22,13 +22,26 @@ export class FilterTextComponent implements OnChanges {
     | 'end with'
     | 'equals'
     | 'not equals' = 'starts with';
+
+  pevinData: any;
   ngOnChanges(change: SimpleChanges): void {
-    if (change['rule']) {
+    if (change['rule'] || change['inData']) {
+      console.log('lllll filter text llll ', change['inData']);
       console.log(this.rule);
       this.filterBy(this.inputVal);
     }
   }
 
+  ngDoCheck() {
+    if(this.pevinData!= this.inData){
+
+    this.pevinData = this.inData
+    this.filterBy(this.inputVal);
+    console.log("inputVal: ", this.inputVal);
+
+    }
+
+  }
   inputVal: string = '';
   setTimeOutId: any = -1;
   ngAfterViewInit(): void {
@@ -76,3 +89,4 @@ export class FilterTextComponent implements OnChanges {
     }
   }
 }
+

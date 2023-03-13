@@ -23,6 +23,7 @@ import { MenuItem } from 'primeng/api';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { BehaviorSubject } from 'rxjs';
 import {
+  FlterType,
   ListCaptionConfig,
   ListHeader,
   OnDeleteEvent,
@@ -36,15 +37,35 @@ import { UndoDeleteDialogService } from 'src/app/shared/services/undo-delete-dia
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class DTableComponent implements OnInit {
-  gitFilerParameterNameId: (i: any, filterType: any) => string = (
-    i,
-    filterType: any
-  ) => `${i}--${filterType}`;
-
+  gitFilerParameterNameId: (i: number, b: string) => string = (i, b) =>
+    `${i}--${b}`;
   filterParameter: Map<any, any> = new Map();
   outParameter(event: Event, id: string) {
     this.filterParameter.set(id, event);
   }
+
+log=console.log
+  filterMap = new Map();
+  linkFiltersWithData() {
+  let  per:string = 'default'
+  this.filterMap.set(per,this.data)
+   this.cols.map((o:any,i:any)=>{
+
+       if(o.filter)
+         {
+           this.filterMap.set(i,this.data)
+           this.filterMap.set(`${i}--per`, per)
+           per = i
+
+         }
+
+   })
+   this.filterMap.set('outData',per)
+  }
+
+  // outFilter(event: Event, id: string) {
+  //   this.filterConcataytions.set(id, event);
+  // }
   // #region  call dom Elemants
   @ViewChild('dt') dataTable!: Table;
   @ViewChildren('i') exRowIcon!: QueryList<ElementRef>;
@@ -88,7 +109,6 @@ export class DTableComponent implements OnInit {
     'template',
     'multiSelect',
   ];
-
   dateTypefilterDontWorkWith: string[] | any[] = [
     'img',
     'file',
@@ -115,15 +135,41 @@ export class DTableComponent implements OnInit {
   selectedItems: any = [];
   speedDialItems: any[] = [];
   selected: any;
-
   clearfilterActive: boolean = false;
-
   firstTime: any = true;
   currentWidth: number = window.innerWidth;
   showshowCurrentPageReport: boolean = true;
   currentPageReportTemplate: string = '{first} to {last}';
   checked: boolean = false;
   accorditoinTableRowBtnIcon: boolean | null = null;
+  // FinaleFilteredDdata: any = {
+  //   filter_type_template_data: [],
+  //   filter_type_multiSelect_data: [],
+  //   filter_type_phone_data: [],
+  //   filter_type_price_data: [],
+  //   filter_type_address_data: [],
+  //   filter_type_email_data: [],
+  //   filter_type_date_data: [],
+  //   filter_type_boolean_data: [],
+  //   filter_type_range_data: [],
+  //   filter_type_percentage_data: [],
+  //   filter_type_chips_data: [],
+  //   filter_type_numeric_data: [],
+  //   filter_type_text_data: [],
+  // };
+  // filter_type_template_data: [] = [];
+  // filter_type_multiSelect_data: [] = [];
+  // filter_type_phone_data: [] = [];
+  // filter_type_price_data: [] = [];
+  // filter_type_address_data: [] = [];
+  // filter_type_email_data: [] = [];
+  // filter_type_date_data: [] = [];
+  // filter_type_boolean_data: [] = [];
+  // filter_type_range_data: [] = [];
+  // filter_type_percentage_data: [] = [];
+  // filter_type_chips_data: [] = [];
+  // filter_type_numeric_data: [] = [];
+  // filter_type_text_data: [] = [];
   accorditoinTableRowBtnIconF(a: any, i: HTMLElement) {
     i.setAttribute(
       'data-accorditionRow',
@@ -237,6 +283,12 @@ export class DTableComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+
+
+  this.linkFiltersWithData()
+
+
+
     this.disableFilterWithHeader instanceof Array
       ? this.disableFilterWithHeader.map((d) =>
           this.filterDontWorkWithHeaders.push(d)
@@ -247,7 +299,6 @@ export class DTableComponent implements OnInit {
           this.SortDontWorkWithHeaders.push(d)
         )
       : this.SortDontWorkWithHeaders.push(this.disableSortWithHeader);
-
     this.disableFilterInDataType instanceof Array
       ? this.disableFilterInDataType.map((d) =>
           this.dateTypeSortDontWorkWith.push(d)
@@ -258,7 +309,6 @@ export class DTableComponent implements OnInit {
           this.dateTypefilterDontWorkWith.push(d)
         )
       : this.dateTypefilterDontWorkWith.push(this.disableSortInDataType);
-
     //  this.productService
     //    .getProductsSmall()
     //    .then((products) => (this.products = products));
@@ -318,11 +368,13 @@ export class DTableComponent implements OnInit {
     this.unicFilled = !!this.unicNgContentElements;
   }
   ngAfterViewInit() {
-    const divElement = this.tableBody.nativeElement;
-    this.tableBodyTotalHeight =
-      this.renderer.selectRootElement(divElement).clientHeight;
-    this.tableBodyTotalWidth =
-      this.renderer.selectRootElement(divElement).clientWidth;
+  
+    // const divElement = this.tableBody.nativeElement;
+    // this.tableBodyTotalHeight =
+    //   this.renderer.selectRootElement(divElement).clientHeight;
+    // this.tableBodyTotalWidth =
+    //   this.renderer.selectRootElement(divElement).clientWidth;
+
     console.log(
       `The width of the div is ${this.tableBodyTotalHeight}px and its height is ${this.tableBodyTotalWidth}px`
     );
@@ -415,10 +467,15 @@ export class DTableComponent implements OnInit {
   outData: any[] = [];
   outDatav2: any[] = [];
   tableDatalength: number = 0;
-  outDataFunction(fDAta: any, type: string, index: number, field: string) {
-    this.outDatav2 = JSON.parse(JSON.stringify(fDAta));
-    this.outData = fDAta;
-    this.tableDatalength = fDAta.length;
+  outDataFunction(fData: any, type: string, index: number, field: string) {
+    // this.outFilter(
+    //   JSON.parse(JSON.stringify(fData)),
+    //   this.gitFilerParameterNameId(index, type)
+    // );
+
+    this.outDatav2 = JSON.parse(JSON.stringify(fData));
+    this.outData = fData;
+    this.tableDatalength = fData.length;
   }
   public o_config: PaginationInstance = {
     id: 'custom',
@@ -526,15 +583,12 @@ export class DTableComponent implements OnInit {
     }, 2);
   }
   firstSortEvent() {}
-
   clear(table?: any) {
     this._selectedColumns = this.columns;
     this.clearfilterActive = !this.clearfilterActive;
-     this.filterParameter.clear()
-      this.outData= this.data
+    this.filterParameter.clear();
+    this.outData = this.data;
   }
-
-
   saveSelectedItems() {
     this.ref.close(this.selectedItems);
   }

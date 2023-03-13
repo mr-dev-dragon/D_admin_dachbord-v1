@@ -27,15 +27,10 @@ export class FilterTextRuleTemplateComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     this.inParameter ? (this.parameter = this.inParameter) : '';
   }
-  // sectiontwo: boolean = false;
-  // MatchType: any = 'match any';
-  // filterTypeOne: any = 'starts with';
-  // filterTypeTwo: any = 'starts with';
   filterOne!: any[];
   filterTwo!: any[];
   allFeltedData!: any;
-  // inputValueOne: any;
-  // inputValueTwo: any;
+
   inputVlueFunctionOne(a: any) {
     this.parameter.inputValueOne = a;
   }
@@ -53,7 +48,6 @@ export class FilterTextRuleTemplateComponent implements OnInit, AfterViewInit {
     this.parameter.sectiontwo = !this.parameter.sectiontwo;
   }
   apply(a: any) {
-    this.outParameter.emit(this.parameter);
     if (a) {
       this.parameter.MatchType == 'match any'
         ? (this.allFeltedData = addArrays<string>(
@@ -70,4 +64,5 @@ export class FilterTextRuleTemplateComponent implements OnInit, AfterViewInit {
       this.outData.emit(this.filterOne);
     }
   }
+  sendParameter: any = () => this.outParameter.emit(this.parameter);
 }

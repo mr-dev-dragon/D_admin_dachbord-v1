@@ -9,9 +9,7 @@
                  <div class="col-5"> <h5 class="range_title ">end at <span> :  {{parameter.inputValueTwo}} </span></h5></div>
            </div>
            <div class="row ">
-               {{this.var|json}}
-
-
+               <!-- {{this.var|json}} -->
              <p-slider
 
              [(ngModel)]="parameter.values"
@@ -26,7 +24,7 @@
                       class="range-input"
                       type="number"
                       [(ngModel)]="parameter.inputValueOne"
-                      (change)="handleChange(parameter.inputValueOne) ; filterBy()"
+                      (change)="handleChange(parameter.inputValueOne ,'input') ; filterBy()"
                       pInputText
                   />
                </div>

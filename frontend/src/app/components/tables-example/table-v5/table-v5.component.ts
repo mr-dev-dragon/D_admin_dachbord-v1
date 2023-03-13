@@ -2416,12 +2416,11 @@ export class TableV5Component {
   ];
 
   cols: ListHeader[] = [
-  
     {
       field: 'img',
       header: 'img',
       sort: true,
-      filter: true,
+      filter: false,
       filterType: 'img',
       filterData: [],
     },
@@ -2489,7 +2488,7 @@ export class TableV5Component {
       templatePath: ['category', 'img', 'age'],
       filter: true,
       filterType: 'template',
-      optionLabel: ['img', 'fullname'],
+      // optionLabel: 'fullname',
       filterData: [],
     },
     {
@@ -2506,7 +2505,7 @@ export class TableV5Component {
       header: 'price',
       sort: true,
       filter: true,
-      filterType: 'text',
+      filterType: 'price',
       filterData: [],
     },
   ];

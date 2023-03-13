@@ -1,15 +1,28 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { Page404Component } from './../../../page404/page404.component';
+import { Component, EventEmitter, Input, Output,  OnChanges, SimpleChanges } from '@angular/core';
 import { g, removeAccent } from 'src/app/shared/global/filter-tool';
-
+import { filterParameter } from 'src/app/shared/models/List.model';
 @Component({
   selector: 'filter-by-address',
   templateUrl: './filter-address.component.html',
   styleUrls: ['./filter-address.component.scss'],
 })
-export class FilterAddressComponent {
+export class FilterAddressComponent implements OnChanges {
   @Input() type: string | string[] = 'text';
   @Input() label: string | string[] = 'text';
   @Input() path: string | string[] = '';
+  @Input() inData: any[] = [];
+  @Output() outData: EventEmitter<any[]> = new EventEmitter();
+  @Input() inParameter!: filterParameter;
+  @Output() outParameter: EventEmitter<any> = new EventEmitter();
+  parameter!: filterParameter;
+  ngAfterViewInit(): void {
+    this.outData.emit(this.inData);
+    this.inParameter
+      ? (this.parameter = this.inParameter)
+      : (this.parameter = {value:''});
+
+  }
   @Input() rule:
     | 'starts with'
     | 'contains'
@@ -20,20 +33,15 @@ export class FilterAddressComponent {
   ngOnChanges(change: SimpleChanges): void {
     if (change['rule']) {
       console.log(this.rule);
-      this.filterBy(this.inputVal);
+      this.filterBy(this.parameter.value);
     }
   }
-  @Input() inData!: any[];
-  @Output() outData: EventEmitter<any[]> = new EventEmitter();
-  inputVal = '';
+
+
   setTimeOutId: any = -1;
-
-  ngAfterViewInit(): void {
-    this.outData.emit(this.inData);
-  }
   filterBy(event: any) {
+    this.sendParameter( event)
     console.log(event);
-
     clearTimeout(this.setTimeOutId);
     this.setTimeOutId = setTimeout(() => {
       let filterInputValue = event;
@@ -55,7 +63,6 @@ export class FilterAddressComponent {
     findIn = removeAccent(findIn.toLowerCase());
     findBy = removeAccent(findBy.toLowerCase());
     // let [first, ...other] = findBy.split('');
-
     switch (this.rule) {
       case 'starts with':
         return findIn.startsWith(findBy);
@@ -71,4 +78,7 @@ export class FilterAddressComponent {
         return findIn.includes(findBy);
     }
   }
+  sendParameter: any = (a: any) => a ? this.outParameter.emit(this.parameter.value= a) : this.outParameter.emit(this.parameter);
 }
+
+

@@ -1,22 +1,16 @@
-
-
-
-      <div class="lai">
-        <label for="valuechips">{{ label }}</label>
-        <p-chips
-        (ngModelChange)="filter($event)"
-         class="my-chips" [style]="{width: '100%'}" inputId="valuechips" [(ngModel)]="valuesChips"
-            [placeholder]="'filter by tag / catagory'" [allowDuplicate]="false">
-          <ng-template let-item pTemplate="item">
-            {{ item }} - <i class="pi pi-filter ml-2"></i>
-          </ng-template>
-        </p-chips>
-      </div>
-
-
-
-
-
-
-
-
+<div class="lai">
+  <label for="valuechips">{{ label }}</label>
+  <p-chips
+    [(ngModel)]="parameter.value"
+    (ngModelChange)="filter($event);sendParameter();"
+    class="my-chips"
+    [style]="{ width: '100%' }"
+    inputId="valuechips"
+    [placeholder]="'filter by tag / catagory'"
+    [allowDuplicate]="false"
+  >
+    <ng-template let-item pTemplate="item">
+      {{ item }} - <i class="pi pi-filter ml-2"></i>
+    </ng-template>
+  </p-chips>
+</div>
