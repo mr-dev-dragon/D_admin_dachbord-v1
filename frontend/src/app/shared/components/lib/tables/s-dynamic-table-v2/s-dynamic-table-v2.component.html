@@ -3,14 +3,17 @@
 
 <p-table (onRowExpand)="onRowExpand($event)" responsiveLayout="stack" [tableStyle]="{ backgroundColor: '#000' }" #dt
   *ngIf="cols.length && captionConfig" [columns]="selectedColumns" [value]="data" [rows]="rows" [paginator]="true"
-  [showCurrentPageReport]="showshowCurrentPageReport" [rowsPerPageOptions]="[
-    demiRows,
-    rows,
-    rows * 2,
-    rows * 3,
-    rows * 4,
-    rows * 5
-  ]"
+  [showCurrentPageReport]="showshowCurrentPageReport"
+  [rowsPerPageOptions]="
+    [
+      demiRows,
+      rows,
+      rows * 2,
+      rows * 3,
+      rows * 4,
+      rows * 5
+    ]
+  "
 
 
       dataKey="_id"

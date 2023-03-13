@@ -36,12 +36,14 @@ import { UndoDeleteDialogService } from 'src/app/shared/services/undo-delete-dia
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class DTableComponent implements OnInit {
-
-  gitFilerParameterNameId:(i:any,filterType:any)=>string=(i,filterType:any) => `${i}--${filterType}`;
+  gitFilerParameterNameId: (i: any, filterType: any) => string = (
+    i,
+    filterType: any
+  ) => `${i}--${filterType}`;
 
   filterParameter: Map<any, any> = new Map();
   outParameter(event: Event, id: string) {
-      this.filterParameter.set(id, event);
+    this.filterParameter.set(id, event);
   }
   // #region  call dom Elemants
   @ViewChild('dt') dataTable!: Table;
@@ -524,10 +526,15 @@ export class DTableComponent implements OnInit {
     }, 2);
   }
   firstSortEvent() {}
+
   clear(table?: any) {
     this._selectedColumns = this.columns;
     this.clearfilterActive = !this.clearfilterActive;
+     this.filterParameter.clear()
+      this.outData= this.data
   }
+
+
   saveSelectedItems() {
     this.ref.close(this.selectedItems);
   }

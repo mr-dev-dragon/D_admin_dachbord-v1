@@ -25,7 +25,12 @@
             <i class="pi pi pi-plus s-t-h-b-icon"></i>
           </button>
           <div>
-            <p-tieredMenu #menu [model]="captionConfig.addButton.menuItem" [popup]="true" [appendTo]="'body'">
+            <p-tieredMenu
+            #menu
+            [model]="captionConfig.addButton.menuItem"
+            [popup]="true"
+            [appendTo]="'body'"
+            >
             </p-tieredMenu>
           </div>
           <button type="button" *ngIf="captionConfig.clearTable" class="button red" (click)="showUndoDialog()"
@@ -61,21 +66,30 @@
 
             <i [ngClass]="clearfilterActive? 'pi-filter-slash ':'pi-filter '" class="filterIconSize pi  s-t-h-b-icon  "></i>
           </button>
-          <p-multiSelect *ngIf="captionConfig.displayedColumns" [appendTo]="'body'" [options]="columns"
-            [(ngModel)]="_selectedColumns" [ngStyle]="{ marginBlock: 'auto' }" [optionLabel]="'header'"
-            selectedItemsLabel="{0} columns selected"
-            [style]="{
-              minWidth: '200px',
-              borderRadius: '10px ',
-              boxShadow: 'none',
-              width: '150%',
-              height: '45px',
-              marginTop: '-10px',
-              marginBottom: '-10px',
-              padding: '2px',
-              backgroundColor: '#fff5',
-              border: '1px  solid  #fff1'
-            }" placeholder="Choose Columns" (onChange)="test($event)">
+          <p-multiSelect
+          *ngIf="captionConfig.displayedColumns"
+
+                [appendTo]="'body'"
+                [options]="columns"
+                [(ngModel)]="_selectedColumns"
+                [ngStyle]="{ marginBlock: 'auto' }"
+                [optionLabel]="'header'"
+                selectedItemsLabel="{0} columns selected"
+                [style]="{
+                  minWidth: '200px',
+                  borderRadius: '10px ',
+                  boxShadow: 'none',
+                  width: '150%',
+                  height: '45px',
+                  marginTop: '-10px',
+                  marginBottom: '-10px',
+                  padding: '2px',
+                  backgroundColor: '#fff5',
+                  border: '1px  solid  #fff1'}"
+                placeholder="Choose Columns"
+                (onChange)="test($event)"
+
+            >
           </p-multiSelect>
         </div>
         <div *ngIf="captionConfig.sort" class="header-container">
@@ -152,177 +166,177 @@
                   </p-overlayPanel>
                   <p-overlayPanel #filter
                      [showCloseIcon]="true"
-                     [style]="{ width: '300px', paddingLeft: '-10px' }">
- ::::::::: {{filterParameter.get(gitFilerParameterNameId(i,col.filterType))|json}}
-
-                    <ng-template pTemplate>
-
-                      <div class="filter">
-                        <ng-container *ngIf="col.filterType == 'boolean'">
-
-                          <filter-by-boolean
-                                    [type]="'boolean'"
-                                    [label]="'date'"
-                                    [path]="col.field"
-                                    [inData]="data"
-                                     [inParameter]="filterParameter.get(gitFilerParameterNameId(i,col.filterType))"
-                                    (outParameter)="outParameter($event,gitFilerParameterNameId(i,col.filterType))"
-                                    (outData)="
-                                    outDataFunction(
-                                      $event,
-                                      col.filterType,
-                                      i,
-                                      col.field
-                                    )
-                           ">
-                          </filter-by-boolean>
-                        </ng-container>
-                        <ng-container *ngIf="col.filterType == 'chips'">
-                          <filter-by-tag
-                           [label]="'chips'"
-                           [path]="col.field"
-                           [inData]="data"
-                           (outParameter)="outParameter($event,gitFilerParameterNameId(i,col.filterType))"
-                           (outData)="
-                              outDataFunction(
-                                $event,
-                                col.filterType,
-                                i,
-                                col.field
-                              )
-                            "
-                          >
+                     [style]="{  width: '300px', paddingLeft: '-10px' }">
 
 
+                    <ng-template pTemplate >
 
-                          </filter-by-tag>
+                                  <div class="filter" [ngSwitch]="col.filterType">
+                                    <ng-container  *ngSwitchCase="'boolean'">
 
-                        </ng-container>
-                        <ng-container *ngIf="col.filterType == 'date'">
-                          <filter-date-rule-template
-                          [label]="'date'"
-                          [path]="col.field"
-                          (outParameter)="outParameter($event,gitFilerParameterNameId(i,col.filterType))"
-                          [inData]="data"
-                          (outData)="
-                          outDataFunction(
-                            $event,
-                            col.filterType,
-                            i,
-                            col.field
-                          )
-                                                      ">
-                          </filter-date-rule-template>
-                        </ng-container>
-                        <ng-container *ngIf="col.filterType == 'numeric'">
-                                <!-- ::: {{filterParameter.get(gitFilerParameterNameId(i,col.filterType))|json}} -->
-                          <filter-number-rule-template
-                           (outParameter)="outParameter($event,gitFilerParameterNameId(i,col.filterType))"
-                           [inParameter]="filterParameter.get(gitFilerParameterNameId(i,col.filterType))"
-                          [label]="'search'"
-                          [path]="col.field"
-                            [inData]="data"
-                            (outData)="
-                                outDataFunction(
-                                  $event,
-                                  col.filterType,
-                                  i,
-                                  col.field
-                                )
-                              ">
-                          </filter-number-rule-template>
-                        </ng-container>
-                        <ng-container *ngIf="col.filterType == 'template'">
-                        </ng-container>
-                        <ng-container *ngIf="col.filterType == 'multiSelect'">
-                          <d-filter [type]="'multiSelect'" [label]="'Choose'"
-
-                            [optionLabel]="[col.field, col.optionLabel]" [path]="col.field" [inData]="data" (outData)="
-                            outDataFunction(
-                              $event,
-                              col.filterType,
-                              i,
-                              col.field
-                            )
-                          ">
-                          </d-filter>
-                        </ng-container>
-                        <ng-container *ngIf="col.filterType == 'text'">
+                                      <filter-by-boolean
+                                                [type]="'boolean'"
+                                                [label]="'date'"
+                                                [path]="col.field"
+                                                [inData]="data"
+                                                 [inParameter]="filterParameter.get(gitFilerParameterNameId(i,col.filterType))"
+                                                (outParameter)="outParameter($event,gitFilerParameterNameId(i,col.filterType))"
+                                                (outData)="
+                                                outDataFunction(
+                                                  $event,
+                                                  col.filterType,
+                                                  i,
+                                                  col.field
+                                                )
+                                       ">
+                                      </filter-by-boolean>
+                                    </ng-container>
+                                    <ng-container   *ngSwitchCase="'chips'">
+                                      <filter-by-tag
+                                       [label]="'chips'"
+                                       [path]="col.field"
+                                       [inData]="data"
+                                       (outParameter)="outParameter($event,gitFilerParameterNameId(i,col.filterType))"
+                                       (outData)="
+                                          outDataFunction(
+                                            $event,
+                                            col.filterType,
+                                            i,
+                                            col.field
+                                          )
+                                        "
+                                      >
 
 
-                          <filter-text-rule-template
-                              (outParameter)="outParameter($event,gitFilerParameterNameId(i,col.filterType))"
-                              [inParameter]="filterParameter.get(gitFilerParameterNameId(i,col.filterType))"
-                              [label]="'search'"
-                              [path]="col.field"
-                              [inData]="data"
-                              (outData)="
-                          outDataFunction(
-                            $event,
-                            col.filterType,
-                            i,
-                            col.field
-                          )
-                        ">
-                          </filter-text-rule-template>
-                        </ng-container>
-                        <ng-container *ngIf="col.filterType == 'percentage'">
-                          <filter-percentage
-                          (outParameter)="outParameter($event,gitFilerParameterNameId(i,col.filterType))"
-                          [inParameter]="filterParameter.get(gitFilerParameterNameId(i,col.filterType))"
-                          [label]="'lable'"
-                          [path]="col.field"
-                          [inData]="data"
-                          (outData)="
-                                  outDataFunction(
-                                    $event,
-                                    col.filterType,
-                                    i,
-                                    col.field
-                                  )
-                      ">
-                          </filter-percentage>
-                        </ng-container>
-                        <ng-container *ngIf="col.filterType == 'range'">
 
-                          <filter-by-range
-                           (outParameter)="outParameter($event,gitFilerParameterNameId(i,col.filterType))"
-                           [inParameter]="filterParameter.get( gitFilerParameterNameId(i,col.filterType))"
-                           [type]="'range'"
-                            [label]="'doubleRange'"
-                            [path]="col.field"
-                            [inData]="data"
-                            (outData)="
-                              outDataFunction(
-                                $event,
-                                col.filterType,
-                                i,
-                                col.field
-                              )
-                            "
+                                      </filter-by-tag>
 
-                          >
-                          </filter-by-range>
-                        </ng-container>
-                        <ng-container *ngIf="col.filterType == 'address'">
-                              <filter-by-address
-                                (outParameter)="outParameter($event,gitFilerParameterNameId(i,col.filterType))"
-                                [label]="'address'"
-                                [path]="col.field"
-                                [inData]="data"
-                                (outData)="
-                                  outDataFunction(
-                                    $event,
-                                    col.filterType,
-                                    i,
-                                    col.field
-                                  )
-                                "
+                                    </ng-container>
+                                    <ng-container  *ngSwitchCase="'date'">
+                                      <filter-date-rule-template
+                                      [label]="'date'"
+                                      [path]="col.field"
+                                      (outParameter)="outParameter($event,gitFilerParameterNameId(i,col.filterType))"
+                                      [inData]="data"
+                                      (outData)="
+                                      outDataFunction(
+                                        $event,
+                                        col.filterType,
+                                        i,
+                                        col.field
+                                      )
+                                                                  ">
+                                      </filter-date-rule-template>
+                                    </ng-container>
+                                    <ng-container  *ngSwitchCase="'numeric'">
+                                            <!-- ::: {{filterParameter.get(gitFilerParameterNameId(i,col.filterType))|json}} -->
+                                      <filter-number-rule-template
+                                       (outParameter)="outParameter($event,gitFilerParameterNameId(i,col.filterType))"
+                                       [inParameter]="filterParameter.get(gitFilerParameterNameId(i,col.filterType))"
+                                      [label]="'search'"
+                                      [path]="col.field"
+                                        [inData]="data"
+                                        (outData)="
+                                            outDataFunction(
+                                              $event,
+                                              col.filterType,
+                                              i,
+                                              col.field
+                                            )
+                                          ">
+                                      </filter-number-rule-template>
+                                    </ng-container>
+                                    <ng-container  *ngSwitchCase="'template'">
+                                    </ng-container>
+                                    <ng-container  *ngSwitchCase="'multiSelect'">
+                                      <d-filter [type]="'multiSelect'" [label]="'Choose'"
 
-                              >
-                              </filter-by-address>
-                        </ng-container>
-                      </div>
+                                        [optionLabel]="[col.field, col.optionLabel]" [path]="col.field" [inData]="data" (outData)="
+                                        outDataFunction(
+                                          $event,
+                                          col.filterType,
+                                          i,
+                                          col.field
+                                        )
+                                      ">
+                                      </d-filter>
+                                    </ng-container>
+                                    <ng-container  *ngSwitchCase="'text'">
+
+
+                                      <filter-text-rule-template
+                                          (outParameter)="outParameter($event,gitFilerParameterNameId(i,col.filterType))"
+                                          [inParameter]="filterParameter.get(gitFilerParameterNameId(i,col.filterType))"
+                                          [label]="'search'"
+                                          [path]="col.field"
+                                          [inData]="data"
+                                          (outData)="
+                                      outDataFunction(
+                                        $event,
+                                        col.filterType,
+                                        i,
+                                        col.field
+                                      )
+                                    ">
+                                      </filter-text-rule-template>
+                                    </ng-container>
+                                    <ng-container  *ngSwitchCase="'percentage'">
+                                      <filter-percentage
+                                      (outParameter)="outParameter($event,gitFilerParameterNameId(i,col.filterType))"
+                                      [inParameter]="filterParameter.get(gitFilerParameterNameId(i,col.filterType))"
+                                      [label]="'lable'"
+                                      [path]="col.field"
+                                      [inData]="data"
+                                      (outData)="
+                                              outDataFunction(
+                                                $event,
+                                                col.filterType,
+                                                i,
+                                                col.field
+                                              )
+                                  ">
+                                      </filter-percentage>
+                                    </ng-container>
+                                    <ng-container  *ngSwitchCase="'range'">
+
+                                      <filter-by-range
+                                       (outParameter)="outParameter($event,gitFilerParameterNameId(i,col.filterType))"
+                                       [inParameter]="filterParameter.get( gitFilerParameterNameId(i,col.filterType))"
+                                       [type]="'range'"
+                                        [label]="'doubleRange'"
+                                        [path]="col.field"
+                                        [inData]="data"
+                                        (outData)="
+                                          outDataFunction(
+                                            $event,
+                                            col.filterType,
+                                            i,
+                                            col.field
+                                          )
+                                        "
+
+                                      >
+                                      </filter-by-range>
+                                    </ng-container>
+                                    <ng-container  *ngSwitchCase="'address'">
+                                          <filter-by-address
+                                            (outParameter)="outParameter($event,gitFilerParameterNameId(i,col.filterType))"
+                                            [label]="'address'"
+                                            [path]="col.field"
+                                            [inData]="data"
+                                            (outData)="
+                                              outDataFunction(
+                                                $event,
+                                                col.filterType,
+                                                i,
+                                                col.field
+                                              )
+                                            "
+
+                                          >
+                                          </filter-by-address>
+                                    </ng-container>
+                                  </div>
                       <!--
                                     | 'price'
                                     | 'phone'
@@ -344,7 +358,8 @@
                      </ng-container>
                      <ng-container *ngIf="!filterDontWorkWithHeaders.includes(col.header)">
                         <ng-container *ngIf="!dateTypefilterDontWorkWith.includes(col.filterType) ">
-                             <button
+                             <button class="s-t-th-btn"
+                              [ngClass]="filterParameter.get(gitFilerParameterNameId(i,col.filterType)? 'filterActive' : 's-t-th-btn')"
                              (click)="filter.toggle($event)" class="s-t-th-btn" type="button" label="Save"
                             tooltipPosition="right" pTooltip="{{'filter'| titlecase| translate}}">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

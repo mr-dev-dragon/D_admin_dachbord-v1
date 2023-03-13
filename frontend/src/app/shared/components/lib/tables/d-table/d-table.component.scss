@@ -207,6 +207,39 @@
                           padding: 1px;
                     }
                   }
+                                     .filterActive {
+
+                                       background-color: #70707000;
+                                       border: #9826b59d 2px solid;
+                                       color: #823392;
+                                       height: fit-content;
+                                       margin-block: auto;
+                                       padding: 10px;
+                                       border-radius: 50%;
+                                       margin: auto;
+
+                                       align-items: center;
+
+                                       &:hover {
+                                         .s-t-th-btn-icon {
+
+                                           color: #6d346d;
+                                         }
+
+                                         // border: #b5266e 2px solid;
+                                         border-radius: 50%;
+                                         padding: 10px;
+                                       }
+
+                                       .s-t-th-btn-icon {
+                                         font-size: 1.5rem;
+                                         width: 20px !important;
+                                         height: 20px !important;
+                                         color: #913294;
+                                         margin: 0;
+                                         padding: 1px;
+                                       }
+                                     }
               .s-t-th-label {
                 font-size: 0.9rem;
                 font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -578,8 +611,7 @@ $p-color: rgb(38, 132, 234);
 
 .show_tbody_main_td_hover_at
 {
-    background-color: #e70707 !important;
-
+    // background-color: #e70707 !important;
 }
 
 

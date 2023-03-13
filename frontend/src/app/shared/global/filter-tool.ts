@@ -39,6 +39,22 @@ function addArrays<T = any>(arr1: T[], arr2: T[], merge = true): T[] {
 
 
 
+// function i<x = number>(a: x, o: string, b: x)  =>
+//   o == '==' || o == '=' || o == 'equals'
+//     ? a == b
+//     : o.includes('!=') || o == '=!' || o == '!' || o == 'not equals'
+//       ?  a != b
+//       : o == '<=' || o == '=<' || o == 'less then or equl equals'
+//         ? a <= b
+//         : o == '=>' || o == '>=' || o == 'greater then or equl equals'
+//           ? a >= b
+//           : o == '>' || o == '>' || o == 'greater then'
+//             ? a > b
+//             : o == '<' || o == '<' || o == 'less then'
+//               ? a < b
+//                : false;
+
+
 
 
 export { removeAccent, g, addArrays };
