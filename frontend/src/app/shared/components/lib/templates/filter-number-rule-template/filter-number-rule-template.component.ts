@@ -26,35 +26,33 @@ export class FilterNumberRuleTemplateComponent {
   filterOne!: any[];
   filtertwo!: any[];
   allFeltedData!: any;
+  apleyFiler: boolean = false;
   ngOnInit(): void {}
   ngAfterViewInit() {
-    console.log(this.parameter);
+
     this.inParameter ? (this.parameter = this.inParameter) : '';
   }
-
-  sectiontwoF: () => void = () =>
-    (this.parameter.sectiontwo = !this.parameter.sectiontwo);
+  clear:()=>void=()=>this.apleyFiler = false;
+  sectiontwoF: () => void = () =>(this.parameter.sectiontwo = !this.parameter.sectiontwo);
   sendParamiter: () => void = () => this.outParameter.emit(this.parameter);
-  outDataFunctionOne: (a: any[]) => void = (a) => (this.filterOne = a);
-  outDataFunctionTwo: (a: any[]) => void = (a) => (this.filtertwo = a);
-  inputVlueFunctionOne: (a: number) => void = (a) => (
-    (this.parameter.inputValueOne = a), this.sendParamiter() 
-  );
-  inputVlueFunctionTwo: (a: number) => void = (a) => (
-    (this.parameter.inputValueTwo = a), this.sendParamiter()
-  );
-  apply: (a: any) => void = (a) =>
-    a
-      ? (this.parameter.MatchType == 'match any'
-          ? (this.allFeltedData = addArrays<string>(
-              this.filterOne,
-              this.filtertwo
-            ))
-          : (this.allFeltedData = addArrays<string>(
-              this.filterOne,
-              this.filtertwo,
-              false
-            )),
-        this.outData.emit(this.allFeltedData))
-      : this.outData.emit(this.filterOne);
+  outDataFunctionOne: (a: any[]) => void = (a) => (this.filterOne = a, this.apply());
+  outDataFunctionTwo: (a: any[]) => void = (a) => (this.filtertwo = a, this.apply());
+  inputVlueFunctionOne: (a: number) => void = (a) => (this.parameter.inputValueOne = a, this.sendParamiter());
+  inputVlueFunctionTwo: (a: number) => void = (a) => (this.parameter.inputValueTwo = a, this.sendParamiter());
+  apply: () => void = () =>
+    this.apleyFiler
+      ? this.parameter.sectiontwo
+        ? (this.parameter.MatchType == 'match any'
+            ? (this.allFeltedData = addArrays<string>(
+                this.filterOne,
+                this.filtertwo
+              ))
+            : (this.allFeltedData = addArrays<string>(
+                this.filterOne,
+                this.filtertwo,
+                false
+              )),
+          this.outData.emit(this.allFeltedData))
+        : this.outData.emit(this.filterOne)
+      : this.outData.emit(this.inData);
 }

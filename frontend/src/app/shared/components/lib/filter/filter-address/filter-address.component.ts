@@ -20,8 +20,7 @@ export class FilterAddressComponent implements OnChanges {
     this.outData.emit(this.inData);
     this.inParameter
       ? (this.parameter = this.inParameter)
-      : (this.parameter = {value:''});
-
+      : (this.parameter = { value: '' });
   }
   @Input() rule:
     | 'starts with'
@@ -37,10 +36,9 @@ export class FilterAddressComponent implements OnChanges {
     }
   }
 
-
   setTimeOutId: any = -1;
   filterBy(event: any) {
-    this.sendParameter( event)
+    this.sendParameter(event);
     console.log(event);
     clearTimeout(this.setTimeOutId);
     this.setTimeOutId = setTimeout(() => {
@@ -78,7 +76,11 @@ export class FilterAddressComponent implements OnChanges {
         return findIn.includes(findBy);
     }
   }
-  sendParameter: any = (a: any) => a ? this.outParameter.emit(this.parameter.value= a) : this.outParameter.emit(this.parameter);
+  apleyFiler: boolean = false;
+  apply() {}
+  clear() {
+    this.apleyFiler = false;
+  }
+
+  sendParameter: any = () => this.outParameter.emit(this.parameter);
 }
-
-

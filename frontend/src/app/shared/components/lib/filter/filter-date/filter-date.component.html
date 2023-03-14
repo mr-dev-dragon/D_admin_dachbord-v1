@@ -4,7 +4,7 @@
 
 
 
-<ng-container *ngSwitchCase="'date'">
+<!-- <ng-container *ngSwitchCase="'date'">
     <div class="dateform">
       <date-display *ngIf="!dateAddSpecificValueBtn" (updatevalue)="updatevalue($event)" [label]="'min'"
         [date]="randomDates[0]"></date-display>
@@ -15,4 +15,10 @@
       <button class="date-add-a-specific-value-btn" (click)="dateAddSpecificValueBtnF()" type="button" value="">
         {{(dateAddSpecificValueBtn?'add max & min  value' :'add a specific value')|titlecase|translate}} </button>
     </div>
-</ng-container>
+</ng-container> -->
+ <p-calendar
+   (ngModelChange)="updatevalue($event)"
+   inputId="basic"
+   [(ngModel)]="this.update_value_form_date_input_display"
+ >
+ </p-calendar>

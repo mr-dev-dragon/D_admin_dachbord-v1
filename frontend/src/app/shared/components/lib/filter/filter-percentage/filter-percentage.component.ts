@@ -17,6 +17,7 @@ export class FilterPercentageComponent implements OnInit, AfterViewInit {
   // @Input() rule!: 'lass then' | 'biger then';
   @Input() inParameter!: filterParameter;
   @Output() outParameter: any = new EventEmitter();
+  apleyFiler: boolean = false;
   parameter: filterParameter = {
     value: '',
     filterTypeOne: 'lass then',
@@ -47,7 +48,7 @@ export class FilterPercentageComponent implements OnInit, AfterViewInit {
   filterBy() {
     clearTimeout(this.setTimeOutId);
     this.setTimeOutId = setTimeout(() => {
-        this.outParameter.emit(this.parameter);
+      this.outParameter.emit(this.parameter);
       let filterInputValue = this.parameter.value;
       if (!this.clearDataVar && this.path && this.inData) {
         let reusltdata = this.filter(filterInputValue);
@@ -73,5 +74,12 @@ export class FilterPercentageComponent implements OnInit, AfterViewInit {
         return false;
     }
   }
+  apply() {
 
+  }
+  clear() {
+    this.apleyFiler = false;
+  }
+
+  sendParameter: any = () => this.outParameter.emit(this.parameter);
 }

@@ -1,23 +1,22 @@
+
+
 .footer {
-  margin: 20px;
+  margin: 2px;
   display: flex;
   justify-content: space-between;
 
   button {
-
-    border-radius: 1rem;
-    padding: 0.8rem;
-
+    border-radius: .5rem;
+    padding: .2rem;
   }
 
   button:first-child {
-    border: 3px #1a78c084 solid;
+    border: 1px #1a78c084 solid;
     color: #5d5d5d;
 
     &:hover {
       color: #373737;
-      border: 3px #1a78c0ed solid;
-
+      border: 1px #1a78c0ed solid;
     }
   }
 
@@ -27,12 +26,8 @@
     color: #ffffffd1;
 
     &:hover {
-
       background-color: #6c28d9db;
       color: #ffffff;
     }
-
-
   }
-
 }

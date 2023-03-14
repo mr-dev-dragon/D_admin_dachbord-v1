@@ -37,9 +37,9 @@ import { UndoDeleteDialogService } from 'src/app/shared/services/undo-delete-dia
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class DTableComponent implements OnInit {
-  gitFilerParameterNameId: (i: number, b: string) => string = (i, b) =>
-    `${i}--${b}`;
+  gitFilerParameterNameId: (i: number, b: string) => string = (i, b) =>`${i}--${b}`;
   filterParameter: Map<any, any> = new Map();
+  
   outParameter(event: Event, id: string) {
     this.filterParameter.set(id, event);
   }
@@ -368,7 +368,7 @@ log=console.log
     this.unicFilled = !!this.unicNgContentElements;
   }
   ngAfterViewInit() {
-  
+
     // const divElement = this.tableBody.nativeElement;
     // this.tableBodyTotalHeight =
     //   this.renderer.selectRootElement(divElement).clientHeight;

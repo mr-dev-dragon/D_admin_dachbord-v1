@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output, OnInit, SimpleChanges } from '@angular/core';
-import { g } from 'src/app/shared/global/filter-tool';
 @Component({
   selector: 'filter-by-number',
   templateUrl: './filter-number.component.html',
@@ -12,11 +11,13 @@ export class FilterNumberComponent {
   @Output() outData = new EventEmitter();
   @Input() inputvalue: number = 0;
   @Output() outinputValue: EventEmitter<any> = new EventEmitter();
-  @Input() rule: '==' | '!=' | '>' | '>=' | '<' | '<=' = '==';
+  @Input() rule: '==' | '!=' | '>' | '>=' | '<' | '<=' = '==' ;
   inputVal: number = 0;
   setTimeOutId: any = -1;
   ngOnChanges(change: SimpleChanges): void {
-    change['rule'] ? this.filterBy(this.inputvalue, true) : '';
+    change['rule' || change['inData']]
+      ? this.filterBy(this.inputvalue, true)
+      : '';
   }
   ngOnInit: any = () => (
     this.outData.emit(this.inData),
@@ -42,7 +43,6 @@ export class FilterNumberComponent {
 
   filter(filterInputValue: any, operator: string) {
     let reusltdata: any;
-
     reusltdata = this.inData.filter((item) => {
       let sitem = item[this.path];
       switch (operator) {

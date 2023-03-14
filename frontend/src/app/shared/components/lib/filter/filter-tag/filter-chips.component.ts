@@ -17,6 +17,7 @@ export class FilterChipsComponent {
   @Input() inParameter!: filterParameter;
   @Output() outParameter: any = new EventEmitter();
   parameter!: filterParameter;
+  apleyFiler: boolean = false;
   @Input() rule!: 'lass then' | 'biger then';
 
   ngOnInit(): void {
@@ -37,7 +38,17 @@ export class FilterChipsComponent {
       });
       return match;
     });
-    this.outData.emit(filteredData);
+    this.apleyFiler
+      ? this.outData.emit(filteredData)
+      : this.outData.emit(this.inData);
+  }
+
+  apply() {
+    this.apleyFiler = true;
+  }
+
+  clear() {
+    this.apleyFiler = false;
   }
   sendParameter: any = () => this.outParameter.emit(this.parameter);
 }

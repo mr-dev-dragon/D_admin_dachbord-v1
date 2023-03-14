@@ -12,17 +12,17 @@ export class FilterDateRuleTemplateComponent {
   @Input() path: string = '';
   @Input() inData!: any[];
   @Output() outData: EventEmitter<any> = new EventEmitter();
-  sectiontwo: boolean = false;
-  MatchType: any = 'match any';
-  filterTypeOne: any = '==';
-  filterTypeTwo: any = '==';
-  filterOne!: any[];
-  filterTwo!: any[];
-  allFeltedData!: any;
+
+      sectiontwo: boolean = false;
+      MatchType: any = 'match any';
+      filterTypeOne: any = '==';
+      filterTypeTwo: any = '==';
+      filterOne!: any[];
+      filterTwo!: any[];
+      allFeltedData!: any;
 
   ngOnInit(): void {}
   outDataFunctionOne(a: any) {
-    console.log('+++++++++++++++++++++++++++++++++++++++', a);
     this.outData.emit(a);
     this.filterOne = a;
   }

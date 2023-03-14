@@ -33,7 +33,7 @@
         [inData]="inData"
         (outData)="outDataFunctionOne($event)"
           [rule]="parameter.filterTypeOne"
-          (outinputValue)=" inputVlueFunctionOne($event)"
+          (outinputValue)=" inputVlueFunctionOne($event) ;sendParamiter()"
           [inputvalue]="parameter.inputValueOne"
         >
       </filter-by-number>
@@ -63,7 +63,7 @@
           [inData]="inData"
           (outData)="outDataFunctionTwo($event)"
           [rule]="parameter.filterTypeTwo"
-          (outinputValue)="inputVlueFunctionTwo($event)"
+          (outinputValue)="inputVlueFunctionTwo($event) ;sendParamiter()"
           [inputvalue]="parameter.inputValueTwo"
           >
       </filter-by-number>
@@ -85,12 +85,12 @@
   </section>
   <footer>
     <div class="footer">
-      <button type="button" class="footer-btn">
+      <button      (click)="clear()" type="button" class="footer-btn">
         <span class="p-button-label">
           Clear
         </span>
       </button>
-      <button (click)="apply( parameter.sectiontwo)" type="button" class="footer-btn">
+      <button (click)="apleyFiler = true;apply(); sendParamiter() ;    " type="button" class="footer-btn">
         <span  class="p-button-label">
           Apply
         </span>

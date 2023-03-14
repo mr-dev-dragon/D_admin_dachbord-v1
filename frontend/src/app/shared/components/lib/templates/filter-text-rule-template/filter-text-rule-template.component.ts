@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Input, Output, OnInit, SimpleChanges, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnInit,
+  SimpleChanges,
+  AfterViewInit,
+  OnChanges,
+} from '@angular/core';
 import { isThisQuarter } from 'date-fns';
 import { addArrays } from 'src/app/shared/global/filter-tool';
 import { filterParameter } from 'src/app/shared/models/List.model';
@@ -9,6 +18,11 @@ import { filterParameter } from 'src/app/shared/models/List.model';
   styleUrls: ['./filter-text-rule-template.component.scss'],
 })
 export class FilterTextRuleTemplateComponent implements OnInit, AfterViewInit {
+  filterOne!: any[];
+  filterTwo!: any[];
+  allFeltedData!: any;
+  apleyFiler: boolean = false;
+
   @Input() type: string | string[] = 'text';
   @Input() label: string | string[] = 'text';
   @Input() path: string | string[] = '';
@@ -24,12 +38,13 @@ export class FilterTextRuleTemplateComponent implements OnInit, AfterViewInit {
     inputValueOne: '',
     inputValueTwo: '',
   };
+
+  clear() {
+    this.apleyFiler = false;
+  }
   ngAfterViewInit(): void {
     this.inParameter ? (this.parameter = this.inParameter) : '';
   }
-  filterOne!: any[];
-  filterTwo!: any[];
-  allFeltedData!: any;
 
   inputVlueFunctionOne(a: any) {
     this.parameter.inputValueOne = a;
@@ -40,28 +55,34 @@ export class FilterTextRuleTemplateComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {}
   outDataFunctionOne(a: any) {
     this.filterOne = a;
+    this.apply();
   }
   outDataFunctionTwo(a: any) {
     this.filterTwo = a;
+    this.apply();
   }
   sectiontwoF() {
     this.parameter.sectiontwo = !this.parameter.sectiontwo;
   }
-  apply(a: any) {
-    if (a) {
-      this.parameter.MatchType == 'match any'
-        ? (this.allFeltedData = addArrays<string>(
-            this.filterOne,
-            this.filterTwo
-          ))
-        : (this.allFeltedData = addArrays<string>(
-            this.filterOne,
-            this.filterTwo,
-            false
-          ));
-      this.outData.emit(this.allFeltedData);
+  apply() {
+    if (this.apleyFiler) {
+      if (this.parameter.sectiontwo) {
+        this.parameter.MatchType == 'match any'
+          ? (this.allFeltedData = addArrays<string>(
+              this.filterOne,
+              this.filterTwo
+            ))
+          : (this.allFeltedData = addArrays<string>(
+              this.filterOne,
+              this.filterTwo,
+              false
+            ));
+        this.outData.emit(this.allFeltedData);
+      } else {
+        this.outData.emit(this.filterOne);
+      }
     } else {
-      this.outData.emit(this.filterOne);
+      this.outData.emit(this.inData);
     }
   }
   sendParameter: any = () => this.outParameter.emit(this.parameter);

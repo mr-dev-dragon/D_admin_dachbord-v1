@@ -1,16 +1,24 @@
+
+
+ <div class="m5">
+        {{filterParameter|json}}
+ </div>
+
+
 <div [ngClass]="tiblecontinerDiv ? 'table_container' : ''">
   <div class="body">
     <main class="s-t-main">
       <section class="s-t-header">
         <div class="header-container">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 s-t-t-icon h-6"
-          >
+        
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 s-t-t-icon h-6"
+              >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -168,8 +176,6 @@
                 </th>
               </ng-container>
               <ng-container *ngFor="let col of _selectedColumns; let i = index" >
-
-
               <th
                 *ngIf="!(col.filterType == 'template' && !col.optionLabel)"
                 class="s-t-th"
@@ -234,14 +240,15 @@
                     [showCloseIcon]="true"
                     [style]="{ width: '300px', paddingLeft: '-10px' }"
                   > -->
-
                     <!-- <ng-template pTemplate> -->
+                      <div class="filter "
+                           [ngClass]=" { 'd-block':openedPopupTr.getAttribute('data-openedPopup') == (i+'') ,
+                                         'd-none':openedPopupTr.getAttribute('data-openedPopup') !=  (i+'') }"
+                           [ngSwitch]="col.filterType">
 
-                      <div class="filter "[ngClass]=" { 'd-block':openedPopupTr.getAttribute('data-openedPopup') == (i+'') ,
-                                                         'd-none':openedPopupTr.getAttribute('data-openedPopup') != (i +'')
 
 
-                                                          }" [ngSwitch]="col.filterType">
+
                          <ng-container *ngSwitchCase="'text'">
                           <filter-text-rule-template
                             (outParameter)="
@@ -259,7 +266,7 @@
                             [path]="col.field"
                             [inData]="filterMap.get(filterMap.get(i+'--per'))"
                             (outData)="
-                                 filterMap.set(i,$event)
+                                 filterMap.set(i,$event ) ; log(filterMap)
                             "
                           >
                           </filter-text-rule-template>
@@ -282,7 +289,7 @@
                             [label]="'search'"
                             [path]="col.field"
                             (outData)="
-                                 filterMap.set(i,$event)
+                              filterMap.set(i,$event)
                             "
                           >
                           </filter-number-rule-template>
@@ -378,7 +385,27 @@
                           </filter-by-boolean>
                         </ng-container>
                         <ng-container *ngSwitchCase="'date'">
-                          <filter-date-rule-template
+                          <filter-text-rule-template
+                             [inData]="filterMap.get(filterMap.get(i+'--per'))"
+                            (outParameter)="
+                              outParameter(
+                                $event,
+                                gitFilerParameterNameId(i, col.filterType)
+                              )
+                            "
+                            [inParameter]="
+                              filterParameter.get(
+                                gitFilerParameterNameId(i, col.filterType)
+                              )
+                            "
+                            [label]="'search'"
+                            [path]="col.field"
+                            (outData)="
+                                 filterMap.set(i,$event)
+                            "
+                          >
+                          </filter-text-rule-template>
+                          <!-- <filter-date-rule-template
                             [inData]="filterMap.get(filterMap.get(i+'--per'))"
                             [label]="'date'"
                             [path]="col.field"
@@ -392,7 +419,7 @@
                             filterMap.set(i,$event)
                             "
                           >
-                          </filter-date-rule-template>
+                          </filter-date-rule-template> -->
                         </ng-container>
                         <ng-container *ngSwitchCase="'email'">
                           <filter-text-rule-template
@@ -410,7 +437,6 @@
                             "
                             [label]="'search'"
                             [path]="col.field"
-
                             (outData)="
                                  filterMap.set(i,$event)
                             "
@@ -455,7 +481,6 @@
                             "
                             [label]="'search'"
                             [path]="col.field"
-
                             (outData)="
                                  filterMap.set(i,$event)
                             "
@@ -478,7 +503,6 @@
                             "
                             [label]="'search'"
                             [path]="col.field"
-
                             (outData)="
                                  filterMap.set(i,$event)
                             "
@@ -486,7 +510,6 @@
                           </filter-text-rule-template>
                         </ng-container>
                         <ng-container *ngSwitchCase="'multiSelect'">
-
                            <filter-By-multiSelect
                             (outParameter)="
                               outParameter(
@@ -531,9 +554,7 @@
                           </filter-By-template>
                         </ng-container>
                       </div>
-
                     <!-- </ng-template> -->
-
                   <!-- </p-overlayPanel> -->
                   <!-- style="display: {{(col.filterType!= 'img' || col.filterType != 'file')? '':''}}" -->
                   <ng-container
@@ -562,11 +583,9 @@
                         [ngClass]="
                           filterParameter.get(
                             gitFilerParameterNameId(i, col.filterType)
-
                           )    ? 'filterActive'
                               : 's-t-th-btn'
                         "
-
                         class="s-t-th-btn"
                         type="button"
                         label="Save"
@@ -608,7 +627,6 @@
                   #tbody_tr
                   data-tr
                   data-showExpandedRow="false"
-
                 >
                   <!-- #region   this arry ooof the row expanttion tn -->
                   <ng-container *ngIf="!(_selectedColumns.length == 0)">
@@ -692,12 +710,10 @@
                   </ng-container>
                   <!-- #endregion -->
                     <ng-container *ngFor="let col of _selectedColumns; let p = index">
-
                   <td
                     *ngIf="!(col.filterType == 'template' && !col.optionLabel)"
                     class="s-t-td"
                     data-td
-
                     #tbody_main_td
                     (mouseenter)="
                       show_tbody_main_td_hover_f(p, rowData[col.field])
@@ -796,7 +812,7 @@
                           }}
                         </span>
                       </ng-container>
-                          <ng-container *ngIf="col.filterType == 'template'">
+                       <ng-container *ngIf="col.filterType == 'template'">
                         <span
                           *ngIf="col.optionLabel"
                           [class]="
@@ -816,7 +832,6 @@
                               | translate
                               | genericPipe : col.pipes
                           }}
-
                         </span>
                       </ng-container>
                     </div>

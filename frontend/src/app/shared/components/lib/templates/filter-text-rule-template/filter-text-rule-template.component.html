@@ -2,7 +2,6 @@
   <div class="sectiontwo">
     <section>
       <br />
-
       <label for="matchtype">{{ "matching type" }}</label>
       <select
         *ngIf="parameter.sectiontwo"
@@ -45,7 +44,7 @@
           {{ "not equals" | translate | titlecase }}
         </option>
       </select>
-      {{ this.parameter.inputValueOne }}
+
       <filter-by-text
         [type]="'text'"
         [label]="'search'"
@@ -55,8 +54,8 @@
         [rule]="parameter.filterTypeOne"
         (outinputValue)="inputVlueFunctionOne($event) ; sendParameter()"
         [inputvalue]="parameter.inputValueOne"
-      >
-      </filter-by-text>
+      ></filter-by-text>
+
     </section>
     <section class="mb-3 mt-3 add_remove_item">
       <button
@@ -80,7 +79,7 @@
     >
       <select
         [(ngModel)]="parameter.filterTypeTwo"
-          (ngModelChange)="sendParameter()"
+        (ngModelChange)="sendParameter()"
         class="s-t-input-group form-select mt-3 mb-3"
         aria-label="Default select example"
       >
@@ -101,9 +100,8 @@
           {{ "not equals" | translate | titlecase }}
         </option>
       </select>
-      {{ this.parameter.inputValueTwo }}
+
       <filter-by-text
-        [type]="'text'"
         [label]="'search'"
         [path]="path"
         [inData]="inData"
@@ -130,7 +128,6 @@
     <button
       *ngIf="parameter.sectiontwo"
       (click)="sectiontwoF();  sendParameter()"
-
       type="button"
       class="_btn"
     >
@@ -142,11 +139,13 @@
   </section>
   <footer>
     <div class="footer">
-      <button type="button" class="footer-btn">
+      <button
+       (click)="clear()"
+      type="button" class="footer-btn">
         <span class="p-button-label"> Clear </span>
       </button>
       <button
-        (click)="apply(parameter.sectiontwo); sendParameter()"
+        (click)="apleyFiler = true;apply(); sendParameter() ;    "
         type="button"
         class="footer-btn"
       >

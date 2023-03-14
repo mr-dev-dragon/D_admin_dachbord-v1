@@ -25,7 +25,16 @@ export class FilterMultiSelectComponent {
 
   @Input() inParameter!: filterParameter;
   @Output() outParameter: EventEmitter<any> = new EventEmitter();
-  parameter: filterParameter = {
-  
-  };
+  parameter!: filterParameter;
+
+  ngOnInit(): void {
+    this.inParameter
+      ? (this.parameter = this.inParameter)
+      : (this.parameter = {
+          value: ['parameter has to be here'],
+        });
+    this.sendParameter();
+    this.outData.emit(this.inData);
+  }
+  sendParameter: any = () => this.outParameter.emit(this.parameter);
 }

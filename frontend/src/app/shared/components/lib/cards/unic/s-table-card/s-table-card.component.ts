@@ -14,7 +14,6 @@ export class STableCardComponent implements OnInit {
 
 
   constructor() {}
-
   ngOnInit(): void {
     let calSub: number = 0;
     this.col.map((i: number) => {

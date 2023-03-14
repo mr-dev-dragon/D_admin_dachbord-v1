@@ -1,12 +1,12 @@
-import { Page404Component } from './../../../page404/page404.component';
-import { Component, EventEmitter, Input, Output,  OnChanges, SimpleChanges, DoCheck } from '@angular/core';
+
+import { Component, EventEmitter, Input, Output,  OnChanges, SimpleChanges  } from '@angular/core';
 import { g, removeAccent } from 'src/app/shared/global/filter-tool';
 @Component({
   selector: 'filter-by-text',
   templateUrl: './filter-text.component.html',
   styleUrls: ['./filter-text.component.scss'],
 })
-export class FilterTextComponent implements OnChanges, DoCheck {
+export class FilterTextComponent implements OnChanges {
   @Input() type: string | string[] = 'text';
   @Input() label: string | string[] = 'text';
   @Input() path: string | string[] = '';
@@ -14,7 +14,6 @@ export class FilterTextComponent implements OnChanges, DoCheck {
   @Input() inData: any[] = [];
   @Output() outData: EventEmitter<any[]> = new EventEmitter();
   @Output() outinputValue: EventEmitter<any> = new EventEmitter();
-
   @Input() rule:
     | 'starts with'
     | 'contains'
@@ -22,36 +21,36 @@ export class FilterTextComponent implements OnChanges, DoCheck {
     | 'end with'
     | 'equals'
     | 'not equals' = 'starts with';
-
   pevinData: any;
+
+
+
   ngOnChanges(change: SimpleChanges): void {
     if (change['rule'] || change['inData']) {
-      console.log('lllll filter text llll ', change['inData']);
-      console.log(this.rule);
       this.filterBy(this.inputVal);
     }
   }
 
-  ngDoCheck() {
-    if(this.pevinData!= this.inData){
 
-    this.pevinData = this.inData
-    this.filterBy(this.inputVal);
-    console.log("inputVal: ", this.inputVal);
 
-    }
 
-  }
+  // ngOnInit: any = () => (
+  //   this.outData.emit(this.inData),
+  //   this.inputvalue != 0 ? (this.inputVal = this.inputvalue) : ''
+  // );
+
+
   inputVal: string = '';
   setTimeOutId: any = -1;
+
   ngAfterViewInit(): void {
     this.outData.emit(this.inData);
-    this.inputvalue != '' ? (this.inputVal = this.inputvalue) : '';
+    this.inputVal ||= this.inputvalue;
   }
 
   filterBy(event: any) {
     this.outinputValue.emit(event);
-    console.log(event);
+
     clearTimeout(this.setTimeOutId);
     this.setTimeOutId = setTimeout(() => {
       let filterInputValue = event;
