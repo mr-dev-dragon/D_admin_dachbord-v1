@@ -16,6 +16,7 @@ import {
   ContentChildren,
   ViewChildren,
 } from '@angular/core';
+
 import { TranslateService } from '@ngx-translate/core';
 import { Table } from 'jspdf-autotable';
 import { PaginationInstance } from 'ngx-pagination';
@@ -30,6 +31,7 @@ import {
 } from 'src/app/shared/models/List.model';
 import { HelpersService } from 'src/app/shared/services/helpers.service';
 import { UndoDeleteDialogService } from 'src/app/shared/services/undo-delete-dialog.service';
+import { ConcatArryToText } from '../../../../global/filter-tool';
 @Component({
   selector: 'd-table',
   templateUrl: './d-table.component.html',
@@ -37,11 +39,13 @@ import { UndoDeleteDialogService } from 'src/app/shared/services/undo-delete-dia
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class DTableComponent implements OnInit {
-  gitFilerParameterNameId: (i: number, b: string) => string = (i, b) =>`${i}--${b}`;
+  gitFilerParameterNameId: (a:any[]) => string = (a) => ConcatArryToText(a)
   filterParameter: Map<any, any> = new Map();
-  
+    var :any =[]
   outParameter(event: Event, id: string) {
     this.filterParameter.set(id, event);
+    this.var.push({ id : id , data : event })
+
   }
 
 log=console.log
@@ -619,3 +623,5 @@ log=console.log
   showExRowStyles: boolean = false;
   showExRow(a?: number) {}
 }
+
+

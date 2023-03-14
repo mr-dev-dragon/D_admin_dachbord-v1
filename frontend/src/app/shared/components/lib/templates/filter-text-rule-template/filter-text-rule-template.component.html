@@ -5,7 +5,6 @@
       <label for="matchtype">{{ "matching type" }}</label>
       <select
         *ngIf="parameter.sectiontwo"
-        (ngModelChange)="sendParameter()"
         [(ngModel)]="parameter.MatchType"
         id="matchtype"
         class="s-t-input-group form-select mt-3 mb-3"
@@ -22,7 +21,6 @@
       <label for="typefilter">{{ "type filter" }}</label>
       <select
         [(ngModel)]="parameter.filterTypeOne"
-        (ngModelChange)="sendParameter()"
         id="typefilter"
         class="s-t-input-group form-select mt-3 mb-3"
         aria-label="Default select example"
@@ -52,7 +50,7 @@
         [inData]="inData"
         (outData)="outDataFunctionOne($event)"
         [rule]="parameter.filterTypeOne"
-        (outinputValue)="inputVlueFunctionOne($event) ; sendParameter()"
+        (outinputValue)="inputVlueFunctionOne($event) ;"
         [inputvalue]="parameter.inputValueOne"
       ></filter-by-text>
 
@@ -60,7 +58,7 @@
     <section class="mb-3 mt-3 add_remove_item">
       <button
         *ngIf="parameter.sectiontwo"
-        (click)="sectiontwoF();  sendParameter()"
+        (click)="sectiontwoF();  "
         type="button"
         class="_btn"
       >
@@ -77,29 +75,29 @@
         sectiontwo: !parameter.sectiontwo || parameter.sectiontwo
       }"
     >
-      <select
-        [(ngModel)]="parameter.filterTypeTwo"
-        (ngModelChange)="sendParameter()"
-        class="s-t-input-group form-select mt-3 mb-3"
-        aria-label="Default select example"
-      >
-        <option value="starts with">
-          {{ "starts with" | translate | titlecase }}
-        </option>
-        <option value="contains">
-          {{ "contains" | translate | titlecase }}
-        </option>
-        <option value="not Contains">
-          {{ "not Contains" | translate | titlecase }}
-        </option>
-        <option value="end with">
-          {{ "end with" | translate | titlecase }}
-        </option>
-        <option value="equals">{{ "equals" | translate | titlecase }}</option>
-        <option value="not equals">
-          {{ "not equals" | translate | titlecase }}
-        </option>
-      </select>
+            <select
+              [(ngModel)]="parameter.filterTypeTwo"
+        
+              class="s-t-input-group form-select mt-3 mb-3"
+              aria-label="Default select example"
+            >
+            <option value="starts with">
+              {{ "starts with" | translate | titlecase }}
+            </option>
+            <option value="contains">
+              {{ "contains" | translate | titlecase }}
+            </option>
+            <option value="not Contains">
+              {{ "not Contains" | translate | titlecase }}
+            </option>
+            <option value="end with">
+              {{ "end with" | translate | titlecase }}
+            </option>
+            <option value="equals">{{ "equals" | translate | titlecase }}</option>
+            <option value="not equals">
+              {{ "not equals" | translate | titlecase }}
+            </option>
+          </select>
 
       <filter-by-text
         [label]="'search'"
@@ -107,16 +105,16 @@
         [inData]="inData"
         (outData)="outDataFunctionTwo($event)"
         [rule]="parameter.filterTypeTwo"
-        (outinputValue)="inputVlueFunctionTwo($event) ;sendParameter()"
+        (outinputValue)="inputVlueFunctionTwo($event) ;"
         [inputvalue]="parameter.inputValueTwo"
-      >
-      </filter-by-text>
+      ></filter-by-text>
+
     </section>
   </div>
   <section class="mb-3 mt-3 add_remove_item">
     <button
       *ngIf="!parameter.sectiontwo"
-      (click)="sectiontwoF();  sendParameter()"
+      (click)="sectiontwoF(); "
       type="button"
       class="__btn"
     >
@@ -127,7 +125,7 @@
     </button>
     <button
       *ngIf="parameter.sectiontwo"
-      (click)="sectiontwoF();  sendParameter()"
+      (click)="sectiontwoF(); "
       type="button"
       class="_btn"
     >
@@ -145,7 +143,7 @@
         <span class="p-button-label"> Clear </span>
       </button>
       <button
-        (click)="apleyFiler = true;apply(); sendParameter() ;    "
+        (click)="apleyFiler = true;apply();  sendParameter()     "
         type="button"
         class="footer-btn"
       >

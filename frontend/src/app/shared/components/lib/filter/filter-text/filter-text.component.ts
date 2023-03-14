@@ -50,7 +50,6 @@ export class FilterTextComponent implements OnChanges {
 
   filterBy(event: any) {
     this.outinputValue.emit(event);
-
     clearTimeout(this.setTimeOutId);
     this.setTimeOutId = setTimeout(() => {
       let filterInputValue = event;

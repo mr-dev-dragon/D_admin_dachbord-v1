@@ -186,7 +186,7 @@
                  box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
                   position: absolute;
                   background-color: #fff;
-                   padding: 1.8rem 1rem;
+                   padding: 1rem 1rem;
                     width:18.75rem;
                    top: 110%;
                    left: 50%;
@@ -205,8 +205,25 @@
                       transition: left 0.1s;
                       transform: rotate(135deg);
                       -webkit-transform: rotate(135deg);
-                    }
+                    } 
+                    
+                    .FilerCloseSection{
 
+                       position: relative;
+                      .removePopUp-icon{
+                         position: absolute;
+                         left:16rem;
+                         top:10px;
+                         font-size: 20px;
+                         color:#818181;
+                         &:hover{
+                            left: 15.7rem;
+                              top: 11px;
+                              font-size: 23px;
+                              color: #823392;
+                         }
+                      }
+                    }
                 }
               .s-t-th-btn {
                 background-color: #70707000;

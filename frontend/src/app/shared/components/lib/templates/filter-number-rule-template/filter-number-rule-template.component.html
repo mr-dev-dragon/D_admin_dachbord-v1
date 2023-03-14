@@ -7,7 +7,6 @@
         <label for="matchtype">{{ 'matching type' }}</label>
         <select
         *ngIf=" parameter.sectiontwo"
-        (ngModelChange)="sendParamiter()"
         [(ngModel)]=" parameter.MatchType"
         id="matchtype"
         class=" s-t-input-group form-select mt-3 mb-3"
@@ -17,7 +16,7 @@
       </select>
       <hr *ngIf=" parameter.sectiontwo"  />
          <label for="typefilter">{{ 'type filter' }}</label>
-      <select  (ngModelChange)="sendParamiter()" [(ngModel)]=" parameter.filterTypeOne"class=" s-t-input-group form-select mt-3 mb-3"
+      <select   [(ngModel)]=" parameter.filterTypeOne"class=" s-t-input-group form-select mt-3 mb-3"
                id="typefilter" aria-label="Default select example">
         <option value='==' > {{'equals'         |translate      |titlecase}}</option>
         <option value='!=' > {{'not equals'     |translate      |titlecase}}</option>
@@ -33,13 +32,13 @@
         [inData]="inData"
         (outData)="outDataFunctionOne($event)"
           [rule]="parameter.filterTypeOne"
-          (outinputValue)=" inputVlueFunctionOne($event) ;sendParamiter()"
+          (outinputValue)=" inputVlueFunctionOne($event) "
           [inputvalue]="parameter.inputValueOne"
         >
       </filter-by-number>
     </section>
     <section class=" mb-3 mt-3 add_remove_item">
-      <button *ngIf=" parameter.sectiontwo"  (click)="sectiontwoF();sendParamiter()" type="button" class="_btn ">
+      <button *ngIf=" parameter.sectiontwo"  (click)="sectiontwoF()" type="button" class="_btn ">
         <span class="p-button-label">
           <p>remove</p>
           <i class="pi add-icon pi-times-circle"></i>
@@ -48,7 +47,7 @@
     </section>
     <section *ngIf=" parameter.sectiontwo">
       <br>
-      <select (ngModelChange)="sendParamiter()" [(ngModel)]=" parameter.filterTypeTwo" class=" s-t-input-group form-select mt-3 mb-3" aria-label="Default select example">
+      <select  [(ngModel)]=" parameter.filterTypeTwo" class=" s-t-input-group form-select mt-3 mb-3" aria-label="Default select example">
         <option value='=='> {{ 'equals'                         |translate |titlecase    }}</option>
         <option value='!='> {{ 'not equals'                     |translate |titlecase    }}</option>
         <option value='<'>  {{ 'less then'                      |translate |titlecase    }}</option>
@@ -58,25 +57,25 @@
       </select>
 
       <filter-by-number
-          [label]="'search'"
-          [path]="path"
-          [inData]="inData"
-          (outData)="outDataFunctionTwo($event)"
-          [rule]="parameter.filterTypeTwo"
-          (outinputValue)="inputVlueFunctionTwo($event) ;sendParamiter()"
-          [inputvalue]="parameter.inputValueTwo"
-          >
+            [label]="'search'"
+            [path]="path"
+            [inData]="inData"
+            (outData)="outDataFunctionTwo($event)"
+            [rule]="parameter.filterTypeTwo"
+            (outinputValue)="inputVlueFunctionTwo($event) "
+            [inputvalue]="parameter.inputValueTwo"
+          > 
       </filter-by-number>
     </section>
   </div>
   <section class=" mb-3 mt-3 add_remove_item">
-    <button *ngIf="! parameter.sectiontwo" (click)="sectiontwoF() ;sendParamiter()" type="button" class="__btn ">
+    <button *ngIf="! parameter.sectiontwo" (click)="sectiontwoF() " type="button" class="__btn ">
       <span class="p-button-label">
         <i class="pi add-icon pi-plus-circle"></i>
         <p>add</p>
       </span>
     </button>
-    <button *ngIf=" parameter.sectiontwo" (click)="sectiontwoF() ;sendParamiter()" type="button" class="_btn ">
+    <button *ngIf=" parameter.sectiontwo" (click)="sectiontwoF() " type="button" class="_btn ">
       <span class="p-button-label">
         <p>remove</p>
         <i class="pi add-icon pi-times-circle"></i>

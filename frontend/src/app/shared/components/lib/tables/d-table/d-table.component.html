@@ -1,7 +1,10 @@
 
 
  <div class="m5">
-        {{filterParameter|json}}
+        <textarea name="" id="" cols="30" rows="10">
+  {{this.var|json}}
+
+        </textarea>
  </div>
 
 
@@ -246,7 +249,15 @@
                                          'd-none':openedPopupTr.getAttribute('data-openedPopup') !=  (i+'') }"
                            [ngSwitch]="col.filterType">
 
-
+                          <span class="FilerCloseSection">
+                                       
+                                      <i
+                                       (click)="openedPopupTr.setAttribute('data-openedPopup',openedPopupTr.getAttribute('data-openedPopup')== i+''? '-1' : i+'')"
+                                       class="  pi removePopUp-icon pi-times-circle"
+                                       >
+                                      </i>
+                          </span>
+                         
 
 
                          <ng-container *ngSwitchCase="'text'">
@@ -254,12 +265,11 @@
                             (outParameter)="
                               outParameter(
                                 $event,
-                                gitFilerParameterNameId(i, col.filterType)
-                              )
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ]))
                             "
                             [inParameter]="
                               filterParameter.get(
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field] )
                               )
                             "
                             [label]="'search'"
@@ -278,19 +288,17 @@
                             (outParameter)="
                               outParameter(
                                 $event,
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             [inParameter]="
                               filterParameter.get(
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             [label]="'search'"
                             [path]="col.field"
-                            (outData)="
-                              filterMap.set(i,$event)
-                            "
+                            (outData)="filterMap.set(i,$event)"
                           >
                           </filter-number-rule-template>
                         </ng-container>
@@ -301,13 +309,13 @@
                             [inData]="filterMap.get(filterMap.get(i+'--per'))"
                             [inParameter]="
                               filterParameter.get(
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             (outParameter)="
                               outParameter(
                                 $event,
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             (outData)="
@@ -322,12 +330,12 @@
                             (outParameter)="
                               outParameter(
                                 $event,
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             [inParameter]="
                               filterParameter.get(
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             [label]="'lable'"
@@ -344,12 +352,12 @@
                             (outParameter)="
                               outParameter(
                                 $event,
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             [inParameter]="
                               filterParameter.get(
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             [type]="'range'"
@@ -369,13 +377,13 @@
                             [inData]="filterMap.get(filterMap.get(i+'--per'))"
                             [inParameter]="
                               filterParameter.get(
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             (outParameter)="
                               outParameter(
                                 $event,
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             (outData)="
@@ -390,12 +398,12 @@
                             (outParameter)="
                               outParameter(
                                 $event,
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             [inParameter]="
                               filterParameter.get(
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             [label]="'search'"
@@ -412,7 +420,7 @@
                             (outParameter)="
                               outParameter(
                                 $event,
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             (outData)="
@@ -427,12 +435,12 @@
                             (outParameter)="
                               outParameter(
                                 $event,
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             [inParameter]="
                               filterParameter.get(
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             [label]="'search'"
@@ -449,12 +457,12 @@
                             (outParameter)="
                               outParameter(
                                 $event,
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             [inParameter]="
                               filterParameter.get(
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             [label]="'search'"
@@ -471,12 +479,12 @@
                             (outParameter)="
                               outParameter(
                                 $event,
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             [inParameter]="
                               filterParameter.get(
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             [label]="'search'"
@@ -493,12 +501,12 @@
                             (outParameter)="
                               outParameter(
                                 $event,
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             [inParameter]="
                               filterParameter.get(
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             [label]="'search'"
@@ -514,12 +522,12 @@
                             (outParameter)="
                               outParameter(
                                 $event,
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             [inParameter]="
                               filterParameter.get(
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             [label]="'search'"
@@ -536,12 +544,12 @@
                             (outParameter)="
                               outParameter(
                                 $event,
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             [inParameter]="
                               filterParameter.get(
-                                gitFilerParameterNameId(i, col.filterType)
+                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                               )
                             "
                             [label]="'search'"
@@ -582,7 +590,7 @@
                         class="s-t-th-btn"
                         [ngClass]="
                           filterParameter.get(
-                            gitFilerParameterNameId(i, col.filterType)
+                            gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
                           )    ? 'filterActive'
                               : 's-t-th-btn'
                         "

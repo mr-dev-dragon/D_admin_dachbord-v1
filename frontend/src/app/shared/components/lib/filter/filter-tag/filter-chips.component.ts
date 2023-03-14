@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { filterParameter } from 'src/app/shared/models/List.model';
 
 @Component({
@@ -24,8 +24,15 @@ export class FilterChipsComponent {
     this.inParameter
       ? (this.parameter = this.inParameter)
       : (this.parameter = {
-          value: ['jjj'],
+          value: [],
         });
+  }
+
+  ngOnChanges(change: SimpleChanges): void {
+    if ( change['inData'])
+      this.filter(this.parameter.value);
+    
+    
   }
 
   filter(selectedTags: string[]) {
@@ -43,12 +50,7 @@ export class FilterChipsComponent {
       : this.outData.emit(this.inData);
   }
 
-  apply() {
-    this.apleyFiler = true;
-  }
-
-  clear() {
-    this.apleyFiler = false;
-  }
-  sendParameter: any = () => this.outParameter.emit(this.parameter);
+  apply:any=() => this.apleyFiler = true;
+  clear:any = ()=> this.apleyFiler = false;
+  sendParameter: any = ()=> this.outParameter.emit(this.parameter);
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 
 import { g, removeAccent } from 'src/app/shared/global/filter-tool';
 import { filterParameter } from 'src/app/shared/models/List.model';
@@ -15,6 +15,7 @@ export class FilterBooleanComponent {
   @Output() outData: EventEmitter<any[]> = new EventEmitter();
   @Input() inParameter!: filterParameter;
   @Output() outParameter: any = new EventEmitter();
+  apleyFiler: boolean = false;
   parameter: filterParameter = {
     value: 0,
     filterTypeOne: 'lass then',
@@ -22,8 +23,11 @@ export class FilterBooleanComponent {
   ngAfterViewInit(): void {
     this.inParameter ? (this.parameter = this.inParameter) : '';
   }
+
+  ngOnChanges(change: SimpleChanges): void {
+    if (change['inData']) this._filter();
+  }
   _filter() {
-    this.outParameter.emit(this.parameter);
     if (this.path != '' && this.inData) {
       let reusltdata = this.filter(
         this.inData,
@@ -81,7 +85,9 @@ export class FilterBooleanComponent {
 
     return reusltdata;
   }
-  filtererry(reusltdata: any[], filterbythis: any, i: any, type: any): any[] {
-    throw new Error('Method not implemented.');
-  }
+  filtererry(reusltdata: any[], filterbythis: any, i: any, type: any): any {}
+
+  apply: any = () => ((this.apleyFiler = true), this.sendParameter());
+  clear: any = () => ((this.apleyFiler = false),this.outParameter.emit({}));
+  sendParameter: any = () => this.outParameter.emit(this.parameter);
 }

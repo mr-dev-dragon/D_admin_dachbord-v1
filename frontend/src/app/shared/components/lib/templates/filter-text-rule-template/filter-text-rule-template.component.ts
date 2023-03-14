@@ -41,6 +41,7 @@ export class FilterTextRuleTemplateComponent implements OnInit, AfterViewInit {
 
   clear() {
     this.apleyFiler = false;
+    this.outParameter.emit({});
   }
   ngAfterViewInit(): void {
     this.inParameter ? (this.parameter = this.inParameter) : '';
@@ -65,6 +66,7 @@ export class FilterTextRuleTemplateComponent implements OnInit, AfterViewInit {
     this.parameter.sectiontwo = !this.parameter.sectiontwo;
   }
   apply() {
+
     if (this.apleyFiler) {
       if (this.parameter.sectiontwo) {
         this.parameter.MatchType == 'match any'

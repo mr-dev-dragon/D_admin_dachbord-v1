@@ -1,34 +1,30 @@
 function g(path: string, data: any): any {
-    let [current, ...child] = path.split('.');
-    if (child?.length) {
-      return g(child.join('.'), data[current]);
-    }
-    if (current) {
-      return data[current];
-    }
-    return data;
+  let [current, ...child] = path.split('.');
+  if (child?.length) {
+    return g(child.join('.'), data[current]);
   }
-
+  if (current) {
+    return data[current];
+  }
+  return data;
+}
 function  removeAccent(s: any) {
-    var r = s.toLowerCase();
-    r = r.replace(new RegExp('-', 'g'), ' ');
-    r = r.replace(new RegExp('_', 'g'), ' ');
-    r = r.replace(new RegExp('[àáâãäå]', 'g'), 'a');
-    r = r.replace(new RegExp('æ', 'g'), 'ae');
-    r = r.replace(new RegExp('ç', 'g'), 'c');
-    r = r.replace(new RegExp('[èéêë]', 'g'), 'e');
-    r = r.replace(new RegExp('[ìíîï]', 'g'), 'i');
-    r = r.replace(new RegExp('ñ', 'g'), 'n');
-    r = r.replace(new RegExp('[òóôõö]', 'g'), 'o');
-    r = r.replace(new RegExp('œ', 'g'), 'oe');
-    r = r.replace(new RegExp('[ùúûü]', 'g'), 'u');
-    r = r.replace(new RegExp('[ýÿ]', 'g'), 'y');
-    r = r.replace(new RegExp('ç', 'g'), 'c');
-    return r;
-  }
-
-
-
+  var r = s.toLowerCase();
+  r = r.replace(new RegExp('-', 'g'), ' ');
+  r = r.replace(new RegExp('_', 'g'), ' ');
+  r = r.replace(new RegExp('[àáâãäå]', 'g'), 'a');
+  r = r.replace(new RegExp('æ', 'g'), 'ae');
+  r = r.replace(new RegExp('ç', 'g'), 'c');
+  r = r.replace(new RegExp('[èéêë]', 'g'), 'e');
+  r = r.replace(new RegExp('[ìíîï]', 'g'), 'i');
+  r = r.replace(new RegExp('ñ', 'g'), 'n');
+  r = r.replace(new RegExp('[òóôõö]', 'g'), 'o');
+  r = r.replace(new RegExp('œ', 'g'), 'oe');
+  r = r.replace(new RegExp('[ùúûü]', 'g'), 'u');
+  r = r.replace(new RegExp('[ýÿ]', 'g'), 'y');
+  r = r.replace(new RegExp('ç', 'g'), 'c');
+  return r;
+}
 function addArrays<T = any>(arr1: T[], arr2: T[], merge = true): T[] {
   return Array.from(
     new Set(
@@ -36,9 +32,6 @@ function addArrays<T = any>(arr1: T[], arr2: T[], merge = true): T[] {
     )
   );
 }
-
-
-
 // function i<x = number>(a: x, o: string, b: x)  =>
 //   o == '==' || o == '=' || o == 'equals'
 //     ? a == b
@@ -53,12 +46,12 @@ function addArrays<T = any>(arr1: T[], arr2: T[], merge = true): T[] {
 //             : o == '<' || o == '<' || o == 'less then'
 //               ? a < b
 //                : false;
-
-
 function calcPercent(defaultValue: number, newValue: number): number {
   return (newValue / defaultValue) * 100;
 }
-
-
-
-export { removeAccent, g, addArrays, calcPercent };
+function ConcatArryToText(a: string[]): string {
+  let text: string = '';
+  a.map((o, i) => (text = text + `_${i}_${o}`));
+  return text;
+}
+export { removeAccent, g, addArrays, calcPercent, ConcatArryToText };

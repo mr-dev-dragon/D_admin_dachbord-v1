@@ -11,7 +11,7 @@ export class FilterNumberComponent {
   @Output() outData = new EventEmitter();
   @Input() inputvalue: number = 0;
   @Output() outinputValue: EventEmitter<any> = new EventEmitter();
-  @Input() rule: '==' | '!=' | '>' | '>=' | '<' | '<=' = '==' ;
+  @Input() rule: '==' | '!=' | '>' | '>=' | '<' | '<=' = '==';
   inputVal: number = 0;
   setTimeOutId: any = -1;
   ngOnChanges(change: SimpleChanges): void {
@@ -23,6 +23,7 @@ export class FilterNumberComponent {
     this.outData.emit(this.inData),
     this.inputvalue != 0 ? (this.inputVal = this.inputvalue) : ''
   );
+
 
 
   filterBy(event: any, fromTs: boolean = false) {

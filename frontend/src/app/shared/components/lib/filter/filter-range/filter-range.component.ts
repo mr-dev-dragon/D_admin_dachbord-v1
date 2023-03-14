@@ -18,6 +18,8 @@ export class FilterRangeComponent {
   @Input() inParameter!: filterParameter;
   @Output() outParameter: any = new EventEmitter();
   parameter!: filterParameter;
+  apleyFiler: boolean = false;
+
   @Input() rule!: 'lass then' | 'biger then';
 
   ngOnInit(): void {
@@ -29,16 +31,18 @@ export class FilterRangeComponent {
           values: this.DafultValue,
         });
   }
-
   ngAfterViewInit(): void {
     this.outData.emit(this.inData);
   }
 
-  var: any;
-  handeleRenge(renge:number[]) {
-     
+  ngOnChanges(change: SimpleChanges): void {
+    if (change['rule'] || change['inData']) {
+      this.filterBy();
+    }
   }
 
+  var: any;
+  handeleRenge(renge: number[]) {}
   handleChange(e: any, type: string = 'slider') {
     type == 'slider'
       ? (e.values[0] < this.renge[0]
@@ -57,10 +61,8 @@ export class FilterRangeComponent {
       : '';
     this.sendParameter();
   }
-
   setTimeOutId: any = -1;
   clearDataVar: boolean = false;
-
   clearFiler() {
     this.clearDataVar = true;
     this.parameter = {
@@ -80,7 +82,9 @@ export class FilterRangeComponent {
       ];
       if (!this.clearDataVar && this.path && this.inData) {
         let reusltdata = this.filter(filterInputValue);
-        this.outData.emit(reusltdata);
+        this.apleyFiler
+          ? this.outData.emit(reusltdata)
+          : this.outData.emit(this.inData);
       } else if (this.clearDataVar) this.outData.emit(this.inData);
     }, 150);
   }
@@ -98,6 +102,13 @@ export class FilterRangeComponent {
     }
     return !!(findBy[0] >= findIn || findIn <= findBy[1]);
   }
-  sendParameter: any = () => this.outParameter.emit(this.parameter);
+  apply() {
+    this.apleyFiler = true;
+  }
+  clear() {
+    this.apleyFiler = false;
+    this.sendParameter(false);
+    this.outParameter.emit({});
+  }
+  sendParameter: any = (a: any = true) => this.outParameter.emit(this.parameter)
 }
-

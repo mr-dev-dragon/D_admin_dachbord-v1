@@ -14,7 +14,7 @@ export class FilterNumberRuleTemplateComponent {
   @Output() outData: EventEmitter<any> = new EventEmitter();
   @Input() inParameter!: filterParameter;
   @Output() outParameter: EventEmitter<any> =
-    new EventEmitter<filterParameter>();
+   new EventEmitter<filterParameter>();
   parameter: filterParameter = {
     sectiontwo: false,
     MatchType: 'match any',
@@ -29,16 +29,15 @@ export class FilterNumberRuleTemplateComponent {
   apleyFiler: boolean = false;
   ngOnInit(): void {}
   ngAfterViewInit() {
-
     this.inParameter ? (this.parameter = this.inParameter) : '';
   }
-  clear:()=>void=()=>this.apleyFiler = false;
+  clear:()=>void=()=>(this.apleyFiler = false, this.outParameter.emit({}))
   sectiontwoF: () => void = () =>(this.parameter.sectiontwo = !this.parameter.sectiontwo);
   sendParamiter: () => void = () => this.outParameter.emit(this.parameter);
   outDataFunctionOne: (a: any[]) => void = (a) => (this.filterOne = a, this.apply());
   outDataFunctionTwo: (a: any[]) => void = (a) => (this.filtertwo = a, this.apply());
-  inputVlueFunctionOne: (a: number) => void = (a) => (this.parameter.inputValueOne = a, this.sendParamiter());
-  inputVlueFunctionTwo: (a: number) => void = (a) => (this.parameter.inputValueTwo = a, this.sendParamiter());
+  inputVlueFunctionOne: (a: number) => void = (a) => (this.parameter.inputValueOne = a);
+  inputVlueFunctionTwo: (a: number) => void = (a) => (this.parameter.inputValueTwo = a);
   apply: () => void = () =>
     this.apleyFiler
       ? this.parameter.sectiontwo

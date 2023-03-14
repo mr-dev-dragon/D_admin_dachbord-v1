@@ -67,6 +67,7 @@ export interface filterParameter extends Partial<List> {
   valueOne?: any;
   valueTwo?: any;
   values?: any[];
+  filterActive?: boolean
 }
 export interface expanded extends Partial<List> {
   dataField?: string;
