@@ -22,14 +22,14 @@ export class FilterTextComponent implements OnChanges {
     | 'equals'
     | 'not equals' = 'starts with';
   pevinData: any;
-
+  inputVal: string = '';
+  setTimeOutId: any = -1;
   ngOnChanges(change: SimpleChanges): void {
     if (change['rule'] || change['inData']) {
       this.filterConfige();
     }
   }
-  inputVal: string = '';
-  setTimeOutId: any = -1;
+
   ngAfterViewInit(): void {
     this.outData.emit(this.inData);
     this.inputVal ||= this.inputvalue;

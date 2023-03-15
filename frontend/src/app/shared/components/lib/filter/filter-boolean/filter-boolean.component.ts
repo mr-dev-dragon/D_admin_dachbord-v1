@@ -29,17 +29,17 @@ export class FilterBooleanComponent {
   }
   filterConfige() {
     if (this.path != '' && this.inData) {
-      let reusltdata = this.filter(
-        this.inData,
-        {
-          path: this.path,
-          filterbythis: this.parameter.value,
-        },
-        'boolean'
-      );
-      this.apleyFiler ?
-        this.outData.emit(reusltdata) :
-        this.outData.emit(this.inData);
+      if (this.apleyFiler) {
+        let reusltdata = this.filter(
+          this.inData,
+          {
+            path: this.path,
+            filterbythis: this.parameter.value,
+          },
+          'boolean'
+        );
+        this.outData.emit(reusltdata);
+      } else this.outData.emit(this.inData);
     }
   }
 
@@ -86,8 +86,11 @@ export class FilterBooleanComponent {
     return reusltdata;
   }
   filtererry(reusltdata: any[], filterbythis: any, i: any, type: any): any {}
-  apply: any = () => (this.apleyFiler = true);
-  clear: any = () => ((this.apleyFiler = false), this.outParameter.emit({}));
+
+  apply: any = () => ((this.apleyFiler = true), this.filterConfige());
+  clear: any = () => (
+    (this.apleyFiler = false), this.outParameter.emit({}), this.filterConfige()
+  );
   sendParameter: any = () => this.outParameter.emit(this.parameter);
 }
  

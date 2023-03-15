@@ -39,10 +39,10 @@ export class FilterTextRuleTemplateComponent implements OnInit, AfterViewInit {
     inputValueTwo: '',
   };
 
-  clear() {
-    this.apleyFiler = false;
-    this.outParameter.emit({});
-  }
+  clear: any = () => (
+    (this.apleyFiler = false), this.outParameter.emit({}), this.apply()
+  );
+
   ngAfterViewInit(): void {
     this.inParameter ? (this.parameter = this.inParameter) : '';
   }
@@ -50,6 +50,7 @@ export class FilterTextRuleTemplateComponent implements OnInit, AfterViewInit {
   inputVlueFunctionOne(a: any) {
     this.parameter.inputValueOne = a;
   }
+  
   inputVlueFunctionTwo(a: any) {
     this.parameter.inputValueTwo = a;
   }

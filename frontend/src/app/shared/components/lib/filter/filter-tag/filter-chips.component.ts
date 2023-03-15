@@ -29,26 +29,31 @@ export class FilterChipsComponent {
   }
 
   ngOnChanges(change: SimpleChanges): void {
-    if (change['rule'] || change['inData'])
-      this.filterConfige(this.parameter.value);
+    if (change['inData']) this.filterConfige(this.parameter.value);
   }
 
   filterConfige(selectedTags: string[]) {
-    let filteredData = this.inData.filter((item) => {
-      let match = false;
-      selectedTags.forEach((tag) => {
-        if (item[this.path].includes(tag)) {
-          match = true;
-        }
+    if (this.apleyFiler) {
+      let filteredData = this.inData.filter((item) => {
+        let match = false;
+        selectedTags.forEach((tag) => {
+          if (item[this.path].includes(tag)) {
+            match = true;
+          }
+        });
+        return match;
       });
-      return match;
-    });
-    this.apleyFiler
-      ? this.outData.emit(filteredData)
-      : this.outData.emit(this.inData);
+      this.outData.emit(filteredData);
+    } else this.outData.emit(this.inData);
   }
 
-  apply: any = () => (this.apleyFiler = true);
-  clear: any = () => (this.apleyFiler = false , this.outParameter.emit({}));
+  apply: any = () => (
+    (this.apleyFiler = true), this.filterConfige(this.parameter.value)
+  );
+  clear: any = () => (
+    (this.apleyFiler = false),
+    (this.outParameter.emit({})),
+    (this.filterConfige(this.parameter.value))
+  );
   sendParameter: any = () => this.outParameter.emit(this.parameter);
 }

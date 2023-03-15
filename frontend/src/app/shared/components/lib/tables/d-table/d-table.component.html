@@ -1,4 +1,4 @@
-
+ <!-- ::{{filterMap.get(filterMap.get('outData')).length|json}} -->
 <div [ngClass]="tiblecontinerDiv ? 'table_container' : ''">
   <div class="body">
     <main class="s-t-main">
@@ -804,6 +804,7 @@
                 *ngFor="
                   let rowData of filterMap.get(filterMap.get('outData'))
                     | paginate : o_config;
+                    
                   let o = index
                 "
               >
@@ -1105,48 +1106,22 @@
               </ng-container>
             </tbody>
           </ng-container>
-          <tbody *ngIf="filterMap.get(filterMap.get('outData')).length == 0">
-            <tr class="s-t-tr">
-              <div class="div"></div>
-            </tr>
-            <tr class="s-t-tr">
-              <div class="div"></div>
-            </tr>
-            <tr class="s-t-tr">
-              <div class="div"></div>
-            </tr>
-            <tr class="s-t-tr">
-              <div class="div"></div>
-            </tr>
-            <tr class="s-t-tr">
-              <div class="div"></div>
-              <h1>data not found</h1>
-            </tr>
-            <tr class="s-t-tr">
-              <div class="div"></div>
-            </tr>
-            <tr class="s-t-tr">
-              <div class="div"></div>
-            </tr>
-            <tr class="s-t-tr">
-              <div class="div"></div>
-            </tr>
-            <tr class="s-t-tr">
-              <div class="div"></div>
-            </tr>
-            <tr class="s-t-tr">
-              <div class="div"></div>
-            </tr>
-          </tbody>
+          <ng-container  *ngIf="(filterMap.get(filterMap.get('outData')).length < o_config.itemsPerPage)">
+            <ng-container *ngFor=" let k of  playholder">
+              <span class="plasHilderRow">
+               sdsdasd {{k}}
+              </span>
+            </ng-container>
+          </ng-container>
         </table>
       </section>
+      <!-- *ngIf="filterMap.get(filterMap.get('outData')).length >= o_config.itemsPerPage" -->
       <section
-        *ngIf="tableDatalength >= o_config.itemsPerPage"
         class="s-t-footer"
       >
         <!-- <h1 class=" row s-t-d">{{'tible footer ' | titlecase}}</h1> -->
         <pagination-template
-          *ngIf="tableDatalength >= o_config.itemsPerPage"
+          *ngIf="filterMap.get(filterMap.get('outData')).length >= o_config.itemsPerPage"
           #p="paginationApi"
           [id]="o_config.id"
           (pageChange)="o_config.currentPage = $event"

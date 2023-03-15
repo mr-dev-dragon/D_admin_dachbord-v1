@@ -27,7 +27,7 @@ export class FilterPercentageComponent implements OnInit, AfterViewInit {
       this.parameter.value < 0 ? (this.parameter.value = 0) : '';
       this.parameter.value > 100 ? (this.parameter.value = 100) : '';
       this.filterConfige();
-      console.log('**************************')
+      console.log('**************************');
     }
   }
 
@@ -56,14 +56,10 @@ export class FilterPercentageComponent implements OnInit, AfterViewInit {
 
         if (!this.clearDataVar && this.path && this.inData) {
           let reusltdata = this.filter(filterInputValue);
-          this.outData.emit(reusltdata)
-        }
-        else if (this.clearDataVar) this.outData.emit(this.inData);
-      }
-      else 
-       this.outData.emit(this.inData)
-}, 150);
-    
+          this.outData.emit(reusltdata);
+        } else if (this.clearDataVar) this.outData.emit(this.inData);
+      } else this.outData.emit(this.inData);
+    }, 150);
   }
 
   filter(filterInputValue: number) {
@@ -85,14 +81,10 @@ export class FilterPercentageComponent implements OnInit, AfterViewInit {
     }
   }
 
-  apply() {
-    this.apleyFiler = true;
-     this.filterConfige();
-  }
-  clear() {
-    this.apleyFiler = false;
-    this.outParameter.emit({});
-  }
+  apply: any = () => ((this.apleyFiler = true), this.filterConfige());
+  clear: any = () => (
+    (this.apleyFiler = false), this.outParameter.emit({}), this.filterConfige()
+  );
   sendParameter: any = (a: any = true) =>
     this.outParameter.emit(this.parameter);
 }

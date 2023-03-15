@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import { es } from 'date-fns/locale';
 import { g } from 'src/app/shared/global/filter-tool';
 import { filterParameter } from 'src/app/shared/models/List.model';
 @Component({
@@ -66,16 +67,18 @@ export class FilterRangeComponent {
   filterConfige() {
     clearTimeout(this.setTimeOutId);
     this.setTimeOutId = setTimeout(() => {
-      let filterInputValue = [
-        this.parameter.inputValueOne,
-        this.parameter.inputValueTwo,
-      ];
-      if (!this.clearDataVar && this.path && this.inData) {
-        let reusltdata = this.filter(filterInputValue);
-        this.apleyFiler
-          ? this.outData.emit(reusltdata)
-          : this.outData.emit(this.inData);
-      } else if (this.clearDataVar) this.outData.emit(this.inData);
+      if (this.apleyFiler) {
+        let filterInputValue = [
+          this.parameter.inputValueOne,
+          this.parameter.inputValueTwo,
+        ];
+        if (!this.clearDataVar && this.path && this.inData) {
+          let reusltdata = this.filter(filterInputValue);
+          this.outData.emit(reusltdata);
+        } else if (this.clearDataVar) this.outData.emit(this.inData);
+      } else {
+        this.outData.emit(this.inData);
+      }
     }, 150);
   }
   filter(filterInputValue: number[]) {
@@ -87,18 +90,21 @@ export class FilterRangeComponent {
   }
   find(findIn: number, findBy: number[]): boolean {
     if (!(findIn && findBy)) return false;
-    if (findBy[0] >= findIn && findIn <= findBy[1]) {
-      return true;
-    }
-    return !!(findBy[0] >= findIn || findIn <= findBy[1]);
+    let resulat: boolean = false;
+    if (findBy[0] <= findIn && findIn <= findBy[1]) {
+     resulat = true
+    } 
+    else resulat = false;
+    
+     return resulat
   }
-  apply() {
-    this.apleyFiler = true;
-  }
-  clear() {
-    this.apleyFiler = false;
-    this.outParameter.emit({});
-  }
-  sendParameter: any = () =>
-    this.outParameter.emit(this.parameter);
+  apply: any = () => (
+    (this.apleyFiler = true), this.filterConfige()
+  );
+  clear: any = () => (
+    (this.apleyFiler = false),
+    this.outParameter.emit({}),
+    this.filterConfige()
+  );
+  sendParameter: any = () => this.outParameter.emit(this.parameter);
 }

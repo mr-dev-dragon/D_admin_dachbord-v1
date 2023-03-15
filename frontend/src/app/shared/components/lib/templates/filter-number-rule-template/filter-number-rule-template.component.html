@@ -47,7 +47,9 @@
     </section>
     <section *ngIf=" parameter.sectiontwo">
       <br>
-      <select  [(ngModel)]=" parameter.filterTypeTwo" class=" s-t-input-group form-select mt-3 mb-3" aria-label="Default select example">
+      <select  [(ngModel)]=" parameter.filterTypeTwo"
+       class=" s-t-input-group form-select mt-3 mb-3"
+        aria-label="Default select example">
         <option value='=='> {{ 'equals'                         |translate |titlecase    }}</option>
         <option value='!='> {{ 'not equals'                     |translate |titlecase    }}</option>
         <option value='<'>  {{ 'less then'                      |translate |titlecase    }}</option>
@@ -89,7 +91,7 @@
           Clear
         </span>
       </button>
-      <button (click)="apleyFiler = true;apply(); sendParamiter() ;    " type="button" class="footer-btn">
+      <button (click)="apleyFiler = true;apply(); sendParameter() ;    " type="button" class="footer-btn">
         <span  class="p-button-label">
           Apply
         </span>

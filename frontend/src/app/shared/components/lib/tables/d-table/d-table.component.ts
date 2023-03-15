@@ -45,14 +45,14 @@ export class DTableComponent implements OnInit {
     this.filterParameter.set(id, event);
     this.var.push({ id: id, data: event });
   }
-  log: (a:string ,b:any) => void =(a,b)=> console.log(a,b)
+  log: (a: string, b: any) => void = (a, b) => console.log(a, b);
   filterMap = new Map();
   linkFiltersWithData() {
     this.filterMap = new Map();
     let per: string = 'default';
     this.filterMap.set(per, this.data);
     this._selectedColumns.map((o: any, i: any) => {
-      console.log(o,i)
+      console.log(o, i);
       if (o.filter) {
         this.filterMap.set(i, this.data);
         this.filterMap.set(`${i}--per`, per);
@@ -280,8 +280,15 @@ export class DTableComponent implements OnInit {
         });
     }
   }
+  playholder: any[]=[]
   ngOnInit(): void {
+
+// #region  row plice holder 
+    this.rowcontEvetn == 0
+      ? '': (this.playholder = new Array(this.rowcontEvetn).fill('')); 
+// #endregion
       
+
     this.disableFilterWithHeader instanceof Array
       ? this.disableFilterWithHeader.map((d) =>
           this.filterDontWorkWithHeaders.push(d)
@@ -348,20 +355,26 @@ export class DTableComponent implements OnInit {
       dataKey: col.field,
     }));
 
-      this.linkFiltersWithData();
+    this.linkFiltersWithData();
   }
   tableBodyTotalHeight: any;
   tableBodyTotalWidth: any;
   ngAfterContentInit() {
-
-
     this.cardFilled = !!this.cardNgContentElements;
     this.detailsFilled = !!this.detailsNgContentElements;
     this.unicFilled = !!this.unicNgContentElements;
   }
-  // ngAfterViewInit() {
- 
-  // }
+  rowcontEvetn:number=0
+  ngAfterViewInit() {
+    
+    this.filterMap.get(this.filterMap.get('outData')).length <
+    this.o_config.itemsPerPage
+      ? (this.rowcontEvetn =
+          this.o_config.itemsPerPage -
+          this.filterMap.get(this.filterMap.get('outData')).length)
+      : this.rowcontEvetn= 0
+  
+  }
   imageClikEvent(i: any, n: number, event: any, k?: boolean) {
     if (!k) {
       this.zoomedImag = true;
@@ -370,32 +383,34 @@ export class DTableComponent implements OnInit {
     } else {
       this.zoomedImag = false;
       event.clientX > 2450
-        ? (this.left = event.clientX - 800)
-        : event.clientX > 2400
-        ? (this.left = event.clientX - 750)
-        : event.clientX > 2350
-        ? (this.left = event.clientX - 700)
-        : event.clientX > 2300
-        ? (this.left = event.clientX - 650)
-        : event.clientX > 2250
-        ? (this.left = event.clientX - 600)
-        : event.clientX > 2200
-        ? (this.left = event.clientX - 550)
-        : event.clientX > 2150
-        ? (this.left = event.clientX - 500)
-        : event.clientX > 2100
-        ? (this.left = event.clientX - 450)
-        : event.clientX > 2050
-        ? (this.left = event.clientX - 400)
-        : event.clientX > 2000
-        ? (this.left = event.clientX - 350)
-        : event.clientX > 1950
-        ? (this.left = event.clientX - 300)
-        : event.clientX > 1900
-        ? (this.left = event.clientX - 250)
-        : event.clientX > 1800
-        ? (this.left = event.clientX - 200)
-        : (this.left = event.clientX - 200);
+        
+            ? (this.left = event.clientX - 800)
+            : event.clientX > 2400
+            ? (this.left = event.clientX - 750)
+            : event.clientX > 2350
+            ? (this.left = event.clientX - 700)
+            : event.clientX > 2300
+            ? (this.left = event.clientX - 650)
+            : event.clientX > 2250
+            ? (this.left = event.clientX - 600)
+            : event.clientX > 2200
+            ? (this.left = event.clientX - 550)
+            : event.clientX > 2150
+            ? (this.left = event.clientX - 500)
+            : event.clientX > 2100
+            ? (this.left = event.clientX - 450)
+            : event.clientX > 2050
+            ? (this.left = event.clientX - 400)
+            : event.clientX > 2000
+            ? (this.left = event.clientX - 350)
+            : event.clientX > 1950
+            ? (this.left = event.clientX - 300)
+            : event.clientX > 1900
+            ? (this.left = event.clientX - 250)
+            : event.clientX > 1800
+            ? (this.left = event.clientX - 200)
+            : (this.left = event.clientX - 200);
+        
       this.top = event.clientY - 300;
       this.zoomedImagsrc = '';
       this.zoomedImagindex = -1;
@@ -464,6 +479,7 @@ export class DTableComponent implements OnInit {
     itemsPerPage: 11,
     currentPage: 1,
   };
+
   ngDoCheck() {
     if (this.changes) {
       this.columns = [...this.cols];
@@ -544,7 +560,7 @@ export class DTableComponent implements OnInit {
     this.onCloneClick.emit(this.data[index]);
   }
   onSelectedColumnsChange(event: any) {
-     this.linkFiltersWithData()
+    this.linkFiltersWithData();
     this._selectedColumns = event.value;
   }
   left!: number;

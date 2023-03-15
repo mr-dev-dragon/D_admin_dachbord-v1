@@ -14,7 +14,7 @@ export class FilterNumberRuleTemplateComponent {
   @Output() outData: EventEmitter<any> = new EventEmitter();
   @Input() inParameter!: filterParameter;
   @Output() outParameter: EventEmitter<any> =
-   new EventEmitter<filterParameter>();
+    new EventEmitter<filterParameter>();
   parameter: filterParameter = {
     sectiontwo: false,
     MatchType: 'match any',
@@ -24,34 +24,71 @@ export class FilterNumberRuleTemplateComponent {
     inputValueTwo: '',
   };
   filterOne!: any[];
-  filtertwo!: any[];
+  filterTwo!: any[];
   allFeltedData!: any;
   apleyFiler: boolean = false;
   ngOnInit(): void {}
+  clear: any = () => (
+    (this.apleyFiler = false), this.outParameter.emit({}), this.apply()
+  );
+
   ngAfterViewInit() {
     this.inParameter ? (this.parameter = this.inParameter) : '';
   }
-  clear:()=>void=()=>(this.apleyFiler = false, this.outParameter.emit({}))
-  sectiontwoF: () => void = () =>(this.parameter.sectiontwo = !this.parameter.sectiontwo);
-  sendParamiter: () => void = () => this.outParameter.emit(this.parameter);
-  outDataFunctionOne: (a: any[]) => void = (a) => (this.filterOne = a, this.apply());
-  outDataFunctionTwo: (a: any[]) => void = (a) => (this.filtertwo = a, this.apply());
-  inputVlueFunctionOne: (a: number) => void = (a) => (this.parameter.inputValueOne = a);
-  inputVlueFunctionTwo: (a: number) => void = (a) => (this.parameter.inputValueTwo = a);
-  apply: () => void = () =>
-    this.apleyFiler
-      ? this.parameter.sectiontwo
-        ? (this.parameter.MatchType == 'match any'
-            ? (this.allFeltedData = addArrays<string>(
-                this.filterOne,
-                this.filtertwo
-              ))
-            : (this.allFeltedData = addArrays<string>(
-                this.filterOne,
-                this.filtertwo,
-                false
-              )),
-          this.outData.emit(this.allFeltedData))
-        : this.outData.emit(this.filterOne)
-      : this.outData.emit(this.inData);
+
+  inputVlueFunctionOne: (a: number) => void = (a) =>
+    (this.parameter.inputValueOne = a);
+
+  outDataFunctionTwo: (a: any[]) => void = (a) => (
+    (this.filterTwo = a), this.apply()
+  );
+
+  sectiontwoF: () => void = () =>
+    (this.parameter.sectiontwo = !this.parameter.sectiontwo);
+  outDataFunctionOne: (a: any[]) => void = (a) => (
+    (this.filterOne = a), this.apply()
+  );
+
+  inputVlueFunctionTwo: (a: number) => void = (a) =>
+    (this.parameter.inputValueTwo = a);
+
+  // apply: () => void = () =>
+  //   this.apleyFiler
+  //     ? this.parameter.sectiontwo
+  //       ? (this.parameter.MatchType == 'match any'
+  //           ? (this.allFeltedData = addArrays<string>(
+  //               this.filterOne,
+  //               this.filterTwo
+  //             ))
+  //           : (this.allFeltedData = addArrays<string>(
+  //               this.filterOne,
+  //               this.filterTwo,
+  //               false
+  //             )),
+  //         this.outData.emit(this.allFeltedData))
+  //       : this.outData.emit(this.filterOne)
+  //     : this.outData.emit(this.inData);
+
+  apply() {
+    if (this.apleyFiler) {
+      if (this.parameter.sectiontwo) {
+        this.parameter.MatchType == 'match any'
+          ? (this.allFeltedData = addArrays<string>(
+              this.filterOne,
+              this.filterTwo
+            ))
+          : (this.allFeltedData = addArrays<string>(
+              this.filterOne,
+              this.filterTwo,
+              false
+            ));
+        this.outData.emit(this.allFeltedData);
+      } else {
+        this.outData.emit(this.filterOne);
+      }
+    } else {
+      this.outData.emit(this.inData);
+    }
+  }
+  sendParameter: any = () => this.outParameter.emit(this.parameter);
 }
