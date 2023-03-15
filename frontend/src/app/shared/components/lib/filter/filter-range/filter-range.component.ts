@@ -37,7 +37,7 @@ export class FilterRangeComponent {
 
   ngOnChanges(change: SimpleChanges): void {
     if (change['rule'] || change['inData']) {
-      this.filterBy();
+      this.filterConfige();
     }
   }
 
@@ -59,21 +59,11 @@ export class FilterRangeComponent {
           this.parameter.inputValueTwo,
         ]))
       : '';
-    this.sendParameter();
   }
   setTimeOutId: any = -1;
   clearDataVar: boolean = false;
-  clearFiler() {
-    this.clearDataVar = true;
-    this.parameter = {
-      inputValueOne: this.DafultValue[0],
-      inputValueTwo: this.DafultValue[1],
-      values: this.DafultValue,
-    };
-    this.sendParameter();
-    this.filterBy();
-  }
-  filterBy() {
+
+  filterConfige() {
     clearTimeout(this.setTimeOutId);
     this.setTimeOutId = setTimeout(() => {
       let filterInputValue = [
@@ -107,8 +97,8 @@ export class FilterRangeComponent {
   }
   clear() {
     this.apleyFiler = false;
-    this.sendParameter(false);
     this.outParameter.emit({});
   }
-  sendParameter: any = (a: any = true) => this.outParameter.emit(this.parameter)
+  sendParameter: any = () =>
+    this.outParameter.emit(this.parameter);
 }

@@ -23,36 +23,23 @@ export class FilterTextComponent implements OnChanges {
     | 'not equals' = 'starts with';
   pevinData: any;
 
-
-
   ngOnChanges(change: SimpleChanges): void {
     if (change['rule'] || change['inData']) {
-      this.filterBy(this.inputVal);
+      this.filterConfige();
     }
   }
-
-
-
-
-  // ngOnInit: any = () => (
-  //   this.outData.emit(this.inData),
-  //   this.inputvalue != 0 ? (this.inputVal = this.inputvalue) : ''
-  // );
-
-
   inputVal: string = '';
   setTimeOutId: any = -1;
-
   ngAfterViewInit(): void {
     this.outData.emit(this.inData);
     this.inputVal ||= this.inputvalue;
   }
 
-  filterBy(event: any) {
-    this.outinputValue.emit(event);
+  filterConfige() {
+    this.outinputValue.emit(this.inputVal);
     clearTimeout(this.setTimeOutId);
     this.setTimeOutId = setTimeout(() => {
-      let filterInputValue = event;
+      let filterInputValue = this.inputVal;
       if (filterInputValue && this.path && this.inData) {
         let reusltdata = this.filter(filterInputValue);
         this.outData.emit(reusltdata);

@@ -23,7 +23,7 @@
           <h5 class="range_title ">value <span> : {{parameter.value}} % </span> </h5>
         </div>
         <div class="row m-1">
-          <p-slider (onChange)="filterBy()" [(ngModel)]="parameter.value"></p-slider>
+          <p-slider (onChange)="filterConfige()" [(ngModel)]="parameter.value"></p-slider>
         </div>
         <div class="row">
           <div class="col-md-8"></div>
@@ -42,7 +42,7 @@
         <span class="p-button-label"> Clear </span>
       </button>
         <button
-          (click)="apleyFiler = true;apply(); sendParameter() ;    "
+          (click)="apleyFiler = true;apply(); sendParameter() ; "
           type="button"
           class="footer-btn"
          >

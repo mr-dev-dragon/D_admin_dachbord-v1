@@ -5,7 +5,7 @@
     <label class="inputLabel" for="numberSaerchBar"
     >{{ label }}</label>
     <div class="s-t-input-group-s">
-      <input  (ngModelChange)="filterBy($event)"
+      <input  (ngModelChange)="filterConfige()"
       [(ngModel)]="inputvalue" #numeric id="numberSaerchBar" aria-label="SearchByNumber"
         aria-describedby="searchByNumber-addon" type="number" placeholder="Search Data by {{label}} that {{rule}} val..." />
 

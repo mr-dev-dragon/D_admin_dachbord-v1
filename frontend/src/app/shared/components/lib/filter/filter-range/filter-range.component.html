@@ -13,7 +13,7 @@
              <p-slider
 
              [(ngModel)]="parameter.values"
-             (onChange)="handleChange($event ) ; filterBy()"
+             (onChange)="handleChange($event ) ; filterConfige()"
              [range]="true"
 
              ></p-slider>
@@ -24,7 +24,7 @@
                       class="range-input"
                       type="number"
                       [(ngModel)]="parameter.inputValueOne"
-                      (change)="handleChange(parameter.inputValueOne ,'input') ; filterBy()"
+                      (change)="handleChange(parameter.inputValueOne ,'input') ; filterConfige()"
                       pInputText />
                </div>
                <div class="col-2"></div>
@@ -34,7 +34,7 @@
                         type="number"
                         pInputText
                         [(ngModel)]="parameter.inputValueTwo"
-                        (change)="handleChange(parameter.inputValueTwo ,'input') ; filterBy()"
+                        (change)="handleChange(parameter.inputValueTwo ,'input') ; filterConfige()"
                     />
                </div>
            </div>

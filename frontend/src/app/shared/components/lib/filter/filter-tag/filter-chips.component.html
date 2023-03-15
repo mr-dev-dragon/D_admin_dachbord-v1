@@ -2,7 +2,7 @@
   <label for="valuechips">{{ label }}</label>
   <p-chips
     [(ngModel)]="parameter.value"
-    (ngModelChange)="filter($event);sendParameter();"
+    (ngModelChange)="filterConfige($event);"
     class="my-chips"
     [style]="{ width: '100%' }"
     inputId="valuechips"

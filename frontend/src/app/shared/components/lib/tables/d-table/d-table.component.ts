@@ -16,7 +16,6 @@ import {
   ContentChildren,
   ViewChildren,
 } from '@angular/core';
-
 import { TranslateService } from '@ngx-translate/core';
 import { Table } from 'jspdf-autotable';
 import { PaginationInstance } from 'ngx-pagination';
@@ -39,34 +38,29 @@ import { ConcatArryToText } from '../../../../global/filter-tool';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class DTableComponent implements OnInit {
-  gitFilerParameterNameId: (a:any[]) => string = (a) => ConcatArryToText(a)
+  gitFilerParameterNameId: (a: any[]) => string = (a) => ConcatArryToText(a);
   filterParameter: Map<any, any> = new Map();
-    var :any =[]
+  var: any = [];
   outParameter(event: Event, id: string) {
     this.filterParameter.set(id, event);
-    this.var.push({ id : id , data : event })
-
+    this.var.push({ id: id, data: event });
   }
-
-log=console.log
+  log: (a:string ,b:any) => void =(a,b)=> console.log(a,b)
   filterMap = new Map();
   linkFiltersWithData() {
-  let  per:string = 'default'
-  this.filterMap.set(per,this.data)
-   this.cols.map((o:any,i:any)=>{
-
-       if(o.filter)
-         {
-           this.filterMap.set(i,this.data)
-           this.filterMap.set(`${i}--per`, per)
-           per = i
-
-         }
-
-   })
-   this.filterMap.set('outData',per)
+    this.filterMap = new Map();
+    let per: string = 'default';
+    this.filterMap.set(per, this.data);
+    this._selectedColumns.map((o: any, i: any) => {
+      console.log(o,i)
+      if (o.filter) {
+        this.filterMap.set(i, this.data);
+        this.filterMap.set(`${i}--per`, per);
+        per = i;
+      }
+    });
+    this.filterMap.set('outData', per);
   }
-
   // outFilter(event: Event, id: string) {
   //   this.filterConcataytions.set(id, event);
   // }
@@ -287,12 +281,7 @@ log=console.log
     }
   }
   ngOnInit(): void {
-
-
-  this.linkFiltersWithData()
-
-
-
+      
     this.disableFilterWithHeader instanceof Array
       ? this.disableFilterWithHeader.map((d) =>
           this.filterDontWorkWithHeaders.push(d)
@@ -358,31 +347,21 @@ log=console.log
       title: col.header,
       dataKey: col.field,
     }));
+
+      this.linkFiltersWithData();
   }
   tableBodyTotalHeight: any;
   tableBodyTotalWidth: any;
   ngAfterContentInit() {
-    console.log(
-      '================================',
-      this.tableBodyTotalHeight,
-      this.tableBodyTotalWidth
-    );
+
+
     this.cardFilled = !!this.cardNgContentElements;
     this.detailsFilled = !!this.detailsNgContentElements;
     this.unicFilled = !!this.unicNgContentElements;
   }
-  ngAfterViewInit() {
-
-    // const divElement = this.tableBody.nativeElement;
-    // this.tableBodyTotalHeight =
-    //   this.renderer.selectRootElement(divElement).clientHeight;
-    // this.tableBodyTotalWidth =
-    //   this.renderer.selectRootElement(divElement).clientWidth;
-
-    console.log(
-      `The width of the div is ${this.tableBodyTotalHeight}px and its height is ${this.tableBodyTotalWidth}px`
-    );
-  }
+  // ngAfterViewInit() {
+ 
+  // }
   imageClikEvent(i: any, n: number, event: any, k?: boolean) {
     if (!k) {
       this.zoomedImag = true;
@@ -476,7 +455,6 @@ log=console.log
     //   JSON.parse(JSON.stringify(fData)),
     //   this.gitFilerParameterNameId(index, type)
     // );
-
     this.outDatav2 = JSON.parse(JSON.stringify(fData));
     this.outData = fData;
     this.tableDatalength = fData.length;
@@ -565,7 +543,8 @@ log=console.log
   onClone(index: number) {
     this.onCloneClick.emit(this.data[index]);
   }
-  test(event: any) {
+  onSelectedColumnsChange(event: any) {
+     this.linkFiltersWithData()
     this._selectedColumns = event.value;
   }
   left!: number;
@@ -623,5 +602,3 @@ log=console.log
   showExRowStyles: boolean = false;
   showExRow(a?: number) {}
 }
-
-

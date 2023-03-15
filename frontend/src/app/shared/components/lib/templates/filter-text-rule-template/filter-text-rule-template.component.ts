@@ -66,7 +66,6 @@ export class FilterTextRuleTemplateComponent implements OnInit, AfterViewInit {
     this.parameter.sectiontwo = !this.parameter.sectiontwo;
   }
   apply() {
-
     if (this.apleyFiler) {
       if (this.parameter.sectiontwo) {
         this.parameter.MatchType == 'match any'

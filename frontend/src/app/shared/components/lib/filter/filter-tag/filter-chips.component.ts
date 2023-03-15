@@ -29,13 +29,11 @@ export class FilterChipsComponent {
   }
 
   ngOnChanges(change: SimpleChanges): void {
-    if ( change['inData'])
-      this.filter(this.parameter.value);
-    
-    
+    if (change['rule'] || change['inData'])
+      this.filterConfige(this.parameter.value);
   }
 
-  filter(selectedTags: string[]) {
+  filterConfige(selectedTags: string[]) {
     let filteredData = this.inData.filter((item) => {
       let match = false;
       selectedTags.forEach((tag) => {
@@ -50,7 +48,7 @@ export class FilterChipsComponent {
       : this.outData.emit(this.inData);
   }
 
-  apply:any=() => this.apleyFiler = true;
-  clear:any = ()=> this.apleyFiler = false;
-  sendParameter: any = ()=> this.outParameter.emit(this.parameter);
+  apply: any = () => (this.apleyFiler = true);
+  clear: any = () => (this.apleyFiler = false , this.outParameter.emit({}));
+  sendParameter: any = () => this.outParameter.emit(this.parameter);
 }

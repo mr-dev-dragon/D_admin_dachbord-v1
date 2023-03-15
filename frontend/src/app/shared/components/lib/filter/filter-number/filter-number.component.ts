@@ -15,25 +15,17 @@ export class FilterNumberComponent {
   inputVal: number = 0;
   setTimeOutId: any = -1;
   ngOnChanges(change: SimpleChanges): void {
-    change['rule' || change['inData']]
-      ? this.filterBy(this.inputvalue, true)
-      : '';
+    change['rule' || change['inData']] ? this.filterConfige() : '';
   }
   ngOnInit: any = () => (
     this.outData.emit(this.inData),
     this.inputvalue != 0 ? (this.inputVal = this.inputvalue) : ''
   );
-
-
-
-  filterBy(event: any, fromTs: boolean = false) {
-    this.outinputValue.emit(event);
+  filterConfige() {
+    this.outinputValue.emit(this.inputvalue);
     clearTimeout(this.setTimeOutId);
     this.setTimeOutId = setTimeout(() => {
-      let filterInputValue: any;
-      fromTs
-        ? (filterInputValue = event)
-        : (filterInputValue = event.target.value);
+      let filterInputValue: any = this.inputvalue;
 
       if (filterInputValue && this.path && this.inData) {
         let reusltdata = this.filter(filterInputValue, this.rule);

@@ -1,27 +1,17 @@
 
-
- <div class="m5">
-        <textarea name="" id="" cols="30" rows="10">
-  {{this.var|json}}
-
-        </textarea>
- </div>
-
-
 <div [ngClass]="tiblecontinerDiv ? 'table_container' : ''">
   <div class="body">
     <main class="s-t-main">
       <section class="s-t-header">
         <div class="header-container">
-        
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 s-t-t-icon h-6"
-              >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 s-t-t-icon h-6"
+          >
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -68,18 +58,11 @@
             [type]="captionConfig.headerFilterType"
             [inData]="data"
             [path]="captionConfig.headerFilterfield"
-            (outData)="filterMap.set('default',$event) ; log(filterMap)"
-          >
+            (outData)="filterMap.set('default', $event);  log(' text header ==>',filterMap)">
           </filter-by-text>
         </div>
         <div class="header-container">
           <button type="button" class="button gray" (click)="clear()">
-            <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-            class="s-t-h-b-icon" viewBox="0 0 24 24"
-              strokeWidth="{1.5}" stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round"
-                d="M6 13.5V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m12-3V3.75m0 9.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 3.75V16.5m-6-9V3.75m0 3.75a1.5 1.5 0 010 3m0-3a1.5 1.5 0 000 3m0 9.75V10.5" />
-            </svg> -->
             <i
               [ngClass]="clearfilterActive ? 'pi-filter-slash ' : 'pi-filter '"
               class="filterIconSize pi s-t-h-b-icon"
@@ -106,7 +89,7 @@
               border: '1px  solid  #fff1'
             }"
             placeholder="Choose Columns"
-            (onChange)="test($event)"
+            (onChange)="onSelectedColumnsChange($event)"
           >
           </p-multiSelect>
         </div>
@@ -147,7 +130,12 @@
             />
           </div>
           <thead class="s-t-thead">
-            <tr #openedPopupTr data-openedPopup="-1" class="s-t-tr">
+            <tr
+              #openedPopupTr
+              data-openedPopupSort="-1"
+              data-openedPopupFilter="-1"
+              class="s-t-tr"
+            >
               <ng-container *ngIf="!(_selectedColumns.length == 0)">
                 <th
                   class="s-t-th"
@@ -178,242 +166,366 @@
                   </div>
                 </th>
               </ng-container>
-              <ng-container *ngFor="let col of _selectedColumns; let i = index" >
-              <th
-                *ngIf="!(col.filterType == 'template' && !col.optionLabel)"
-                class="s-t-th"
-              >
-                <div class="s-t-th-conteainer">
-                  <ng-container
-                    *ngIf="SortDontWorkWithHeaders.includes(col.header)"
-                  >
-                    <div
-                      *ngIf="dateTypeSortDontWorkWith.includes(col.filterType)"
-                    >
-                      <div class="s-t-th-btn"></div>
-                    </div>
-                  </ng-container>
-                  <ng-container
-                    *ngIf="!SortDontWorkWithHeaders.includes(col.header)"
-                  >
+              <ng-container *ngFor="let col of _selectedColumns; let i = index">
+                <th
+                  *ngIf="!(col.filterType == 'template' && !col.optionLabel)"
+                  class="s-t-th"
+                >
+                  <div class="s-t-th-conteainer">
                     <ng-container
-                      *ngIf="!dateTypeSortDontWorkWith.includes(col.filterType)"
+                      *ngIf="SortDontWorkWithHeaders.includes(col.header)"
                     >
-                      <button
-                        (click)="sort.toggle($event)"
-                        class="s-t-th-btn"
-                        type="button"
-                        tooltipPosition="left"
-                        pTooltip="{{ 'sort' | titlecase | translate }}"
+                      <div
+                        *ngIf="
+                          dateTypeSortDontWorkWith.includes(col.filterType)
+                        "
                       >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke-width="1.5"
-                          stroke="currentColor"
-                          class="w-6 s-t-th-btn-icon h-6"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25"
-                          />
-                        </svg>
-                      </button>
+                        <div class="s-t-th-btn"></div>
+                      </div>
                     </ng-container>
-                  </ng-container>
-                  <h1 class="s-t-th-label">{{ col?.header | titlecase }}</h1>
-                  <p-overlayPanel
-                    #sort
-                    [showCloseIcon]="true"
-                    [style]="{ width: '35erm' }"
-                  >
-                    <ng-template pTemplate>
+                    <ng-container
+                      *ngIf="!SortDontWorkWithHeaders.includes(col.header)"
+                    >
+                      <ng-container
+                        *ngIf="
+                          !dateTypeSortDontWorkWith.includes(col.filterType)
+                        "
+                      >
+                        <button
+                          (click)="
+                            openedPopupTr.setAttribute(
+                              'openedPopupSort',
+                              openedPopupTr.getAttribute('openedPopupSort') ==
+                                i + ''
+                                ? '-1'
+                                : i + ''
+                            )
+                          "
+                          class="s-t-th-btn"
+                          type="button"
+                          tooltipPosition="left"
+                          pTooltip="{{ 'sort' | titlecase | translate }}"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-6 s-t-th-btn-icon h-6"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25"
+                            />
+                          </svg>
+                        </button>
+                      </ng-container>
+                    </ng-container>
+                    <h1 class="s-t-th-label">{{ col?.header | titlecase }}</h1>
+                    <div
+                      class="popUp"
+                      [ngClass]="{
+                        'd-block':
+                          openedPopupTr.getAttribute('openedPopupSort') ==
+                          i + '',
+                        'd-none':
+                          openedPopupTr.getAttribute('openedPopupSort') !=
+                          i + '',
+                        afterOne: _selectedColumns.length - 1 == i,
+                        afterTow: _selectedColumns.length - 2 == i,
+                        defaultAfter:
+                          !(_selectedColumns.length - 2 == i) ||
+                          !(_selectedColumns.length - 1 == i)
+                      }"
+                      [ngStyle]="{
+                        left:
+                          _selectedColumns.length - 1 == i
+                            ? '-165px'
+                            : _selectedColumns.length - 2 == i
+                            ? '-100px'
+                            : _selectedColumns.length - 3 == i
+                            ? '0px'
+                            : '50%'
+                      }"
+                      [ngSwitch]="col.filterType"
+                    >
+                      <span class="FilerCloseSection">
+                        <i
+                          (click)="
+                            openedPopupTr.setAttribute(
+                              'openedPopupSort',
+                              openedPopupTr.getAttribute('openedPopupSort') ==
+                                i + ''
+                                ? '-1'
+                                : i + ''
+                            )
+                          "
+                          class="pi removePopUp-icon pi-times-circle"
+                        >
+                        </i>
+                      </span>
                       <app-sort
                         [data]="filterMap.get(filterMap.get('outData'))"
                         [path]="col.field"
                         [sortByName]="true"
                         [sortByDate]="false"
                       ></app-sort>
-                    </ng-template>
-                  </p-overlayPanel>
-                  <!-- <p-overlayPanel
-                    #filter
-                    [showCloseIcon]="true"
-                    [style]="{ width: '300px', paddingLeft: '-10px' }"
-                  > -->
-                    <!-- <ng-template pTemplate> -->
-                      <div class="filter "
-                           [ngClass]=" { 'd-block':openedPopupTr.getAttribute('data-openedPopup') == (i+'') ,
-                                         'd-none':openedPopupTr.getAttribute('data-openedPopup') !=  (i+'') }"
-                           [ngSwitch]="col.filterType">
-
-                          <span class="FilerCloseSection">
-                                       
-                                      <i
-                                       (click)="openedPopupTr.setAttribute('data-openedPopup',openedPopupTr.getAttribute('data-openedPopup')== i+''? '-1' : i+'')"
-                                       class="  pi removePopUp-icon pi-times-circle"
-                                       >
-                                      </i>
-                          </span>
-                         
-
-
-                         <ng-container *ngSwitchCase="'text'">
-                          <filter-text-rule-template
-                            (outParameter)="
-                              outParameter(
-                                $event,
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ]))
-                            "
-                            [inParameter]="
-                              filterParameter.get(
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field] )
-                              )
-                            "
-                            [label]="'search'"
-                            [path]="col.field"
-                            [inData]="filterMap.get(filterMap.get(i+'--per'))"
-                            (outData)="
-                                 filterMap.set(i,$event ) ; log(filterMap)
-                            "
-                          >
-                          </filter-text-rule-template>
-                        </ng-container>
-                         <ng-container *ngSwitchCase="'numeric'">
-                          <!-- ::: {{filterParameter.get(gitFilerParameterNameId(i,col.filterType))|json}} -->
-                          <filter-number-rule-template
-                          [inData]="filterMap.get(filterMap.get(i+'--per'))"
-                            (outParameter)="
-                              outParameter(
-                                $event,
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            [inParameter]="
-                              filterParameter.get(
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            [label]="'search'"
-                            [path]="col.field"
-                            (outData)="filterMap.set(i,$event)"
-                          >
-                          </filter-number-rule-template>
-                        </ng-container>
-                        <ng-container *ngSwitchCase="'chips'">
-                          <filter-by-tag
-                            [label]="'chips'"
-                            [path]="col.field"
-                            [inData]="filterMap.get(filterMap.get(i+'--per'))"
-                            [inParameter]="
-                              filterParameter.get(
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            (outParameter)="
-                              outParameter(
-                                $event,
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            (outData)="
-                                 filterMap.set(i,$event)
-                            "
-                          >
-                          </filter-by-tag>
-                        </ng-container>
-                        <ng-container *ngSwitchCase="'percentage'">
-                          <filter-percentage
-                          [inData]="filterMap.get(filterMap.get(i+'--per'))"
-                            (outParameter)="
-                              outParameter(
-                                $event,
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            [inParameter]="
-                              filterParameter.get(
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            [label]="'lable'"
-                            [path]="col.field"
-                            (outData)="
-                                 filterMap.set(i,$event)
-                            "
-                          >
-                          </filter-percentage>
-                        </ng-container>
-                        <ng-container *ngSwitchCase="'range'">
-                          <filter-by-range
-                          [inData]="filterMap.get(filterMap.get(i+'--per'))"
-                            (outParameter)="
-                              outParameter(
-                                $event,
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            [inParameter]="
-                              filterParameter.get(
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            [type]="'range'"
-                            [label]="'doubleRange'"
-                            [path]="col.field"
-                            (outData)="
-                                 filterMap.set(i,$event)
-                              "
-                              >
-                            </filter-by-range>
-                        </ng-container>
-                        <ng-container *ngSwitchCase="'boolean'">
-                          <filter-by-boolean
-                            [type]="'boolean'"
-                            [label]="'date'"
-                            [path]="col.field"
-                            [inData]="filterMap.get(filterMap.get(i+'--per'))"
-                            [inParameter]="
-                              filterParameter.get(
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            (outParameter)="
-                              outParameter(
-                                $event,
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            (outData)="
-                                 filterMap.set(i,$event)
-                            "
-                          >
-                          </filter-by-boolean>
-                        </ng-container>
-                        <ng-container *ngSwitchCase="'date'">
-                          <filter-text-rule-template
-                             [inData]="filterMap.get(filterMap.get(i+'--per'))"
-                            (outParameter)="
-                              outParameter(
-                                $event,
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            [inParameter]="
-                              filterParameter.get(
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            [label]="'search'"
-                            [path]="col.field"
-                            (outData)="
-                                 filterMap.set(i,$event)
-                            "
-                          >
-                          </filter-text-rule-template>
-                          <!-- <filter-date-rule-template
+                    </div>
+                    <div *ngIf="col.filter " class="popUp"
+                      [ngClass]="{
+                        'd-block':
+                          openedPopupTr.getAttribute('openedPopupFilter') ==
+                          i + '',
+                        'd-none':
+                          openedPopupTr.getAttribute('openedPopupFilter') !=
+                          i + '',
+                        afterOne: _selectedColumns.length - 1 == i,
+                        afterTow: _selectedColumns.length - 2 == i,
+                        defaultAfter:
+                          !(_selectedColumns.length - 2 == i) ||
+                          !(_selectedColumns.length - 1 == i)
+                      }"
+                      [ngStyle]="{
+                        left:
+                          _selectedColumns.length - 1 == i
+                            ? '-165px'
+                            : _selectedColumns.length - 2 == i
+                            ? '-100px'
+                            : _selectedColumns.length - 3 == i
+                            ? '0px'
+                            : '50%'
+                      }"
+                      [ngSwitch]="col.filterType"
+                    >
+                      <span class="FilerCloseSection">
+                        <i
+                          (click)="
+                            openedPopupTr.setAttribute(
+                              'openedPopupFilter',
+                              openedPopupTr.getAttribute('openedPopupFilter') ==
+                                i + ''
+                                ? '-1'
+                                : i + ''
+                            )
+                          "
+                          class="pi removePopUp-icon pi-times-circle"
+                        >
+                        </i>
+                      </span>
+                      <ng-container *ngSwitchCase="'text'">
+                        <filter-text-rule-template
+                          (outParameter)="
+                            outParameter(
+                              $event,
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [inParameter]="
+                            filterParameter.get(
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [label]="'search'"
+                          [path]="col.field"
+                          [inData]="filterMap.get(filterMap.get(i + '--per'))"
+                          (outData)="filterMap.set(i, $event); log('text == >',filterMap)"
+                        >
+                        </filter-text-rule-template>
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'numeric'">
+                        <!-- ::: {{filterParameter.get(gitFilerParameterNameId(i,col.filterType))|json}} -->
+                        <filter-number-rule-template
+                          [inData]="filterMap.get(filterMap.get(i + '--per'))"
+                          (outParameter)="
+                            outParameter(
+                              $event,
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [inParameter]="
+                            filterParameter.get(
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [label]="'search'"
+                          [path]="col.field"
+                          (outData)="filterMap.set(i, $event) ; log(' numeric ==>',filterMap)">
+                        </filter-number-rule-template>
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'chips'">
+                        <filter-by-tag
+                          [label]="'chips'"
+                          [path]="col.field"
+                          [inData]="filterMap.get(filterMap.get(i + '--per'))"
+                          [inParameter]="
+                            filterParameter.get(
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          (outParameter)="
+                            outParameter(
+                              $event,
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          (outData)="filterMap.set(i, $event) ; log(' chips ==>',filterMap)"
+                        >
+                        </filter-by-tag>
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'percentage'">
+                        <filter-percentage
+                          [inData]="filterMap.get(filterMap.get(i + '--per'))"
+                          (outParameter)="
+                            outParameter(
+                              $event,
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [inParameter]="
+                            filterParameter.get(
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [label]="'lable'"
+                          [path]="col.field"
+                          (outData)="filterMap.set(i, $event ); log(' percentage ==>',filterMap)"
+                        >
+                        </filter-percentage>
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'range'">
+                        <filter-by-range
+                          [inData]="filterMap.get(filterMap.get(i + '--per'))"
+                          (outParameter)="
+                            outParameter(
+                              $event,
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [inParameter]="
+                            filterParameter.get(
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [type]="'range'"
+                          [label]="'doubleRange'"
+                          [path]="col.field"
+                          (outData)="filterMap.set(i, $event) ; log(' range ==>',filterMap)"
+                        >
+                        </filter-by-range>
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'boolean'">
+                        <filter-by-boolean
+                          [type]="'boolean'"
+                          [label]="'boolean'"
+                          [path]="col.field"
+                          [inData]="filterMap.get(filterMap.get(i + '--per'))"
+                          [inParameter]="
+                            filterParameter.get(
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          (outParameter)="
+                            outParameter(
+                              $event,
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          (outData)="filterMap.set(i, $event) ; log('boolean ==>',filterMap)"
+                        >
+                        </filter-by-boolean>
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'date'">
+                        <filter-text-rule-template
+                          [inData]="filterMap.get(filterMap.get(i + '--per'))"
+                          (outParameter)="
+                            outParameter(
+                              $event,
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [inParameter]="
+                            filterParameter.get(
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [label]="'date'"
+                          [path]="col.field"
+                          (outData)="filterMap.set(i, $event) ; log(' date ==>',filterMap)"
+                        >
+                        </filter-text-rule-template>
+                        <!-- <filter-date-rule-template
                             [inData]="filterMap.get(filterMap.get(i+'--per'))"
                             [label]="'date'"
                             [path]="col.field"
@@ -428,205 +540,270 @@
                             "
                           >
                           </filter-date-rule-template> -->
-                        </ng-container>
-                        <ng-container *ngSwitchCase="'email'">
-                          <filter-text-rule-template
-                             [inData]="filterMap.get(filterMap.get(i+'--per'))"
-                            (outParameter)="
-                              outParameter(
-                                $event,
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            [inParameter]="
-                              filterParameter.get(
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            [label]="'search'"
-                            [path]="col.field"
-                            (outData)="
-                                 filterMap.set(i,$event)
-                            "
-                          >
-                          </filter-text-rule-template>
-                        </ng-container>
-                        <ng-container *ngSwitchCase="'address'">
-                            <filter-text-rule-template
-                            [inData]="filterMap.get(filterMap.get(i+'--per'))"
-                            (outParameter)="
-                              outParameter(
-                                $event,
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            [inParameter]="
-                              filterParameter.get(
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            [label]="'search'"
-                            [path]="col.field"
-                            (outData)="
-                                 filterMap.set(i,$event)
-                            "
-                          >
-                          </filter-text-rule-template>
-                        </ng-container>
-                         <ng-container *ngSwitchCase="'price'">
-                          <filter-text-rule-template
-                             [inData]="filterMap.get(filterMap.get(i+'--per'))"
-                            (outParameter)="
-                              outParameter(
-                                $event,
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            [inParameter]="
-                              filterParameter.get(
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            [label]="'search'"
-                            [path]="col.field"
-                            (outData)="
-                                 filterMap.set(i,$event)
-                            "
-                          >
-                          </filter-text-rule-template>
-                        </ng-container>
-                        <ng-container *ngSwitchCase="'phone'">
-                          <filter-text-rule-template
-                             [inData]="filterMap.get(filterMap.get(i+'--per'))"
-                            (outParameter)="
-                              outParameter(
-                                $event,
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            [inParameter]="
-                              filterParameter.get(
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            [label]="'search'"
-                            [path]="col.field"
-                            (outData)="
-                                 filterMap.set(i,$event)
-                            "
-                          >
-                          </filter-text-rule-template>
-                        </ng-container>
-                        <ng-container *ngSwitchCase="'multiSelect'">
-                           <filter-By-multiSelect
-                            (outParameter)="
-                              outParameter(
-                                $event,
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            [inParameter]="
-                              filterParameter.get(
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            [label]="'search'"
-                            [path]="col.field"
-                            [inData]="filterMap.get(filterMap.get(i+'--per'))"
-                            (outData)="
-                                 filterMap.set(i,$event)
-                            "
-                          >
-                          </filter-By-multiSelect>
-                        </ng-container>
-                        <ng-container *ngSwitchCase="'template'">
-                           <filter-By-template
-                            (outParameter)="
-                              outParameter(
-                                $event,
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            [inParameter]="
-                              filterParameter.get(
-                                gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                              )
-                            "
-                            [label]="'search'"
-                            [path]="col.field"
-                            [inData]="filterMap.get(filterMap.get(i+'--per'))"
-                            (outData)="
-                                 filterMap.set(i,$event)
-                            "
-                          >
-                          </filter-By-template>
-                        </ng-container>
-                      </div>
-                    <!-- </ng-template> -->
-                  <!-- </p-overlayPanel> -->
-                  <!-- style="display: {{(col.filterType!= 'img' || col.filterType != 'file')? '':''}}" -->
-                  <ng-container
-                    *ngIf="filterDontWorkWithHeaders.includes(col.header)"
-                  >
-                    <div
-                      *ngIf="
-                        dateTypefilterDontWorkWith.includes(col.filterType)
-                      "
-                    >
-                      <div class="s-t-th-btn"></div>
-                    </div>
-                  </ng-container>
-                  <ng-container
-                    *ngIf="!filterDontWorkWithHeaders.includes(col.header)"
-                  >
-                    <ng-container
-                      *ngIf="
-                        !dateTypefilterDontWorkWith.includes(col.filterType)
-                      "
-                    >
-                     <!-- >>filetreertewrtew -->
-                      <button
-                        (click)="openedPopupTr.setAttribute('data-openedPopup',openedPopupTr.getAttribute('data-openedPopup')== i+''? '-1' : i+'')"
-                        class="s-t-th-btn"
-                        [ngClass]="
-                          filterParameter.get(
-                            gitFilerParameterNameId([col.header,i, col.filterType, col.field ])
-                          )    ? 'filterActive'
-                              : 's-t-th-btn'
-                        "
-                        class="s-t-th-btn"
-                        type="button"
-                        label="Save"
-                        tooltipPosition="right"
-                        pTooltip="{{ 'filter' | titlecase | translate }}"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke-width="1.5"
-                          stroke="currentColor"
-                          class="w-6 s-t-th-btn-icon h-6"
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'email'">
+                        <filter-text-rule-template
+                          [inData]="filterMap.get(filterMap.get(i + '--per'))"
+                          (outParameter)="
+                            outParameter(
+                              $event,
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [inParameter]="
+                            filterParameter.get(
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [label]="'email'"
+                          [path]="col.field"
+                          (outData)="filterMap.set(i, $event) ; log(' email ==>',filterMap)"
                         >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z"
-                          />
-                        </svg>
-                      </button>
+                        </filter-text-rule-template>
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'address'">
+                        <filter-text-rule-template
+                          [inData]="filterMap.get(filterMap.get(i + '--per'))"
+                          (outParameter)="
+                            outParameter(
+                              $event,
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [inParameter]="
+                            filterParameter.get(
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [label]="'address'"
+                          [path]="col.field"
+                          (outData)="filterMap.set(i, $event) ; log('address ==>',filterMap)"
+                        >
+                        </filter-text-rule-template>
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'price'">
+                        <filter-text-rule-template
+                          [inData]="filterMap.get(filterMap.get(i + '--per'))"
+                          (outParameter)="
+                            outParameter(
+                              $event,
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [inParameter]="
+                            filterParameter.get(
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [label]="'price'"
+                          [path]="col.field"
+                          (outData)="filterMap.set(i, $event) ; log(' price ==>',filterMap)"
+                        >
+                        </filter-text-rule-template>
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'phone'">
+                        <filter-text-rule-template
+                          [inData]="filterMap.get(filterMap.get(i + '--per'))"
+                          (outParameter)="
+                            outParameter(
+                              $event,
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [inParameter]="
+                            filterParameter.get(
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [label]="'multiSelect'"
+                          [path]="col.field"
+                          (outData)="filterMap.set(i, $event) ; log(' phone ==>',filterMap)"
+                        >
+                        </filter-text-rule-template>
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'multiSelect'">
+                        <filter-By-multiSelect
+                          (outParameter)="
+                            outParameter(
+                              $event,
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [inParameter]="
+                            filterParameter.get(
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [label]="'multiSelect'"
+                          [path]="col.field"
+                          [inData]="filterMap.get(filterMap.get(i + '--per'))"
+                          (outData)="filterMap.set(i, $event) ; log(' multiSelect ==>',filterMap)"
+                        >
+                        </filter-By-multiSelect>
+                      </ng-container>
+                      <ng-container *ngSwitchCase="'template'">
+                        <filter-By-template
+                          (outParameter)="
+                            outParameter(
+                              $event,
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [inParameter]="
+                            filterParameter.get(
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [label]="'multiSelect'"
+                          [path]="col.field"
+                          [inData]="filterMap.get(filterMap.get(i + '--per'))"
+                          (outData)="filterMap.set(i, $event) ; log('template ==>',filterMap)"
+                        >
+                        </filter-By-template>
+                      </ng-container>
+                    </div>
+                    <!-- </ng-template> -->
+                    <!-- </p-overlayPanel> -->
+                    <!-- style="display: {{(col.filterType!= 'img' || col.filterType != 'file')? '':''}}" -->
+                    <ng-container
+                      *ngIf="filterDontWorkWithHeaders.includes(col.header)"
+                    >
+                      <div
+                        *ngIf="
+                          dateTypefilterDontWorkWith.includes(col.filterType)
+                        "
+                      >
+                        <div class="s-t-th-btn"></div>
+                      </div>
                     </ng-container>
-                  </ng-container>
-                </div>
-              </th>
-            </ng-container>
+                    <ng-container
+                      *ngIf="!filterDontWorkWithHeaders.includes(col.header)"
+                    >
+                      <ng-container
+                        *ngIf="
+                          !dateTypefilterDontWorkWith.includes(col.filterType)
+                        "
+                      >
+                        <!-- >>filetreertewrtew -->
+                        <button
+                         *ngIf="col.filter"
+                          (click)="
+                            openedPopupTr.setAttribute(
+                              'openedPopupFilter',
+                              openedPopupTr.getAttribute('openedPopupFilter') ==
+                                i + ''
+                                ? '-1'
+                                : i + ''
+                            )
+                          "
+                          class="s-t-th-btn"
+                          [ngClass]="
+                            filterParameter.get(
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                              ? 'filterActive'
+                              : 's-t-th-btn'
+                          "
+                          type="button"
+                          label="Save"
+                          tooltipPosition="right"
+                          pTooltip="{{ 'filter' | titlecase | translate }}"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            class="w-6 s-t-th-btn-icon h-6"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z"
+                            />
+                          </svg>
+                        </button>
+                      </ng-container>
+                    </ng-container>
+                  </div>
+                </th>
+              </ng-container>
             </tr>
           </thead>
-          <ng-container *ngIf="filterMap.get(filterMap.get('outData')).length != 0">
+          <ng-container
+            *ngIf="filterMap.get(filterMap.get('outData')).length != 0"
+          >
             <tbody #tableBody data-selectedIndex class="s-t-tbody">
               <ng-container
                 *ngFor="
-                  let rowData of filterMap.get(filterMap.get('outData')) | paginate : o_config;
+                  let rowData of filterMap.get(filterMap.get('outData'))
+                    | paginate : o_config;
                   let o = index
                 "
               >
@@ -717,134 +894,150 @@
                     </td>
                   </ng-container>
                   <!-- #endregion -->
-                    <ng-container *ngFor="let col of _selectedColumns; let p = index">
-                  <td
-                    *ngIf="!(col.filterType == 'template' && !col.optionLabel)"
-                    class="s-t-td"
-                    data-td
-                    #tbody_main_td
-                    (mouseenter)="
-                      show_tbody_main_td_hover_f(p, rowData[col.field])
-                    "
-                    (mouseleave)="show_tbody_main_td_hover_f('')"
-                    [ngClass]="{
-                      show_tbody_main_td_hover: show_tbody_main_td_hover == p,
-                      show_tbody_main_td_hover_at:
-                        show_tbody_main_td_hover_at == p + rowData[col.field]
-                    }"
+                  <ng-container
+                    *ngFor="let col of _selectedColumns; let p = index"
                   >
-                    <div class="s-next">
-                      <ng-container *ngIf="col.filterType == 'img'">
-                        <img
-                          (mouseenter)="
-                            imageClikEvent(rowData[col.field], o, $event)
-                          "
-                          [lazyLoad]="rowData[col.field]"
-                          [defaultImage]="
-                            '../../../../../../assets/images/logo/defaultImage.png'
-                          "
-                        />
-                        <img
-                          class="zoomedImg"
-                          *ngIf="zoomedImag && o == zoomedImagindex"
-                          draggable="true"
-                          (mouseleave)="imagemouseleaveEvent()"
-                          (click)="
-                            imageClikEvent(rowData[col.field], o, $event, true)
-                          "
-                          [lazyLoad]="zoomedImagsrc"
-                        />
-                      </ng-container>
-                      <ng-container *ngIf="col.filterType == 'chips'">
-                        <div class="dynamic-table-chipcontainer">
-                          <span
-                            *ngFor="
-                              let item of rowData | readDataTable : col.field
+                    <td
+                      *ngIf="
+                        !(col.filterType == 'template' && !col.optionLabel)
+                      "
+                      class="s-t-td"
+                      data-td
+                      #tbody_main_td
+                      (mouseenter)="
+                        show_tbody_main_td_hover_f(p, rowData[col.field])
+                      "
+                      (mouseleave)="show_tbody_main_td_hover_f('')"
+                      [ngClass]="{
+                        show_tbody_main_td_hover: show_tbody_main_td_hover == p,
+                        show_tbody_main_td_hover_at:
+                          show_tbody_main_td_hover_at == p + rowData[col.field]
+                      }"
+                    >
+                      <div class="s-next">
+                        <ng-container *ngIf="col.filterType == 'img'">
+                          <img
+                            (mouseenter)="
+                              imageClikEvent(rowData[col.field], o, $event)
                             "
+                            [lazyLoad]="rowData[col.field]"
+                            [defaultImage]="
+                              '../../../../../../assets/images/logo/defaultImage.png'
+                            "
+                          />
+                          <img
+                            class="zoomedImg"
+                            *ngIf="zoomedImag && o == zoomedImagindex"
+                            draggable="true"
+                            (mouseleave)="imagemouseleaveEvent()"
+                            (click)="
+                              imageClikEvent(
+                                rowData[col.field],
+                                o,
+                                $event,
+                                true
+                              )
+                            "
+                            [lazyLoad]="zoomedImagsrc"
+                          />
+                        </ng-container>
+                        <ng-container *ngIf="col.filterType == 'chips'">
+                          <div class="dynamic-table-chipcontainer">
+                            <span
+                              *ngFor="
+                                let item of rowData | readDataTable : col.field
+                              "
+                              [class]="
+                                item | dynamicTableCellColor : col.colorize
+                              "
+                              [style]="
+                                item
+                                  | dynamicTableCellColorStyle
+                                    : col.colorizeStyle
+                              "
+                            >
+                              {{ item | translate | genericPipe : col.pipes }}
+                            </span>
+                          </div>
+                        </ng-container>
+                        <ng-container
+                          *ngIf="
+                            ![
+                              'file',
+                              'img',
+                              'chips',
+                              'template',
+                              'multiSelect'
+                            ].includes(col.filterType || '')
+                          "
+                        >
+                          <span
                             [class]="
-                              item | dynamicTableCellColor : col.colorize
+                              rowData
+                                | readDataTable : col.field
+                                | dynamicTableCellColor : col.colorize
                             "
                             [style]="
-                              item
+                              rowData
+                                | readDataTable : col.field
                                 | dynamicTableCellColorStyle : col.colorizeStyle
                             "
                           >
-                            {{ item | translate | genericPipe : col.pipes }}
+                            {{
+                              rowData
+                                | readDataTable : col.field
+                                | translate
+                                | genericPipe : col.pipes
+                            }}
                           </span>
-                        </div>
-                      </ng-container>
-                      <ng-container *ngIf="!['file', 'img', 'chips','template', 'multiSelect'].includes(
-                            col.filterType || ''
-                          )
-                        "
-                      >
-                        <span
-                          [class]="
-                            rowData
-                              | readDataTable : col.field
-                              | dynamicTableCellColor : col.colorize
-                          "
-                          [style]="
-                            rowData
-                              | readDataTable : col.field
-                              | dynamicTableCellColorStyle : col.colorizeStyle
-                          "
-                        >
-                          {{
-                            rowData
-                              | readDataTable : col.field
-                              | translate
-                              | genericPipe : col.pipes
-                          }}
-                        </span>
-                      </ng-container>
-                      <ng-container *ngIf="col.filterType == 'multiSelect'">
-                        <span
-                          *ngIf="col.optionLabel"
-                          [class]="
-                            rowData
-                              | readDataTable : col.field
-                              | dynamicTableCellColor : col.colorize
-                          "
-                          [style]="
-                            rowData
-                              | readDataTable : col.field
-                              | dynamicTableCellColorStyle : col.colorizeStyle
-                          "
-                        >
-                          {{
-                            rowData
-                              | readDataTable : col.field
-                              | translate
-                              | genericPipe : col.pipes
-                          }}
-                        </span>
-                      </ng-container>
-                       <ng-container *ngIf="col.filterType == 'template'">
-                        <span
-                          *ngIf="col.optionLabel"
-                          [class]="
-                            rowData
-                              | readDataTable : col.field
-                              | dynamicTableCellColor : col.colorize
-                          "
-                          [style]="
-                            rowData
-                              | readDataTable : col.field
-                              | dynamicTableCellColorStyle : col.colorizeStyle
-                          "
-                        >
-                          {{
-                            rowData
-                              | readDataTable : col.optionLabel
-                              | translate
-                              | genericPipe : col.pipes
-                          }}
-                        </span>
-                      </ng-container>
-                    </div>
-                  </td>
-                       </ng-container>
+                        </ng-container>
+                        <ng-container *ngIf="col.filterType == 'multiSelect'">
+                          <span
+                            *ngIf="col.optionLabel"
+                            [class]="
+                              rowData
+                                | readDataTable : col.field
+                                | dynamicTableCellColor : col.colorize
+                            "
+                            [style]="
+                              rowData
+                                | readDataTable : col.field
+                                | dynamicTableCellColorStyle : col.colorizeStyle
+                            "
+                          >
+                            {{
+                              rowData
+                                | readDataTable : col.field
+                                | translate
+                                | genericPipe : col.pipes
+                            }}
+                          </span>
+                        </ng-container>
+                        <ng-container *ngIf="col.filterType == 'template'">
+                          <span
+                            *ngIf="col.optionLabel"
+                            [class]="
+                              rowData
+                                | readDataTable : col.field
+                                | dynamicTableCellColor : col.colorize
+                            "
+                            [style]="
+                              rowData
+                                | readDataTable : col.field
+                                | dynamicTableCellColorStyle : col.colorizeStyle
+                            "
+                          >
+                            {{
+                              rowData
+                                | readDataTable : col.optionLabel
+                                | translate
+                                | genericPipe : col.pipes
+                            }}
+                          </span>
+                        </ng-container>
+                      </div>
+                    </td>
+                  </ng-container>
                 </tr>
                 <tr
                   #showExpanded_child

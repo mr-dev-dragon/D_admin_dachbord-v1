@@ -25,9 +25,9 @@ export class FilterBooleanComponent {
   }
 
   ngOnChanges(change: SimpleChanges): void {
-    if (change['inData']) this._filter();
+    if (change['inData']) this.filterConfige();
   }
-  _filter() {
+  filterConfige() {
     if (this.path != '' && this.inData) {
       let reusltdata = this.filter(
         this.inData,
@@ -37,14 +37,14 @@ export class FilterBooleanComponent {
         },
         'boolean'
       );
-
-      this.outData.emit(reusltdata);
+      this.apleyFiler ?
+        this.outData.emit(reusltdata) :
+        this.outData.emit(this.inData);
     }
   }
 
   filter(data: any[], filter: { path: any; filterbythis: any }, type?: any) {
     let reusltdata = data;
-
     if (filter.filterbythis instanceof Array) {
       if (filter.path instanceof Array) {
         filter?.path.map((i) => {
@@ -86,8 +86,8 @@ export class FilterBooleanComponent {
     return reusltdata;
   }
   filtererry(reusltdata: any[], filterbythis: any, i: any, type: any): any {}
-
-  apply: any = () => ((this.apleyFiler = true), this.sendParameter());
-  clear: any = () => ((this.apleyFiler = false),this.outParameter.emit({}));
+  apply: any = () => (this.apleyFiler = true);
+  clear: any = () => ((this.apleyFiler = false), this.outParameter.emit({}));
   sendParameter: any = () => this.outParameter.emit(this.parameter);
 }
+ 
