@@ -2856,6 +2856,6 @@ export class TableV5Component {
    clearTimeout(this.setTimeOutId);
    this.setTimeOutId = setTimeout(() => {
      this.data = a;
-   }, 200);
+   }, 2000);
   }
 }

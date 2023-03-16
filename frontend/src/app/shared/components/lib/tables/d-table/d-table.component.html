@@ -1163,6 +1163,12 @@
         </table>
           <ng-container *ngIf=" this.o_config.itemsPerPage > this.filterMap.get(filterMap.get('outData')).length ">
             <div class=" plasHildercontinaer dots-bg">
+                <div  *ngIf="filterMap.get(filterMap.get('outData')).length == 0" class="plaiceHolderMisage">
+                         <h4 >{{
+                               this.refreshActive? 'refresh Data ...': ' Data not fund !' 
+                             |titlecase|translate}}  
+                         </h4> 
+                </div>
                <ng-container *ngFor="let k of playholder()">
                  <span class="plasHilderRow"> </span>
                </ng-container>

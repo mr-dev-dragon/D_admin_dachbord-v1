@@ -551,7 +551,7 @@ export class DTableComponent implements OnInit {
     clearTimeout(this.setTimeOutId);
     this.setTimeOutId = setTimeout(() => {
        this.refreshActive = false
-    }, 2050);
+    }, 12050);
   }
   onAdd() {
     this.onAddClick.emit();

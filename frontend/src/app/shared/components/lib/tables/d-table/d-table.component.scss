@@ -789,7 +789,20 @@ $p-color: rgb(38, 132, 234);
 
 
 .plasHildercontinaer{
+  position: relative;
   width: 100%;
+  .plaiceHolderMisage{
+  position: absolute;
+  left: 42.5%;
+   top: 40%;
+   padding: 20px;
+   border-radius: 20px;
+   background-color: white;
+
+
+
+
+  }
 }
 
 
