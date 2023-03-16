@@ -864,6 +864,26 @@
                   </div>
                 </th>
               </ng-container>
+              <ng-container *ngIf="!(_selectedColumns.length == 0)">
+                  <th
+                    class="s-t-th"
+                    *ngIf="
+                        captionConfig.actions?.clone ||
+                        captionConfig.actions?.delete||
+                        captionConfig.actions?.edit  ||
+                        captionConfig.actions?.detail||
+                        captionConfig.actions?.close
+                    "
+                  >
+                    <div class="s-t-th-conteainer">
+              
+                        <h1 class="s-t-th-label">
+                          {{ "action" | titlecase }}
+                        </h1>
+                      
+                    </div>
+                  </th>
+              </ng-container>
             </tr>
           </thead>
           <ng-container *ngIf="filterMap.get(filterMap.get('outData')).length != 0"
@@ -1138,29 +1158,90 @@
                       </div>
                     </td>
                   </ng-container>
+                  <!-- #region   this arry ooof the row expanttion tn -->
+                  <ng-container *ngIf="!(_selectedColumns.length == 0)">
+
+                  <td
+                        class="text-center"
+                        *ngIf="
+                          columns.length &&
+                          (captionConfig.actions?.clone ||
+                            captionConfig.actions?.detail ||
+                            captionConfig.actions?.edit)
+                        "
+                      >
+                        <div class=" action-button-group ">
+                          <button
+                            type="button"
+                            *ngIf="captionConfig.actions?.clone && !rowData.cloned"
+                            type="button"
+                            class=" me-2 mb-2  s-btn-clone action-button"
+                            (click)="onClone(o)"
+                          >
+                            <i class="pi pi-copy action-button-icon "></i>
+                           </button>
+
+                          <button
+                            type="button"
+                            *ngIf="captionConfig.actions?.detail"
+                            type="button"
+                            class=" me-2 mb-2 s-btn-detail  action-button"
+                            (click)="onDetail(o)"
+                          >
+                            <i class="pi pi-eye  action-button-icon "></i>
+                           </button>
+
+                          <button
+                            type="button"
+                            *ngIf="captionConfig.actions?.edit"
+                            type="button"
+                            class=" me-2 mb-2 s-btn-edit p-button-warning  action-button"
+                            (click)="onEdit(o)"
+                          >
+                          
+                            <i class="pi pi-pencil action-button-icon action-button-icon-2 "></i>
+                           </button>
+
+                          <button
+                            *ngFor="let button of captionConfig.buttons"
+                            pButton
+                            type="button"
+                            [label]="button.label || ''"
+                            [icon]="button.icon || ''"
+                            [class]="
+                              'action-button ' +
+                              (button.class || 'p-button-rounded p-button-sm')
+                            "
+                            [ngStyle]="button.style || null"
+                            (click)="button?.command?.(o,rowData)"
+                          ></button>
+                        </div>
+                   </td>
+                  </ng-container>
+                  <!-- #endregion -->
                 </tr>
                 <tr
                   #showExpanded_child
                   [attr.s-Expanded-child]="o"
                   *ngIf="tbody_tr.getAttribute('showExpandedRow') == 'true'"
                 >
-                  <td
-                    class="row-expanded-container-out"
-                    [colSpan]="
-                      _selectedColumns.length +
-                      (columns.length
-                        ? (captionConfig.actions?.clone ||
-                          captionConfig.actions?.detail ||
-                          captionConfig.actions?.edit
-                            ? 1
-                            : 0) +
-                          (captionConfig.selectionType === 'multiple' ||
-                          captionConfig.expanded
-                            ? 1
+                      <td
+                        class="row-expanded-container-out"
+                        [colSpan]="
+                          _selectedColumns.length +
+                          (columns.length
+                            ? (captionConfig.actions?.clone ||
+                              captionConfig.actions?.detail ||
+                              captionConfig.actions?.edit
+                                ? 1
+                                : 0) +
+                              (captionConfig.selectionType === 'multiple' ||
+                              captionConfig.expanded
+                                ? 1
+                                : 0)
                             : 0)
-                        : 0)
-                    "
-                  >
+                        "
+                      >
                     <div
                       class="row-expanded-container-in"
                       [ngStyle]="{ backgroundColor: tableBgC }"
@@ -1175,6 +1256,7 @@
                         >
                         </ng-container>
                       </ng-container>
+                      
                       <ng-container *ngIf="!expandedRow">
                         <d-table
                           [data]="
