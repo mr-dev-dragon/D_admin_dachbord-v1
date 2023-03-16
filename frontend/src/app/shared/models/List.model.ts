@@ -85,11 +85,13 @@ export interface ListCaptionConfig {
   csv?: boolean;
   pdf?: boolean;
   xls?: boolean;
+
   selection?: boolean;
   displayedColumns?: boolean;
   clearTable?: boolean;
   refreshData?: boolean;
   expanded?: expanded | null;
+  rowNamber?: boolean
   addButton?: any;
   sort?: boolean;
   headerFilterType?: string;

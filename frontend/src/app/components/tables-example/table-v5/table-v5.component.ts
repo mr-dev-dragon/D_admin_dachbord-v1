@@ -2792,6 +2792,7 @@ export class TableV5Component {
     refreshData: true,
     addButton: true,
     imgPopUp: true,
+    rowNamber: true,
     selectionType: 'single',
     summary: {
       enabled: true,
@@ -2816,6 +2817,7 @@ export class TableV5Component {
     refreshData: true,
     addButton: true,
     imgPopUp: true,
+    rowNamber: true,
     headerFilterType: 'text-header',
     headerFilterfield: 'fullname',
     selectionType: 'multiple',
@@ -2845,17 +2847,15 @@ export class TableV5Component {
     this.darkMode = JSON.parse(sessionStorage.getItem('darkMode') || 'false');
     console.log(this.darkMode);
   }
- 
+
   setTimeOutId: any = -1;
-  
- 
-  
+
   onRefreshClick($event: boolean) {
     let a = this.data;
     this.data = [];
-   clearTimeout(this.setTimeOutId);
-   this.setTimeOutId = setTimeout(() => {
-     this.data = a;
-   }, 2000);
+    clearTimeout(this.setTimeOutId);
+    this.setTimeOutId = setTimeout(() => {
+      this.data = a;
+    }, 2000);
   }
 }

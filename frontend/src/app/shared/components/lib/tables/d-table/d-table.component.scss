@@ -346,7 +346,7 @@
 
                 &:nth-child(even) {
                   background-color: #c1c1c10b;
-                  // transition: 0.4s ease-in-out;
+                  // transition: 0.4s n.ease-in-out;
                   box-shadow: #ffffff2a 0px 0px 80px;
                   &:hover {
                     background-color: #ffffffac;
@@ -805,6 +805,26 @@ $p-color: rgb(38, 132, 234);
   }
 }
 
+
+
+
+.numbertd{
+  border-right: 2px solid #00000005; ;
+  div{
+    margin: auto;
+      .rowMamber {
+          text-align: center;
+          padding: 7px 7px;
+          font-size: 16px;
+          font-weight: 400;
+          font-family: 'Courier New', Courier, monospace;
+          height: 30px;
+          color: #999999;
+
+        }
+
+  }
+}
 
 
 

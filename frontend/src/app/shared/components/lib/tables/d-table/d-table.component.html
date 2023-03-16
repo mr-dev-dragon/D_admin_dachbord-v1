@@ -148,7 +148,22 @@
               data-openedPopupSort="-1"
               data-openedPopupFilter="-1"
               class="s-t-tr"
-            >
+            > 
+            <ng-container *ngIf="!(_selectedColumns.length == 0)">
+                <th
+                  class="s-t-th"
+                  *ngIf="captionConfig.rowNamber"
+                >
+                  <div class="s-t-th-conteainer">
+            
+                    <ng-container>
+                      <h1 class="s-t-th-label">
+                        {{ "n" | titlecase }}
+                      </h1>
+                    </ng-container>
+                  </div>
+                </th>
+              </ng-container>
               <ng-container *ngIf="!(_selectedColumns.length == 0)">
                 <th
                   class="s-t-th"
@@ -173,7 +188,7 @@
                       "
                     >
                       <h1 class="s-t-th-label">
-                        {{ "expantion" | titlecase }}
+                        {{ "exP" | titlecase }}
                       </h1>
                     </ng-container>
                   </div>
@@ -869,11 +884,41 @@
                 >
                   <!-- #region   this arry ooof the row expanttion tn -->
                   <ng-container *ngIf="!(_selectedColumns.length == 0)">
+                           <td class="numbertd"
+                              *ngIf="  
+                                captionConfig.rowNamber
+                              "
+                              >
+                              <div
+                                style="
+                                  margin: auto;
+                                  display: flex;
+                                  justify-content: center;
+                                  align-items: center;
+                                  text-align: center;
+                                "
+                              >
+                                <ng-container
+                                  *ngIf="captionConfig.rowNamber"
+                                >
+                             
+                                
+                                  <span class="rowMamber">{{(  
+                                        this.o_config.currentPage ==1 ?
+                                          (o+1+(this.o_config.itemsPerPage * (this.o_config.currentPage -1)))
+                                         :(o+1+(this.o_config.itemsPerPage * (this.o_config.currentPage -1))) 
+                                      )}}</span> 
+                             
+                                </ng-container>
+
+                              </div>
+                            </td>
                     <td
                       *ngIf="
                         captionConfig.expanded?.dataField ||
                         captionConfig.expanded?.headers ||
-                        captionConfig.expanded?.captionConfig ||
+                        captionConfig.expanded?.captionConfig ||       
+                        captionConfig.rowNamber||
                         captionConfig.selectionType == 'multiple'
                       "
                     >
@@ -886,6 +931,7 @@
                           text-align: center;
                         "
                       >
+
                         <ng-container
                           *ngIf="captionConfig.selectionType == 'multiple'"
                         >

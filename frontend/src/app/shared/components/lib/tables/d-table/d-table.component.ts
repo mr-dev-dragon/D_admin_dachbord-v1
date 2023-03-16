@@ -241,6 +241,7 @@ export class DTableComponent implements OnInit {
     addButton: false,
     expanded: null,
     sort: false,
+    rowNamber: false,
     selectionType: 'single',
     summary: {
       enabled: true,
@@ -551,7 +552,7 @@ export class DTableComponent implements OnInit {
     clearTimeout(this.setTimeOutId);
     this.setTimeOutId = setTimeout(() => {
        this.refreshActive = false
-    }, 12050);
+    }, 5050);
   }
   onAdd() {
     this.onAddClick.emit();
