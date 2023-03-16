@@ -1164,21 +1164,20 @@
           <ng-container *ngIf=" this.o_config.itemsPerPage > this.filterMap.get(filterMap.get('outData')).length ">
             <div class=" plasHildercontinaer dots-bg">
                <ng-container *ngFor="let k of playholder()">
-                 <span class="plasHilderRow"></span>
+                 <span class="plasHilderRow"> </span>
                </ng-container>
             </div>
           </ng-container>
       </section>
       <!-- *ngIf="filterMap.get(filterMap.get('outData')).length >= o_config.itemsPerPage" -->
       <section class="s-t-footer">
-        <!-- <h6 class=" row s-t-d">{{'tible footer ' | titlecase}}</h6> -->
         <pagination-template
 
           #p="paginationApi"
           [id]="o_config.id"
           (pageChange)="o_config.currentPage = $event" >
           <div class="pagination">
-            <div *ngIf="filterMap.get(filterMap.get('outData')).length >= o_config.itemsPerPage" class="in-custom-pagination">
+            <div *ngIf="filterMap.get(filterMap.get('outData')).length > o_config.itemsPerPage" class="in-custom-pagination">
               <div class="in-in-custom-pagination">
                 <div
                   class="pagination-previous"
@@ -1240,20 +1239,18 @@
                 </div>
               </div>
             </div>
-            <div *ngIf="!(filterMap.get(filterMap.get('outData')).length >= o_config.itemsPerPage)" class="in-custom-pagination">
+            <div *ngIf=" filterMap.get(filterMap.get('outData')).length < o_config.itemsPerPage  " class="in-custom-pagination">
               <div class="in-in-custom-pagination">
 
-                <div
-                  class="pagination-tiems"
-                >
-                  <a
+         
+                  <span
                     class="pagination-active"
                   >
-                    <span> 1 </span>
-                  </a>
+                    <span>  {{filterMap.get(filterMap.get('outData')).length != 0 ? '1': this.refreshActive? 'refresh  ...': ' no page exist !' }}  </span>
+                  </span>
                 </div>
 
-              </div>
+           
             </div>
           </div>
         </pagination-template>
