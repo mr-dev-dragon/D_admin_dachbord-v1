@@ -2457,7 +2457,7 @@ export class TableV5Component {
       field: 'age',
       header: 'age',
       sort: true,
-      filter:true,
+      filter: true,
       filterType: 'numeric',
       filterData: [],
     },
@@ -2844,5 +2844,18 @@ export class TableV5Component {
   ngOnInit(): void {
     this.darkMode = JSON.parse(sessionStorage.getItem('darkMode') || 'false');
     console.log(this.darkMode);
+  }
+ 
+  setTimeOutId: any = -1;
+  
+ 
+  
+  onRefreshClick($event: boolean) {
+    let a = this.data;
+    this.data = [];
+   clearTimeout(this.setTimeOutId);
+   this.setTimeOutId = setTimeout(() => {
+     this.data = a;
+   }, 200);
   }
 }

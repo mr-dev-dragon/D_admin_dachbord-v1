@@ -527,6 +527,29 @@ $p-color: rgb(38, 132, 234);
   );
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f09433', endColorstr='#bc1888', GradientType=1);
 }
+.colortrplayicon{
+
+  background: -moz-linear-gradient(45deg,
+        #7048de 0%,
+        #613ce6 25%,
+        #7448dc 50%,
+        #3e3cbf 75%,
+        #4d2ca9 100%);
+    background: -webkit-linear-gradient(45deg,
+        #5760de 0%,
+        #6553c9 25%,
+        #5b3ad3 50%,
+        #533cb9 75%,
+        #4d2ebd 100%);
+    background: linear-gradient(45deg,
+        #4732a2 0%,
+        #564bbd 25%,
+        #523dc5 50%,
+        #432ebd 75%,
+        #7c26b5 100%);
+
+}
+
 .green {
   background-color: #25d366;
 }
@@ -590,6 +613,9 @@ $p-color: rgb(38, 132, 234);
 }
 .info {
   background: #e7e7e7;
+}
+.white{
+  color: white;
 }
 
 .button {
@@ -753,8 +779,20 @@ $p-color: rgb(38, 132, 234);
 
 
  .plasHilderRow{
-   background:rgba(129, 129, 129, 0.082);
-  height: 62.4px;
-  display: flex;
-  flex-direction: column;
+  
+      background:rgba(128, 127, 127, 0);
+      height: 62.4px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
  }
+
+
+.plasHildercontinaer{
+  width: 100%;
+}
+
+
+
+
+

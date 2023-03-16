@@ -1,4 +1,4 @@
- <!-- ::{{filterMap.get(filterMap.get('outData')).length|json}} -->
+<!-- ::{{filterMap.get(filterMap.get('outData')).length|json}} -->
 <div [ngClass]="tiblecontinerDiv ? 'table_container' : ''">
   <div class="body">
     <main class="s-t-main">
@@ -21,6 +21,16 @@
           <h1 class="s-t-t-title">{{ tibleTitale | titlecase }}</h1>
         </div>
         <div class="header-container">
+           <button
+              type="button"
+              *ngIf="captionConfig.addButton && !captionConfig.addButton.menuItem"
+              class="button  colortrplayicon"
+              (click)="refresh()"
+           >
+         
+            <i class="pi  s-t-h-b-icon  {{!refreshActive?' pi-refresh':'pi-spin pi-refresh '}} white  " style="font-size: 1.2rem"></i>
+          </button>
+          <div></div>
           <button
             type="button"
             *ngIf="captionConfig.addButton && !captionConfig.addButton.menuItem"
@@ -30,13 +40,13 @@
             <i class="pi pi pi-plus s-t-h-b-icon"></i>
           </button>
           <div>
-            <p-tieredMenu
+          <p-tieredMenu
               #menu
               [model]="captionConfig.addButton.menuItem"
               [popup]="true"
               [appendTo]="'body'"
             >
-            </p-tieredMenu>
+            </p-tieredMenu> 
           </div>
           <button
             type="button"
@@ -53,12 +63,15 @@
         <div class="header-container">
           <filter-by-text
             *ngIf="
-              captionConfig.headerFilterType && captionConfig.headerFilterfield
-            "
+              captionConfig.headerFilterType && captionConfig.headerFilterfield"
             [type]="captionConfig.headerFilterType"
             [inData]="data"
             [path]="captionConfig.headerFilterfield"
-            (outData)="filterMap.set('default', $event);  log(' text header ==>',filterMap)">
+            (outData)="
+              filterMap.set('default', $event);
+              log(' text header ==>', filterMap)
+            "
+          >
           </filter-by-text>
         </div>
         <div class="header-container">
@@ -273,7 +286,9 @@
                         [sortByDate]="false"
                       ></app-sort>
                     </div>
-                    <div *ngIf="col.filter " class="popUp"
+                    <div
+                      *ngIf="col.filter"
+                      class="popUp"
                       [ngClass]="{
                         'd-block':
                           openedPopupTr.getAttribute('openedPopupFilter') ==
@@ -340,7 +355,10 @@
                           [label]="'search'"
                           [path]="col.field"
                           [inData]="filterMap.get(filterMap.get(i + '--per'))"
-                          (outData)="filterMap.set(i, $event); log('text == >',filterMap)"
+                          (outData)="
+                            filterMap.set(i, $event);
+                            log('text == >', filterMap)
+                          "
                         >
                         </filter-text-rule-template>
                       </ng-container>
@@ -371,7 +389,11 @@
                           "
                           [label]="'search'"
                           [path]="col.field"
-                          (outData)="filterMap.set(i, $event) ; log(' numeric ==>',filterMap)">
+                          (outData)="
+                            filterMap.set(i, $event);
+                            log(' numeric ==>', filterMap)
+                          "
+                        >
                         </filter-number-rule-template>
                       </ng-container>
                       <ng-container *ngSwitchCase="'chips'">
@@ -400,7 +422,10 @@
                               ])
                             )
                           "
-                          (outData)="filterMap.set(i, $event) ; log(' chips ==>',filterMap)"
+                          (outData)="
+                            filterMap.set(i, $event);
+                            log(' chips ==>', filterMap)
+                          "
                         >
                         </filter-by-tag>
                       </ng-container>
@@ -430,7 +455,10 @@
                           "
                           [label]="'lable'"
                           [path]="col.field"
-                          (outData)="filterMap.set(i, $event ); log(' percentage ==>',filterMap)"
+                          (outData)="
+                            filterMap.set(i, $event);
+                            log(' percentage ==>', filterMap)
+                          "
                         >
                         </filter-percentage>
                       </ng-container>
@@ -461,7 +489,10 @@
                           [type]="'range'"
                           [label]="'doubleRange'"
                           [path]="col.field"
-                          (outData)="filterMap.set(i, $event) ; log(' range ==>',filterMap)"
+                          (outData)="
+                            filterMap.set(i, $event);
+                            log(' range ==>', filterMap)
+                          "
                         >
                         </filter-by-range>
                       </ng-container>
@@ -492,7 +523,10 @@
                               ])
                             )
                           "
-                          (outData)="filterMap.set(i, $event) ; log('boolean ==>',filterMap)"
+                          (outData)="
+                            filterMap.set(i, $event);
+                            log('boolean ==>', filterMap)
+                          "
                         >
                         </filter-by-boolean>
                       </ng-container>
@@ -522,7 +556,10 @@
                           "
                           [label]="'date'"
                           [path]="col.field"
-                          (outData)="filterMap.set(i, $event) ; log(' date ==>',filterMap)"
+                          (outData)="
+                            filterMap.set(i, $event);
+                            log(' date ==>', filterMap)
+                          "
                         >
                         </filter-text-rule-template>
                         <!-- <filter-date-rule-template
@@ -567,7 +604,10 @@
                           "
                           [label]="'email'"
                           [path]="col.field"
-                          (outData)="filterMap.set(i, $event) ; log(' email ==>',filterMap)"
+                          (outData)="
+                            filterMap.set(i, $event);
+                            log(' email ==>', filterMap)
+                          "
                         >
                         </filter-text-rule-template>
                       </ng-container>
@@ -597,7 +637,10 @@
                           "
                           [label]="'address'"
                           [path]="col.field"
-                          (outData)="filterMap.set(i, $event) ; log('address ==>',filterMap)"
+                          (outData)="
+                            filterMap.set(i, $event);
+                            log('address ==>', filterMap)
+                          "
                         >
                         </filter-text-rule-template>
                       </ng-container>
@@ -627,7 +670,10 @@
                           "
                           [label]="'price'"
                           [path]="col.field"
-                          (outData)="filterMap.set(i, $event) ; log(' price ==>',filterMap)"
+                          (outData)="
+                            filterMap.set(i, $event);
+                            log(' price ==>', filterMap)
+                          "
                         >
                         </filter-text-rule-template>
                       </ng-container>
@@ -657,7 +703,10 @@
                           "
                           [label]="'multiSelect'"
                           [path]="col.field"
-                          (outData)="filterMap.set(i, $event) ; log(' phone ==>',filterMap)"
+                          (outData)="
+                            filterMap.set(i, $event);
+                            log(' phone ==>', filterMap)
+                          "
                         >
                         </filter-text-rule-template>
                       </ng-container>
@@ -687,7 +736,10 @@
                           [label]="'multiSelect'"
                           [path]="col.field"
                           [inData]="filterMap.get(filterMap.get(i + '--per'))"
-                          (outData)="filterMap.set(i, $event) ; log(' multiSelect ==>',filterMap)"
+                          (outData)="
+                            filterMap.set(i, $event);
+                            log(' multiSelect ==>', filterMap)
+                          "
                         >
                         </filter-By-multiSelect>
                       </ng-container>
@@ -717,7 +769,10 @@
                           [label]="'multiSelect'"
                           [path]="col.field"
                           [inData]="filterMap.get(filterMap.get(i + '--per'))"
-                          (outData)="filterMap.set(i, $event) ; log('template ==>',filterMap)"
+                          (outData)="
+                            filterMap.set(i, $event);
+                            log('template ==>', filterMap)
+                          "
                         >
                         </filter-By-template>
                       </ng-container>
@@ -746,7 +801,7 @@
                       >
                         <!-- >>filetreertewrtew -->
                         <button
-                         *ngIf="col.filter"
+                          *ngIf="col.filter"
                           (click)="
                             openedPopupTr.setAttribute(
                               'openedPopupFilter',
@@ -796,15 +851,13 @@
               </ng-container>
             </tr>
           </thead>
-          <ng-container
-            *ngIf="filterMap.get(filterMap.get('outData')).length != 0"
+          <ng-container *ngIf="filterMap.get(filterMap.get('outData')).length != 0"
           >
             <tbody #tableBody data-selectedIndex class="s-t-tbody">
               <ng-container
                 *ngFor="
                   let rowData of filterMap.get(filterMap.get('outData'))
                     | paginate : o_config;
-                    
                   let o = index
                 "
               >
@@ -1106,28 +1159,26 @@
               </ng-container>
             </tbody>
           </ng-container>
-          <ng-container  *ngIf="(filterMap.get(filterMap.get('outData')).length < o_config.itemsPerPage)">
-            <ng-container *ngFor=" let k of  playholder">
-              <span class="plasHilderRow">
-               sdsdasd {{k}}
-              </span>
-            </ng-container>
-          </ng-container>
+
         </table>
+          <ng-container *ngIf=" this.o_config.itemsPerPage > this.filterMap.get(filterMap.get('outData')).length ">
+            <div class=" plasHildercontinaer dots-bg">
+               <ng-container *ngFor="let k of playholder()">
+                 <span class="plasHilderRow"></span>
+               </ng-container>
+            </div>
+          </ng-container>
       </section>
       <!-- *ngIf="filterMap.get(filterMap.get('outData')).length >= o_config.itemsPerPage" -->
-      <section
-        class="s-t-footer"
-      >
-        <!-- <h1 class=" row s-t-d">{{'tible footer ' | titlecase}}</h1> -->
+      <section class="s-t-footer">
+        <!-- <h6 class=" row s-t-d">{{'tible footer ' | titlecase}}</h6> -->
         <pagination-template
-          *ngIf="filterMap.get(filterMap.get('outData')).length >= o_config.itemsPerPage"
+
           #p="paginationApi"
           [id]="o_config.id"
-          (pageChange)="o_config.currentPage = $event"
-        >
+          (pageChange)="o_config.currentPage = $event" >
           <div class="pagination">
-            <div class="in-custom-pagination">
+            <div *ngIf="filterMap.get(filterMap.get('outData')).length >= o_config.itemsPerPage" class="in-custom-pagination">
               <div class="in-in-custom-pagination">
                 <div
                   class="pagination-previous"
@@ -1189,9 +1240,29 @@
                 </div>
               </div>
             </div>
+            <div *ngIf="!(filterMap.get(filterMap.get('outData')).length >= o_config.itemsPerPage)" class="in-custom-pagination">
+              <div class="in-in-custom-pagination">
+
+                <div
+                  class="pagination-tiems"
+                >
+                  <a
+                    class="pagination-active"
+                  >
+                    <span> 1 </span>
+                  </a>
+                </div>
+
+              </div>
+            </div>
           </div>
         </pagination-template>
       </section>
     </main>
   </div>
 </div>
+
+
+
+
+

@@ -15,6 +15,7 @@ import {
   QueryList,
   ContentChildren,
   ViewChildren,
+  ɵɵqueryRefresh,
 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Table } from 'jspdf-autotable';
@@ -80,6 +81,7 @@ export class DTableComponent implements OnInit {
   @Output() onDetailClick: EventEmitter<any> = new EventEmitter();
   @Output() onCloneClick: EventEmitter<any> = new EventEmitter();
   @Output() onAddClick: EventEmitter<any> = new EventEmitter();
+  @Output() onRefreshClick: EventEmitter<boolean> = new EventEmitter();
   @Output() onDelete: EventEmitter<OnDeleteEvent> = new EventEmitter();
   @Input() tiblecontinerDiv: boolean = true;
   @Input() tibleFooter: boolean = true;
@@ -280,15 +282,8 @@ export class DTableComponent implements OnInit {
         });
     }
   }
-  playholder: any[]=[]
+  playHolder: any[] = [];
   ngOnInit(): void {
-
-// #region  row plice holder 
-    this.rowcontEvetn == 0
-      ? '': (this.playholder = new Array(this.rowcontEvetn).fill('')); 
-// #endregion
-      
-
     this.disableFilterWithHeader instanceof Array
       ? this.disableFilterWithHeader.map((d) =>
           this.filterDontWorkWithHeaders.push(d)
@@ -364,17 +359,19 @@ export class DTableComponent implements OnInit {
     this.detailsFilled = !!this.detailsNgContentElements;
     this.unicFilled = !!this.unicNgContentElements;
   }
-  rowcontEvetn:number=0
-  ngAfterViewInit() {
-    
-    this.filterMap.get(this.filterMap.get('outData')).length <
-    this.o_config.itemsPerPage
-      ? (this.rowcontEvetn =
-          this.o_config.itemsPerPage -
-          this.filterMap.get(this.filterMap.get('outData')).length)
-      : this.rowcontEvetn= 0
-  
+
+  playholder() {
+    let Datalength: number = this.filterMap.get(
+      this.filterMap.get('outData')
+    ).length;
+    let shownrows: number = this.o_config.itemsPerPage;
+    shownrows > Datalength
+      ? (this.playHolder = new Array(shownrows - Datalength).fill(''))
+      : '';
+    return this.playHolder;
   }
+
+  ngAfterViewInit() {}
   imageClikEvent(i: any, n: number, event: any, k?: boolean) {
     if (!k) {
       this.zoomedImag = true;
@@ -383,34 +380,33 @@ export class DTableComponent implements OnInit {
     } else {
       this.zoomedImag = false;
       event.clientX > 2450
-        
-            ? (this.left = event.clientX - 800)
-            : event.clientX > 2400
-            ? (this.left = event.clientX - 750)
-            : event.clientX > 2350
-            ? (this.left = event.clientX - 700)
-            : event.clientX > 2300
-            ? (this.left = event.clientX - 650)
-            : event.clientX > 2250
-            ? (this.left = event.clientX - 600)
-            : event.clientX > 2200
-            ? (this.left = event.clientX - 550)
-            : event.clientX > 2150
-            ? (this.left = event.clientX - 500)
-            : event.clientX > 2100
-            ? (this.left = event.clientX - 450)
-            : event.clientX > 2050
-            ? (this.left = event.clientX - 400)
-            : event.clientX > 2000
-            ? (this.left = event.clientX - 350)
-            : event.clientX > 1950
-            ? (this.left = event.clientX - 300)
-            : event.clientX > 1900
-            ? (this.left = event.clientX - 250)
-            : event.clientX > 1800
-            ? (this.left = event.clientX - 200)
-            : (this.left = event.clientX - 200);
-        
+        ? (this.left = event.clientX - 800)
+        : event.clientX > 2400
+        ? (this.left = event.clientX - 750)
+        : event.clientX > 2350
+        ? (this.left = event.clientX - 700)
+        : event.clientX > 2300
+        ? (this.left = event.clientX - 650)
+        : event.clientX > 2250
+        ? (this.left = event.clientX - 600)
+        : event.clientX > 2200
+        ? (this.left = event.clientX - 550)
+        : event.clientX > 2150
+        ? (this.left = event.clientX - 500)
+        : event.clientX > 2100
+        ? (this.left = event.clientX - 450)
+        : event.clientX > 2050
+        ? (this.left = event.clientX - 400)
+        : event.clientX > 2000
+        ? (this.left = event.clientX - 350)
+        : event.clientX > 1950
+        ? (this.left = event.clientX - 300)
+        : event.clientX > 1900
+        ? (this.left = event.clientX - 250)
+        : event.clientX > 1800
+        ? (this.left = event.clientX - 200)
+        : (this.left = event.clientX - 200);
+
       this.top = event.clientY - 300;
       this.zoomedImagsrc = '';
       this.zoomedImagindex = -1;
@@ -546,6 +542,16 @@ export class DTableComponent implements OnInit {
     this.showColumn == 'up'
       ? (this.showColumn = 'down')
       : (this.showColumn = 'up');
+  }
+  refreshActive: boolean = false;
+  setTimeOutId: any = -1;
+  refresh() {
+    this.onRefreshClick.emit(true);
+    this.refreshActive = true
+    clearTimeout(this.setTimeOutId);
+    this.setTimeOutId = setTimeout(() => {
+       this.refreshActive = false
+    }, 2050);
   }
   onAdd() {
     this.onAddClick.emit();
