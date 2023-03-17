@@ -42,6 +42,8 @@ export class DTableComponent implements OnInit {
   gitFilerParameterNameId: (a: any[]) => string = (a) => ConcatArryToText(a);
   filterParameter: Map<any, any> = new Map();
   var: any = [];
+  checked: any;
+ture: any;
   outParameter(event: Event, id: string) {
     this.filterParameter.set(id, event);
     this.var.push({ id: id, data: event });
@@ -49,6 +51,7 @@ export class DTableComponent implements OnInit {
   log: (a: string, b: any) => void = (a, b) => console.log(a, b);
   filterMap = new Map();
   linkFiltersWithData() {
+    
     this.filterMap = new Map();
     let per: string = 'default';
     this.filterMap.set(per, this.data);
@@ -62,6 +65,22 @@ export class DTableComponent implements OnInit {
     });
     this.filterMap.set('outData', per);
   }
+  dataLenth:number=0
+  selectedRow = new Map();
+  allRowAreSelectedRow:boolean = false;
+  selectedRowfunction(valid: any, id: string, data: any) {
+    valid.checked
+      ? this.selectedRow.set(id, data)
+      : this.selectedRow.has(id)
+      ? this.selectedRow.delete(id)
+      : '';
+  }
+  selectedAllRowfunction(valid: any) {
+    valid.checked
+      ? (this.allRowAreSelectedRow = true)
+      :( (this.allRowAreSelectedRow = false), this.selectedRow.clear());
+  }
+
   // outFilter(event: Event, id: string) {
   //   this.filterConcataytions.set(id, event);
   // }
@@ -140,36 +159,9 @@ export class DTableComponent implements OnInit {
   currentWidth: number = window.innerWidth;
   showshowCurrentPageReport: boolean = true;
   currentPageReportTemplate: string = '{first} to {last}';
-  checked: boolean = false;
+
   accorditoinTableRowBtnIcon: boolean | null = null;
-  // FinaleFilteredDdata: any = {
-  //   filter_type_template_data: [],
-  //   filter_type_multiSelect_data: [],
-  //   filter_type_phone_data: [],
-  //   filter_type_price_data: [],
-  //   filter_type_address_data: [],
-  //   filter_type_email_data: [],
-  //   filter_type_date_data: [],
-  //   filter_type_boolean_data: [],
-  //   filter_type_range_data: [],
-  //   filter_type_percentage_data: [],
-  //   filter_type_chips_data: [],
-  //   filter_type_numeric_data: [],
-  //   filter_type_text_data: [],
-  // };
-  // filter_type_template_data: [] = [];
-  // filter_type_multiSelect_data: [] = [];
-  // filter_type_phone_data: [] = [];
-  // filter_type_price_data: [] = [];
-  // filter_type_address_data: [] = [];
-  // filter_type_email_data: [] = [];
-  // filter_type_date_data: [] = [];
-  // filter_type_boolean_data: [] = [];
-  // filter_type_range_data: [] = [];
-  // filter_type_percentage_data: [] = [];
-  // filter_type_chips_data: [] = [];
-  // filter_type_numeric_data: [] = [];
-  // filter_type_text_data: [] = [];
+
   accorditoinTableRowBtnIconF(a: any, i: HTMLElement) {
     i.setAttribute(
       'data-accorditionRow',
@@ -372,7 +364,11 @@ export class DTableComponent implements OnInit {
     return this.playHolder;
   }
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() {
+   
+
+
+  }
   imageClikEvent(i: any, n: number, event: any, k?: boolean) {
     if (!k) {
       this.zoomedImag = true;
@@ -548,10 +544,10 @@ export class DTableComponent implements OnInit {
   setTimeOutId: any = -1;
   refresh() {
     this.onRefreshClick.emit(true);
-    this.refreshActive = true
+    this.refreshActive = true;
     clearTimeout(this.setTimeOutId);
     this.setTimeOutId = setTimeout(() => {
-       this.refreshActive = false
+      this.refreshActive = false;
     }, 5050);
   }
   onAdd() {
@@ -622,6 +618,11 @@ export class DTableComponent implements OnInit {
     this.show_tbody_main_td_hover = i;
     this.show_tbody_main_td_hover_at = i + b;
   }
+
   showExRowStyles: boolean = false;
+
   showExRow(a?: number) {}
+  exportCSV(a?: number) {}
+  exportPdf(a?: number) {}
+  exportExcel(a?: number) {}
 }

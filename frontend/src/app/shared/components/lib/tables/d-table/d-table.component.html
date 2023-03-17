@@ -21,6 +21,29 @@
           <h1 class="s-t-t-title">{{ tibleTitale | titlecase }}</h1>
         </div>
         <div class="header-container">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
            <button
               type="button"
               *ngIf="captionConfig.addButton && !captionConfig.addButton.menuItem"
@@ -29,16 +52,45 @@
            >
          
             <i class="pi  s-t-h-b-icon  {{!refreshActive?' pi-refresh':'pi-spin pi-refresh '}} white  " style="font-size: 1.2rem"></i>
-          </button>
+          </button> -->
+
+              <button
+                  *ngIf="captionConfig.addButton && !captionConfig.addButton.menuItem"
+                    type="button "
+                    pButton pRipple 
+                     (click)="refresh()"
+                    [icon]="!refreshActive ? 'pi pi-refresh ' : ' pi pi-spin pi-refresh '" 
+                    class=" colortrplayicon mr-2 " 
+                    pTooltip="refresh data"
+                    tooltipPosition="bottom"
+              ></button>
+
+
           <div></div>
-          <button
+          <!-- <button
             type="button"
             *ngIf="captionConfig.addButton && !captionConfig.addButton.menuItem"
             class="button green"
             (click)="onAdd()"
           >
             <i class="pi pi pi-plus s-t-h-b-icon"></i>
-          </button>
+          </button> -->
+
+
+              <button
+                 *ngIf="captionConfig.addButton && !captionConfig.addButton.menuItem"
+                    type="button "
+                    pButton pRipple 
+                    (click)="onAdd()"
+                    icon="pi pi-plus" 
+                    class=" green mr-2 " 
+                    pTooltip="add item"
+                    tooltipPosition="bottom"
+              > </button>
+
+
+
+
           <div>
           <p-tieredMenu
               #menu
@@ -48,7 +100,7 @@
             >
             </p-tieredMenu> 
           </div>
-          <button
+          <!-- <button
             type="button"
             *ngIf="captionConfig.clearTable"
             class="button red"
@@ -58,7 +110,25 @@
             "
           >
             <i class="pi pi pi-trash s-t-h-b-icon"></i>
-          </button>
+          </button> -->
+
+
+              <button
+                    *ngIf="captionConfig.clearTable"
+                    [disabled]="
+                        selectedItems.map ? !selectedItems.length : !selectedItems
+                      "
+                    type="button "
+                    pButton pRipple 
+                    (click)="showUndoDialog()"
+                    icon="pi pi-trash" 
+                    class=" red mr-2 " 
+                    pTooltip="delete"
+                    tooltipPosition="bottom"
+              
+              > </button>
+
+
         </div>
         <div class="header-container">
           <filter-by-text
@@ -67,20 +137,30 @@
             [type]="captionConfig.headerFilterType"
             [inData]="data"
             [path]="captionConfig.headerFilterfield"
-            (outData)="
-              filterMap.set('default', $event);
-              log(' text header ==>', filterMap)
-            "
+            (outData)=" filterMap.set('default', $event);
+                        log(' text header ==>', filterMap)"
           >
           </filter-by-text>
         </div>
         <div class="header-container">
-          <button type="button" class="button gray" (click)="clear()">
+          <!-- <button type="button" class="button gray" (click)="clear()">
             <i
               [ngClass]="clearfilterActive ? 'pi-filter-slash ' : 'pi-filter '"
               class="filterIconSize pi s-t-h-b-icon"
             ></i>
-          </button>
+          </button> -->
+
+
+  <button
+   type="button"
+   pButton pRipple 
+   [icon]="clearfilterActive ? 'pi pi-filter-slash ' : ' pi pi-filter '" 
+  (click)="clear()"
+   class=" gray mr-2" 
+   pTooltip="reset filter" 
+   tooltipPosition="bottom"
+   > </button>
+
           <p-multiSelect
             *ngIf="captionConfig.displayedColumns"
             [appendTo]="'body'"
@@ -114,6 +194,39 @@
             [sortByDate]="false"
           ></app-sort>
         </div>
+          <div class="flex  ml-4">
+            <button 
+                type="button"
+                pButton 
+                pRipple i
+                icon="pi pi-file"       
+                (click)="exportCSV()" 
+                class="mr-2"
+                pTooltip="CSV" 
+                tooltipPosition="bottom"
+             > </button>
+            <button 
+                type="button"
+                pButton 
+                pRipple i
+                icon="pi pi-file-excel" 
+                (click)="exportExcel()"
+                class="p-button-success mr-2" 
+                pTooltip="XLS" 
+                tooltipPosition="bottom"
+              ></button>
+            <button 
+                type="button"
+                pButton 
+                pRipple i
+                icon="pi pi-file-pdf"   
+                (click)="exportPdf()"
+                class="p-button-warning mr-2"
+                pTooltip="PDF"
+                tooltipPosition="bottom"
+            ></button>
+        </div>
+
         <div class="header-container"></div>
       </section>
       <!-- </container> -->
@@ -159,7 +272,8 @@
                     <ng-container
                       *ngIf="captionConfig.selectionType == 'multiple'"
                     >
-                      <p-checkbox [(ngModel)]="checked" [binary]="true" inputId="binary"></p-checkbox>
+                         <p-checkbox (onChange)="selectedAllRowfunction($event)" [(ngModel)]="checked" [binary]="true" inputId="binary"></p-checkbox>
+                   
                     </ng-container>
                     </div>
                   </th>
@@ -929,7 +1043,13 @@
                                 <ng-container
                                 *ngIf="captionConfig.selectionType == 'multiple'"
                               >
-                                <p-checkbox [(ngModel)]="checked" [binary]="true" inputId="binary"></p-checkbox>
+                      
+                                <p-checkbox (onChange)="selectedRowfunction(
+                                  $event ,
+                                 gitFilerParameterNameId(['__',o ,filterMap.get(filterMap.get('outData')).length ,filterMap.get(filterMap.get('outData'))[o]?._id,'__']) ,
+                                  rowData
+                                  )" 
+                                inputId="binary"></p-checkbox>
                               </ng-container>
                               
       
