@@ -111,14 +111,15 @@ import { FilterDateRuleTemplateComponent } from './components/lib/templates/filt
 import { BgContainerComponent } from './components/lib/containers/bg-container/bg-container.component';
 import { FilterAddressRuleTemplateComponent } from './components/lib/templates/filter-address-rule-template/filter-address-rule-template.component';
 import { DZoonSictionComponent } from './components/lib/sections/d-zoon-siction/d-zoon-siction.component';
-
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DndModule } from 'ngx-drag-drop';
+import { ExportDataComponent } from './components/lib/others/export/export-excel/export.component';
 
 @NgModule({
   declarations: [
+    ExportDataComponent,
     CustomTemplateExampleComponent,
     DFilterComponent,
     DateDisplayComponent,
@@ -174,10 +175,12 @@ import { DndModule } from 'ngx-drag-drop';
     BgContainerComponent,
     FilterAddressRuleTemplateComponent,
     DZoonSictionComponent,
+
+
+
+
   ],
   imports: [
-
-
     DndModule,
     BrowserModule,
     BrowserAnimationsModule,

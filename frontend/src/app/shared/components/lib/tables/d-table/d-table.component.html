@@ -66,6 +66,7 @@
               ></button>
 
 
+
           <div></div>
           <!-- <button
             type="button"
@@ -111,8 +112,6 @@
           >
             <i class="pi pi pi-trash s-t-h-b-icon"></i>
           </button> -->
-
-
               <button
                     *ngIf="captionConfig.clearTable"
                     [disabled]="
@@ -125,10 +124,7 @@
                     class=" red mr-2 " 
                     pTooltip="delete"
                     tooltipPosition="bottom"
-              
               > </button>
-
-
         </div>
         <div class="header-container">
           <filter-by-text
@@ -149,8 +145,6 @@
               class="filterIconSize pi s-t-h-b-icon"
             ></i>
           </button> -->
-
-
   <button
    type="button"
    pButton pRipple 
@@ -160,7 +154,6 @@
    pTooltip="reset filter" 
    tooltipPosition="bottom"
    > </button>
-
           <p-multiSelect
             *ngIf="captionConfig.displayedColumns"
             [appendTo]="'body'"
@@ -195,17 +188,7 @@
           ></app-sort>
         </div>
           <div class="flex  ml-4">
-            <button 
-                type="button"
-                pButton 
-                pRipple i
-                icon="pi pi-file"       
-                (click)="exportCSV()" 
-                class="mr-2"
-                pTooltip="CSV" 
-                tooltipPosition="bottom"
-             > </button>
-            <button 
+            <!-- <button 
                 type="button"
                 pButton 
                 pRipple i
@@ -214,8 +197,39 @@
                 class="p-button-success mr-2" 
                 pTooltip="XLS" 
                 tooltipPosition="bottom"
-              ></button>
-            <button 
+              ></button> -->
+ 
+
+
+
+                    <export-data
+                          [headers]="_selectedColumns" 
+                          [type]="'excel'"
+                          [data]="filterMap.get(filterMap.get('outData'))"
+                    ></export-data>
+
+                    
+
+
+<!-- 
+           <button 
+                type="button"
+                pButton 
+                pRipple i
+                icon="pi pi-file"       
+                (click)="exportCSV()" 
+                class=" s-btn-edit mr-2"
+                pTooltip="CSV" 
+                tooltipPosition="bottom"
+             > </button> -->
+
+
+                     <export-data
+                          [headers]="_selectedColumns" 
+                          [type]="'CSV'"
+                          [data]="filterMap.get(filterMap.get('outData'))"
+                    ></export-data>
+            <!-- <button 
                 type="button"
                 pButton 
                 pRipple i
@@ -224,9 +238,15 @@
                 class="p-button-warning mr-2"
                 pTooltip="PDF"
                 tooltipPosition="bottom"
-            ></button>
-        </div>
+            ></button> -->
 
+
+                   <export-data
+                          [headers]="_selectedColumns" 
+                          [type]="'pdf'"
+                          [data]="filterMap.get(filterMap.get('outData'))"
+                    ></export-data>
+        </div>
         <div class="header-container"></div>
       </section>
       <!-- </container> -->
@@ -1043,7 +1063,6 @@
                                 <ng-container
                                 *ngIf="captionConfig.selectionType == 'multiple'"
                               >
-                      
                                 <p-checkbox (onChange)="selectedRowfunction(
                                   $event ,
                                  gitFilerParameterNameId(['__',o ,filterMap.get(filterMap.get('outData')).length ,filterMap.get(filterMap.get('outData'))[o]?._id,'__']) ,
@@ -1051,15 +1070,11 @@
                                   )" 
                                 inputId="binary"></p-checkbox>
                               </ng-container>
-                              
-      
-
                               </div>
                             </td>
                            <td class="numbertd"
                               *ngIf="  
                                  captionConfig.rowNamber 
-                             
                                  "
                               >
                               <div
@@ -1074,16 +1089,12 @@
                                 <ng-container
                                   *ngIf="captionConfig.rowNamber"
                                   >
-                             
-                                
                                   <span class="rowMamber">{{(  
                                         this.o_config.currentPage ==1 ?
                                           (o+1+(this.o_config.itemsPerPage * (this.o_config.currentPage -1)))
                                          :(o+1+(this.o_config.itemsPerPage * (this.o_config.currentPage -1))) 
                                       )}}</span> 
-                             
                                 </ng-container>
-
                               </div>
                             </td>
                     <td
@@ -1104,7 +1115,6 @@
                           text-align: center;
                         "
                       >
-
                         <ng-container
                           *ngIf="captionConfig.selectionType == 'multiple'"
                         >
@@ -1313,7 +1323,6 @@
                   </ng-container>
                   <!-- #region   this arry ooof the row expanttion tn -->
                   <ng-container *ngIf="!(_selectedColumns.length == 0)">
-
                   <td
                         class="text-center"
                         *ngIf="
@@ -1333,7 +1342,6 @@
                           >
                             <i class="pi pi-copy action-button-icon "></i>
                            </button>
-
                           <button
                             type="button"
                             *ngIf="captionConfig.actions?.detail"
@@ -1343,7 +1351,6 @@
                           >
                             <i class="pi pi-eye  action-button-icon "></i>
                            </button>
-
                           <button
                             type="button"
                             *ngIf="captionConfig.actions?.edit"
@@ -1351,10 +1358,8 @@
                             class=" me-2 mb-2 s-btn-edit p-button-warning  action-button"
                             (click)="onEdit(o)"
                           >
-
                             <i class="pi pi-pencil action-button-icon action-button-icon-2 "></i>
                            </button>
-
                           <button
                             *ngFor="let button of captionConfig.buttons"
                             pButton
@@ -1409,7 +1414,6 @@
                         >
                         </ng-container>
                       </ng-container>
-                      
                       <ng-container *ngIf="!expandedRow">
                         <d-table
                           [data]="
@@ -1440,7 +1444,6 @@
               </ng-container>
             </tbody>
           </ng-container>
-
         </table>
           <ng-container *ngIf=" this.o_config.itemsPerPage > this.filterMap.get(filterMap.get('outData')).length ">
             <div class=" plasHildercontinaer dots-bg">
@@ -1459,7 +1462,6 @@
       <!-- *ngIf="filterMap.get(filterMap.get('outData')).length >= o_config.itemsPerPage" -->
       <section class="s-t-footer">
         <pagination-template
-
           #p="paginationApi"
           [id]="o_config.id"
           (pageChange)="o_config.currentPage = $event" >
@@ -1528,16 +1530,12 @@
             </div>
             <div *ngIf=" filterMap.get(filterMap.get('outData')).length < o_config.itemsPerPage  " class="in-custom-pagination">
               <div class="in-in-custom-pagination">
-
-         
                   <span
                     class="pagination-active"
                   >
                     <span>  {{filterMap.get(filterMap.get('outData')).length != 0 ? '1': this.refreshActive? 'refresh  ...': ' no page exist !' }}  </span>
                   </span>
                 </div>
-
-           
             </div>
           </div>
         </pagination-template>
@@ -1545,6 +1543,33 @@
     </main>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

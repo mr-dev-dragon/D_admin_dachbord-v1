@@ -43,7 +43,7 @@ export class DTableComponent implements OnInit {
   filterParameter: Map<any, any> = new Map();
   var: any = [];
   checked: any;
-ture: any;
+  ture: any;
   outParameter(event: Event, id: string) {
     this.filterParameter.set(id, event);
     this.var.push({ id: id, data: event });
@@ -51,7 +51,6 @@ ture: any;
   log: (a: string, b: any) => void = (a, b) => console.log(a, b);
   filterMap = new Map();
   linkFiltersWithData() {
-    
     this.filterMap = new Map();
     let per: string = 'default';
     this.filterMap.set(per, this.data);
@@ -65,9 +64,9 @@ ture: any;
     });
     this.filterMap.set('outData', per);
   }
-  dataLenth:number=0
+  dataLenth: number = 0;
   selectedRow = new Map();
-  allRowAreSelectedRow:boolean = false;
+  allRowAreSelectedRow: boolean = false;
   selectedRowfunction(valid: any, id: string, data: any) {
     valid.checked
       ? this.selectedRow.set(id, data)
@@ -78,7 +77,7 @@ ture: any;
   selectedAllRowfunction(valid: any) {
     valid.checked
       ? (this.allRowAreSelectedRow = true)
-      :( (this.allRowAreSelectedRow = false), this.selectedRow.clear());
+      : ((this.allRowAreSelectedRow = false), this.selectedRow.clear());
   }
 
   // outFilter(event: Event, id: string) {
@@ -364,11 +363,7 @@ ture: any;
     return this.playHolder;
   }
 
-  ngAfterViewInit() {
-   
-
-
-  }
+  ngAfterViewInit() {}
   imageClikEvent(i: any, n: number, event: any, k?: boolean) {
     if (!k) {
       this.zoomedImag = true;
