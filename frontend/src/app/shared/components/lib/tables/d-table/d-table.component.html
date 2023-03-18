@@ -1535,15 +1535,25 @@
                   >
                     <span>  {{filterMap.get(filterMap.get('outData')).length != 0 ? '1': this.refreshActive? 'refresh  ...': ' no page exist !' }}  </span>
                   </span>
+
                 </div>
-            </div>
+
+              </div>
+                <div class=" in-in-custom-pagination ">
+                   <select   class="pagination-active pageRowsOptionsValue"  [(ngModel)]="o_config.itemsPerPage" >
+                        <option [value]="10">10</option>
+                        <option  [value]="20">20</option>
+                        <option [value]="40">40</option>
+                        <option [value]="50">50</option>
+                    </select>
+                </div>
           </div>
+
         </pagination-template>
       </section>
     </main>
   </div>
 </div>
-
 
 
 

@@ -6,7 +6,6 @@
 
   .body {
     background: url(../../../../../../assets/images/wallpaperflare.com_wallpaper.jpg);
-
     justify-items: center;
     align-items: center;
     border-radius: 15px;
@@ -18,7 +17,7 @@
       backdrop-filter: blur(30px);
       box-shadow: 0 0.4rem 0.8rem rgba(54, 70, 75, 0.298);
       border-radius: 0.6rem;
-      overflow: hidden;
+      // overflow: hidden;
       .s-t-header {
         width: 100%;
         background: #fff5;
@@ -418,16 +417,17 @@
           }
         }
       }
-      .s-t-footer {
-        z-index: 1111;
-        width: 100%;
-        padding: 0.3rem;
+      .s-t-footer{
+        
+          z-index: 1111;
+          width: 100%;
+          padding: 0.3rem;
+          background-color: rgba(255, 255, 255, 0.146);
+          backdrop-filter: blur(30px);
+          box-shadow: 0 0.4rem 0.8rem rgba(56, 79, 87, 0.626);
+          border-radius: 0 0 0.5rem 0.5rem;
+      
 
-        background-color: rgba(255, 255, 255, 0.146);
-        backdrop-filter: blur(30px);
-        box-shadow: 0 0.4rem 0.8rem rgba(56, 79, 87, 0.626);
-        border-radius: 0 0 0.5rem 0.5rem;
-        overflow: hidden;
       }
     }
   }
@@ -795,7 +795,7 @@ $p-color: rgb(38, 132, 234);
   position: absolute;
   left: 42.5%;
    top: 40%;
-   padding: 20px;
+   padding: 20px;  
    border-radius: 20px;
    background-color: white;
 
@@ -810,20 +810,18 @@ $p-color: rgb(38, 132, 234);
 
 .numbertd{
   border-right: 2px solid #00000005; ;
-  div{
-    margin: auto;
-      .rowMamber {
-          text-align: center;
-          padding: 7px 7px;
-          font-size: 16px;
-          font-weight: 400;
-          font-family: 'Courier New', Courier, monospace;
-          height: 30px;
-          color: #999999;
-
-        }
-
-  }
+    div{
+          margin: auto;
+            .rowMamber {
+                text-align: center;
+                padding: 7px 7px;
+                font-size: 16px;
+                font-weight: 400;
+                font-family: 'Courier New', Courier, monospace;
+                height: 30px;
+                color: #999999;
+          }
+       }
 }
 
 
@@ -944,10 +942,20 @@ $p-color: rgb(38, 132, 234);
 
 
 
+.pageRowsOptionsValue {
+
+  border: none;
+  padding: 5px;
+  border-radius: 7px;
+  background-color: hsla(0, 0%, 22%, 0.13);
+  &:hover{
 
 
+      background-color: hsla(0, 0%, 1%, 0.247);
+  }
 
 
+}
 
 
 

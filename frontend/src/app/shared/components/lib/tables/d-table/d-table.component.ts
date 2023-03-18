@@ -464,7 +464,7 @@ export class DTableComponent implements OnInit {
   }
   public o_config: PaginationInstance = {
     id: 'custom',
-    itemsPerPage: 11,
+    itemsPerPage: 10,
     currentPage: 1,
   };
 
@@ -620,4 +620,8 @@ export class DTableComponent implements OnInit {
   exportCSV(a?: number) {}
   exportPdf(a?: number) {}
   exportExcel(a?: number) {}
+
+  pageRowsOptions: any[] = [10,20,30,40,50];
+  pageRowsSelected: any;
+
 }

@@ -39,7 +39,6 @@ export class ExportDataComponent {
   }
 
   ngOnInit() {}
-
   exportExcel() {
     const worksheet = XLSX.utils.json_to_sheet(this.data);
     const workbook = { Sheets: { data: worksheet }, SheetNames: ['data'] };
