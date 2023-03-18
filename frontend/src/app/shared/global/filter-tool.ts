@@ -49,9 +49,5 @@ function addArrays<T = any>(arr1: T[], arr2: T[], merge = true): T[] {
 function calcPercent(defaultValue: number, newValue: number): number {
   return (newValue / defaultValue) * 100;
 }
-function ConcatArryToText(a: string[]): string {
-  let text: string = '';
-  a.map((o, i) => (text = text + `_${i}_${o}`));
-  return text;
-}
-export { removeAccent, g, addArrays, calcPercent, ConcatArryToText };
+
+export { removeAccent, g, addArrays, calcPercent};

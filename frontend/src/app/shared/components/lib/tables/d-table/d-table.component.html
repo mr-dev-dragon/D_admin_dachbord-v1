@@ -2,7 +2,7 @@
 <div [ngClass]="tiblecontinerDiv ? 'table_container' : ''">
   <div class="body">
     <main class="s-t-main">
-      <section class="s-t-header">
+      <section class="s-t-header"     [ngClass]="{'s-t-body-v2': false}">
         <div class="header-container">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -21,39 +21,15 @@
           <h1 class="s-t-t-title">{{ tibleTitale | titlecase }}</h1>
         </div>
         <div class="header-container">
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- 
-
            <button
               type="button"
               *ngIf="captionConfig.addButton && !captionConfig.addButton.menuItem"
               class="button  colortrplayicon"
               (click)="refresh()"
            >
-         
             <i class="pi  s-t-h-b-icon  {{!refreshActive?' pi-refresh':'pi-spin pi-refresh '}} white  " style="font-size: 1.2rem"></i>
           </button> -->
-
               <button
                   *ngIf="captionConfig.addButton && !captionConfig.addButton.menuItem"
                     type="button "
@@ -64,9 +40,6 @@
                     pTooltip="refresh data"
                     tooltipPosition="bottom"
               ></button>
-
-
-
           <div></div>
           <!-- <button
             type="button"
@@ -76,8 +49,6 @@
           >
             <i class="pi pi pi-plus s-t-h-b-icon"></i>
           </button> -->
-
-
               <button
                  *ngIf="captionConfig.addButton && !captionConfig.addButton.menuItem"
                     type="button "
@@ -88,10 +59,6 @@
                     pTooltip="add item"
                     tooltipPosition="bottom"
               > </button>
-
-
-
-
           <div>
           <p-tieredMenu
               #menu
@@ -133,7 +100,7 @@
             [type]="captionConfig.headerFilterType"
             [inData]="data"
             [path]="captionConfig.headerFilterfield"
-            (outData)=" filterMap.set('default', $event);
+            (outData)=" onDataChange('default', $event);
                         log(' text header ==>', filterMap)"
           >
           </filter-by-text>
@@ -145,15 +112,28 @@
               class="filterIconSize pi s-t-h-b-icon"
             ></i>
           </button> -->
-  <button
-   type="button"
-   pButton pRipple 
-   [icon]="clearfilterActive ? 'pi pi-filter-slash ' : ' pi pi-filter '" 
-  (click)="clear()"
-   class=" gray mr-2" 
-   pTooltip="reset filter" 
-   tooltipPosition="bottom"
-   > </button>
+                                  <button
+                                      *ngIf="clearfilterActive"
+                                      type="button"
+                                      pButton
+                                      pRipple 
+                                      [icon]="'pi pi-filter-slash'" 
+                                      (click)="clearfunction()"
+                                      class=" gray mr-2" 
+                                      pTooltip="reset filter" 
+                                      tooltipPosition="bottom"
+                                  > 
+                                </button>
+                            <button
+                                *ngIf="!clearfilterActive"
+                                  type="button"
+                                  pButton
+                                   pRipple 
+                                  [icon]="'pi pi-filter'" 
+                                  class=" gray mr-2" 
+                                  pTooltip="reset filter" 
+                                  tooltipPosition="bottom"
+                                  > </button>
           <p-multiSelect
             *ngIf="captionConfig.displayedColumns"
             [appendTo]="'body'"
@@ -198,19 +178,11 @@
                 pTooltip="XLS" 
                 tooltipPosition="bottom"
               ></button> -->
- 
-
-
-
                     <export-data
                           [headers]="_selectedColumns" 
                           [type]="'excel'"
                           [data]="filterMap.get(filterMap.get('outData'))"
                     ></export-data>
-
-                    
-
-
 <!-- 
            <button 
                 type="button"
@@ -222,8 +194,6 @@
                 pTooltip="CSV" 
                 tooltipPosition="bottom"
              > </button> -->
-
-
                      <export-data
                           [headers]="_selectedColumns" 
                           [type]="'CSV'"
@@ -239,8 +209,6 @@
                 pTooltip="PDF"
                 tooltipPosition="bottom"
             ></button> -->
-
-
                    <export-data
                           [headers]="_selectedColumns" 
                           [type]="'pdf'"
@@ -292,8 +260,7 @@
                     <ng-container
                       *ngIf="captionConfig.selectionType == 'multiple'"
                     >
-                         <p-checkbox (onChange)="selectedAllRowfunction($event)" [(ngModel)]="checked" [binary]="true" inputId="binary"></p-checkbox>
-                   
+                         <p-checkbox (onChange)="selectedAllRowfunction($event)" [(ngModel)]="selectedAllRowVal" [binary]="true" inputId="binary"></p-checkbox>
                     </ng-container>
                     </div>
                   </th>
@@ -304,7 +271,6 @@
                   *ngIf="captionConfig.rowNamber"
                 >
                   <div class="s-t-th-conteainer">
-            
                     <ng-container>
                       <h1 class="s-t-th-label">
                         {{ "n" | titlecase }}
@@ -515,7 +481,7 @@
                           [path]="col.field"
                           [inData]="filterMap.get(filterMap.get(i + '--per'))"
                           (outData)="
-                            filterMap.set(i, $event);
+                            onDataChange(i, $event);
                             log('text == >', filterMap)
                           "
                         >
@@ -549,7 +515,7 @@
                           [label]="'search'"
                           [path]="col.field"
                           (outData)="
-                            filterMap.set(i, $event);
+                            onDataChange(i, $event);
                             log(' numeric ==>', filterMap)
                           "
                         >
@@ -582,7 +548,7 @@
                             )
                           "
                           (outData)="
-                            filterMap.set(i, $event);
+                            onDataChange(i, $event);
                             log(' chips ==>', filterMap)
                           "
                         >
@@ -590,35 +556,35 @@
                       </ng-container>
                       <ng-container *ngSwitchCase="'percentage'">
                         <filter-percentage
-                          [inData]="filterMap.get(filterMap.get(i + '--per'))"
-                          (outParameter)="
-                            outParameter(
-                              $event,
-                              gitFilerParameterNameId([
-                                col.header,
-                                i,
-                                col.filterType,
-                                col.field
-                              ])
-                            )
-                          "
-                          [inParameter]="
-                            filterParameter.get(
-                              gitFilerParameterNameId([
-                                col.header,
-                                i,
-                                col.filterType,
-                                col.field
-                              ])
-                            )
-                          "
-                          [label]="'lable'"
-                          [path]="col.field"
-                          (outData)="
-                            filterMap.set(i, $event);
-                            log(' percentage ==>', filterMap)
-                          "
-                        >
+                              [inData]="filterMap.get(filterMap.get(i + '--per'))"
+                              (outParameter)="
+                                outParameter(
+                                  $event,
+                                  gitFilerParameterNameId([
+                                    col.header,
+                                    i,
+                                    col.filterType,
+                                    col.field
+                                  ])
+                                )
+                              "
+                              [inParameter]="
+                                filterParameter.get(
+                                  gitFilerParameterNameId([
+                                    col.header,
+                                    i,
+                                    col.filterType,
+                                    col.field
+                                  ])
+                                )
+                              "
+                              [label]="'lable'"
+                              [path]="col.field"
+                              (outData)="
+                                onDataChange(i, $event);
+                                log(' percentage ==>', filterMap)
+                              "
+                            >
                         </filter-percentage>
                       </ng-container>
                       <ng-container *ngSwitchCase="'range'">
@@ -649,7 +615,7 @@
                           [label]="'doubleRange'"
                           [path]="col.field"
                           (outData)="
-                            filterMap.set(i, $event);
+                            onDataChange(i, $event);
                             log(' range ==>', filterMap)
                           "
                         >
@@ -683,7 +649,7 @@
                             )
                           "
                           (outData)="
-                            filterMap.set(i, $event);
+                            onDataChange(i, $event);
                             log('boolean ==>', filterMap)
                           "
                         >
@@ -716,7 +682,7 @@
                           [label]="'date'"
                           [path]="col.field"
                           (outData)="
-                            filterMap.set(i, $event);
+                            onDataChange(i, $event);
                             log(' date ==>', filterMap)
                           "
                         >
@@ -732,7 +698,7 @@
                               )
                             "
                             (outData)="
-                            filterMap.set(i,$event)
+                            onDataChange(i,$event)
                             "
                           >
                           </filter-date-rule-template> -->
@@ -764,7 +730,7 @@
                           [label]="'email'"
                           [path]="col.field"
                           (outData)="
-                            filterMap.set(i, $event);
+                            onDataChange(i, $event);
                             log(' email ==>', filterMap)
                           "
                         >
@@ -797,7 +763,7 @@
                           [label]="'address'"
                           [path]="col.field"
                           (outData)="
-                            filterMap.set(i, $event);
+                            onDataChange(i, $event);
                             log('address ==>', filterMap)
                           "
                         >
@@ -830,7 +796,7 @@
                           [label]="'price'"
                           [path]="col.field"
                           (outData)="
-                            filterMap.set(i, $event);
+                            onDataChange(i, $event);
                             log(' price ==>', filterMap)
                           "
                         >
@@ -863,7 +829,7 @@
                           [label]="'multiSelect'"
                           [path]="col.field"
                           (outData)="
-                            filterMap.set(i, $event);
+                            onDataChange(i, $event);
                             log(' phone ==>', filterMap)
                           "
                         >
@@ -896,7 +862,7 @@
                           [path]="col.field"
                           [inData]="filterMap.get(filterMap.get(i + '--per'))"
                           (outData)="
-                            filterMap.set(i, $event);
+                            onDataChange(i, $event);
                             log(' multiSelect ==>', filterMap)
                           "
                         >
@@ -929,7 +895,7 @@
                           [path]="col.field"
                           [inData]="filterMap.get(filterMap.get(i + '--per'))"
                           (outData)="
-                            filterMap.set(i, $event);
+                            onDataChange(i, $event);
                             log('template ==>', filterMap)
                           "
                         >
@@ -1063,12 +1029,11 @@
                                 <ng-container
                                 *ngIf="captionConfig.selectionType == 'multiple'"
                               >
-                                <p-checkbox (onChange)="selectedRowfunction(
-                                  $event ,
-                                 gitFilerParameterNameId(['__',o ,filterMap.get(filterMap.get('outData')).length ,filterMap.get(filterMap.get('outData'))[o]?._id,'__']) ,
-                                  rowData
-                                  )" 
-                                inputId="binary"></p-checkbox>
+                                <p-checkbox 
+                                (onChange)="selectedRowfunction($event ,rowData)" 
+                                 [ngModel]="selectedRow.has(rowData)"
+                                 [binary]="true">
+                                </p-checkbox>
                               </ng-container>
                               </div>
                             </td>
@@ -1089,11 +1054,12 @@
                                 <ng-container
                                   *ngIf="captionConfig.rowNamber"
                                   >
-                                  <span class="rowMamber">{{(  
+                                   <span class="rowMamber">{{(  
                                         this.o_config.currentPage ==1 ?
                                           (o+1+(this.o_config.itemsPerPage * (this.o_config.currentPage -1)))
                                          :(o+1+(this.o_config.itemsPerPage * (this.o_config.currentPage -1))) 
-                                      )}}</span> 
+                                      )}}
+                                   </span> 
                                 </ng-container>
                               </div>
                             </td>
@@ -1393,11 +1359,11 @@
                               captionConfig.actions?.edit
                                 ? 1
                                 : 0) +
-                              (captionConfig.selectionType === 'multiple' ||
+                              (captionConfig.selectionType == 'multiple' ||
                               captionConfig.expanded
                                 ? 1
                                 : 0)
-                            : 0)
+                            : 0)+(captionConfig.rowNamber?1:0)
                         "
                       >
                     <div
@@ -1535,53 +1501,19 @@
                   >
                     <span>  {{filterMap.get(filterMap.get('outData')).length != 0 ? '1': this.refreshActive? 'refresh  ...': ' no page exist !' }}  </span>
                   </span>
-
                 </div>
-
               </div>
                 <div class=" in-in-custom-pagination ">
                    <select   class="pagination-active pageRowsOptionsValue"  [(ngModel)]="o_config.itemsPerPage" >
-                        <option [value]="10">10</option>
-                        <option  [value]="20">20</option>
-                        <option [value]="40">40</option>
-                        <option [value]="50">50</option>
+                        <option id="option"  [value]="10">10</option>
+                        <option id="option"  [value]="20">20</option>
+                        <option id="option"  [value]="40">40</option>
+                        <option id="option"  [value]="50">50</option>
                     </select>
                 </div>
           </div>
-
         </pagination-template>
       </section>
     </main>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -16,13 +16,14 @@ import {
   ContentChildren,
   ViewChildren,
   ɵɵqueryRefresh,
+  SimpleChange,
 } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Table } from 'jspdf-autotable';
 import { PaginationInstance } from 'ngx-pagination';
 import { MenuItem } from 'primeng/api';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import {
   FlterType,
   ListCaptionConfig,
@@ -31,7 +32,6 @@ import {
 } from 'src/app/shared/models/List.model';
 import { HelpersService } from 'src/app/shared/services/helpers.service';
 import { UndoDeleteDialogService } from 'src/app/shared/services/undo-delete-dialog.service';
-import { ConcatArryToText } from '../../../../global/filter-tool';
 @Component({
   selector: 'd-table',
   templateUrl: './d-table.component.html',
@@ -39,18 +39,29 @@ import { ConcatArryToText } from '../../../../global/filter-tool';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class DTableComponent implements OnInit {
-  gitFilerParameterNameId: (a: any[]) => string = (a) => ConcatArryToText(a);
+  ngOnChanges(changes: SimpleChange) {
+    console.log(
+      '%cMyProject%cline:44%cchanges',
+      'color:#fff;background:#ee6f57;padding:3px;border-radius:2px',
+      'color:#fff;background:#1f3c88;padding:3px;border-radius:2px',
+      'color:#fff;background:rgb(161, 23, 21);padding:3px;border-radius:2px',
+      changes
+    );
+  }
+  filtersCunte: number = 0;
+  gitFilerParameterNameId: (a: any[]) => string = (a) => a.join('');
   filterParameter: Map<any, any> = new Map();
   var: any = [];
-  checked: any;
+  selectedAllRowVal: any;
   ture: any;
   outParameter(event: Event, id: string) {
     this.filterParameter.set(id, event);
     this.var.push({ id: id, data: event });
   }
-  log: (a: string, b: any) => void = (a, b) => console.log(a, b);
+  log = console.log;
   filterMap = new Map();
   linkFiltersWithData() {
+    this.filtersCunte = 0;
     this.filterMap = new Map();
     let per: string = 'default';
     this.filterMap.set(per, this.data);
@@ -60,26 +71,45 @@ export class DTableComponent implements OnInit {
         this.filterMap.set(i, this.data);
         this.filterMap.set(`${i}--per`, per);
         per = i;
+        this.filtersCunte++;
       }
     });
     this.filterMap.set('outData', per);
   }
+
+
+  clear = new Subject();
+  clearfunction(table?: any) {
+    this._selectedColumns = this.columns;
+    this.clearfilterActive = false;
+    this.clearfilterActive ? this.filterParameter.clear() : '';
+    this.clear.next('')
+  }
+  onDataChange(id: any, data: any) {
+    this.filterParameter.size && (this.clearfilterActive = true);
+    this.filterMap.set(id, data);
+    if (id == this.filtersCunte) {
+      this.selectedRow.clear();
+      this.selectedAllRowVal = false;
+    }
+  }
   dataLenth: number = 0;
-  selectedRow = new Map();
+  selectedRow = new Set();
   allRowAreSelectedRow: boolean = false;
-  selectedRowfunction(valid: any, id: string, data: any) {
-    valid.checked
-      ? this.selectedRow.set(id, data)
-      : this.selectedRow.has(id)
-      ? this.selectedRow.delete(id)
-      : '';
+  selectedRowfunction(valid: any, data: any) {
+    valid.checked ? this.selectedRow.add(data) : this.selectedRow.delete(data);
+    if (
+      this.selectedRow.size ==
+      this.filterMap.get(this.filterMap.get('outData')).length
+    )
+      this.selectedAllRowVal = true;
+    else this.selectedAllRowVal = false;
   }
   selectedAllRowfunction(valid: any) {
-    valid.checked
-      ? (this.allRowAreSelectedRow = true)
-      : ((this.allRowAreSelectedRow = false), this.selectedRow.clear());
+    this.filterMap.get(this.filterMap.get('outData')).forEach((o: any) => {
+      this.selectedRow[valid.checked ? 'add' : 'delete'](o);
+    });
   }
-
   // outFilter(event: Event, id: string) {
   //   this.filterConcataytions.set(id, event);
   // }
@@ -117,6 +147,7 @@ export class DTableComponent implements OnInit {
   @Input() disableSortInDataType: string[] | string = '';
   @Input() disableFilterWithHeader: string[] | string = '';
   @Input() disableSortWithHeader: string[] | string = '';
+  @Input() table: boolean = false;
   SortDontWorkWithHeaders: string[] | any[] = [];
   filterDontWorkWithHeaders: string[] | any[] = [];
   dateTypeSortDontWorkWith: string[] | any[] = [
@@ -158,9 +189,7 @@ export class DTableComponent implements OnInit {
   currentWidth: number = window.innerWidth;
   showshowCurrentPageReport: boolean = true;
   currentPageReportTemplate: string = '{first} to {last}';
-
   accorditoinTableRowBtnIcon: boolean | null = null;
-
   accorditoinTableRowBtnIconF(a: any, i: HTMLElement) {
     i.setAttribute(
       'data-accorditionRow',
@@ -341,7 +370,6 @@ export class DTableComponent implements OnInit {
       title: col.header,
       dataKey: col.field,
     }));
-
     this.linkFiltersWithData();
   }
   tableBodyTotalHeight: any;
@@ -351,7 +379,6 @@ export class DTableComponent implements OnInit {
     this.detailsFilled = !!this.detailsNgContentElements;
     this.unicFilled = !!this.unicNgContentElements;
   }
-
   playholder() {
     let Datalength: number = this.filterMap.get(
       this.filterMap.get('outData')
@@ -362,7 +389,6 @@ export class DTableComponent implements OnInit {
       : '';
     return this.playHolder;
   }
-
   ngAfterViewInit() {}
   imageClikEvent(i: any, n: number, event: any, k?: boolean) {
     if (!k) {
@@ -398,7 +424,6 @@ export class DTableComponent implements OnInit {
         : event.clientX > 1800
         ? (this.left = event.clientX - 200)
         : (this.left = event.clientX - 200);
-
       this.top = event.clientY - 300;
       this.zoomedImagsrc = '';
       this.zoomedImagindex = -1;
@@ -467,7 +492,6 @@ export class DTableComponent implements OnInit {
     itemsPerPage: 10,
     currentPage: 1,
   };
-
   ngDoCheck() {
     if (this.changes) {
       this.columns = [...this.cols];
@@ -580,12 +604,6 @@ export class DTableComponent implements OnInit {
     }, 2);
   }
   firstSortEvent() {}
-  clear(table?: any) {
-    this._selectedColumns = this.columns;
-    this.clearfilterActive = !this.clearfilterActive;
-    this.filterParameter.clear();
-    this.outData = this.data;
-  }
   saveSelectedItems() {
     this.ref.close(this.selectedItems);
   }
@@ -613,15 +631,11 @@ export class DTableComponent implements OnInit {
     this.show_tbody_main_td_hover = i;
     this.show_tbody_main_td_hover_at = i + b;
   }
-
   showExRowStyles: boolean = false;
-
   showExRow(a?: number) {}
   exportCSV(a?: number) {}
   exportPdf(a?: number) {}
   exportExcel(a?: number) {}
-
-  pageRowsOptions: any[] = [10,20,30,40,50];
+  pageRowsOptions: any[] = [10, 20, 30, 40, 50];
   pageRowsSelected: any;
-
 }

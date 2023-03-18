@@ -18,6 +18,7 @@
       box-shadow: 0 0.4rem 0.8rem rgba(54, 70, 75, 0.298);
       border-radius: 0.6rem;
       // overflow: hidden;
+
       .s-t-header {
         width: 100%;
         background: #fff5;
@@ -79,6 +80,11 @@
             }
           }
         }
+      }
+      .s-t-body-v2 {
+            background: rgba(255, 255, 255, 0.459);
+            margin-bottom: 200px; 
+            position: absolute;
       }
       .s-t-body {
         max-height: calc(89% - 1.6rem);
@@ -417,6 +423,7 @@
           }
         }
       }
+
       .s-t-footer{
         
           z-index: 1111;
@@ -948,14 +955,24 @@ $p-color: rgb(38, 132, 234);
   padding: 5px;
   border-radius: 7px;
   background-color: hsla(0, 0%, 22%, 0.13);
+  color: #11549c;
   &:hover{
 
-
-      background-color: hsla(0, 0%, 1%, 0.247);
+  color: #2f82db;
+      background-color: hsl(0, 0%, 100%);
   }
-
-
+  
+  
 }
 
 
 
+#option{
+
+color: #11549c;
+
+&:hover {
+
+color: #2f82db;
+}
+}

@@ -6,7 +6,7 @@ import { Page404Component } from 'src/app/shared/components/page404/page404.comp
 // import { SDynamicTableComponent } from '../components/lib/tables/s-dynamic-table/s-dynamic-table.component';
 // import { PresentMainStiperComponent } from 'src/app/components/others-example/stipers-example/present-main-stiper/present-main-stiper.component';
 // import { FormExampleComponent } from 'src/app/components/form-example/form-example.component';
-// import { TablesV1Component } from 'src/app/components/tables-example/tables-v1/tables-v1.component';
+import { TablesV1Component } from 'src/app/components/tables-example/tables-v1/tables-v1.component';
 // import { TablesV2Component } from 'src/app/components/tables-example/tables-v2/tables-v2.component';
 // import { UnicCardV1Component } from 'src/app/components/cards-example/unic/unic-card-v1/card-v1.component';
 // import { UnicCardV2Component } from 'src/app/components/cards-example/unic/unic-card-v2/card-v2.component';
@@ -50,10 +50,10 @@ export const content: Routes = [
   {
     path: 'tables',
     children: [
-      // {
-      //   path: 'table-v1',
-      //   component: TablesV1Component,
-      // },
+      {
+        path: 'table-v1',
+        component: TablesV1Component,
+      },
       // {
       //   path: 'table-v2',
       //   component: TablesV2Component,
