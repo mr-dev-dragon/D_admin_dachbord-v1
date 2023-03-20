@@ -5,6 +5,7 @@ import { Component, EventEmitter, Input, Output, OnInit, SimpleChanges } from '@
   styleUrls: ['./filter-number.component.scss'],
 })
 export class FilterNumberComponent {
+  @Input() clearfilter: boolean = false;
   @Input() label: string | string[] = 'text';
   @Input() path: string = '';
   @Input() inData!: any[];

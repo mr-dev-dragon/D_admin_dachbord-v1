@@ -8,6 +8,7 @@ import { filterParameter } from 'src/app/shared/models/List.model';
   styleUrls: ['./filter-range.component.scss'],
 })
 export class FilterRangeComponent {
+  @Input() clearfilter: boolean = false;
   @Input() type: string | string[] = '';
   @Input() label: string | string[] = '';
   @Input() path: string | string[] = '';

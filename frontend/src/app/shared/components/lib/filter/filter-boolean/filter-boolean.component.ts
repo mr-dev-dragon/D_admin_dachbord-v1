@@ -8,6 +8,7 @@ import { filterParameter } from 'src/app/shared/models/List.model';
   styleUrls: ['./filter-boolean.component.scss'],
 })
 export class FilterBooleanComponent {
+  @Input() clearfilter: boolean = false;
   @Input() type: string | string[] = 'text';
   @Input() label: string | string[] = 'text';
   @Input() path: string | string[] = '';

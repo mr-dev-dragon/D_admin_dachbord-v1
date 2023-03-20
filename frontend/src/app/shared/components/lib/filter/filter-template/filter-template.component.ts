@@ -7,6 +7,7 @@ import { filterParameter } from 'src/app/shared/models/List.model';
   styleUrls: ['./filter-template.component.scss'],
 })
 export class FilterTemplateComponent {
+   @Input() clearfilter: boolean = false;
   @Input() label: string | string[] = 'text';
   @Input() path: string | string[] = '';
   @Input() inputvalue: string = '';

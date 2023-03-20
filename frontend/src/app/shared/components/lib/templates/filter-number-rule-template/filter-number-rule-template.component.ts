@@ -10,6 +10,7 @@ export class FilterNumberRuleTemplateComponent {
   @Input() type: string | string[] = 'text';
   @Input() label: string | string[] = 'text';
   @Input() path: string = '';
+  @Input() clearfilter: boolean = false;
   @Input() inData!: any[];
   @Output() outData: EventEmitter<any> = new EventEmitter();
   @Input() inParameter!: filterParameter;

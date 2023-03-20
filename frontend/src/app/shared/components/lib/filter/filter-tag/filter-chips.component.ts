@@ -7,6 +7,7 @@ import { filterParameter } from 'src/app/shared/models/List.model';
   styleUrls: ['./filter-chips.component.scss'],
 })
 export class FilterChipsComponent {
+    @Input() clearfilter: boolean = false;
   @Input() type: string | string[] = 'text';
   @Input() label: string | string[] = 'text';
   @Input() path: string = '';

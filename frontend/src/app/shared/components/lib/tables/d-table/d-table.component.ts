@@ -78,12 +78,12 @@ export class DTableComponent implements OnInit {
   }
 
 
-  clear = new Subject();
+
   clearfunction(table?: any) {
     this._selectedColumns = this.columns;
     this.clearfilterActive = false;
-    this.clearfilterActive ? this.filterParameter.clear() : '';
-    this.clear.next('')
+    this.filterParameter.clear()
+ 
   }
   onDataChange(id: any, data: any) {
     this.filterParameter.size && (this.clearfilterActive = true);

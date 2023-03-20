@@ -22,7 +22,7 @@ export class FilterTextRuleTemplateComponent implements OnInit, AfterViewInit {
   filterTwo!: any[];
   allFeltedData!: any;
   apleyFiler: boolean = false;
-
+  @Input() clearfilter: boolean = false;
   @Input() type: string | string[] = 'text';
   @Input() label: string | string[] = 'text';
   @Input() path: string | string[] = '';

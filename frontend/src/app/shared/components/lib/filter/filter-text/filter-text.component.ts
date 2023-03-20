@@ -7,6 +7,7 @@ import { g, removeAccent } from 'src/app/shared/global/filter-tool';
   styleUrls: ['./filter-text.component.scss'],
 })
 export class FilterTextComponent implements OnChanges {
+  @Input() clearfilter: boolean = false;
   @Input() type: string | string[] = 'text';
   @Input() label: string | string[] = 'text';
   @Input() path: string | string[] = '';

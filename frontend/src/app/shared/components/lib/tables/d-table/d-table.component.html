@@ -2,7 +2,7 @@
 <div [ngClass]="tiblecontinerDiv ? 'table_container' : ''">
   <div class="body">
     <main class="s-t-main">
-      <section class="s-t-header"     [ngClass]="{'s-t-body-v2': false}">
+      <section class="s-t-header" [ngClass]="{ 's-t-body-v2': false }">
         <div class="header-container">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +21,7 @@
           <h1 class="s-t-t-title">{{ tibleTitale | titlecase }}</h1>
         </div>
         <div class="header-container">
-<!-- 
+          <!-- 
            <button
               type="button"
               *ngIf="captionConfig.addButton && !captionConfig.addButton.menuItem"
@@ -30,16 +30,19 @@
            >
             <i class="pi  s-t-h-b-icon  {{!refreshActive?' pi-refresh':'pi-spin pi-refresh '}} white  " style="font-size: 1.2rem"></i>
           </button> -->
-              <button
-                  *ngIf="captionConfig.addButton && !captionConfig.addButton.menuItem"
-                    type="button "
-                    pButton pRipple 
-                     (click)="refresh()"
-                    [icon]="!refreshActive ? 'pi pi-refresh ' : ' pi pi-spin pi-refresh '" 
-                    class=" colortrplayicon mr-2 " 
-                    pTooltip="refresh data"
-                    tooltipPosition="bottom"
-              ></button>
+          <button
+            *ngIf="captionConfig.addButton && !captionConfig.addButton.menuItem"
+            type="button "
+            pButton
+            pRipple
+            (click)="refresh()"
+            [icon]="
+              !refreshActive ? 'pi pi-refresh ' : ' pi pi-spin pi-refresh '
+            "
+            class="colortrplayicon mr-2"
+            pTooltip="refresh data"
+            tooltipPosition="bottom"
+          ></button>
           <div></div>
           <!-- <button
             type="button"
@@ -49,24 +52,25 @@
           >
             <i class="pi pi pi-plus s-t-h-b-icon"></i>
           </button> -->
-              <button
-                 *ngIf="captionConfig.addButton && !captionConfig.addButton.menuItem"
-                    type="button "
-                    pButton pRipple 
-                    (click)="onAdd()"
-                    icon="pi pi-plus" 
-                    class=" green mr-2 " 
-                    pTooltip="add item"
-                    tooltipPosition="bottom"
-              > </button>
+          <button
+            *ngIf="captionConfig.addButton && !captionConfig.addButton.menuItem"
+            type="button "
+            pButton
+            pRipple
+            (click)="onAdd()"
+            icon="pi pi-plus"
+            class="green mr-2"
+            pTooltip="add item"
+            tooltipPosition="bottom"
+          ></button>
           <div>
-          <p-tieredMenu
+            <p-tieredMenu
               #menu
               [model]="captionConfig.addButton.menuItem"
               [popup]="true"
               [appendTo]="'body'"
             >
-            </p-tieredMenu> 
+            </p-tieredMenu>
           </div>
           <!-- <button
             type="button"
@@ -79,29 +83,34 @@
           >
             <i class="pi pi pi-trash s-t-h-b-icon"></i>
           </button> -->
-              <button
-                    *ngIf="captionConfig.clearTable"
-                    [disabled]="
-                        selectedItems.map ? !selectedItems.length : !selectedItems
-                      "
-                    type="button "
-                    pButton pRipple 
-                    (click)="showUndoDialog()"
-                    icon="pi pi-trash" 
-                    class=" red mr-2 " 
-                    pTooltip="delete"
-                    tooltipPosition="bottom"
-              > </button>
+          <button
+            *ngIf="captionConfig.clearTable"
+            [disabled]="
+              selectedItems.map ? !selectedItems.length : !selectedItems
+            "
+            type="button "
+            pButton
+            pRipple
+            (click)="showUndoDialog()"
+            icon="pi pi-trash"
+            class="red mr-2"
+            pTooltip="delete"
+            tooltipPosition="bottom"
+          ></button>
         </div>
         <div class="header-container">
           <filter-by-text
+            [clearfilter]="clearfilterActive"
             *ngIf="
-              captionConfig.headerFilterType && captionConfig.headerFilterfield"
+              captionConfig.headerFilterType && captionConfig.headerFilterfield
+            "
             [type]="captionConfig.headerFilterType"
             [inData]="data"
             [path]="captionConfig.headerFilterfield"
-            (outData)=" onDataChange('default', $event);
-                        log(' text header ==>', filterMap)"
+            (outData)="
+              onDataChange('default', $event);
+              log(' text header ==>', filterMap)
+            "
           >
           </filter-by-text>
         </div>
@@ -112,28 +121,18 @@
               class="filterIconSize pi s-t-h-b-icon"
             ></i>
           </button> -->
-                                  <button
-                                      *ngIf="clearfilterActive"
-                                      type="button"
-                                      pButton
-                                      pRipple 
-                                      [icon]="'pi pi-filter-slash'" 
-                                      (click)="clearfunction()"
-                                      class=" gray mr-2" 
-                                      pTooltip="reset filter" 
-                                      tooltipPosition="bottom"
-                                  > 
-                                </button>
-                            <button
-                                *ngIf="!clearfilterActive"
-                                  type="button"
-                                  pButton
-                                   pRipple 
-                                  [icon]="'pi pi-filter'" 
-                                  class=" gray mr-2" 
-                                  pTooltip="reset filter" 
-                                  tooltipPosition="bottom"
-                                  > </button>
+          <button
+            *ngIf="filterParameter.size !=0"
+            type="button"
+            pButton
+            pRipple
+            [icon]="'pi pi-filter-slash'"
+            (click)="clearfunction()"
+            class="gray mr-2"
+            pTooltip="reset filter"
+            tooltipPosition="bottom"
+          ></button>
+          <div *ngIf="!clearfilterActive" class="clearfilternotActive"></div>
           <p-multiSelect
             *ngIf="captionConfig.displayedColumns"
             [appendTo]="'body'"
@@ -167,8 +166,8 @@
             [sortByDate]="false"
           ></app-sort>
         </div>
-          <div class="flex  ml-4">
-            <!-- <button 
+        <div class="flex ml-4">
+          <!-- <button 
                 type="button"
                 pButton 
                 pRipple i
@@ -178,12 +177,12 @@
                 pTooltip="XLS" 
                 tooltipPosition="bottom"
               ></button> -->
-                    <export-data
-                          [headers]="_selectedColumns" 
-                          [type]="'excel'"
-                          [data]="filterMap.get(filterMap.get('outData'))"
-                    ></export-data>
-<!-- 
+          <export-data
+            [headers]="_selectedColumns"
+            [type]="'excel'"
+            [data]="filterMap.get(filterMap.get('outData'))"
+          ></export-data>
+          <!-- 
            <button 
                 type="button"
                 pButton 
@@ -194,12 +193,12 @@
                 pTooltip="CSV" 
                 tooltipPosition="bottom"
              > </button> -->
-                     <export-data
-                          [headers]="_selectedColumns" 
-                          [type]="'CSV'"
-                          [data]="filterMap.get(filterMap.get('outData'))"
-                    ></export-data>
-            <!-- <button 
+          <export-data
+            [headers]="_selectedColumns"
+            [type]="'CSV'"
+            [data]="filterMap.get(filterMap.get('outData'))"
+          ></export-data>
+          <!-- <button 
                 type="button"
                 pButton 
                 pRipple i
@@ -209,11 +208,11 @@
                 pTooltip="PDF"
                 tooltipPosition="bottom"
             ></button> -->
-                   <export-data
-                          [headers]="_selectedColumns" 
-                          [type]="'pdf'"
-                          [data]="filterMap.get(filterMap.get('outData'))"
-                    ></export-data>
+          <export-data
+            [headers]="_selectedColumns"
+            [type]="'pdf'"
+            [data]="filterMap.get(filterMap.get('outData'))"
+          ></export-data>
         </div>
         <div class="header-container"></div>
       </section>
@@ -249,27 +248,31 @@
               data-openedPopupSort="-1"
               data-openedPopupFilter="-1"
               class="s-t-tr"
-            > 
-              <ng-container *ngIf="!(_selectedColumns.length == 0)">
-                  <th  class="s-t-th"
-                  *ngIf="
-                        captionConfig.rowNamber || 
-                        captionConfig.selectionType == 'multiple'
-                        ">
-                    <div class="s-t-th-conteainer">
-                    <ng-container
-                      *ngIf="captionConfig.selectionType == 'multiple'"
-                    >
-                         <p-checkbox (onChange)="selectedAllRowfunction($event)" [(ngModel)]="selectedAllRowVal" [binary]="true" inputId="binary"></p-checkbox>
-                    </ng-container>
-                    </div>
-                  </th>
-              </ng-container>
+            >
               <ng-container *ngIf="!(_selectedColumns.length == 0)">
                 <th
                   class="s-t-th"
-                  *ngIf="captionConfig.rowNamber"
+                  *ngIf="
+                    captionConfig.rowNamber ||
+                    captionConfig.selectionType == 'multiple'
+                  "
                 >
+                  <div class="s-t-th-conteainer">
+                    <ng-container
+                      *ngIf="captionConfig.selectionType == 'multiple'"
+                    >
+                      <p-checkbox
+                        (onChange)="selectedAllRowfunction($event)"
+                        [(ngModel)]="selectedAllRowVal"
+                        [binary]="true"
+                        inputId="binary"
+                      ></p-checkbox>
+                    </ng-container>
+                  </div>
+                </th>
+              </ng-container>
+              <ng-container *ngIf="!(_selectedColumns.length == 0)">
+                <th class="s-t-th" *ngIf="captionConfig.rowNamber">
                   <div class="s-t-th-conteainer">
                     <ng-container>
                       <h1 class="s-t-th-label">
@@ -278,7 +281,7 @@
                     </ng-container>
                   </div>
                 </th>
-              </ng-container>              
+              </ng-container>
               <ng-container *ngIf="!(_selectedColumns.length == 0)">
                 <th
                   class="s-t-th"
@@ -456,6 +459,7 @@
                       </span>
                       <ng-container *ngSwitchCase="'text'">
                         <filter-text-rule-template
+                          [clearfilter]="clearfilterActive"
                           (outParameter)="
                             outParameter(
                               $event,
@@ -481,8 +485,7 @@
                           [path]="col.field"
                           [inData]="filterMap.get(filterMap.get(i + '--per'))"
                           (outData)="
-                            onDataChange(i, $event);
-                            log('text == >', filterMap)
+                            onDataChange(i, $event); log('text == >', filterMap)
                           "
                         >
                         </filter-text-rule-template>
@@ -490,6 +493,7 @@
                       <ng-container *ngSwitchCase="'numeric'">
                         <!-- ::: {{filterParameter.get(gitFilerParameterNameId(i,col.filterType))|json}} -->
                         <filter-number-rule-template
+                          [clearfilter]="clearfilterActive"
                           [inData]="filterMap.get(filterMap.get(i + '--per'))"
                           (outParameter)="
                             outParameter(
@@ -523,6 +527,7 @@
                       </ng-container>
                       <ng-container *ngSwitchCase="'chips'">
                         <filter-by-tag
+                          [clearfilter]="clearfilterActive"
                           [label]="'chips'"
                           [path]="col.field"
                           [inData]="filterMap.get(filterMap.get(i + '--per'))"
@@ -556,39 +561,41 @@
                       </ng-container>
                       <ng-container *ngSwitchCase="'percentage'">
                         <filter-percentage
-                              [inData]="filterMap.get(filterMap.get(i + '--per'))"
-                              (outParameter)="
-                                outParameter(
-                                  $event,
-                                  gitFilerParameterNameId([
-                                    col.header,
-                                    i,
-                                    col.filterType,
-                                    col.field
-                                  ])
-                                )
-                              "
-                              [inParameter]="
-                                filterParameter.get(
-                                  gitFilerParameterNameId([
-                                    col.header,
-                                    i,
-                                    col.filterType,
-                                    col.field
-                                  ])
-                                )
-                              "
-                              [label]="'lable'"
-                              [path]="col.field"
-                              (outData)="
-                                onDataChange(i, $event);
-                                log(' percentage ==>', filterMap)
-                              "
-                            >
+                          [clearfilter]="clearfilterActive"
+                          [inData]="filterMap.get(filterMap.get(i + '--per'))"
+                          (outParameter)="
+                            outParameter(
+                              $event,
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [inParameter]="
+                            filterParameter.get(
+                              gitFilerParameterNameId([
+                                col.header,
+                                i,
+                                col.filterType,
+                                col.field
+                              ])
+                            )
+                          "
+                          [label]="'lable'"
+                          [path]="col.field"
+                          (outData)="
+                            onDataChange(i, $event);
+                            log(' percentage ==>', filterMap)
+                          "
+                        >
                         </filter-percentage>
                       </ng-container>
                       <ng-container *ngSwitchCase="'range'">
                         <filter-by-range
+                          [clearfilter]="clearfilterActive"
                           [inData]="filterMap.get(filterMap.get(i + '--per'))"
                           (outParameter)="
                             outParameter(
@@ -623,6 +630,7 @@
                       </ng-container>
                       <ng-container *ngSwitchCase="'boolean'">
                         <filter-by-boolean
+                          [clearfilter]="clearfilterActive"
                           [type]="'boolean'"
                           [label]="'boolean'"
                           [path]="col.field"
@@ -657,6 +665,7 @@
                       </ng-container>
                       <ng-container *ngSwitchCase="'date'">
                         <filter-text-rule-template
+                          [clearfilter]="clearfilterActive"
                           [inData]="filterMap.get(filterMap.get(i + '--per'))"
                           (outParameter)="
                             outParameter(
@@ -682,8 +691,7 @@
                           [label]="'date'"
                           [path]="col.field"
                           (outData)="
-                            onDataChange(i, $event);
-                            log(' date ==>', filterMap)
+                            onDataChange(i, $event); log(' date ==>', filterMap)
                           "
                         >
                         </filter-text-rule-template>
@@ -705,6 +713,7 @@
                       </ng-container>
                       <ng-container *ngSwitchCase="'email'">
                         <filter-text-rule-template
+                          [clearfilter]="clearfilterActive"
                           [inData]="filterMap.get(filterMap.get(i + '--per'))"
                           (outParameter)="
                             outParameter(
@@ -738,6 +747,7 @@
                       </ng-container>
                       <ng-container *ngSwitchCase="'address'">
                         <filter-text-rule-template
+                          [clearfilter]="clearfilterActive"
                           [inData]="filterMap.get(filterMap.get(i + '--per'))"
                           (outParameter)="
                             outParameter(
@@ -771,6 +781,7 @@
                       </ng-container>
                       <ng-container *ngSwitchCase="'price'">
                         <filter-text-rule-template
+                          [clearfilter]="clearfilterActive"
                           [inData]="filterMap.get(filterMap.get(i + '--per'))"
                           (outParameter)="
                             outParameter(
@@ -804,6 +815,7 @@
                       </ng-container>
                       <ng-container *ngSwitchCase="'phone'">
                         <filter-text-rule-template
+                          [clearfilter]="clearfilterActive"
                           [inData]="filterMap.get(filterMap.get(i + '--per'))"
                           (outParameter)="
                             outParameter(
@@ -837,6 +849,7 @@
                       </ng-container>
                       <ng-container *ngSwitchCase="'multiSelect'">
                         <filter-By-multiSelect
+                          [clearfilter]="clearfilterActive"
                           (outParameter)="
                             outParameter(
                               $event,
@@ -870,6 +883,7 @@
                       </ng-container>
                       <ng-container *ngSwitchCase="'template'">
                         <filter-By-template
+                          [clearfilter]="clearfilterActive"
                           (outParameter)="
                             outParameter(
                               $event,
@@ -975,26 +989,27 @@
                 </th>
               </ng-container>
               <ng-container *ngIf="!(_selectedColumns.length == 0)">
-                  <th
-                    class="s-t-th"
-                    *ngIf="
-                        captionConfig.actions?.clone ||
-                        captionConfig.actions?.delete||
-                        captionConfig.actions?.edit  ||
-                        captionConfig.actions?.detail||
-                        captionConfig.actions?.close
-                    "
-                  >
-                    <div class="s-t-th-conteainer">
-                        <h1 class="s-t-th-label">
-                          {{ "action" | titlecase }}
-                        </h1>
-                    </div>
-                  </th>
+                <th
+                  class="s-t-th"
+                  *ngIf="
+                    captionConfig.actions?.clone ||
+                    captionConfig.actions?.delete ||
+                    captionConfig.actions?.edit ||
+                    captionConfig.actions?.detail ||
+                    captionConfig.actions?.close
+                  "
+                >
+                  <div class="s-t-th-conteainer">
+                    <h1 class="s-t-th-label">
+                      {{ "action" | titlecase }}
+                    </h1>
+                  </div>
+                </th>
               </ng-container>
             </tr>
           </thead>
-          <ng-container *ngIf="filterMap.get(filterMap.get('outData')).length != 0"
+          <ng-container
+            *ngIf="filterMap.get(filterMap.get('outData')).length != 0"
           >
             <tbody #tableBody data-selectedIndex class="s-t-tbody">
               <ng-container
@@ -1012,63 +1027,64 @@
                 >
                   <!-- #region   this arry ooof the row expanttion tn -->
                   <ng-container *ngIf="!(_selectedColumns.length == 0)">
-                           <td class="numbertd"
-                              *ngIf="  
-                                 captionConfig.selectionType == 'multiple'
-                                 "
-                              >
-                              <div
-                                style="
-                                  margin: auto;
-                                  display: flex;
-                                  justify-content: center;
-                                  align-items: center;
-                                  text-align: center;
-                                "
-                              >
-                                <ng-container
-                                *ngIf="captionConfig.selectionType == 'multiple'"
-                              >
-                                <p-checkbox 
-                                (onChange)="selectedRowfunction($event ,rowData)" 
-                                 [ngModel]="selectedRow.has(rowData)"
-                                 [binary]="true">
-                                </p-checkbox>
-                              </ng-container>
-                              </div>
-                            </td>
-                           <td class="numbertd"
-                              *ngIf="  
-                                 captionConfig.rowNamber 
-                                 "
-                              >
-                              <div
-                                style="
-                                  margin: auto;
-                                  display: flex;
-                                  justify-content: center;
-                                  align-items: center;
-                                  text-align: center;
-                                "
-                              >
-                                <ng-container
-                                  *ngIf="captionConfig.rowNamber"
-                                  >
-                                   <span class="rowMamber">{{(  
-                                        this.o_config.currentPage ==1 ?
-                                          (o+1+(this.o_config.itemsPerPage * (this.o_config.currentPage -1)))
-                                         :(o+1+(this.o_config.itemsPerPage * (this.o_config.currentPage -1))) 
-                                      )}}
-                                   </span> 
-                                </ng-container>
-                              </div>
-                            </td>
+                    <td
+                      class="numbertd"
+                      *ngIf="captionConfig.selectionType == 'multiple'"
+                    >
+                      <div
+                        style="
+                          margin: auto;
+                          display: flex;
+                          justify-content: center;
+                          align-items: center;
+                          text-align: center;
+                        "
+                      >
+                        <ng-container
+                          *ngIf="captionConfig.selectionType == 'multiple'"
+                        >
+                          <p-checkbox
+                            (onChange)="selectedRowfunction($event, rowData)"
+                            [ngModel]="selectedRow.has(rowData)"
+                            [binary]="true"
+                          >
+                          </p-checkbox>
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td class="numbertd" *ngIf="captionConfig.rowNamber">
+                      <div
+                        style="
+                          margin: auto;
+                          display: flex;
+                          justify-content: center;
+                          align-items: center;
+                          text-align: center;
+                        "
+                      >
+                        <ng-container *ngIf="captionConfig.rowNamber">
+                          <span class="rowMamber"
+                            >{{
+                              this.o_config.currentPage == 1
+                                ? o +
+                                  1 +
+                                  this.o_config.itemsPerPage *
+                                    (this.o_config.currentPage - 1)
+                                : o +
+                                  1 +
+                                  this.o_config.itemsPerPage *
+                                    (this.o_config.currentPage - 1)
+                            }}
+                          </span>
+                        </ng-container>
+                      </div>
+                    </td>
                     <td
                       *ngIf="
                         captionConfig.expanded?.dataField ||
                         captionConfig.expanded?.headers ||
-                        captionConfig.expanded?.captionConfig ||       
-                        captionConfig.rowNamber||
+                        captionConfig.expanded?.captionConfig ||
+                        captionConfig.rowNamber ||
                         captionConfig.selectionType == 'multiple'
                       "
                     >
@@ -1289,58 +1305,62 @@
                   </ng-container>
                   <!-- #region   this arry ooof the row expanttion tn -->
                   <ng-container *ngIf="!(_selectedColumns.length == 0)">
-                  <td
-                        class="text-center"
-                        *ngIf="
-                          columns.length &&
-                          (captionConfig.actions?.clone ||
-                            captionConfig.actions?.detail ||
-                            captionConfig.actions?.edit)
-                        "
-                      >
-                        <div class=" action-button-group ">
-                          <button
-                            type="button"
-                            *ngIf="captionConfig.actions?.clone && !rowData.cloned"
-                            type="button"
-                            class=" me-2 mb-2  s-btn-clone action-button"
-                            (click)="onClone(o)"
-                          >
-                            <i class="pi pi-copy action-button-icon "></i>
-                           </button>
-                          <button
-                            type="button"
-                            *ngIf="captionConfig.actions?.detail"
-                            type="button"
-                            class=" me-2 mb-2 s-btn-detail  action-button"
-                            (click)="onDetail(o)"
-                          >
-                            <i class="pi pi-eye  action-button-icon "></i>
-                           </button>
-                          <button
-                            type="button"
-                            *ngIf="captionConfig.actions?.edit"
-                            type="button"
-                            class=" me-2 mb-2 s-btn-edit p-button-warning  action-button"
-                            (click)="onEdit(o)"
-                          >
-                            <i class="pi pi-pencil action-button-icon action-button-icon-2 "></i>
-                           </button>
-                          <button
-                            *ngFor="let button of captionConfig.buttons"
-                            pButton
-                            type="button"
-                            [label]="button.label || ''"
-                            [icon]="button.icon || ''"
-                            [class]="
-                              'action-button ' +
-                              (button.class || 'p-button-rounded p-button-sm')
-                            "
-                            [ngStyle]="button.style || null"
-                            (click)="button?.command?.(o,rowData)"
-                          ></button>
-                        </div>
-                   </td>
+                    <td
+                      class="text-center"
+                      *ngIf="
+                        columns.length &&
+                        (captionConfig.actions?.clone ||
+                          captionConfig.actions?.detail ||
+                          captionConfig.actions?.edit)
+                      "
+                    >
+                      <div class="action-button-group">
+                        <button
+                          type="button"
+                          *ngIf="
+                            captionConfig.actions?.clone && !rowData.cloned
+                          "
+                          type="button"
+                          class="me-2 mb-2 s-btn-clone action-button"
+                          (click)="onClone(o)"
+                        >
+                          <i class="pi pi-copy action-button-icon"></i>
+                        </button>
+                        <button
+                          type="button"
+                          *ngIf="captionConfig.actions?.detail"
+                          type="button"
+                          class="me-2 mb-2 s-btn-detail action-button"
+                          (click)="onDetail(o)"
+                        >
+                          <i class="pi pi-eye action-button-icon"></i>
+                        </button>
+                        <button
+                          type="button"
+                          *ngIf="captionConfig.actions?.edit"
+                          type="button"
+                          class="me-2 mb-2 s-btn-edit p-button-warning action-button"
+                          (click)="onEdit(o)"
+                        >
+                          <i
+                            class="pi pi-pencil action-button-icon action-button-icon-2"
+                          ></i>
+                        </button>
+                        <button
+                          *ngFor="let button of captionConfig.buttons"
+                          pButton
+                          type="button"
+                          [label]="button.label || ''"
+                          [icon]="button.icon || ''"
+                          [class]="
+                            'action-button ' +
+                            (button.class || 'p-button-rounded p-button-sm')
+                          "
+                          [ngStyle]="button.style || null"
+                          (click)="button?.command?.(o,rowData)"
+                        ></button>
+                      </div>
+                    </td>
                   </ng-container>
                   <!-- #endregion -->
                 </tr>
@@ -1349,23 +1369,24 @@
                   [attr.s-Expanded-child]="o"
                   *ngIf="tbody_tr.getAttribute('showExpandedRow') == 'true'"
                 >
-                      <td
-                        class="row-expanded-container-out"
-                        [colSpan]="
-                          _selectedColumns.length +
-                          (columns.length
-                            ? (captionConfig.actions?.clone ||
-                              captionConfig.actions?.detail ||
-                              captionConfig.actions?.edit
-                                ? 1
-                                : 0) +
-                              (captionConfig.selectionType == 'multiple' ||
-                              captionConfig.expanded
-                                ? 1
-                                : 0)
-                            : 0)+(captionConfig.rowNamber?1:0)
-                        "
-                      >
+                  <td
+                    class="row-expanded-container-out"
+                    [colSpan]="
+                      _selectedColumns.length +
+                      (columns.length
+                        ? (captionConfig.actions?.clone ||
+                          captionConfig.actions?.detail ||
+                          captionConfig.actions?.edit
+                            ? 1
+                            : 0) +
+                          (captionConfig.selectionType == 'multiple' ||
+                          captionConfig.expanded
+                            ? 1
+                            : 0)
+                        : 0) +
+                      (captionConfig.rowNamber ? 1 : 0)
+                    "
+                  >
                     <div
                       class="row-expanded-container-in"
                       [ngStyle]="{ backgroundColor: tableBgC }"
@@ -1411,23 +1432,34 @@
             </tbody>
           </ng-container>
         </table>
-          <ng-container *ngIf=" this.o_config.itemsPerPage > this.filterMap.get(filterMap.get('outData')).length ">
-            <div class=" plasHildercontinaer dots-bg">
-                <div  *ngIf="filterMap.get(filterMap.get('outData')).length == 0" class="plaiceHolderMisage">
-                         <h4 >{{
-                               this.refreshActive? 'refresh Data ...': ' Data not fund !' 
-                             |titlecase|translate}}  
-                         </h4> 
-                </div>
-               <ng-container *ngFor="let k of playholder()">
-                 <span class="plasHilderRow"> </span>
-               </ng-container>
+        <ng-container
+          *ngIf="
+            this.o_config.itemsPerPage >
+            this.filterMap.get(filterMap.get('outData')).length
+          "
+        >
+          <div class="plasHildercontinaer dots-bg">
+            <div
+              *ngIf="filterMap.get(filterMap.get('outData')).length == 0"
+              class="plaiceHolderMisage"
+            >
+              <h4>
+                {{
+                  this.refreshActive
+                    ? "refresh Data ..."
+                    : (" Data not fund !" | titlecase | translate)
+                }}
+              </h4>
             </div>
-          </ng-container>
+            <ng-container *ngFor="let k of playholder()">
+              <span class="plasHilderRow"> </span>
+            </ng-container>
+          </div>
+        </ng-container>
       </section>
       <!-- *ngIf="filterMap.get(filterMap.get('outData')).length >= o_config.itemsPerPage" -->
       <section class="s-t-footer">
-        <pagination-template
+        <!-- <pagination-template
           #p="paginationApi"
           [id]="o_config.id"
           (pageChange)="o_config.currentPage = $event" >
@@ -1512,7 +1544,22 @@
                     </select>
                 </div>
           </div>
-        </pagination-template>
+        </pagination-template> -->
+        <div>
+          <div class="in-custom-pagination">
+            <span class="pagination-active">
+              <span>
+                {{
+                  filterMap.get(filterMap.get("outData")).length != 0
+                    ? "1"
+                    : this.refreshActive
+                    ? "refresh ..."
+                    : "no page exist!"
+                }}
+              </span>
+            </span>
+          </div>
+        </div>
       </section>
     </main>
   </div>
