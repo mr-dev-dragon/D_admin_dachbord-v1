@@ -347,25 +347,35 @@
                           tooltipPosition="left"
                           pTooltip="{{ 'sort' | titlecase | translate }}"
                         >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            class="w-6 s-t-th-btn-icon h-6"
-                          >
-                            <path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              d="M3 4.5h14.25M3 9h9.75M3 13.5h9.75m4.5-4.5v12m0 0l-3.75-3.75M17.25 21L21 17.25"
-                            />
-                          </svg>
+                           <app-sort
+                              [data]="filterMap.get(filterMap.get('outData'))"
+                              [path]="col.field"
+                              [sortByName]="  
+                                      col.filterType == 'chips' ||
+                                      col.filterType == 'text'  ||
+                                      col.filterType == 'price' ||
+                                      col.filterType == 'phone' ||
+                                      col.filterType == 'email' ||
+                                      col.filterType == 'address' 
+                              "
+                              [sortByDate]="  
+                                      col.filterType == 'date'
+                              "
+                              [sortByNumber]="
+                                      col.filterType == 'numeric'||
+                                      col.filterType == 'range'  ||
+                                      col.filterType == 'percentage'
+                              "
+                            >
+                            </app-sort> 
                         </button>
+
+
+
                       </ng-container>
                     </ng-container>
                     <h1 class="s-t-th-label">{{ col?.header | titlecase }}</h1>
-                    <div
+                    <!-- <div
                       class="popUpsort"
                       [ngClass]="{
                         'd-block':
@@ -408,14 +418,14 @@
                           class="pi removePopUp-icon pi-times-circle"
                         >
                         </i>
-                      </span>
-                      <app-sort
+                      </span> -->
+                      <!-- <app-sort
                         [data]="filterMap.get(filterMap.get('outData'))"
                         [path]="col.field"
                         [sortByName]="true"
                         [sortByDate]="false"
-                      ></app-sort>
-                    </div>
+                      ></app-sort> -->
+                    <!-- </div> -->
                     <div
                       *ngIf="col.filter"
                       class="popUp"
@@ -1468,7 +1478,7 @@
               </span>
           
           </div>
-        <!-- <pagination-template
+        <pagination-template
           #p="paginationApi"
           [id]="o_config.id"
           (pageChange)="o_config.currentPage = $event" >
@@ -1553,7 +1563,7 @@
                     </select>
                 </div>
           </div>
-        </pagination-template> -->
+        </pagination-template> 
         <div>
         </div>
       </section>

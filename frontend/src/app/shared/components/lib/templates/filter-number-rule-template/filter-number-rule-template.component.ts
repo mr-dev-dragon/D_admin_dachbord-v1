@@ -3,7 +3,7 @@ import { addArrays } from 'src/app/shared/global/filter-tool';
 import { filterParameter } from 'src/app/shared/models/List.model';
 @Component({
   selector: 'filter-number-rule-template',
-  templateUrl: './filter-number-rule-template.component.html',
+templateUrl: './filter-number-rule-template.component.html',
   styleUrls: ['./filter-number-rule-template.component.scss'],
 })
 export class FilterNumberRuleTemplateComponent {
