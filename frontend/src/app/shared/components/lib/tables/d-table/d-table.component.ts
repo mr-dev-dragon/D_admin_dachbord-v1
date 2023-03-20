@@ -39,15 +39,6 @@ import { UndoDeleteDialogService } from 'src/app/shared/services/undo-delete-dia
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class DTableComponent implements OnInit {
-  ngOnChanges(changes: SimpleChange) {
-    console.log(
-      '%cMyProject%cline:44%cchanges',
-      'color:#fff;background:#ee6f57;padding:3px;border-radius:2px',
-      'color:#fff;background:#1f3c88;padding:3px;border-radius:2px',
-      'color:#fff;background:rgb(161, 23, 21);padding:3px;border-radius:2px',
-      changes
-    );
-  }
   filtersCunte: number = 0;
   gitFilerParameterNameId: (a: any[]) => string = (a) => a.join('');
   filterParameter: Map<any, any> = new Map();
@@ -77,13 +68,10 @@ export class DTableComponent implements OnInit {
     this.filterMap.set('outData', per);
   }
 
-
-
   clearfunction(table?: any) {
     this._selectedColumns = this.columns;
     this.clearfilterActive = false;
-    this.filterParameter.clear()
- 
+    this.filterParameter.clear();
   }
   onDataChange(id: any, data: any) {
     this.filterParameter.size && (this.clearfilterActive = true);
@@ -148,6 +136,9 @@ export class DTableComponent implements OnInit {
   @Input() disableFilterWithHeader: string[] | string = '';
   @Input() disableSortWithHeader: string[] | string = '';
   @Input() table: boolean = false;
+  ngOnChanges(changes: SimpleChange) {
+    this.linkFiltersWithData() 
+  }
   SortDontWorkWithHeaders: string[] | any[] = [];
   filterDontWorkWithHeaders: string[] | any[] = [];
   dateTypeSortDontWorkWith: string[] | any[] = [
@@ -291,7 +282,7 @@ export class DTableComponent implements OnInit {
       this.cols = this.config.data.headers || [];
       this.data = this.config.data.data;
       this.selectedItems = this.data.filter((item: any) => item.selected);
-    if (
+      if (
         this.captionConfig?.selectionType == 'single' &&
         this.selectedItems.length
       )
@@ -395,9 +386,13 @@ export class DTableComponent implements OnInit {
       this.zoomedImag = true;
       this.zoomedImagsrc = i;
       this.zoomedImagindex = n;
+    
+      console.log('%cMyProject%cline:389%cevent.clientX)', 'color:#fff;background:#ee6f57;padding:3px;border-radius:2px',
+      
+        'color:#fff;background:#1f3c88;padding:3px;border-radius:2px', 'color:#fff;background:rgb(252, 157, 154);padding:3px;border-radius:2px', event.clientX)
     } else {
       this.zoomedImag = false;
-      event.clientX > 2450
+      event.clientX > 1906
         ? (this.left = event.clientX - 800)
         : event.clientX > 2400
         ? (this.left = event.clientX - 750)
@@ -420,12 +415,31 @@ export class DTableComponent implements OnInit {
         : event.clientX > 1950
         ? (this.left = event.clientX - 300)
         : event.clientX > 1900
-        ? (this.left = event.clientX - 250)
+        ? (this.left = event.clientX - 550)
         : event.clientX > 1800
-        ? (this.left = event.clientX - 200)
+        ? (this.left = event.clientX - 550)
         : (this.left = event.clientX - 200);
       this.top = event.clientY - 300;
-      this.zoomedImagsrc = '';
+
+
+
+
+
+
+
+      n == 0
+        ? (this.top = event.clientY - 200) :
+          n == 1
+        ? (this.top = event.clientY - 200) :
+
+        ((n > 1) &&( n < (this.o_config.itemsPerPage - 1)))
+          ? (this.top = event.clientY - 300)
+          : this.top = event.clientY - 370;
+     
+     
+     
+     
+       (this.zoomedImagsrc = '');
       this.zoomedImagindex = -1;
       this.show_file_data = true;
       this.zoomedImagModalsrc = i;
@@ -567,7 +581,7 @@ export class DTableComponent implements OnInit {
     clearTimeout(this.setTimeOutId);
     this.setTimeOutId = setTimeout(() => {
       this.refreshActive = false;
-    }, 5050);
+    }, 2050);
   }
   onAdd() {
     this.onAddClick.emit();

@@ -8,6 +8,7 @@ import {
   AfterViewInit,
   OnChanges,
 } from '@angular/core';
+import { trackByHourSegment } from 'angular-calendar/modules/common/util/util';
 import { isThisQuarter } from 'date-fns';
 import { addArrays } from 'src/app/shared/global/filter-tool';
 import { filterParameter } from 'src/app/shared/models/List.model';
@@ -39,8 +40,9 @@ export class FilterTextRuleTemplateComponent implements OnInit, AfterViewInit {
     inputValueTwo: '',
   };
 
+
   clear: any = () => (
-    (this.apleyFiler = false), this.outParameter.emit({}), this.apply()
+    (this.apleyFiler = false), this.outParameter.emit(), this.apply()
   );
 
   ngAfterViewInit(): void {
@@ -57,16 +59,17 @@ export class FilterTextRuleTemplateComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {}
   outDataFunctionOne(a: any) {
     this.filterOne = a;
-    this.apply();
+ 
   }
   outDataFunctionTwo(a: any) {
     this.filterTwo = a;
-    this.apply();
+
   }
   sectiontwoF() {
     this.parameter.sectiontwo = !this.parameter.sectiontwo;
   }
   apply() {
+    
     if (this.apleyFiler) {
       if (this.parameter.sectiontwo) {
         this.parameter.MatchType == 'match any'
@@ -86,6 +89,7 @@ export class FilterTextRuleTemplateComponent implements OnInit, AfterViewInit {
     } else {
       this.outData.emit(this.inData);
     }
+
   }
   sendParameter: any = () => this.outParameter.emit(this.parameter);
 }

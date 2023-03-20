@@ -30,11 +30,11 @@ export class SortComponent implements OnInit {
   constructor() {}
   ngOnInit(): void {}
   ngOnChanges(changes: SimpleChanges): void {
-    this.sort_by_name_value = 'sort';
+    // this.sort_by_name_value = 'sort';
   }
-  sort_by_number_value: string = 'sort';
-  sort_by_name_value: string = 'sort';
-  sort_by_date_value: string = 'sort';
+  sort_by_number_value: string = 'sort-down';
+  sort_by_name_value: string = 'sort-down';
+  sort_by_date_value: string = 'sort-down';
 
   sortByNumberFunction(): any {
     if (this.sort_by_number_value == 'sort-up') {

@@ -27,6 +27,7 @@ export class TableV5Component {
       persentage: 10,
       age: 24,
       templet: [
+      
         {
           _id: 1,
           img: '../../assets/images/Zinzu Chan Lee.jpg',
