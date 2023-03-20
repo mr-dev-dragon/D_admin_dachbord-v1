@@ -291,7 +291,7 @@ export class DTableComponent implements OnInit {
       this.cols = this.config.data.headers || [];
       this.data = this.config.data.data;
       this.selectedItems = this.data.filter((item: any) => item.selected);
-      if (
+    if (
         this.captionConfig?.selectionType == 'single' &&
         this.selectedItems.length
       )
