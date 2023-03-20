@@ -42,7 +42,6 @@
           {{ "not equals" | translate | titlecase }}
         </option>
       </select>
-
       <filter-by-text
         [clearfilter]="clearfilter"
         [type]="'text'"
@@ -54,9 +53,8 @@
         (outinputValue)="inputVlueFunctionOne($event) ;"
         [inputvalue]="parameter.inputValueOne"
       ></filter-by-text>
-
     </section>
-    <section class="mb-3 mt-3 add_remove_item">
+    <!-- <section class="mb-3 mt-3 add_remove_item">
       <button
         *ngIf="parameter.sectiontwo"
         (click)="sectiontwoF();  "
@@ -68,7 +66,8 @@
           <i class="pi add-icon pi-times-circle"></i>
         </span>
       </button>
-    </section>
+    </section> -->
+    <hr *ngIf="parameter.sectiontwo" />
     <section
       [ngClass]="{
         show: parameter.sectiontwo,
@@ -78,7 +77,6 @@
     >
             <select
               [(ngModel)]="parameter.filterTypeTwo"
-        
               class="s-t-input-group form-select mt-3 mb-3"
               aria-label="Default select example"
             >
@@ -99,19 +97,16 @@
               {{ "not equals" | translate | titlecase }}
             </option>
           </select>
-
       <filter-by-text
-
         [clearfilter]="clearfilter"
         [label]="'search'"
         [path]="path"
-        [inData]="inData"
+        [inData]="parameter.MatchType == 'match any' ? inData : filterOne"
         (outData)="outDataFunctionTwo($event)"
         [rule]="parameter.filterTypeTwo"
         (outinputValue)="inputVlueFunctionTwo($event) ;"
         [inputvalue]="parameter.inputValueTwo"
       ></filter-by-text>
-
     </section>
   </div>
   <section class="mb-3 mt-3 add_remove_item">

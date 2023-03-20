@@ -39,18 +39,16 @@ import { UndoDeleteDialogService } from 'src/app/shared/services/undo-delete-dia
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class DTableComponent implements OnInit {
-  headerfilterValue: string=''
-
+  headerfilterValue: string = '';
   filtersCunte: number = 0;
   gitFilerParameterNameId: (a: any[]) => string = (a) => a.join('');
   filterParameter: Map<any, any> = new Map();
   var: any = [];
   selectedAllRowVal: any;
   ture: any;
-
   outParameter(event: Event, id: string) {
     this.filterParameter.set(id, event);
-    this.var.push({ id: id, data: event });
+    // this.var.push({ id: id, data: event });
   }
   log = console.log;
   filterMap = new Map();
@@ -60,7 +58,6 @@ export class DTableComponent implements OnInit {
     let per: string = 'default';
     this.filterMap.set(per, this.data);
     this._selectedColumns.map((o: any, i: any) => {
-      console.log(o, i);
       if (o.filter) {
         this.filterMap.set(i, this.data);
         this.filterMap.set(`${i}--per`, per);
@@ -70,9 +67,8 @@ export class DTableComponent implements OnInit {
     });
     this.filterMap.set('outData', per);
   }
-
   clearfunction(table?: any) {
-    this.headerfilterValue=''
+    this.headerfilterValue = '';
     this._selectedColumns = this.columns;
     this.clearfilterActive = false;
     this.filterParameter.clear();
@@ -83,6 +79,7 @@ export class DTableComponent implements OnInit {
     if (id == this.filtersCunte) {
       this.selectedRow.clear();
       this.selectedAllRowVal = false;
+      this.o_config.currentPage = 1;
     }
   }
   dataLenth: number = 0;
@@ -390,11 +387,9 @@ export class DTableComponent implements OnInit {
       this.zoomedImag = true;
       this.zoomedImagsrc = i;
       this.zoomedImagindex = n;
-
       console.log(
         '%cMyProject%cline:389%cevent.clientX)',
         'color:#fff;background:#ee6f57;padding:3px;border-radius:2px',
-
         'color:#fff;background:#1f3c88;padding:3px;border-radius:2px',
         'color:#fff;background:rgb(252, 157, 154);padding:3px;border-radius:2px',
         event.clientX
@@ -429,7 +424,6 @@ export class DTableComponent implements OnInit {
         ? (this.left = event.clientX - 550)
         : (this.left = event.clientX - 200);
       this.top = event.clientY - 300;
-
       n == 0
         ? (this.top = event.clientY - 200)
         : n == 1
@@ -437,7 +431,6 @@ export class DTableComponent implements OnInit {
         : n > 1 && n < this.o_config.itemsPerPage - 1
         ? (this.top = event.clientY - 300)
         : (this.top = event.clientY - 370);
-
       this.zoomedImagsrc = '';
       this.zoomedImagindex = -1;
       this.show_file_data = true;

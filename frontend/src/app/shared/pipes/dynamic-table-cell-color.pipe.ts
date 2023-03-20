@@ -17,6 +17,9 @@ export class DynamicTableCellColorPipe implements PipeTransform {
           val.inc.some((v: any) => value.includes(v)) && (color = key);
         } else {
           value.includes(val.inc) && (color = key);
+          console.log(color);
+     
+          
         }
       } else {
         if (val instanceof Array) {

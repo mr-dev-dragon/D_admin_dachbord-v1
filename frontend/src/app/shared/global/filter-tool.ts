@@ -45,7 +45,13 @@ function addArrays<T = any>(arr1: T[], arr2: T[], merge = true): T[] {
 //             ? a > b
 //             : o == '<' || o == '<' || o == 'less then'
 //               ? a < b
-//                : false;
+//               : false;
+               
+
+
+
+
+
 function calcPercent(defaultValue: number, newValue: number): number {
   return (newValue / defaultValue) * 100;
 }

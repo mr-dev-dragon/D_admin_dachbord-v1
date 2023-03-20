@@ -33,18 +33,15 @@ export class FilterTextRuleTemplateComponent implements OnInit, AfterViewInit {
   @Input() inParameter!: filterParameter;
   @Output() outParameter: EventEmitter<any> = new EventEmitter();
   parameter!: filterParameter;
-
   clear() {
     this.apleyFiler = false;
     this.outParameter.emit(null);
-    this.apply();
     this.parameter.inputValueOne = '';
     this.parameter.inputValueTwo = '';
     this.inputVlueFunctionOne('');
     this.inputVlueFunctionTwo('');
-
+    this.apply();
   }
-
   ngOnChanges(change: SimpleChanges) {
     if (change['inData']) {
       this.apply();
@@ -76,44 +73,36 @@ export class FilterTextRuleTemplateComponent implements OnInit, AfterViewInit {
           inputValueTwo: '',
         });
   }
-
   inputVlueFunctionOne(a: any) {
     this.parameter.inputValueOne = a;
   }
-
   inputVlueFunctionTwo(a: any) {
     this.parameter.inputValueTwo = a;
   }
-
   ngOnInit(): void {}
-
   outDataFunctionOne(a: any) {
     this.filterOne = a;
-
   }
   outDataFunctionTwo(a: any) {
     this.filterTwo = a;
- 
   }
   sectiontwoF() {
     this.parameter.sectiontwo = !this.parameter.sectiontwo;
   }
   apply() {
-
     if (this.apleyFiler) {
-  
       if (this.parameter.sectiontwo) {
-        this.parameter.MatchType == 'match any'
-          ? (this.allFeltedData = addArrays<string>(
-              this.filterOne,
-              this.filterTwo
-            ))
-          : (this.allFeltedData = addArrays<string>(
-              this.filterOne,
-              this.filterTwo,
-              false
-            ));
-        this.outData.emit(this.allFeltedData);
+        // this.allFeltedData = addArrays<string>(
+        //   this.filterOne,
+        //   this.filterTwo,
+        //   this.parameter.MatchType == 'match any'
+        // );
+        // this.outData.emit(this.allFeltedData);
+        this.outData.emit(
+          this.parameter.MatchType == 'match any'
+            ? addArrays<string>(this.filterOne, this.filterTwo)
+            : this.filterTwo
+        );
       } else if (!this.parameter.sectiontwo) {
         this.outData.emit(this.filterOne);
       }

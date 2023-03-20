@@ -1,5 +1,11 @@
-
-import { Component, EventEmitter, Input, Output,  OnChanges, SimpleChanges  } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  OnChanges,
+  SimpleChanges,
+} from '@angular/core';
 import { g, removeAccent } from 'src/app/shared/global/filter-tool';
 @Component({
   selector: 'filter-by-text',
@@ -28,41 +34,37 @@ export class FilterTextComponent implements OnChanges {
   ngOnChanges(change: SimpleChanges): void {
     if (change['rule'] || change['inData']) {
       this.filterConfige();
-      console.log('ssssssssssssssssssssssssssssssssssssssssssss')
+      console.log('ssssssssssssssss');
     }
     if (change['inputvalue']) {
       this.inputVal == this.inputvalue;
       if (this.inputvalue == '') {
         this.outData.emit(this.inData);
-        this.inputVal = ''
-         this.filterConfige(); 
-      } 
-
-        
+        this.inputVal = '';
+        this.filterConfige();
+      }
     }
   }
-
   ngAfterViewInit(): void {
     this.outData.emit(this.inData);
     this.inputVal ||= this.inputvalue;
   }
-
   filterConfige() {
     this.outinputValue.emit(this.inputVal);
     clearTimeout(this.setTimeOutId);
     this.setTimeOutId = setTimeout(() => {
       let filterInputValue = this.inputVal;
-      if (filterInputValue && this.path && this.inData) {
+      if (filterInputValue != '' && this.path && this.inData) {
         let reusltdata = this.filter(filterInputValue);
         this.outData.emit(reusltdata);
       } else if (filterInputValue == '') this.outData.emit(this.inData);
-    }, 150);
+    }, 350);
   }
   filter(filterInputValue: string) {
-    return this.inData.filter((i) =>
+    return this.inData.filter((item) =>
       this.path instanceof Array
-        ? this.path.some((k) => this.find(g(k, i), filterInputValue))
-        : this.find(g(this.path, i), filterInputValue)
+        ? this.path.some((key) => this.find(g(key, item), filterInputValue))
+        : this.find(g(this.path, item), filterInputValue)
     );
   }
   find(findIn: string, findBy: string): boolean {
@@ -83,7 +85,9 @@ export class FilterTextComponent implements OnChanges {
         return !findIn.includes(findBy);
       case 'contains':
         return findIn.includes(findBy);
+      default:
+        console.error('no rule for  matching');
+        return false;
     }
   }
 }
-
