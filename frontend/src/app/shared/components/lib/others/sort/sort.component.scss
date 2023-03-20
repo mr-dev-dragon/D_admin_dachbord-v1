@@ -20,13 +20,13 @@
         height: fit-content;
         margin-block: auto;
         border: none;
-        padding: 10px;
+        padding: 7px;
         border-radius: 10px;
         margin: auto;
         align-items: center;
         display: flex;
         flex-direction: row;
-        gap: 10px;
+        gap: 5px;
         background-color: #fff5;
         box-shadow:
           rgba(54, 54, 54, 0.25) 0px 54px 55px,
@@ -42,14 +42,15 @@
 
         .sort-lable {
           font-weight: 300;
+          font-size: 15px;
           color: #3d3d3d;
 
         }
 
         .sort-icon {
           color: #222222;
-          height: 2rem;
-          width: 2rem;
+          height: 1.2rem;
+          width: 1.2rem;
         }
       }
     }

@@ -366,7 +366,7 @@
                     </ng-container>
                     <h1 class="s-t-th-label">{{ col?.header | titlecase }}</h1>
                     <div
-                      class="popUp"
+                      class="popUpsort"
                       [ngClass]="{
                         'd-block':
                           openedPopupTr.getAttribute('openedPopupSort') ==
@@ -385,10 +385,12 @@
                           _selectedColumns.length - 1 == i
                             ? '-165px'
                             : _selectedColumns.length - 2 == i
-                            ? '-100px'
+                            ? '0px'
                             : _selectedColumns.length - 3 == i
                             ? '0px'
-                            : '50%'
+                            : '-0%'
+                           
+
                       }"
                       [ngSwitch]="col.filterType"
                     >
