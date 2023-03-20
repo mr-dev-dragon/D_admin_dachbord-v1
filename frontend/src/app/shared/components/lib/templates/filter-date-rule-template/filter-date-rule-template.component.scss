@@ -11,18 +11,15 @@
   border: none;
   font-size: 15px;
   color: #a7acb1;
-
   &:focus {
     border: none !important;
   }
-
   &:hover {
     width: 100%;
     box-shadow: none;
     background-color: #fff8;
     box-shadow: 0 .1rem .4rem #0002;
   }
-
   input {
     width: 100%;
     padding: 0 .5rem 0 .3rem;
@@ -30,65 +27,53 @@
     border: none;
     outline: none;
   }
-
   img {
     width: 1.2rem;
     height: 1.2rem;
   }
 }
-
 .footer {
   margin: 2px;
   display: flex;
   justify-content: space-between;
-
   button {
     border-radius: .5rem;
     padding: .2rem;
   }
-
   button:first-child {
     border: 1px #1a78c084 solid;
     color: #5d5d5d;
-
     &:hover {
       color: #373737;
       border: 1px #1a78c0ed solid;
     }
   }
-
   button:last-child {
     border: none !important;
     background-color: #6c28d98d;
     color: #ffffffd1;
-
     &:hover {
       background-color: #6c28d9db;
       color: #ffffff;
     }
   }
 }
-
 .p-button-label {
   font-size: 15px;
   display: flex;
   display: flex;
-
   i {
     font-size: 15px;
   }
-
   p {
     font-size: 15px;
     align-items: center;
     margin: auto;
   }
 }
-
 .add_remove_item {
   width: 100%;
   display: flex;
-
   .__btn {
     margin: auto;
     padding: 0.1rem;
@@ -98,24 +83,19 @@
     color: #169159d7;
     border-radius: 1rem;
     font-size: 10px;
-
     &:hover {
       border: #27b14cf0 1px solid;
       color: #16915aee;
     }
-
     p {
       font-size: 15px;
       font-weight: 600;
     }
-
     .add-icon {
       font-size: 25px;
     }
-
     &:hover {}
   }
-
   ._btn {
     margin: auto;
     padding: 0.1rem;
@@ -125,51 +105,40 @@
     color: #b14343bd;
     border-radius: 1rem;
     font-size: 10px;
-
     &:hover {
       border: #ad4040 1px solid;
       color: #b14343;
     }
-
     .add-icon {
       font-size: 25px;
     }
-
     &:hover {}
   }
 }
-
 .add-btn {}
-
 .sectiontwo {
   transition: ease-in-out 2s;
 }
-
 .hide {
   display: none;
 }
-
 .show {
   display: block;
 }
-
 @keyframes slideaway {
   from {
     display: block;
   }
-
   to {
     transform: translateY(40px);
     opacity: 0;
   }
 }
-
 .hide {
   transition: opacity 200ms, display 200ms;
   display: none;
   opacity: 0;
 }
-
 select {
   option {
     color: #595959;

@@ -33,7 +33,7 @@ export class FilterTextComponent implements OnChanges {
   setTimeOutId: any = -1;
   ngOnChanges(change: SimpleChanges): void {
     if (change['rule'] || change['inData']) {
-      this.filterConfige();
+      this.filterConfige(this.inputVal);
       console.log('ssssssssssssssss');
     }
     if (change['inputvalue']) {
@@ -41,19 +41,19 @@ export class FilterTextComponent implements OnChanges {
       if (this.inputvalue == '') {
         this.outData.emit(this.inData);
         this.inputVal = '';
-        this.filterConfige();
+        this.filterConfige(this.inputVal);
       }
     }
   }
   ngAfterViewInit(): void {
     this.outData.emit(this.inData);
-    this.inputVal ||= this.inputvalue;
+    this.inputvalue && (this.inputVal = this.inputvalue);
   }
-  filterConfige() {
-    this.outinputValue.emit(this.inputVal);
+  filterConfige(a: any) {
+    this.outinputValue.emit(a);
     clearTimeout(this.setTimeOutId);
     this.setTimeOutId = setTimeout(() => {
-      let filterInputValue = this.inputVal;
+      let filterInputValue = a;
       if (filterInputValue != '' && this.path && this.inData) {
         let reusltdata = this.filter(filterInputValue);
         this.outData.emit(reusltdata);

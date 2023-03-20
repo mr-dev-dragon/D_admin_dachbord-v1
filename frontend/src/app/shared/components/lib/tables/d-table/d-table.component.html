@@ -108,6 +108,7 @@
             [path]="captionConfig.headerFilterfield"
             (outData)="
               onDataChange('default', $event);
+              log(' text header ==>', filterMap)
             "
 yy
           >
@@ -489,7 +490,7 @@ yy
                           [path]="col.field"
                           [inData]="filterMap.get(filterMap.get(i + '--per'))"
                           (outData)="
-                            onDataChange(i, $event);
+                            onDataChange(i, $event); log('text == >', filterMap)
                           "
                         >
                         </filter-text-rule-template>
@@ -522,6 +523,7 @@ yy
                           [path]="col.field"
                           (outData)="
                             onDataChange(i, $event);
+                            log(' numeric ==>', filterMap)
                           "
                         >
                         </filter-number-rule-template>
@@ -553,6 +555,7 @@ yy
                           "
                           (outData)="
                             onDataChange(i, $event);
+                            log(' chips ==>', filterMap)
                           "
                         >
                         </filter-by-tag>
@@ -584,6 +587,7 @@ yy
                           [path]="col.field"
                           (outData)="
                             onDataChange(i, $event);
+                            log(' percentage ==>', filterMap)
                           "
                         >
                         </filter-percentage>
@@ -616,6 +620,7 @@ yy
                           [path]="col.field"
                           (outData)="
                             onDataChange(i, $event);
+                            log(' range ==>', filterMap)
                           "
                         >
                         </filter-by-range>
@@ -648,6 +653,7 @@ yy
                           "
                           (outData)="
                             onDataChange(i, $event);
+                            log('boolean ==>', filterMap)
                           "
                         >
                         </filter-by-boolean>
@@ -678,7 +684,7 @@ yy
                           [label]="'date'"
                           [path]="col.field"
                           (outData)="
-                            onDataChange(i, $event);
+                            onDataChange(i, $event); log(' date ==>', filterMap)
                           "
                         >
                         </filter-text-rule-template>
@@ -725,6 +731,7 @@ yy
                           [path]="col.field"
                           (outData)="
                             onDataChange(i, $event);
+                            log(' email ==>', filterMap)
                           "
                         >
                         </filter-text-rule-template>
@@ -756,6 +763,7 @@ yy
                           [path]="col.field"
                           (outData)="
                             onDataChange(i, $event);
+                            log('address ==>', filterMap)
                           "
                         >
                         </filter-text-rule-template>
@@ -787,6 +795,7 @@ yy
                           [path]="col.field"
                           (outData)="
                             onDataChange(i, $event);
+                            log(' price ==>', filterMap)
                           "
                         >
                         </filter-text-rule-template>
@@ -818,6 +827,7 @@ yy
                           [path]="col.field"
                           (outData)="
                             onDataChange(i, $event);
+                            log(' phone ==>', filterMap)
                           "
                         >
                         </filter-text-rule-template>
@@ -849,6 +859,7 @@ yy
                           [inData]="filterMap.get(filterMap.get(i + '--per'))"
                           (outData)="
                             onDataChange(i, $event);
+                            log(' multiSelect ==>', filterMap)
                           "
                         >
                         </filter-By-multiSelect>
@@ -880,6 +891,7 @@ yy
                           [inData]="filterMap.get(filterMap.get(i + '--per'))"
                           (outData)="
                             onDataChange(i, $event);
+                            log('template ==>', filterMap)
                           "
                         >
                         </filter-By-template>

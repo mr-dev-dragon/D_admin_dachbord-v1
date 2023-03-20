@@ -75,16 +75,31 @@ export class FilterTextRuleTemplateComponent implements OnInit, AfterViewInit {
   }
   inputVlueFunctionOne(a: any) {
     this.parameter.inputValueOne = a;
+          console.log(
+            
+            'value of a',
+            a
+          );
+     console.log('value of a', this.parameter.inputValueOne);
   }
   inputVlueFunctionTwo(a: any) {
     this.parameter.inputValueTwo = a;
+      console.log(
+        '%cMyProject%cline:84%ca',
+        'color:#fff;background:#ee6f57;padding:3px;border-radius:2px',
+        'color:#fff;background:#1f3c88;padding:3px;border-radius:2px',
+        'color:#fff;background:rgb(20, 68, 106);padding:3px;border-radius:2px',
+        a
+      );
   }
   ngOnInit(): void {}
   outDataFunctionOne(a: any) {
     this.filterOne = a;
+
   }
   outDataFunctionTwo(a: any) {
     this.filterTwo = a;
+  
   }
   sectiontwoF() {
     this.parameter.sectiontwo = !this.parameter.sectiontwo;

@@ -103,6 +103,10 @@ export class DTableComponent implements OnInit {
   //   this.filterConcataytions.set(id, event);
   // }
   // #region  call dom Elemants
+
+
+
+  
   @ViewChild('dt') dataTable!: Table;
   @ViewChildren('i') exRowIcon!: QueryList<ElementRef>;
   @ContentChild('expandedRow', { static: false })

@@ -40,12 +40,12 @@
     <section *ngIf="sectiontwo">
       <br>
       <select [(ngModel)]="filterTypeTwo" class=" s-t-input-group form-select mt-3 mb-3" aria-label="Default select example">
-        <option value='=='> {{ 'equals'                         |translate |titlecase}}</option>
-        <option value='!='> {{ 'not equals'                     |translate |titlecase}}</option>
-        <option value='<'>  {{ 'less then'                      |translate |titlecase}}</option>
-        <option value='<='> {{ 'less then or equl equals'       |translate |titlecase}}</option>
-        <option value='>'>  {{ 'greater then'                   |translate |titlecase}}</option>
-        <option value='>='> {{ 'greater then or equl equals'    |translate |titlecase}}</option>
+        <option value='=='> {{ 'equals'                     |translate | titlecase}}</option>
+        <option value='!='> {{ 'not equals'                 |translate | titlecase}}</option>
+        <option value='<'>  {{ 'less then'                  |translate | titlecase}}</option>
+        <option value='<='> {{ 'less then or equl equals'   |translate | titlecase}}</option>
+        <option value='>'>  {{ 'greater then'               |translate | titlecase}}</option>
+        <option value='>='> {{ 'greater then or equl equals'|translate | titlecase}}</option>
       </select>
 
       <filter-by-date
