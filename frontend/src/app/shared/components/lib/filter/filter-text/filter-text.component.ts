@@ -27,7 +27,7 @@ export class FilterTextComponent implements OnChanges {
     | 'not Contains'
     | 'end with'
     | 'equals'
-    | 'not equals' = 'starts with';
+    | 'not equals' = 'contains';
   pevinData: any;
   inputVal: string = '';
   setTimeOutId: any = -1;
@@ -59,18 +59,39 @@ export class FilterTextComponent implements OnChanges {
       } else if (filterInputValue == '') this.outData.emit(this.inData);
     }, 350);
   }
+
   filter(filterInputValue: string) {
+  
+//         let tresult = this.inData.filter((item) =>
+//            this.path instanceof Array
+//             ? this.path.some(
+//               (key: string) =>
+//                  this.find(g(key, item), filterInputValue))
+               
+             
+//              : this.find(g(this.path, item), filterInputValue)
+//          );
+//   console.log(tresult);
+// return tresult;  
+
     return this.inData.filter((item) =>
       this.path instanceof Array
-        ? this.path.some((key) => this.find(g(key, item), filterInputValue))
+        ? this.path.some((key: string) =>
+            this.find(g(key, item), filterInputValue)
+        )
         : this.find(g(this.path, item), filterInputValue)
     );
+  
   }
-  find(findIn: string, findBy: string): boolean {
+  find(findIn: any, findBy: string): boolean {
     if (!(findIn && findBy)) return false;
-    findIn = removeAccent(findIn.toLowerCase());
-    findBy = removeAccent(findBy.toLowerCase());
-    // let [first, ...other] = findBy.split('');
+        findIn = findIn.toString()
+    findIn = removeAccent(findIn);
+    
+    findBy = removeAccent(findBy);
+    console.log('findIn.includes=>', findIn, findIn.includes(findBy), findBy);
+   // let [first, ...other] = findBy.split('');
+        console.log(this.rule);
     switch (this.rule) {
       case 'starts with':
         return findIn.startsWith(findBy);
@@ -88,5 +109,7 @@ export class FilterTextComponent implements OnChanges {
         console.error('no rule for  matching');
         return false;
     }
+
+    
   }
 }

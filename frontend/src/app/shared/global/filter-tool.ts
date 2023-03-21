@@ -8,8 +8,12 @@ function g(path: string, data: any): any {
   }
   return data;
 }
-function  removeAccent(s: any) {
+
+
+function removeAccent(s: any) {
+   
   var r = s.toLowerCase();
+  
   r = r.replace(new RegExp('-', 'g'), ' ');
   r = r.replace(new RegExp('_', 'g'), ' ');
   r = r.replace(new RegExp('[àáâãäå]', 'g'), 'a');
