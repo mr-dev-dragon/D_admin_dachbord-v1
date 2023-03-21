@@ -16,27 +16,37 @@ export class FilterNumberComponent {
   inputVal: number = 0;
   setTimeOutId: any = -1;
 
+
+
   ngOnChanges(change: SimpleChanges): void {
     if (change['rule'] || change['inData']) {
-      this.filterConfige();
+      this.filterConfige(this.inputVal);
+    }
+    if (change['inputvalue']) {
+      this.inputVal == this.inputvalue;
+      if (this.inputvalue == 0) {
+        this.outData.emit(this.inData);
+        this.inputVal = 0;
+        this.filterConfige(this.inputVal);
+      }
     }
   }
   ngAfterViewInit(): void {
     this.outData.emit(this.inData);
-    this.inputVal ||= this.inputvalue;
+    this.inputvalue && (this.inputVal = this.inputvalue);
   }
 
-  filterConfige() {
-    this.outinputValue.emit(this.inputVal);
+  filterConfige(a:any) {
+    this.outinputValue.emit(a);
     clearTimeout(this.setTimeOutId);
     this.setTimeOutId = setTimeout(() => {
-      let filterInputValue: any = this.inputVal;
+      let filterInputValue: any = a;
 
       if (filterInputValue && this.path && this.inData) {
         let reusltdata = this.filter(filterInputValue, this.rule);
         this.outData.emit(reusltdata);
       } else if (!filterInputValue) this.outData.emit(this.inData);
-    }, 150);
+    }, 350);
   }
 
   filter(filterInputValue: any, operator: string) {
@@ -62,5 +72,6 @@ export class FilterNumberComponent {
     });
 
     return reusltdata;
+    
   }
 }

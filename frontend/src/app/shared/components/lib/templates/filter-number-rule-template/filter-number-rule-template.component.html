@@ -63,11 +63,11 @@
             [clearfilter]="clearfilter"
             [label]="'search'"
             [path]="path"
-            [inData]="inData"
             (outData)="outDataFunctionTwo($event)"
             [rule]="parameter.filterTypeTwo"
             (outinputValue)="inputVlueFunctionTwo($event) "
             [inputvalue]="parameter.inputValueTwo"
+            [inData]="parameter.MatchType == 'match any' ? inData : filterOne"
           > 
       </filter-by-number>
     </section>

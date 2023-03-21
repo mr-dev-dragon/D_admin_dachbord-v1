@@ -67,7 +67,24 @@
       </ng-template>
     </ng-container>
   </p-splitter>
-</ng-template>
+</ng-template> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -170,3 +187,132 @@
     </ng-container>
   </p-splitter>
 </ng-template> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <br>
+ <hr>
+
+
+
+
+<div class="continer">
+  <ng-container
+    *ngTemplateOutlet="splitterRow; context: { $implicit: this.row }"
+  ></ng-container>
+</div>
+
+
+
+
+<ng-template #splitterRow let-row let-index let-updateValue>
+  <div
+    *ngIf="row.length > 1"
+    styleClass="mb-5"
+    [style]="{ height: '100%' }"
+    layout="vertical">
+    <ng-container *ngFor="let o of row">
+      <ng-container *ngIf="o.map; else elseBlock">
+        <ng-template pTemplate>
+          <ng-container *ngTemplateOutlet="splitterRow; context: { $implicit: o }">
+          </ng-container>
+        </ng-template>
+      </ng-container>
+      <ng-template #elseBlock>
+        <ng-template pTemplate>
+          <ng-container *ngTemplateOutlet="splitterCol; context: { $implicit: this.col }"
+          ></ng-container>
+        </ng-template>
+      </ng-template>
+    </ng-container>
+  </div>
+</ng-template>
+<ng-template #splitterCol let-col>
+  <div
+    *ngIf="col.length > 1"
+    [style]="{ height: '100%' }"
+    styleClass="mb-5"
+    >
+    <ng-container *ngFor="let o of col; let i = index">
+      <ng-container *ngIf="o.map; else elseBlock">
+        <ng-template pTemplate>
+          <ng-container *ngTemplateOutlet="splitterCol; context: { $implicit: o }">
+          </ng-container>
+        </ng-template>
+      </ng-container>
+      <ng-template #elseBlock>
+        <ng-template pTemplate> {{ o }} {{ resizwvalue | json }} </ng-template>
+      </ng-template>
+    </ng-container>
+  </div>
+</ng-template>
+
+
+
+
+
+
+
+
+
+
+

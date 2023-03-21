@@ -37,7 +37,7 @@ import { TablesV1Component } from 'src/app/components/tables-example/tables-v1/t
 // import { DinamicColComponent } from '../components/lib/sections/dinamic-col/dinamic-col.component';
 // import { DColExComponent } from 'src/app/components/section-ex/d-col-ex/d-col-ex.component';
 // import { SelfCloseSectionExComponent } from 'src/app/components/section-ex/self-close-section-ex/self-close-section-ex.component';
-// import { DZoonSictionExComponent } from 'src/app/components/section-ex/dzoon-siction-ex/dzoon-siction-ex.component';
+import { DZoonSictionExComponent } from 'src/app/components/section-ex/dzoon-siction-ex/dzoon-siction-ex.component';
 export const content: Routes = [
   {
     path: 'dashboard',
@@ -245,36 +245,36 @@ export const content: Routes = [
   //     },
   //   ],
   // },
-  // {
-  //   path: 'sections',
-  //   children: [
-  //     {
-  //       path: 'self-close-section',
+  {
+    path: 'sections',
+    children: [
+      // {
+      //   path: 'self-close-section',
 
-  //       component: SelfCloseSectionExComponent,
-  //     },
-  //     {
-  //       path: 'd-zoon-section',
-  //       component: DZoonSictionExComponent,
-  //     },
-  //     {
-  //       path: 'd-col-section',
-  //       component: DColExComponent,
-  //     },
-  //   ],
-  // },
-  // {
-  //   path: 'configuration',
-  //   loadChildren: () =>
-  //     import('../../components/configuration/configuration.module').then(
-  //       (m) => m.ConfigurationModule
-  //     ),
-  //   data: {
-  //     title: 'menu.configuration',
-  //     type: 'module',
-  //     menu: true,
-  //   },
-  // },
+      //   component: SelfCloseSectionExComponent,
+      // },
+      {
+        path: 'd-zoon-section',
+        component: DZoonSictionExComponent,
+      },
+      // {
+      //   path: 'd-col-section',
+      //   component: DColExComponent,
+      // },
+    ],
+  },
+  {
+    path: 'configuration',
+    loadChildren: () =>
+      import('../../components/configuration/configuration.module').then(
+        (m) => m.ConfigurationModule
+      ),
+    data: {
+      title: 'menu.configuration',
+      type: 'module',
+      menu: true,
+    },
+  },
   {
     path: 'PageNotFound',
     component: Page404Component,
