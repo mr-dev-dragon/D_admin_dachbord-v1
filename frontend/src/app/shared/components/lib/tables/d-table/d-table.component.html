@@ -105,12 +105,11 @@
             "
             [type]="captionConfig.headerFilterType"
             [inData]="data"
-            [path]="captionConfig.headerFilterfield"
+            [path]="allPath"
             (outData)="
               onDataChange('default', $event);
               log(' text header ==>', filterMap)
             "
-yy
           >
           </filter-by-text>
         </div>
@@ -122,7 +121,7 @@ yy
             ></i>
           </button> -->
           <button
-            *ngIf="filterParameter.size !=0"
+            *ngIf="filterParameter.size != 0"
             type="button"
             pButton
             pRipple
@@ -271,17 +270,7 @@ yy
                   </div>
                 </th>
               </ng-container>
-              <ng-container *ngIf="!(_selectedColumns.length == 0)">
-                <th class="s-t-th" *ngIf="captionConfig.rowNamber">
-                  <div class="s-t-th-conteainer">
-                    <ng-container>
-                      <h1 class="s-t-th-label">
-                        {{ "n" | titlecase }}
-                      </h1>
-                    </ng-container>
-                  </div>
-                </th>
-              </ng-container>
+
               <ng-container *ngIf="!(_selectedColumns.length == 0)">
                 <th
                   class="s-t-th"
@@ -302,6 +291,17 @@ yy
                     >
                       <h1 class="s-t-th-label">
                         {{ "exP" | titlecase }}
+                      </h1>
+                    </ng-container>
+                  </div>
+                </th>
+              </ng-container>
+              <ng-container *ngIf="!(_selectedColumns.length == 0)">
+                <th class="s-t-th" *ngIf="captionConfig.rowNamber">
+                  <div class="s-t-th-conteainer">
+                    <ng-container>
+                      <h1 class="s-t-th-label">
+                        {{ "n" | titlecase }}
                       </h1>
                     </ng-container>
                   </div>
@@ -347,27 +347,25 @@ yy
                           tooltipPosition="left"
                           pTooltip="{{ 'sort' | titlecase | translate }}"
                         >
-                           <app-sort
-                              [data]="filterMap.get(filterMap.get('outData'))"
-                              [path]="col.field"
-                              [sortByName]="  
-                                      col.filterType == 'chips' ||
-                                      col.filterType == 'text'  ||
-                                      col.filterType == 'price' ||
-                                      col.filterType == 'phone' ||
-                                      col.filterType == 'email' ||
-                                      col.filterType == 'address' 
-                              "
-                              [sortByDate]="  
-                                      col.filterType == 'date'
-                              "
-                              [sortByNumber]="
-                                      col.filterType == 'numeric'||
-                                      col.filterType == 'range'  ||
-                                      col.filterType == 'percentage'
-                              "
-                            >
-                            </app-sort> 
+                          <app-sort
+                            [data]="filterMap.get(filterMap.get('outData'))"
+                            [path]="col.field"
+                            [sortByName]="
+                              col.filterType == 'chips' ||
+                              col.filterType == 'text' ||
+                              col.filterType == 'price' ||
+                              col.filterType == 'phone' ||
+                              col.filterType == 'email' ||
+                              col.filterType == 'address'
+                            "
+                            [sortByDate]="col.filterType == 'date'"
+                            [sortByNumber]="
+                              col.filterType == 'numeric' ||
+                              col.filterType == 'range' ||
+                              col.filterType == 'percentage'
+                            "
+                          >
+                          </app-sort>
                         </button>
                       </ng-container>
                     </ng-container>
@@ -414,7 +412,7 @@ yy
                         >
                         </i>
                       </span> -->
-                      <!-- <app-sort
+                    <!-- <app-sort
                         [data]="filterMap.get(filterMap.get('outData'))"
                         [path]="col.field"
                         [sortByName]="true"
@@ -939,7 +937,7 @@ yy
                                 col.filterType,
                                 col.field
                               ])
-                            ) 
+                            )
                               ? 'filterActive'
                               : 's-t-th-btn'
                           "
@@ -1032,33 +1030,7 @@ yy
                         </ng-container>
                       </div>
                     </td>
-                    <td class="numbertd" *ngIf="captionConfig.rowNamber">
-                      <div
-                        style="
-                          margin: auto;
-                          display: flex;
-                          justify-content: center;
-                          align-items: center;
-                          text-align: center;
-                        "
-                      >
-                        <ng-container *ngIf="captionConfig.rowNamber">
-                          <span class="rowMamber"
-                            >{{
-                              this.o_config.currentPage == 1
-                                ? o +
-                                  1 +
-                                  this.o_config.itemsPerPage *
-                                    (this.o_config.currentPage - 1)
-                                : o +
-                                  1 +
-                                  this.o_config.itemsPerPage *
-                                    (this.o_config.currentPage - 1)
-                            }}
-                          </span>
-                        </ng-container>
-                      </div>
-                    </td>
+
                     <td
                       *ngIf="
                         captionConfig.expanded?.dataField ||
@@ -1134,6 +1106,33 @@ yy
                               "
                             ></i>
                           </button>
+                        </ng-container>
+                      </div>
+                    </td>
+                    <td class="numbertd" *ngIf="captionConfig.rowNamber">
+                      <div
+                        style="
+                          margin: auto;
+                          display: flex;
+                          justify-content: center;
+                          align-items: center;
+                          text-align: center;
+                        "
+                      >
+                        <ng-container *ngIf="captionConfig.rowNamber">
+                          <span class="rowMamber"
+                            >{{
+                              this.o_config.currentPage == 1
+                                ? o +
+                                  1 +
+                                  this.o_config.itemsPerPage *
+                                    (this.o_config.currentPage - 1)
+                                : o +
+                                  1 +
+                                  this.o_config.itemsPerPage *
+                                    (this.o_config.currentPage - 1)
+                            }}
+                          </span>
                         </ng-container>
                       </div>
                     </td>
@@ -1415,7 +1414,7 @@ yy
         <ng-container
           *ngIf="
             this.o_config.itemsPerPage >
-            this.filterMap.get(filterMap.get('outData')).length
+            this.filterMap.get(filterMap.get('outData')).length && this.captionConfig.rowFiler
           "
         >
           <div class="plasHildercontinaer dots-bg">
@@ -1437,21 +1436,32 @@ yy
           </div>
         </ng-container>
       </section>
-<!-- *ngIf="filterMap.get(filterMap.get('outData')).length >= o_config.itemsPerPage" -->
+      <!-- *ngIf="filterMap.get(filterMap.get('outData')).length >= o_config.itemsPerPage" -->
       <section class="s-t-footer">
-<div class="d-flex">
-            <div class="tlwindoo">
-                <span class="telwind">
-                                      Courently There Are  <span class="marked">{{filterMap.get(filterMap.get('outData')).length}}</span>  Elements 
-                </span>
-            </div>
-<div class="m-auto">
+        <div class="d-flex">
+          <div class="tlwindoo">
+            <span class="telwind">
+              Courently There Are
+              <span class="marked">{{
+                filterMap.get(filterMap.get("outData")).length
+              }}</span>
+              Elements
+            </span>
+          </div>
+          <div class="m-auto">
             <pagination-template
               #p="paginationApi"
               [id]="o_config.id"
-              (pageChange)="o_config.currentPage = $event" >
+              (pageChange)="o_config.currentPage = $event"
+            >
               <div class="pagination">
-                <div *ngIf="filterMap.get(filterMap.get('outData')).length > o_config.itemsPerPage" class="in-custom-pagination">
+                <div
+                  *ngIf="
+                    filterMap.get(filterMap.get('outData')).length >
+                    o_config.itemsPerPage
+                  "
+                  class="in-custom-pagination"
+                >
                   <div class="in-in-custom-pagination">
                     <div
                       class="pagination-previous"
@@ -1495,8 +1505,15 @@ yy
                         <span>{{ page.label }}</span>
                       </div>
                     </div>
-                    <div class="pagination-next" [class.disabled]="p.isLastPage()">
-                      <a class="next" *ngIf="!p.isLastPage()" (click)="p.next()">
+                    <div
+                      class="pagination-next"
+                      [class.disabled]="p.isLastPage()"
+                    >
+                      <a
+                        class="next"
+                        *ngIf="!p.isLastPage()"
+                        (click)="p.next()"
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           width="25"
@@ -1513,34 +1530,49 @@ yy
                     </div>
                   </div>
                 </div>
-                <div *ngIf=" filterMap.get(filterMap.get('outData')).length < o_config.itemsPerPage  " class="in-custom-pagination">
+                <div
+                  *ngIf="
+                    filterMap.get(filterMap.get('outData')).length <
+                    o_config.itemsPerPage
+                  "
+                  class="in-custom-pagination"
+                >
                   <div class="in-in-custom-pagination">
-                      <span
-                        class="pagination-active"
-                      >
-                        <span>  {{filterMap.get(filterMap.get('outData')).length != 0 ? '1': this.refreshActive? 'refresh  ...': ' no page exist !' }}  </span>
+                    <span class="pagination-active">
+                      <span>
+                        {{
+                          filterMap.get(filterMap.get("outData")).length != 0
+                            ? "1"
+                            : this.refreshActive
+                            ? "refresh  ..."
+                            : " no page exist !"
+                        }}
                       </span>
-                    </div>
+                    </span>
                   </div>
-                    <div class=" in-in-custom-pagination ">
-                       <select   class="pagination-active pageRowsOptionsValue"  [(ngModel)]="o_config.itemsPerPage" >
-                            <option id="option"  [value]="10">10</option>
-                            <option id="option"  [value]="20">20</option>
-                            <option id="option"  [value]="40">40</option>
-                            <option id="option"  [value]="50">50</option>
-                        </select>
-                    </div>
+                </div>
+                <div class="in-in-custom-pagination">
+                  <select
+                    class="pagination-active pageRowsOptionsValue"
+                    [(ngModel)]="o_config.itemsPerPage"
+                  >
+                    <option id="option" [value]="10">10</option>
+                    <option id="option" [value]="20">20</option>
+                    <option id="option" [value]="40">40</option>
+                    <option id="option" [value]="50">50</option>
+                  </select>
+                </div>
               </div>
-            </pagination-template> 
-</div>
-<div class="tilwindii">
-        <span class="telwind">
-             Orignly There Are <span class="marked">{{data.length}}</span>  Elements.
-         </span>
-</div>
-</div>
-        <div>
+            </pagination-template>
+          </div>
+          <div class="tilwindii">
+            <span class="telwind">
+              Orignly There Are
+              <span class="marked">{{ data.length }}</span> Elements.
+            </span>
+          </div>
         </div>
+        <div></div>
       </section>
     </main>
   </div>

@@ -94,12 +94,6 @@ export class FilterTextRuleTemplateComponent implements OnInit, AfterViewInit {
   apply() {
     if (this.apleyFiler) {
       if (this.parameter.sectiontwo) {
-        // this.allFeltedData = addArrays<string>(
-        //   this.filterOne,
-        //   this.filterTwo,
-        //   this.parameter.MatchType == 'match any'
-        // );
-        // this.outData.emit(this.allFeltedData);
         this.outData.emit(
           this.parameter.MatchType == 'match any'
             ? addArrays<string>(this.filterOne, this.filterTwo)

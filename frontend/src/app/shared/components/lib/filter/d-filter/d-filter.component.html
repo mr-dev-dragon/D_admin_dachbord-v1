@@ -2,8 +2,6 @@
 
 
 <container-element [ngSwitch]="type">
-
-
     <ng-container  *ngSwitchCase="'text-header'">
       <div class="s-t-input-group">
         <input (keyup)="filterBySearch()" #search id="saerchBar" aria-label="Search" aria-describedby="search-addon"
@@ -23,9 +21,6 @@
       </div>
     </ng-container>
     <ng-container  *ngSwitchCase="'numeric'">
-
-
-
       <div class="lai">
         <label for="numberSaerchBar">{{ label }}</label>
         <div class="s-t-input-group-s">

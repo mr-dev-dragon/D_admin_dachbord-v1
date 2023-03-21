@@ -34,7 +34,6 @@ export class FilterTextComponent implements OnChanges {
   ngOnChanges(change: SimpleChanges): void {
     if (change['rule'] || change['inData']) {
       this.filterConfige(this.inputVal);
-  
     }
     if (change['inputvalue']) {
       this.inputVal == this.inputvalue;

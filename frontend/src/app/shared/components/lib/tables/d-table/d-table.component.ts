@@ -144,6 +144,11 @@ export class DTableComponent implements OnInit {
   ngOnChanges(changes: SimpleChange) {
     this.linkFiltersWithData();
   }
+
+ 
+
+
+
   SortDontWorkWithHeaders: string[] | any[] = [];
   filterDontWorkWithHeaders: string[] | any[] = [];
   dateTypeSortDontWorkWith: string[] | any[] = [
@@ -257,6 +262,7 @@ export class DTableComponent implements OnInit {
     addButton: false,
     expanded: null,
     sort: false,
+    rowFiler: false,
     rowNamber: false,
     selectionType: 'single',
     summary: {
@@ -301,6 +307,27 @@ export class DTableComponent implements OnInit {
   }
   playHolder: any[] = [];
   ngOnInit(): void {
+
+
+
+    
+ 
+    
+
+    
+    this.cols.map((o: any) => {
+      if (
+        (o.filterType != 'file') &&
+        (o.filterType != 'img') &&
+        (o.filterType != 'template') &&
+        (o.filterType != 'multiSelect')
+      ) {
+        this.allPath.push(o.field);
+      }
+    });
+
+
+
     this.disableFilterWithHeader instanceof Array
       ? this.disableFilterWithHeader.map((d) =>
           this.filterDontWorkWithHeaders.push(d)
@@ -385,7 +412,12 @@ export class DTableComponent implements OnInit {
       : '';
     return this.playHolder;
   }
-  ngAfterViewInit() {}
+  allPath: string[]=[]
+  ngAfterViewInit() {
+
+
+
+  }
   imageClikEvent(i: any, n: number, event: any, k?: boolean) {
     if (!k) {
       this.zoomedImag = true;

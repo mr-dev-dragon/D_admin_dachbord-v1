@@ -91,12 +91,13 @@ export interface ListCaptionConfig {
   clearTable?: boolean;
   refreshData?: boolean;
   expanded?: expanded | null;
-  rowNamber?: boolean
+  rowNamber?: boolean;
   addButton?: any;
   sort?: boolean;
   headerFilterType?: string;
   headerFilterfield?: string;
   imgPopUp?: boolean;
+  rowFiler?: boolean;
   selectionType?: 'single' | 'multiple';
   summary?: {
     enabled?: boolean;

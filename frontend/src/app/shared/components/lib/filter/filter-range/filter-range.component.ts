@@ -105,7 +105,13 @@ export class FilterRangeComponent {
   clear: any = () => (
     (this.apleyFiler = false),
     this.outParameter.emit({}),
-    this.filterConfige()
+    this.filterConfige(),
+    (this.parameter = {
+      inputValueOne: this.DafultValue[0],
+      inputValueTwo: this.DafultValue[1],
+      values: this.DafultValue,
+    }
+)
   );
   sendParameter: any = () => this.outParameter.emit(this.parameter);
 }

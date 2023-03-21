@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  SimpleChanges
+} from '@angular/core';
 
 import { g, removeAccent } from 'src/app/shared/global/filter-tool';
 import { filterParameter } from 'src/app/shared/models/List.model';
@@ -17,31 +23,60 @@ export class FilterBooleanComponent {
   @Input() inParameter!: filterParameter;
   @Output() outParameter: any = new EventEmitter();
   apleyFiler: boolean = false;
+  // clear: any = () => (
+  //   (this.apleyFiler = false), this.outParameter.emit({}),
+  // );
+
   parameter: filterParameter = {
     value: 0,
-    filterTypeOne: 'lass then',
   };
+
+  clear() {
+    this.apleyFiler = false;
+    this.outParameter.emit(null);
+    this.parameter.value = 0;
+    this.filterConfige();
+         this.apply();
+    
+
+  }
+  // ngOnChanges(change: SimpleChanges): void {
+  //   if (change['inData']) this.filterConfige();
+  // }
+
+  ngOnChanges(change: SimpleChanges) {
+    if (change['inData']) {
+      this.apply();
+
+    }
+    if (change['inParameter']) {
+      this.inParameter
+        ? (this.parameter = this.inParameter)
+        : (this.parameter = {
+            value: 0,
+          });
+    }
+  }
+
   ngAfterViewInit(): void {
     this.inParameter ? (this.parameter = this.inParameter) : '';
   }
 
-  ngOnChanges(change: SimpleChanges): void {
-    if (change['inData']) this.filterConfige();
-  }
   filterConfige() {
     if (this.path != '' && this.inData) {
-      if (this.apleyFiler) {
-        let reusltdata = this.filter(
-          this.inData,
-          {
-            path: this.path,
-            filterbythis: this.parameter.value,
-          },
-          'boolean'
-        );
-        this.outData.emit(reusltdata);
-      } else this.outData.emit(this.inData);
-    }
+      // if (this.apleyFiler) {
+      let reusltdata = this.filter(
+        this.inData,
+        {
+          path: this.path,
+          filterbythis: this.parameter.value,
+        },
+        'boolean'
+      );
+      // this.outData.emit(reusltdata);
+      // } else this.outData.emit(this.inData);
+      return reusltdata;
+    } else return this.inData;
   }
 
   filter(data: any[], filter: { path: any; filterbythis: any }, type?: any) {
@@ -88,10 +123,11 @@ export class FilterBooleanComponent {
   }
   filtererry(reusltdata: any[], filterbythis: any, i: any, type: any): any {}
 
-  apply: any = () => ((this.apleyFiler = true), this.filterConfige());
-  clear: any = () => (
-    (this.apleyFiler = false), this.outParameter.emit({}), this.filterConfige()
-  );
+  apply: any = () =>
+    this.apleyFiler
+      ? this.outData.emit(this.filterConfige())
+      : this.outData.emit(this.inData);
+
   sendParameter: any = () => this.outParameter.emit(this.parameter);
 }
  
