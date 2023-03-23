@@ -10,3 +10,9 @@ export interface paramiter {
   d_zoonrowUnit?: string;
   d_zoonColUnit?: string;
 }
+
+export interface dZonnData {
+  row: number|number[];
+  cols: any;
+  child?: dZonnData | dZonnData[];
+}

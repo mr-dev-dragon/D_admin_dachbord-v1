@@ -1,62 +1,140 @@
-.continer{
-
+.continer {
   width: 100%;
   height: 90vh;
-
 }
-
-
-.pageRowsOptionsValue{
-   border: none;
-   padding:0;
-   background-color: #33333300;
-   color: rgb(95, 95, 95);
-
-  #option{
-   font-size: 15px;
+.pageRowsOptionsValue {
+  border: none;
+  padding: 0;
+  background-color: #33333300;
+  color: rgb(95, 95, 95);
+  #option {
+    font-size: 15px;
   }
 }
-.inputBluk{
-
+.inputBluk {
   height: 2.8rem;
   width: 18rem;
   margin: 1rem;
-  
 }
-uniteLable{
-
-    width: 20rem;
+uniteLable {
+  width: 20rem;
 }
-
-
-
-
-.submit{
+.submit {
   height: 2.8rem;
   margin-top: 1rem;
 }
-
-
 .input_Bluk {
-
   height: 2.8rem;
   width: 10.2rem;
   margin: 1rem;
-
 }
-
-
-
-
-
-.box{
- background-attachment: #fff;
- padding: 10px;
+.box {
+  background-attachment: #fff;
+  padding: 10px;
 }
-
-
-.tool{
+.tool {
   margin: auto;
+}
+.div {
+  width: 100%;
+   height:60vh ;
+   background-color: rgb(255, 255, 255);
+   border: #dee2e6 1.8px solid;
+   border-radius: 6px;
+}
+.s-div {
+  width: 100%;
+  height: 60vh;
+}
+.auto-container {
+  text-align: center;
+  border-radius: 6px;
+  width: 300px;
+  height: 200px;
+  align-items: center;
+  background-color: #ffffff;
+  position: relative;
+  button {
+    position: absolute;
+    border: none;
+    background: none;
+    z-index: 22222;
+    margin: 0;
+    padding: 0;
+    margin-left: 0%;
+    margin-top: 0%;
+    padding: 0;
+    i {
+      font-size: 18px;
+      color: #e9e9e9;
+      background: #ffffff;
+      border-radius: 50%;
+    }
+  }
+  .remove-this-zon{
+        top: 1%;
+       right: 1%;
+       i{color: rgba(255, 0, 0, 0.144);}
+  }
+  .add-btn-top {
+    top: 0;
+    right: 48%;
+  }
+  .add-btn-right {
+    top: 47%;
+    right: 0;
+  }
+  .add-btn-left {
+    top: 47%;
+    left: 0;
+  }
+  .add-btn-buttom {
+    bottom: 0;
+    right: 48%;
+  }
+  .add-btn-center {
+    border-radius: 50%;
+    width: 15%;
+    height: 15%;
+    margin: auto;
+    top: 42%;
+    right: 41%;
+    p {
+      margin: auto;
+      margin-top: 2%;
+      font-size: 25px;
+      color: #e9e9e9;
+    }
+  }
+  &:hover {
+    .add-btn-center {
+      p {
+        color: #3bc072bb;
+            &:hover {
+                color: #22ec76;
+              }
+      }
+    }
+    button {
+  
+      i {
+        color: #3bc07259;
+       &:hover {
+      color: #29834fe1;
+      }
+      }
+      .remove {
+      color: rgba(255, 0, 0, 0.342);
+      &:hover {
+          color:rgba(255, 0, 0, 0.76);
+        }
+      }
+    }
+  }
+
+
+
 
 
 }
+

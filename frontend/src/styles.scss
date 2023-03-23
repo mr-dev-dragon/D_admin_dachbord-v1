@@ -774,6 +774,12 @@ span {
 
 
 
+.p-splitter-gutter{
+    background-color: rgb(238, 238, 238) !important;
+ &:hover{
+  background-color: rgb(224, 223, 223) !important;
+ }
+}
 
 
 // my pup up
@@ -808,27 +814,6 @@ span {
  Segoe UI Symbol,
  noto color emoji;
 
- .dots-bg {
-   background-color: #ffffff;
-   background-image: radial-gradient(#c5c4c4 10%, transparent 11%),
-     radial-gradient(#c5c4c4 10%, transparent 11%);
-   background-size: 10px 10px;
-   background-position: 0 0, 30px 30px;
-   background-repeat: repeat;
-   box-shadow:
-     rgba(177, 177, 177, 0.17) 0px -23px 25px 0px inset,
-     rgba(177, 177, 177, 0.15) 0px -36px 30px 0px inset,
-     rgba(177, 177, 177, 0.1) 0px -79px 40px 0px inset,
-     rgba(177, 177, 177, 0.06) 0px 2px 1px,
-     rgba(177, 177, 177, 0.09) 0px 4px 2px,
-     rgba(177, 177, 177, 0.09) 0px 8px 4px,
-     rgba(177, 177, 177, 0.09) 0px 16px 8px,
-     rgba(177, 177, 177, 0.09) 0px 32px 16px;
-
- }
-
-
-
 
 
 
@@ -851,5 +836,271 @@ span {
   background: #5a33e6cc!important;
   color: #e7e5e5!important;
 }
+
+$dot-sizes: (
+  xxl: 13.3px,
+  xl: 11.6px,
+  md: 8.4px,
+  sm: 6.8px,
+  xsm: 5.2px,
+  xxsm: 3.6px,
+  micro: 2px
+);
+
+@each $size,
+$value in $dot-sizes {
+  $position: $value * 3;
+
+  .#{$size}-dots-bg {
+    background-color: #ffffffb7;
+    background-image: radial-gradient(#c5c4c4c2 10%, transparent 11%), radial-gradient(#c5c4c4ad 10%, transparent 11%);
+    background-size: $value $value;
+    background-position: 0 0, $position $position;
+    background-repeat: repeat;
+  }
+}
+
+// #region  my classes 
+//  .xxl-dots-bg {
+//    background-color: #ffffffb7;
+//    background-image: radial-gradient(#c5c4c4c2 10%, transparent 11%),
+//      radial-gradient(#c5c4c4ad 10%, transparent 11%);
+//    background-size: 13.3px 13.3px;
+//    background-position: 0 0, 40px 40px;
+//    background-repeat: repeat;
+//  }
+//  .xl-dots-bg {
+//    background-color: #ffffffb7;
+//    background-image: radial-gradient(#c5c4c4c2 10%, transparent 11%),
+//      radial-gradient(#c5c4c4ad 10%, transparent 11%);
+//    background-size: 11.6px 11.6px;
+//    background-position: 0 0, 35px 35px;
+//    background-repeat: repeat;
+//  }
+//  .md-dots-bg {
+//    background-color: #ffffffb7;
+//    background-image: radial-gradient(#c5c4c4c2 10%, transparent 11%),
+//      radial-gradient(#c5c4c4ad 10%, transparent 11%);
+//    background-size: 8.4px 8.4px;
+//    background-position: 0 0, 30px 30px;
+//    background-repeat: repeat;
+//  }
+//     .sm-dots-bg {
+//       background-color: #ffffffb7;
+//       background-image: radial-gradient(#c5c4c4c2 10%, transparent 11%),
+//         radial-gradient(#c5c4c4ad 10%, transparent 11%);
+//       background-size: 6.8px 6.8px;
+//       background-position: 0 0, 25px 25px;
+//       background-repeat: repeat;
+//     }
+
+//     .xsm-dots-bg {
+//       background-color: #ffffffb7;
+//       background-image: radial-gradient(#c5c4c4c2 10%, transparent 11%),
+//         radial-gradient(#c5c4c4ad 10%, transparent 11%);
+//       background-size: 5.2px 5.2px;
+//       background-position: 0 0, 20px 20px;
+//       background-repeat: repeat;
+//     }
+
+//     .xxsm-dots-bg {
+//       background-color: #ffffffb7;
+//       background-image: radial-gradient(#c5c4c4c2 10%, transparent 11%),
+//         radial-gradient(#c5c4c4ad 10%, transparent 11%);
+//       background-size: 3.6px 3.6px;
+//       background-position: 0 0, 15px 15px;
+//       background-repeat: repeat;
+//     }
+//     .micro-dots-bg {
+//       background-color: #ffffffb7;
+//       background-image: radial-gradient(#c5c4c4c2 10%, transparent 11%),
+//         radial-gradient(#c5c4c4ad 10%, transparent 11%);
+//       background-size: 2px 2px;
+//       background-position: 0 0, 10px 10px;
+//       background-repeat: repeat;
+//     }
+$dot-sizes: (
+  xxl: 13.3px,
+  xl: 11.6px,
+  md: 8.4px,
+  sm: 6.8px,
+  xsm: 5.2px,
+  xxsm: 3.6px,
+  micro: 2px
+);
+
+@each $size,
+$value in $dot-sizes {
+  $position: $value * 3;
+
+  .#{$size}-shadow-dots-bg {
+    background-color: #ffffffb7;
+    background-image: radial-gradient(#c5c4c4c2 10%, transparent 11%), radial-gradient(#c5c4c4ad 10%, transparent 11%);
+    background-size: $value $value;
+    background-position: 0 0, $position $position;
+    background-repeat: repeat;
+  }
+}
+
+//  .xxl-shadow-dots-bg {
+//    background-color: #ffffffb7;
+//    background-image: radial-gradient(#c5c4c4c2 10%, transparent 11%),
+//      radial-gradient(#c5c4c4ad 10%, transparent 11%);
+//    background-size: 13.3px 13.3px;
+//    background-position: 0 0, 40px 40px;
+//    background-repeat: repeat;
+//         box-shadow:
+//             rgba(177, 177, 177, 0.17) 0px -23px 25px 0px inset,
+//             rgba(177, 177, 177, 0.15) 0px -36px 30px 0px inset,
+//             rgba(177, 177, 177, 0.1) 0px -79px 40px 0px inset,
+//             rgba(177, 177, 177, 0.06) 0px 2px 1px,
+//             rgba(177, 177, 177, 0.09) 0px 4px 2px,
+//             rgba(177, 177, 177, 0.09) 0px 8px 4px,
+//             rgba(177, 177, 177, 0.09) 0px 16px 8px,
+//             rgba(177, 177, 177, 0.09) 0px 32px 16px;
+//  }
+//  .xl-shadow-dots-bg {
+//    background-color: #ffffffb7;
+//    background-image: radial-gradient(#c5c4c4c2 10%, transparent 11%),
+//      radial-gradient(#c5c4c4ad 10%, transparent 11%);
+//    background-size: 11.6px 11.6px;
+//    background-position: 0 0, 35px 35px;
+//    background-repeat: repeat;
+//         box-shadow:
+//             rgba(177, 177, 177, 0.17) 0px -23px 25px 0px inset,
+//             rgba(177, 177, 177, 0.15) 0px -36px 30px 0px inset,
+//             rgba(177, 177, 177, 0.1) 0px -79px 40px 0px inset,
+//             rgba(177, 177, 177, 0.06) 0px 2px 1px,
+//             rgba(177, 177, 177, 0.09) 0px 4px 2px,
+//             rgba(177, 177, 177, 0.09) 0px 8px 4px,
+//             rgba(177, 177, 177, 0.09) 0px 16px 8px,
+//             rgba(177, 177, 177, 0.09) 0px 32px 16px;
+//  }
+//  .md-shadow-dots-bg {
+//    background-color: #ffffffb7;
+//    background-image: radial-gradient(#c5c4c4c2 10%, transparent 11%),
+//      radial-gradient(#c5c4c4ad 10%, transparent 11%);
+//    background-size: 8.4px 8.4px;
+//    background-position: 0 0, 30px 30px;
+//    background-repeat: repeat;
+//         box-shadow:
+//             rgba(177, 177, 177, 0.17) 0px -23px 25px 0px inset,
+//             rgba(177, 177, 177, 0.15) 0px -36px 30px 0px inset,
+//             rgba(177, 177, 177, 0.1) 0px -79px 40px 0px inset,
+//             rgba(177, 177, 177, 0.06) 0px 2px 1px,
+//             rgba(177, 177, 177, 0.09) 0px 4px 2px,
+//             rgba(177, 177, 177, 0.09) 0px 8px 4px,
+//             rgba(177, 177, 177, 0.09) 0px 16px 8px,
+//             rgba(177, 177, 177, 0.09) 0px 32px 16px;
+//  }
+//     .sm-shadow-dots-bg {
+//       background-color: #ffffffb7;
+//       background-image: radial-gradient(#c5c4c4c2 10%, transparent 11%),
+//         radial-gradient(#c5c4c4ad 10%, transparent 11%);
+//       background-size: 6.8px 6.8px;
+//       background-position: 0 0, 25px 25px;
+//       background-repeat: repeat;
+//             box-shadow:
+//                 rgba(177, 177, 177, 0.17) 0px -23px 25px 0px inset,
+//                 rgba(177, 177, 177, 0.15) 0px -36px 30px 0px inset,
+//                 rgba(177, 177, 177, 0.1) 0px -79px 40px 0px inset,
+//                 rgba(177, 177, 177, 0.06) 0px 2px 1px,
+//                 rgba(177, 177, 177, 0.09) 0px 4px 2px,
+//                 rgba(177, 177, 177, 0.09) 0px 8px 4px,
+//                 rgba(177, 177, 177, 0.09) 0px 16px 8px,
+//                 rgba(177, 177, 177, 0.09) 0px 32px 16px;
+//     }
+
+//     .xsm-shadow-dots-bg {
+//       background-color: #ffffffb7;
+//       background-image: radial-gradient(#c5c4c4c2 10%, transparent 11%),
+//         radial-gradient(#c5c4c4ad 10%, transparent 11%);
+//       background-size: 5.2px 5.2px;
+//       background-position: 0 0, 20px 20px;
+//       background-repeat: repeat;
+//             box-shadow:
+//                 rgba(177, 177, 177, 0.17) 0px -23px 25px 0px inset,
+//                 rgba(177, 177, 177, 0.15) 0px -36px 30px 0px inset,
+//                 rgba(177, 177, 177, 0.1) 0px -79px 40px 0px inset,
+//                 rgba(177, 177, 177, 0.06) 0px 2px 1px,
+//                 rgba(177, 177, 177, 0.09) 0px 4px 2px,
+//                 rgba(177, 177, 177, 0.09) 0px 8px 4px,
+//                 rgba(177, 177, 177, 0.09) 0px 16px 8px,
+//                 rgba(177, 177, 177, 0.09) 0px 32px 16px;
+//     }
+
+//     .xxsm-shadow-dots-bg {
+//       background-color: #ffffffb7;
+//       background-image: radial-gradient(#c5c4c4c2 10%, transparent 11%),
+//         radial-gradient(#c5c4c4ad 10%, transparent 11%);
+//       background-size: 3.6px 3.6px;
+//       background-position: 0 0, 15px 15px;
+//       background-repeat: repeat;
+//             box-shadow:
+//                 rgba(177, 177, 177, 0.17) 0px -23px 25px 0px inset,
+//                 rgba(177, 177, 177, 0.15) 0px -36px 30px 0px inset,
+//                 rgba(177, 177, 177, 0.1) 0px -79px 40px 0px inset,
+//                 rgba(177, 177, 177, 0.06) 0px 2px 1px,
+//                 rgba(177, 177, 177, 0.09) 0px 4px 2px,
+//                 rgba(177, 177, 177, 0.09) 0px 8px 4px,
+//                 rgba(177, 177, 177, 0.09) 0px 16px 8px,
+//                 rgba(177, 177, 177, 0.09) 0px 32px 16px;
+//     }
+//     .micro-shadow-dots-bg {
+//       background-color: #ffffffb7;
+//       background-image: radial-gradient(#c5c4c4c2 10%, transparent 11%),
+//         radial-gradient(#c5c4c4ad 10%, transparent 11%);
+//       background-size: 2px 2px;
+//       background-position: 0 0, 10px 10px;
+//       background-repeat: repeat;
+//             box-shadow:
+//                 rgba(177, 177, 177, 0.17) 0px -23px 25px 0px inset,
+//                 rgba(177, 177, 177, 0.15) 0px -36px 30px 0px inset,
+//                 rgba(177, 177, 177, 0.1) 0px -79px 40px 0px inset,
+//                 rgba(177, 177, 177, 0.06) 0px 2px 1px,
+//                 rgba(177, 177, 177, 0.09) 0px 4px 2px,
+//                 rgba(177, 177, 177, 0.09) 0px 8px 4px,
+//                 rgba(177, 177, 177, 0.09) 0px 16px 8px,
+//                 rgba(177, 177, 177, 0.09) 0px 32px 16px;
+//     }
+
+
+
+
+ .w-h-100 {
+   height: 100% !important;
+   width: 100% !important;
+ }
+.h-w-100 {
+  height: 100% !important;
+  width: 100% !important;
+}
+.H-w-100 {
+  height: 100% !important;
+  width: 100% !important;
+}
+.h-W-100 {
+  height: 100% !important;
+  width: 100% !important;
+}
+.W-100 {
+  width: 100% !important;
+}
+.w-100 {
+  width: 100% !important;
+}
+.h-100 {
+  height: 100% !important;
+}
+.H-100 {
+  height: 100% !important;
+}
+ 
+// #endregion
+
+
+
+
+
 
 

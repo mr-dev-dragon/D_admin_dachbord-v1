@@ -36,6 +36,18 @@ function addArrays<T = any>(arr1: T[], arr2: T[], merge = true): T[] {
     )
   );
 }
+
+
+
+
+ function UniceId() {
+   let count = 0;
+
+   return () => {
+     return Date.now() + count++ + '';
+   };
+ }
+
 // function i<x = number>(a: x, o: string, b: x)  =>
 //   o == '==' || o == '=' || o == 'equals'
 //     ? a == b
@@ -60,4 +72,4 @@ function calcPercent(defaultValue: number, newValue: number): number {
   return (newValue / defaultValue) * 100;
 }
 
-export { removeAccent, g, addArrays, calcPercent};
+export { removeAccent, g, addArrays, calcPercent, UniceId };
