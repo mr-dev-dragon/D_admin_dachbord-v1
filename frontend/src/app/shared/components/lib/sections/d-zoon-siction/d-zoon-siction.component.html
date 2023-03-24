@@ -1,64 +1,79 @@
-{{zoneMap.values|json}}
-{{zoneMap.size|json}}<br>
-mainZone::{{mainZone.subCells.length}}
-
-
-
-
-
-
-
-
-
+{{ zoneMap.values | json }} {{ zoneMap.size | json }}<br />
+mainZone::{{ mainZone.subCells.length }}
 
 <div class="box">
-    <div class="tool  d-flex">
-        <div class="input-group  input_Bluk mb-3">
-            <input readonly   class="form-control"  placeholder="Row Unit" >
-              <div class="input-group-text" id="basic-addon2">                 
-                <select [(ngModel)]="paramiter[0].d_zoonrowUnit" class="pagination-active pageRowsOptionsValue">
-                  <option id="option" [value]="'px'">px</option>
-                  <option id="option" [value]="'rem'">rem</option>
-                  <option id="option" [value]="'%'">%</option>
-                  <option id="option" [value]="'rem'">rem</option>
-                </select>
-            </div>
-        </div>
-          <div class="input-group  input_Bluk mb-3">
-            <input  readonly   class="form-control" placeholder="Row Unit" >
-              <div class="input-group-text" id="basic-addon2">                 
-                <select [(ngModel)]="paramiter[0].d_zoonColUnit" class="pagination-active pageRowsOptionsValue">
-                  <option id="option" [value]="'px'">px</option>
-                  <option id="option" [value]="'rem'">rem</option>
-                  <option id="option" [value]="'%'">%</option>
-                  <option id="option" [value]="'rem'">rem</option>
-                </select>
-            </div>
-        </div>
-        <div class="input-group  inputBluk mb-3">
-            <input  [(ngModel)]="paramiter[0].d_zoonWidth"   type="number" class="form-control" placeholder="Zoon Width" >
-              <div class="input-group-text" id="basic-addon2">                 
-                <select [(ngModel)]="paramiter[0].d_zoonWidthUnit" class="pagination-active pageRowsOptionsValue">
-                  <option id="option" [value]="'px'">px</option>
-                  <option id="option" [value]="'rem'">rem</option>
-                  <option id="option" [value]="'%'">%</option>
-                  <option id="option" [value]="'rem'">rem</option>
-                </select>
-            </div>
-        </div>
-        <div class="input-group  inputBluk mb-3">
-           <input [(ngModel)]="paramiter[0].d_zoonHeight" type="number" class="form-control" placeholder="Zoon height">
-              <div class="input-group-text" id="basic-addon2">                 
-                <select [(ngModel)]="paramiter[0].d_zoonHeightUnit" class="pagination-active pageRowsOptionsValue">
-                  <option id="option" [value]="'px'">px</option>
-                  <option id="option" [value]="'rem'">rem</option>
-                  <option id="option" [value]="'%'">%</option>
-                  <option id="option" [value]="'rem'">rem</option>
-                </select>
-              </div>
-          </div>
-        <button type="button" class="btn btn-outline-primary submit">Primary</button>
+  <div class="tool d-flex">
+    <div class="input-group input_Bluk mb-3">
+      <input readonly class="form-control" placeholder="Row Unit" />
+      <div class="input-group-text" id="basic-addon2">
+        <select
+          [(ngModel)]="paramiter[0].d_zoonrowUnit"
+          class="pagination-active pageRowsOptionsValue"
+        >
+          <option id="option" [value]="'px'">px</option>
+          <option id="option" [value]="'rem'">rem</option>
+          <option id="option" [value]="'%'">%</option>
+          <option id="option" [value]="'rem'">rem</option>
+        </select>
+      </div>
     </div>
+    <div class="input-group input_Bluk mb-3">
+      <input readonly class="form-control" placeholder="Row Unit" />
+      <div class="input-group-text" id="basic-addon2">
+        <select
+          [(ngModel)]="paramiter[0].d_zoonColUnit"
+          class="pagination-active pageRowsOptionsValue"
+        >
+          <option id="option" [value]="'px'">px</option>
+          <option id="option" [value]="'rem'">rem</option>
+          <option id="option" [value]="'%'">%</option>
+          <option id="option" [value]="'rem'">rem</option>
+        </select>
+      </div>
+    </div>
+    <div class="input-group inputBluk mb-3">
+      <input
+        [(ngModel)]="paramiter[0].d_zoonWidth"
+        type="number"
+        class="form-control"
+        placeholder="Zoon Width"
+      />
+      <div class="input-group-text" id="basic-addon2">
+        <select
+          [(ngModel)]="paramiter[0].d_zoonWidthUnit"
+          class="pagination-active pageRowsOptionsValue"
+        >
+          <option id="option" [value]="'px'">px</option>
+          <option id="option" [value]="'rem'">rem</option>
+          <option id="option" [value]="'%'">%</option>
+          <option id="option" [value]="'rem'">rem</option>
+
+        </select>
+      </div>
+    </div>
+    <div class="input-group inputBluk mb-3">
+      <input
+        [(ngModel)]="paramiter[0].d_zoonHeight"
+        type="number"
+        class="form-control"
+        placeholder="Zoon height"
+      />
+      <div class="input-group-text" id="basic-addon2">
+        <select
+          [(ngModel)]="paramiter[0].d_zoonHeightUnit"
+          class="pagination-active pageRowsOptionsValue"
+        >
+          <option id="option" [value]="'px'">px</option>
+          <option id="option" [value]="'rem'">rem</option>
+          <option id="option" [value]="'%'">%</option>
+          <option id="option" [value]="'rem'">rem</option>
+        </select>
+      </div>
+    </div>
+    <button type="button" class="btn btn-outline-primary submit">
+      Primary
+    </button>
+  </div>
 </div>
 
 
@@ -74,107 +89,142 @@ mainZone::{{mainZone.subCells.length}}
 
 
 
+<container>
+  <div class="row">
+
+    <!-- <div class="col-4">
+          <button (click)="showparamiter = !showparamiter"  type="button" class="btn btn-primary submit">
+            <i class="remove pi pi-sliders-v"> </i>
+          </button>      
+          <ng-container *ngIf="showparamiter"  >
+              <div Style="z-index: 999999999999">
+                 <confige  [name]="'3'"> </confige>
+              </div>
+       </ng-container>
+    </div>
 
 
 
+  
+    <div class="col-8"> -->
+      <div class="div mb-5 mt-5">
 
- <container>
-      <div class="div  mb-5 mt-5">
-     <ng-container *ngIf="mainZone.subCells.length;else btn">
-          <ng-container *ngTemplateOutlet="splitterTemplate; context: { parentId: mainZone.cellid ,cells:mainZone.subCells ,dir:mainZone.dir }"></ng-container>
-     </ng-container>
-     <ng-template #btn>
-    <ng-container *ngTemplateOutlet="zoonbtns; context: { id: mainZone.cellid ,cell:mainZone}"></ng-container>
-  </ng-template>
+
+
+        <ng-container *ngIf="mainZone.subCells.length; else btn">
+          <ng-container
+            *ngTemplateOutlet="
+              splitterTemplate;
+              context: {
+                parentId: mainZone.cellid,
+                cells: mainZone.subCells,
+                dir: mainZone.dir
+              }
+            "
+          ></ng-container>
+        </ng-container>
+        <ng-template #btn>
+            <ng-container
+              *ngTemplateOutlet="zoonbtns;context: { id: mainZone.cellid, cell: mainZone }"
+            ></ng-container>
+        </ng-template>
+
+
+
       </div>
+    </div>
+  <!-- </div> -->
+
 </container>
 
 
 
 
+<ng-template #zoonbtns let-id="id" let-parentId="parentId" let-cell="cell">
+  <div class="h-w-100 md-dots-bg auto-container">
+    <button class="remove-this-zon" (click)="removeZoon(id)">
+      <i class="remove pi pi-times-circle"></i>
+    </button>
+    <button class="add-btn-top" (click)="addZoon('top', id, parentId, cell)">
+      <i class="pi pi-plus-circle"></i>
+    </button>
+    <button
+      class="add-btn-right"
+      (click)="addZoon('right', id, parentId, cell)"
+    > <i class="pi pi-plus-circle"></i>
+    </button>
+    <button class="add-btn-left" (click)="addZoon('left', id, parentId, cell)">
+      <i class="pi pi-plus-circle"></i>
+    </button>
+    <button
+      class="add-btn-buttom"
+      (click)="addZoon('bottom', id, parentId, cell)"
+    >
+      <i class="pi pi-plus-circle"></i>
+    </button>
+    <button
+      class="add-btn-center"
+      (click)="addZoon('main', id, parentId, cell)"
+    >
+      <p class="pi pi-plus-circle"></p>
+    </button>
+  </div>
+</ng-template>
+
+<ng-template
+  #splitterTemplate
+  let-parentId="parentId"
+  let-dir="dir"
+  let-cells="cells"
+>
+  <p-splitter
+    [panelSizes]="aplaysomedivs"
+    styleClass="mb-5"
+    (onResizeStart)="onResizeStart($event)"
+    (onResizeEnd)="onResizeEnd($event)"
+    [style]="{ height: '100%' }"
+    [layout]="dir"
+  >
+
+      
+      <ng-template  *ngFor="let cell of cells; let i = index" pTemplate>
+        <ng-container *ngIf="cell.subCells.length; else recallBtns">
+         <ng-container
+            *ngTemplateOutlet="
+              splitterTemplate;
+              context: {
+                parentId: cell.cellid,
+                cells: cell.subCells,
+                dir: cell.dir
+              }
+            "
+          ></ng-container>
+        </ng-container>
+
+
+
+        <ng-template #recallBtns>
+          <!-- <ng-container
+            *ngTemplateOutlet="
+              zoonbtns;
+              context: { parentId, id: parentId + i, cell }
+            "
+          ></ng-container>
+         -->
+
+            <ng-container
+              *ngTemplateOutlet="zoonbtns;context: { parentId, id: cell.cellid, cell }"
+            ></ng-container>
+        </ng-template>
 
 
 
 
 
+      </ng-template>
 
-
-
-
-
-
-
- <ng-template #zoonbtns let-id="id" let-parentId="parentId" let-cell="cell">
-      <div class=" h-w-100 md-dots-bg  auto-container">
-            <button
-             class="remove-this-zon"
-             (click)="removeZoon(id)" > 
-              <i 
-             class=" remove pi pi-times-circle"></i> 
-            </button> 
-            <button
-             class="add-btn-top"
-             (click)="addZoon('top',id ,parentId,cell)" > 
-            <i
-            class=" pi pi-plus-circle"></i> 
-            </button> 
-             <button
-              class="add-btn-right"
-              (click)="addZoon('right',id ,parentId,cell)" > 
-            <i
-            class=" pi pi-plus-circle"></i> 
-            </button>  
-             <button
-              class="add-btn-left"
-              (click)="addZoon('left',id ,parentId,cell)" > 
-            <i 
-            class=" pi pi-plus-circle"></i> 
-            </button>   
-             <button
-              class="add-btn-buttom"
-              (click)="addZoon('bottom',id ,parentId,cell)" > 
-            <i 
-            class=" pi pi-plus-circle"></i> 
-            </button> 
-          <button
-           class="add-btn-center"
-           (click)="addZoon('main',id ,parentId,cell)" > 
-          <p
-          class=" pi pi-plus-circle"></p> 
-        </button>  
-    </div>
- </ng-template>
-
-
-
-
-
- <ng-template #splitterTemplate let-parentId="parentId" let-dir="dir"    let-cells="cells">
-          <p-splitter
-          
-              [panelSizes]="aplaysomedivs"
-              styleClass="mb-5"
-              (onResizeStart)="onResizeStart($event)"	
-              (onResizeEnd)="onResizeEnd($event)"
-              [style]="{ height: '100%' }"
-              [layout]="dir"
-              >
-                      <ng-container *ngFor="let cell of cells ;let i = index">
-                        <ng-template pTemplate>
-                          <ng-container *ngIf="cell.subCells.length;else  recallBtns">
-                           <ng-container *ngTemplateOutlet="zoonbtns; context: { id: parentId +  i ,cells:cell.subCells}"></ng-container>
-                        </ng-container>
-                            <ng-template #recallBtns>
-                            <ng-container *ngTemplateOutlet="zoonbtns; context: {  parentId ,id: parentId +  i,cell}"></ng-container>
-                          </ng-template>
-                      </ng-template>
-                      </ng-container>
-                </p-splitter>
- </ng-template>
-
-
-
-
+  </p-splitter>
+</ng-template>
 
 <!-- 
             <container>
@@ -184,145 +234,186 @@ mainZone::{{mainZone.subCells.length}}
                   ></ng-container>
               </div>
           </container> -->
-          <ng-template #splitterRow let-row let-index let-updateValue>
-           <p-splitter
-            *ngIf="row.length > 1"
-            [panelSizes]="aplaysomedivs"
-            styleClass="mb-5"
-            [style]="{ height: '100%' }"
-            layout="vertical">
-                <ng-container *ngFor="let o of row">
-                  <ng-container *ngIf="o.map; else elseBlock">
-                    <ng-template pTemplate>
-                      <ng-container *ngTemplateOutlet="splitterRow; context: { $implicit: o }">
-                      </ng-container>
-                    </ng-template>
-                  </ng-container>
-                  <ng-template #elseBlock>
-                    <ng-template pTemplate>
-                      <ng-container
-                        *ngTemplateOutlet="splitterCol; context: { $implicit: this.col }"
-                      ></ng-container>
-                    </ng-template>
-                  </ng-template>
-                </ng-container>
-              </p-splitter>
-          </ng-template>
-          <ng-template #splitterCol let-col>
-          <p-splitter
-          *ngIf="col.length > 1"
-          [style]="{ height: '100%' }"
-          [panelSizes]="aplaysomedivs"
-          styleClass="mb-5">
-          <ng-container *ngFor="let o of col; let i = index">
-            <ng-container *ngIf="o.map; else elseBlock">
-              <ng-template pTemplate>
-                <ng-container *ngTemplateOutlet="splitterCol; context: { $implicit: o }">
-                </ng-container>
-              </ng-template>
-            </ng-container>
-            <ng-template #elseBlock>
-              <ng-template pTemplate> {{ o }}--{{ resizwvalue | json }} </ng-template>
-            </ng-template>
+<ng-template #splitterRow let-row let-index let-updateValue>
+  <p-splitter
+    *ngIf="row.length > 1"
+    [panelSizes]="aplaysomedivs"
+    styleClass="mb-5"
+    [style]="{ height: '100%' }"
+    layout="vertical"
+  >
+    <ng-container *ngFor="let o of row">
+      <ng-container *ngIf="o.map; else elseBlock">
+        <ng-template pTemplate>
+          <ng-container
+            *ngTemplateOutlet="splitterRow; context: { $implicit: o }"
+          >
           </ng-container>
-          </p-splitter>
-       </ng-template> 
-<!-- 
-?????????????????????????????????????????????????????????????????????????????????????????????????????????????
-?????????????????????????????????????????????????????????????????????????????????????????????????????????????
-?????????????????????????????????????????????????????????????????????????????????????????????????????????????
-?????????????????????????????????????????????????????????????????????????????????????????????????????????????
-?????????????????????????????????????????????????????????????????????????????????????????????????????????????
-?????????????????????????????????????????????????????????????????????????????????????????????????????????????
-?????????????????????????????????????????????????????????????????????????????????????????????????????????????
-????????????????????????????????????????????????????????????????????????????????????????????????????????????? 
--->
-<br class="m-5">
-<container>
-   <ng-container *ngTemplateOutlet="zoonRow; context: { $implicit: aplaysomedivs }"></ng-container>
-</container>
-<ng-template #zoonRow let-data> 
-    <ng-container *ngFor=" let box of data ;let boxIndex = index">
-      <ng-container *ngIf="(box.row.map && box.row.length >1 );  else  this_has_no_more_row_init ">
-          <ng-container *ngFor="let row of box.row ;let i =index">
-               <ng-container *ngTemplateOutlet="insertRowArry; context: { box:row, type:'row'}"></ng-container>
-          </ng-container>
+        </ng-template>
       </ng-container>
-      <ng-template #this_has_no_more_row_init>
-          <ng-container *ngIf="box.row.map;else  no_row_init_and_not_arry">
-            <div [ngStyle]="{height:box.row[0]+paramiter[0].d_zoonrowUnit}">
-                    ===> *[{{box.row[0]}}]*
-                <ng-container *ngTemplateOutlet="insertRowArry; context: { box:box.cols, type:'cols'}">
-                </ng-container>
-            </div>         
-        </ng-container>
-          <ng-template #no_row_init_and_not_arry>
-            <div [ngStyle]="{height: box.row +paramiter[0].d_zoonrowUnit}">
-                    ===> *{{box.row}}*
-                <ng-container *ngTemplateOutlet="insertRowArry; context: { box:box.cols, type:'cols'}"></ng-container>
-            </div>
+      <ng-template #elseBlock>
+        <ng-template pTemplate>
+          <ng-container
+            *ngTemplateOutlet="splitterCol; context: { $implicit: this.col }"
+          ></ng-container>
         </ng-template>
       </ng-template>
     </ng-container>
+  </p-splitter>
+</ng-template>
+<ng-template #splitterCol let-col>
+  <p-splitter
+    *ngIf="col.length > 1"
+    [style]="{ height: '100%' }"
+    [panelSizes]="aplaysomedivs"
+    styleClass="mb-5"
+  >
+    <ng-container *ngFor="let o of col; let i = index">
+      <ng-container *ngIf="o.map; else elseBlock">
+        <ng-template pTemplate>
+          <ng-container
+            *ngTemplateOutlet="splitterCol; context: { $implicit: o }"
+          >
+          </ng-container>
+        </ng-template>
+      </ng-container>
+      <ng-template #elseBlock>
+        <ng-template pTemplate> {{ o }}--{{ resizwvalue | json }} </ng-template>
+      </ng-template>
+    </ng-container>
+  </p-splitter>
+</ng-template>
+<!-- 
+
+
+
+        ?????????????????????????????????????????????????????????????????????????????????????????????????????????????
+        ?????????????????????????????????????????????????????????????????????????????????????????????????????????????
+        ?????????????????????????????????????????????????????????????????????????????????????????????????????????????
+        ?????????????????????????????????????????????????????????????????????????????????????????????????????????????
+        ?????????????????????????????????????????????????????????????????????????????????????????????????????????????
+        ?????????????????????????????????????????????????????????????????????????????????????????????????????????????
+        ?????????????????????????????????????????????????????????????????????????????????????????????????????????????
+        ????????????????????????????????????????????????????????????????????????????????????????????????????????????? 
+
+
+
+        
+      -->
+<br class="m-5" />
+<container>
+  <ng-container
+    *ngTemplateOutlet="zoonRow; context: { $implicit: aplaysomedivs }"
+  ></ng-container>
+</container>
+<ng-template #zoonRow let-data>
+  <ng-container *ngFor="let box of data; let boxIndex = index">
+    <ng-container
+      *ngIf="box.row.map && box.row.length > 1; else this_has_no_more_row_init"
+    >
+      <ng-container *ngFor="let row of box.row; let i = index">
+        <ng-container
+          *ngTemplateOutlet="insertRowArry; context: { box: row, type: 'row' }"
+        ></ng-container>
+      </ng-container>
+    </ng-container>
+    <ng-template #this_has_no_more_row_init>
+      <ng-container *ngIf="box.row.map; else no_row_init_and_not_arry">
+        <div [ngStyle]="{ height: box.row[0] + paramiter[0].d_zoonrowUnit }">
+          ===> *[{{ box.row[0] }}]*
+          <ng-container
+            *ngTemplateOutlet="
+              insertRowArry;
+              context: { box: box.cols, type: 'cols' }
+            "
+          >
+          </ng-container>
+        </div>
+      </ng-container>
+      <ng-template #no_row_init_and_not_arry>
+        <div [ngStyle]="{ height: box.row + paramiter[0].d_zoonrowUnit }">
+          ===> *{{ box.row }}*
+          <ng-container
+            *ngTemplateOutlet="
+              insertRowArry;
+              context: { box: box.cols, type: 'cols' }
+            "
+          ></ng-container>
+        </div>
+      </ng-template>
+    </ng-template>
+  </ng-container>
 </ng-template>
 <ng-template #chikIf let-data="data" let-type="type">
-   <ng-container *ngIf="(data.map && data == null) ;else notArry">
-      <ng-container *ngTemplateOutlet="insertRowArry; context: { box:data.cols, type:type}"></ng-container>
-   </ng-container>
-   <ng-template  #notArry>
-     <ng-container *ngIf="data!=null;else notArry">
-        <ng-container *ngTemplateOutlet="insertRowArry; context: { box:data.cols, type:type}"></ng-container>
-     </ng-container>
-        <ng-template  #notArry>
-              <div  *ngIf="type=='row';else notRowInThis" [ngStyle]="{height: data +paramiter[0].d_zoonrowUnit}">
-                      ===> *{{data}}*row
-              </div>
-              <ng-template  #notRowInThis>
-               <div [ngStyle]="{width:data+paramiter[0].d_zoonColUnit}">
-                   ===> *{{data}}* width
-              </div>
-              </ng-template>
-        </ng-template>
-   </ng-template>
-</ng-template>
-<ng-template #insertRowArry let-box="box" let-type="type">
-  <ng-container  *ngIf="type =='row' ;else paramiterForCols">
-        <ng-container *ngFor="let item of box">
-            <ng-container *ngIf="!item.map ">
-              <div [ngStyle]="{height: item +paramiter[0].d_zoonrowUnit}">
-                      ===> *{{item}}*
-              </div>
-            </ng-container>
-          <ng-container *ngIf="(item.map && item.length >1)">
-              <ng-container *ngTemplateOutlet="insertRowArry; context: { $implicit: item }"></ng-container>
-          </ng-container>
-            <ng-container *ngIf="(item.map && item.length <=1)">
-              <div [ngStyle]="{height: item +paramiter[0].d_zoonrowUnit}">
-                      ===> *{{item}}*
-              </div>
-            </ng-container>
-    </ng-container>  
+  <ng-container *ngIf="data.map && data == null; else notArry">
+    <ng-container
+      *ngTemplateOutlet="insertRowArry; context: { box: data.cols, type: type }"
+    ></ng-container>
   </ng-container>
-  <ng-template #paramiterForCols>
-        <ng-container *ngFor="let item of box">
-            <ng-container *ngIf="!item.map ">
-            <div [ngStyle]="{width:item+paramiter[0].d_zoonColUnit}">
-                   ===> *{{item}}*
-            </div>
-            </ng-container>
-          <ng-container *ngIf="(item.map && item.length >1)">
-              <ng-container *ngTemplateOutlet="insertRowArry; context: { $implicit: item }"></ng-container>
-          </ng-container>
-            <ng-container *ngIf="(item.map && item.length <=1)">
-              <div [ngStyle]="{width:item+paramiter[0].d_zoonColUnit}">
-                    ===> *{{item}}*
-                  </div> 
-            </ng-container>
-    </ng-container>  
+  <ng-template #notArry>
+    <ng-container *ngIf="data != null; else notArry">
+      <ng-container
+        *ngTemplateOutlet="
+          insertRowArry;
+          context: { box: data.cols, type: type }
+        "
+      ></ng-container>
+    </ng-container>
+    <ng-template #notArry>
+      <div
+        *ngIf="type == 'row'; else notRowInThis"
+        [ngStyle]="{ height: data + paramiter[0].d_zoonrowUnit }"
+      >
+        ===> *{{ data }}*row
+      </div>
+      <ng-template #notRowInThis>
+        <div [ngStyle]="{ width: data + paramiter[0].d_zoonColUnit }">
+          ===> *{{ data }}* width
+        </div>
+      </ng-template>
+    </ng-template>
   </ng-template>
 </ng-template>
-
-
+<ng-template #insertRowArry let-box="box" let-type="type">
+  <ng-container *ngIf="type == 'row'; else paramiterForCols">
+    <ng-container *ngFor="let item of box">
+      <ng-container *ngIf="!item.map">
+        <div [ngStyle]="{ height: item + paramiter[0].d_zoonrowUnit }">
+          ===> *{{ item }}*
+        </div>
+      </ng-container>
+      <ng-container *ngIf="item.map && item.length > 1">
+        <ng-container
+          *ngTemplateOutlet="insertRowArry; context: { $implicit: item }"
+        ></ng-container>
+      </ng-container>
+      <ng-container *ngIf="item.map && item.length <= 1">
+        <div [ngStyle]="{ height: item + paramiter[0].d_zoonrowUnit }">
+          ===> *{{ item }}*
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+  <ng-template #paramiterForCols>
+    <ng-container *ngFor="let item of box">
+      <ng-container *ngIf="!item.map">
+        <div [ngStyle]="{ width: item + paramiter[0].d_zoonColUnit }">
+          ===> *{{ item }}*
+        </div>
+      </ng-container>
+      <ng-container *ngIf="item.map && item.length > 1">
+        <ng-container
+          *ngTemplateOutlet="insertRowArry; context: { $implicit: item }"
+        ></ng-container>
+      </ng-container>
+      <ng-container *ngIf="item.map && item.length <= 1">
+        <div [ngStyle]="{ width: item + paramiter[0].d_zoonColUnit }">
+          ===> *{{ item }}*
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-template>
+</ng-template>
 
 <!-- 
 <container>

@@ -67,9 +67,19 @@ function addArrays<T = any>(arr1: T[], arr2: T[], merge = true): T[] {
 
 
 
+      
+
+            
+
+                  
+
+
+
 
 function calcPercent(defaultValue: number, newValue: number): number {
+      
   return (newValue / defaultValue) * 100;
+
 }
 
 export { removeAccent, g, addArrays, calcPercent, UniceId };

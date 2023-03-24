@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-confige-ui',
+  selector: 'confige',
   templateUrl: './confige-ui.component.html',
   styleUrls: ['./confige-ui.component.scss'],
 })
