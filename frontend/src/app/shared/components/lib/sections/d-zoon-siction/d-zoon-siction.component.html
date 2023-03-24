@@ -1,4 +1,4 @@
-{{ zoneMap.values | json }} {{ zoneMap.size | json }}<br />
+{{ zoneMap.get('0') | json }} {{ zoneMap.size | json }}<br />
 mainZone::{{ mainZone.subCells.length }}
 
 <div class="box">
@@ -166,7 +166,8 @@ mainZone::{{ mainZone.subCells.length }}
       class="add-btn-center"
       (click)="addZoon('main', id, parentId, cell)"
     >
-      <p class="pi pi-plus-circle"></p>
+
+      <p class="pi pi-plus-circle">{{cell.dir}}</p>
     </button>
   </div>
 </ng-template>
@@ -178,6 +179,7 @@ mainZone::{{ mainZone.subCells.length }}
   let-cells="cells"
 >
   <p-splitter
+   *ngIf="refrshSplitter!=parentId"
     [panelSizes]="aplaysomedivs"
     styleClass="mb-5"
     (onResizeStart)="onResizeStart($event)"
@@ -189,6 +191,7 @@ mainZone::{{ mainZone.subCells.length }}
       
       <ng-template  *ngFor="let cell of cells; let i = index" pTemplate>
         <ng-container *ngIf="cell.subCells.length; else recallBtns">
+       
          <ng-container
             *ngTemplateOutlet="
               splitterTemplate;
