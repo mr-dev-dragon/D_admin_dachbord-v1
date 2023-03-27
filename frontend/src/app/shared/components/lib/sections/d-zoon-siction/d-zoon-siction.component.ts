@@ -44,7 +44,7 @@ export class DZoonSictionComponent {
   ResizeEndVal: any;
   refrshSplitter: string = '';
   getUniceId = UniceId();
-  paramiter: paramiter[] = [
+  paramiter: paramiter[]  = [
     {
       d_zoonHeight: 0,
       d_zoonWidth: 0,
@@ -57,8 +57,9 @@ export class DZoonSictionComponent {
   ];
   ngOnInit() {
     this.zoneMap.set('0', this.mainZone);
-    let cell0 = new Cell(100, 50, this.getUniceId(), this.mainZone.dir, '0');
-    let cell1 = new Cell(100, 50, this.getUniceId(), this.mainZone.dir, '0');
+    let cell0 = new Cell(100, 50, this.getUniceId(),this.paramiter[0].d_zoonDiraction, '0');
+    let cell1 = new Cell(100, 50, this.getUniceId(),this.paramiter[0].d_zoonDiraction, '0');
+
     this.mainZone.addSubCell(0, cell0, cell1);
     this.zoneMap.set(cell0.cellid, cell0);
     this.zoneMap.set(cell1.cellid, cell1);
@@ -82,9 +83,12 @@ export class DZoonSictionComponent {
       this.refrshSplitter = '';
     }, 500);
   }
-  changeDiraction: any = () =>
-    (this.mainZone.dir =
-      this.mainZone.dir == 'horizontal' ? 'vertical' : 'horizontal');
+  changeDiraction() {
+    this.mainZone.dir = this.mainZone.dir == 'horizontal' ? 'vertical' : 'horizontal';
+    this.paramiter[0].d_zoonDiraction = (this.paramiter[0].d_zoonDiraction == 'horizontal' ? 'vertical' : 'horizontal');
+
+
+  }
   addZoon(type: string, id: string, parentId: string, cell: Cell) {
     this.refrshSplitter = parentId;
     let parent = this.zoneMap.get(parentId);
@@ -92,8 +96,8 @@ export class DZoonSictionComponent {
     switch (type) {
       case 'main':
         let newDir: any = cell.dir == 'horizontal' ? 'vertical' : 'horizontal';
-        let cell0 = new Cell(50, 100, this.getUniceId(), newDir);
-        let cell1 = new Cell(50, 100, this.getUniceId(), newDir);
+        let cell0 =  new Cell(50, 100, this.getUniceId(), newDir);
+        let cell1 =  new Cell(50, 100, this.getUniceId(), newDir);
         let cell00 = new Cell(100, 50, this.getUniceId(), cell.dir);
         let cell01 = new Cell(100, 50, this.getUniceId(), cell.dir);
         let cell10 = new Cell(100, 50, this.getUniceId(), cell.dir);
