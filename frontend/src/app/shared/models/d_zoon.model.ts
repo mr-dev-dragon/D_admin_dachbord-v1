@@ -12,8 +12,3 @@ export interface paramiter {
   d_zoonDiraction?: 'horizontal' | 'vertical';
 }
 
-export interface dZonnData {
-  row: number|number[];
-  cols: any;
-  child?: dZonnData | dZonnData[];
-}

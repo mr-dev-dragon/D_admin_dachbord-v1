@@ -48,14 +48,20 @@ class Cell {
 
 import { Component } from '@angular/core';
 import { UniceId } from 'src/app/shared/global/filter-tool';
-import { dZonnData, paramiter } from 'src/app/shared/models/d_zoon.model';
+import { paramiter } from 'src/app/shared/models/d_zoon.model';
 @Component({
   selector: 'd-zoon-siction',
   templateUrl: './d-zoon-siction.component.html',
   styleUrls: ['./d-zoon-siction.component.scss'],
 })
 export class DZoonSictionComponent {
-    paramiter: paramiter[] = [
+  mainZone = new Cell(100, 100, '0');
+  zoneMap = new Map<string, Cell>();
+  ResizeStartVal: any;
+  ResizeEndVal: any;
+  refrshSplitter: string = '';
+  getUniceId = UniceId();
+  paramiter: paramiter[] = [
     {
       d_zoonHeight: 0,
       d_zoonWidth: 0,
@@ -63,16 +69,27 @@ export class DZoonSictionComponent {
       d_zoonWidthUnit: 'px',
       d_zoonrowUnit: 'px',
       d_zoonColUnit: 'px',
-      d_zoonDiraction:'horizontal'
+      d_zoonDiraction: 'horizontal',
     },
   ];
-  refrshSplitter: string = '';
-  getUniceId = UniceId();
+
+  ngOnInit() {
+    this.zoneMap.set('0', this.mainZone);
+    let cell0 = new Cell(100, 50, this.getUniceId(), this.mainZone.dir, '0');
+    let cell1 = new Cell(100, 50, this.getUniceId(), this.mainZone.dir, '0');
+    this.mainZone.addSubCell(0, cell0, cell1);
+    this.zoneMap.set(cell0.cellid, cell0);
+    this.zoneMap.set(cell1.cellid, cell1);
+  }
+  onResizeStart(event: any) {
+    this.ResizeStartVal = event;
+  }
+  onResizeEnd(event: any) {
+    this.ResizeEndVal = event;
+  }
   removeZoon(id: any, parentId: any) {
     this.refrshSplitter = parentId;
-
     let parent = this.zoneMap.get(parentId);
-    // let index = parent?.subCells.findIndex((cell) => cell.cellid == id)!;
     parent?.removeSubCell(id);
     if (parent?.subCells.length == 1) {
       parent.removeSubCell(parent.subCells[0].cellid);
@@ -86,9 +103,9 @@ export class DZoonSictionComponent {
     }, 500);
   }
 
-  changeDiraction: any = () => (
-    (this.mainZone.dir = this.mainZone.dir == 'horizontal' ? 'vertical' : 'horizontal'))
-  
+  changeDiraction: any = () =>
+    (this.mainZone.dir =
+      this.mainZone.dir == 'horizontal' ? 'vertical' : 'horizontal');
 
   addZoon(type: string, id: string, parentId: string, cell: Cell) {
     this.refrshSplitter = parentId;
@@ -192,44 +209,6 @@ export class DZoonSictionComponent {
       this.refrshSplitter = '';
     }, 500);
   }
-
-  vir: any = ['', '', ''];
-  mainZone = new Cell(100, 100, '0');
-  zoneMap = new Map<string, Cell>();
-  data: dZonnData[] = [];
-  x: (val: number, unit: string) => string = (val, unit) => `${val}${unit}`;
-  // col = [20, 80];
-  justifyOptions: any[] = [{ btn: 'inputNumber' }, { btn: 'select' }];
-
-  minSizes: number[] = [10, 10];
-  row: any[] = [20, [20, [20, 80]]];
-  col: any[] = [30, [30, [20, 80]]];
-  aplaysomedivs: any = [];
-  a = {
-    originalEvent: { isTrusted: true },
-    sizes: [44.307196562835664, 55.47798066595059],
-  };
-  resizwvalue: boolean = false;
-  type!: string;
-  index!: number | any[];
-  ResizeStartVal: any;
-  ResizeEndVal: any;
-  ngOnInit() {
-    this.zoneMap.set('0', this.mainZone);
-    let cell0 = new Cell(100, 50, this.getUniceId(), this.mainZone.dir, '0');
-    let cell1 = new Cell(100, 50, this.getUniceId(), this.mainZone.dir, '0');
-    this.mainZone.addSubCell(0, cell0, cell1);
-    this.zoneMap.set(cell0.cellid, cell0);
-    this.zoneMap.set(cell1.cellid, cell1);
-  }
-  onResizeStart(event: any) {
-    this.ResizeStartVal = event;
-  }
-  onResizeEnd(event: any) {
-    this.ResizeEndVal = event;
-  }
-
-  showparamiter: boolean = false;
 }
 
 

@@ -79,17 +79,6 @@
   </div>
 </div>
 
-
-<!-- 
-
- <textarea name="" id="" cols="60" spellcheck="no" rows="20">
-
-
-{{ zoneMap.get('0') | json }} {{ zoneMap.size | json }}
-
- </textarea> 
-
--->
  
 
 
@@ -104,26 +93,7 @@
 
 <container>
   <div class="row">
-
-    <!-- <div class="col-4">
-          <button (click)="showparamiter = !showparamiter"  type="button" class="btn btn-primary submit">
-            <i class="remove pi pi-sliders-v"> </i>
-          </button>      
-          <ng-container *ngIf="showparamiter"  >
-              <div Style="z-index: 999999999999">
-                 <confige  [name]="'3'"> </confige>
-              </div>
-       </ng-container>
-    </div>
-
-
-
-  
-    <div class="col-8"> -->
       <div class="div mb-5 mt-5">
-
-
-
         <ng-container *ngIf="mainZone.subCells.length; else btn">
           <ng-container
             *ngTemplateOutlet="
@@ -146,7 +116,6 @@
 
       </div>
     </div>
-  <!-- </div> -->
 
 </container>
 
@@ -180,7 +149,7 @@
       (click)="addZoon('main', id, parentId, cell)"
     >
 
-      <p class="pi pi-plus-circle">{{cell.dir=='horizontal'?'H':'V'}}</p>
+      <p class="pi pi-plus-circle"></p>
     </button>
   </div>
 </ng-template>
@@ -204,7 +173,6 @@
       <ng-template  *ngFor="let cell of cells; let i = index" pTemplate>
      <!-- net::{{cells|readDataTable:(dir=='horizontal'?'width':'height')|json}} -->
       <ng-container *ngIf="cell.subCells.length; else recallBtns">
-    
          <ng-container
             *ngTemplateOutlet="
               splitterTemplate;
@@ -216,40 +184,19 @@
             "
           ></ng-container>
         </ng-container>
-
-
-
         <ng-template #recallBtns>
-          <!-- <ng-container
-            *ngTemplateOutlet="
-              zoonbtns;
-              context: { parentId, id: parentId + i, cell }
-            "
-          ></ng-container>
-         -->
-
             <ng-container
               *ngTemplateOutlet="zoonbtns;context: { parentId, id: cell.cellid, cell }"
             ></ng-container>
         </ng-template>
-
-
-
-
-
       </ng-template>
-
   </p-splitter>
 </ng-template>
 
+
+
+
 <!-- 
-            <container>
-              <div class="continer">
-                  <ng-container
-                        *ngTemplateOutlet="splitterRow; context: { $implicit: this.row }"
-                  ></ng-container>
-              </div>
-          </container> -->
 <ng-template #splitterRow let-row let-index let-updateValue>
   <p-splitter
     *ngIf="row.length > 1"
@@ -316,6 +263,7 @@
 
         
       -->
+      <!--  
 <br class="m-5" />
 <container>
   <ng-container
@@ -431,7 +379,7 @@
   </ng-template>
 </ng-template>
 
-<!-- 
+
 <container>
    <ng-container *ngTemplateOutlet="zoonCol; context: { $implicit: aplaysomedivs }"></ng-container>
 </container>
@@ -472,4 +420,4 @@
               </div>
             </ng-container>
     </ng-container>   
-</ng-template>  -->
+</ng-template>  --> 
