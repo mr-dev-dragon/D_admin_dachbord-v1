@@ -11,14 +11,13 @@ export class ReadDataTablePipe implements PipeTransform {
 
 
     let recF = (field: any, data: any): any => {
-      if (field.split('.').length == 1) return data[field];
 
-      let newData = data[field.split('.')[0]];
-      if (!newData) return newData;
+      let[first,...rest]=field.split('.')
 
-      return newData instanceof Array
-        ? newData.map((d: any) => recF(field.split('.').slice(1).join('.'), d))
-        : recF(field.split('.').slice(1).join('.'), newData);
+
+      return data instanceof Array
+        ? data.map((d: any) => rest.length? recF(rest.join('.'), d[first]):d[first])
+        :  rest.length ? recF(rest.join('.'), data[first]):data[first]
     };
     if (field.includes('$xor')) {
       let val = ''

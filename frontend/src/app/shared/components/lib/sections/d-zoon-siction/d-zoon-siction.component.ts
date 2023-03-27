@@ -3,17 +3,24 @@ class Cell {
     height: number = 0;
     dir!: 'vertical' | 'horizontal';
     subCells: Cell[] = [];
-    cellid:string='0'
+  cellid: string = '0'
+  parentId!: string
+  
       constructor(
         width: number,
         height: number,
         cellid: string,
-        dir: 'vertical' | 'horizontal' = 'horizontal'
+
+        dir: 'vertical' | 'horizontal' = 'horizontal',
+        parentId?:string
       ) {
         this.width = width;
         this.height = height;
         this.dir = dir;
         this.cellid = cellid;
+        if (parentId) { 
+          this.parentId = parentId;
+        }
       }
   addSubCell(index: number = Infinity, ...cells: Cell[]) {
         
@@ -29,9 +36,15 @@ class Cell {
   }
   
 
-   removeSubCell(index: number) {
-      this.subCells.splice(index, 1);
-   }  
+  removeSubCell(id: string) {
+    let index = this.subCells.findIndex((cell) => cell.cellid == id);
+    if (index > -1)
+      this.subCells.splice(
+       index,
+       1
+      );
+
+  }  
 }
 
 import { Component } from '@angular/core';
@@ -45,7 +58,26 @@ import { dZonnData, paramiter } from 'src/app/shared/models/d_zoon.model';
 export class DZoonSictionComponent {
   refrshSplitter:string =''
   getUniceId = UniceId();
-  removeZoon(index: any) {}
+  removeZoon(id: any,parentId:any ) {
+    this.refrshSplitter = parentId;
+
+        let parent = this.zoneMap.get(parentId);
+    // let index = parent?.subCells.findIndex((cell) => cell.cellid == id)!;
+         parent?.removeSubCell(id)
+        if (parent?.subCells.length == 1)
+        {
+
+          parent.removeSubCell(parent.subCells[0].cellid)
+          parent.dir = parent.dir=='horizontal'?'vertical':'horizontal'
+          console.log(parent);
+          
+        }
+    
+        setTimeout(() => {
+          console.warn(this.mainZone);
+          this.refrshSplitter = '';
+        }, 500);
+  }
 
   addZoon(type: string, id: string, parentId: string, cell: Cell) {
     this.refrshSplitter = parentId;
@@ -53,23 +85,42 @@ export class DZoonSictionComponent {
     let index = parent?.subCells.findIndex((cell) => cell.cellid == id)!;
 
     switch (type) {
+      case 'main':
+      
+          
+        
+        
+          // let cell0 = new Cell(50, 100, this.getUniceId(), 'horizontal');
+          // let cell1 = new Cell(50, 100, this.getUniceId(), 'horizontal');
+          // let cell2 = new Cell(100, 50, this.getUniceId(), 'vertical');
+          // let cell3= new Cell(100, 50,  this.getUniceId(), 'vertical');
+          
+      
+          // this.zoneMap.get(id)?.addSubCell(0, cell2, cell3);
+          // this.zoneMap.set(cell2.cellid, cell2);
+          // this.zoneMap.set(cell3.cellid, cell3);
+
+        break;
       case 'left':
       case 'right':
+        
         if (cell.dir != 'horizontal') {
           cell.dir = 'horizontal';
 
-          let cell0 = new Cell(50, 100, this.getUniceId(), 'horizontal');
-          let cell1 = new Cell(50, 100, this.getUniceId(), 'horizontal');
-
+          let cell0 = new Cell(50, 100, this.getUniceId(), 'horizontal',parentId);
+          let cell1 = new Cell(50, 100, this.getUniceId(), 'horizontal',parentId);
           this.zoneMap.get(id)?.addSubCell(0, cell0, cell1);
           this.zoneMap.set(cell0.cellid, cell0);
           this.zoneMap.set(cell1.cellid, cell1);
         } else {
-          console.log('step 3 =>{', cell.dir, '  ==not  horizontal', '', '}');
+
+          let cell = new Cell(50, 100, this.getUniceId(), 'horizontal', parentId)
           parent?.addSubCell(
             index + (type == 'right' ? 1 : 0),
-            new Cell(50, 100, this.getUniceId(), 'horizontal')
+           cell
+
           );
+           this.zoneMap.set(cell.cellid, cell);
         }
         break;
 
@@ -78,26 +129,31 @@ export class DZoonSictionComponent {
         if (cell.dir != 'vertical') {
           cell.dir = 'vertical';
 
-          let cell0 = new Cell(100, 50, this.getUniceId(), 'vertical');
-          let cell1 = new Cell(100, 50, this.getUniceId(), 'vertical');
+          let cell0 = new Cell(100, 50, this.getUniceId(), 'vertical',parentId);
+          let cell1 = new Cell(100, 50, this.getUniceId(), 'vertical',parentId);
           this.zoneMap.get(id)?.addSubCell(0, cell0, cell1);
           this.zoneMap.set(cell0.cellid, cell0);
           this.zoneMap.set(cell1.cellid, cell1);
         } else {
+         let cell = new Cell(50, 100, this.getUniceId(), 'vertical', parentId)
           parent?.addSubCell(
             index + (type == 'bottom' ? 1 : 0),
-            new Cell(50, 100, this.getUniceId(), 'vertical')
+            cell
           );
+                 this.zoneMap.set(cell.cellid, cell);
         }
         break;
       default:
         break;
     }
+
+    
     setTimeout(() => {
+      console.warn(this.mainZone)
       
-       console.warn(this.mainZone)
       this.refrshSplitter = '';
     }, 500);
+
   }
 
   vir: any = ['', '', ''];
@@ -132,8 +188,8 @@ export class DZoonSictionComponent {
   ResizeEndVal: any;
   ngOnInit() {
     this.zoneMap.set('0', this.mainZone);
-    let cell0 = new Cell(100, 50, this.getUniceId(), this.mainZone.dir);
-    let cell1 = new Cell(100, 50, this.getUniceId(), this.mainZone.dir);
+    let cell0 = new Cell(100, 50, this.getUniceId(), this.mainZone.dir,'0');
+    let cell1 = new Cell(100, 50, this.getUniceId(), this.mainZone.dir,'0');
     this.mainZone.addSubCell(0, cell0, cell1);
     this.zoneMap.set(cell0.cellid, cell0);
     this.zoneMap.set(cell1.cellid, cell1);
