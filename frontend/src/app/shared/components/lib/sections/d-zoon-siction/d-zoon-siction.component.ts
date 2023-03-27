@@ -87,7 +87,6 @@ export class DZoonSictionComponent {
   }
 
   changeDiraction: any = () => (
-    (this.paramiter.d_zoonDiraction = ( this.paramiter.d_zoonDiraction == 'horizontal' ? 'vertical' : 'horizontal')),
     (this.mainZone.dir = this.mainZone.dir == 'horizontal' ? 'vertical' : 'horizontal'))
   
 
