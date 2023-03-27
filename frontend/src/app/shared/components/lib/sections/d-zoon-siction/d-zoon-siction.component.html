@@ -1,4 +1,12 @@
 
+
+ResizeStartVal::{{ResizeStartVal |json}} <br><br><br><br>
+ResizeEndVal::  {{ResizeEndVal |json}} <br><br><br><br>
+
+
+
+mainZone::{{mainZone |json}} <br><br><br><br>
+zoneMap:: {{zoneMap.get('0')|json}}<br><br><br><br>
 <div class="box">
   <div class="tool d-flex">
     <div class="input-group input_Bluk mb-3">
@@ -68,27 +76,14 @@
         </select>
       </div>
     </div>
-     
     <button (click)="changeDiraction()" type="button" class="btn btn-primary submit">
       dir
     </button>
-     
     <button type="button" class="btn btn-outline-primary submit">
       Primary
     </button>
   </div>
 </div>
-
- 
-
-
-
-
-
-
-
-
-
 
 
 <container>
@@ -111,16 +106,9 @@
               *ngTemplateOutlet="zoonbtns;context: { id: mainZone.cellid, cell: mainZone }"
             ></ng-container>
         </ng-template>
-
-
-
       </div>
     </div>
-
 </container>
-
-
-
 
 <ng-template #zoonbtns let-id="id" let-parentId="parentId" let-cell="cell">
   <div class="h-w-100 md-dots-bg auto-container">
@@ -148,7 +136,6 @@
       class="add-btn-center"
       (click)="addZoon('main', id, parentId, cell)"
     >
-
       <p class="pi pi-plus-circle"></p>
     </button>
   </div>
@@ -160,13 +147,12 @@
   let-dir="dir"
   let-cells="cells"
 >
-   
   <p-splitter
    *ngIf="refrshSplitter!=parentId"
     [panelSizes]="cells|readDataTable:(dir=='horizontal'?'width':'height')"
     styleClass="mb-5"
-    (onResizeStart)="onResizeStart($event)"
-    (onResizeEnd)="onResizeEnd($event)"
+    (onResizeStart)="onResizeStart($event,parentId ,dir ,cells )"
+    (onResizeEnd)="onResizeEnd($event,parentId,dir ,cells )"
     [style]="{ height: '100%' }"
     [layout]="dir"
   >
@@ -177,9 +163,11 @@
             *ngTemplateOutlet="
               splitterTemplate;
               context: {
+
                 parentId: cell.cellid,
                 cells: cell.subCells,
-                dir: cell.dir
+                dir: cell.dir 
+
               }
             "
           ></ng-container>
@@ -192,6 +180,53 @@
       </ng-template>
   </p-splitter>
 </ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
