@@ -100,14 +100,27 @@ export class DZoonSictionComponent {
   }
 
   onResizeStart(event: any, parentId: any, dir: any, cells: any) {
-    this.ResizeStartVal = cells;
+    this.ResizeStartVal = event.sizes;
+    console.log('ResizeStartVal: ', this.ResizeStartVal);
+
+
   }
   onResizeEnd(event: any, parentId: any, dir: any, cells: Cell[]) {
+  
+    let aaa :number=0
+    this.ResizeStartVal.forEach((i:number) => {
+      aaa+=i
+    })
+    let waistedPersonage: number = (100 - aaa )/ this.ResizeStartVal.length;
+    console.log('waistedPersonage: ', waistedPersonage);
+
+
+
     cells.forEach((cell, i) => {
       if (dir == 'horizontal') {
-        cell.width = event.sizes[i];
+        cell.width = event.sizes[i] + (event.sizes.length - 1) * ( waistedPersonage);
       } else {
-        cell.height = event.sizes[i];
+        cell.height = event.sizes[i] + (event.sizes.length - 1) * (waistedPersonage);
       }
     });
 
@@ -225,7 +238,7 @@ export class DZoonSictionComponent {
         } else {
           let size = (this.zoneMap.get(id)?.height || 1) / 2;
           //@ts-ignore
-          this.zoneMap.get(id).height = size;
+          this.zoneMap.get(id).height =  size;
           let cell = new Cell(
             100,
             size,
@@ -243,7 +256,7 @@ export class DZoonSictionComponent {
     setTimeout(() => {
       console.warn(this.mainZone);
       this.refrshSplitter = '';
-    }, 500);
+    }, 100);
   }
 
 
