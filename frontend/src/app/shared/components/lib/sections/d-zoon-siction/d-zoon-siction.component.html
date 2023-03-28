@@ -1,12 +1,8 @@
+ResizeStartVal::{{ ResizeStartVal | json }} <br /><br /><br /><br />
+ResizeEndVal:: {{ ResizeEndVal | json }} <br /><br /><br /><br />
 
-
-ResizeStartVal::{{ResizeStartVal |json}} <br><br><br><br>
-ResizeEndVal::  {{ResizeEndVal |json}} <br><br><br><br>
-
-
-
-mainZone::{{mainZone |json}} <br><br><br><br>
-zoneMap:: {{zoneMap.get('0')|json}}<br><br><br><br> 
+mainZone::{{ mainZone | json }} <br /><br /><br /><br />
+zoneMap:: {{ zoneMap.get("0") | json }}<br /><br /><br /><br />
 <div class="box">
   <div class="tool d-flex">
     <div class="input-group input_Bluk mb-3">
@@ -53,7 +49,6 @@ zoneMap:: {{zoneMap.get('0')|json}}<br><br><br><br>
           <option id="option" [value]="'rem'">rem</option>
           <option id="option" [value]="'%'">%</option>
           <option id="option" [value]="'rem'">rem</option>
-
         </select>
       </div>
     </div>
@@ -76,7 +71,11 @@ zoneMap:: {{zoneMap.get('0')|json}}<br><br><br><br>
         </select>
       </div>
     </div>
-    <button (click)="changeDiraction()" type="button" class="btn btn-primary submit">
+    <button
+      (click)="changeDiraction()"
+      type="button"
+      class="btn btn-primary submit"
+    >
       dir
     </button>
     <button type="button" class="btn btn-outline-primary submit">
@@ -85,40 +84,36 @@ zoneMap:: {{zoneMap.get('0')|json}}<br><br><br><br>
   </div>
 </div>
 
-
-
-
-
-
-
-
 <container>
   <div class="row">
-      <div class="div mb-5 mt-5">
-        <ng-container *ngIf="mainZone.subCells.length; else btn">
-          <ng-container
-            *ngTemplateOutlet="
-              splitterTemplate;
-                context: {
-                  parentId: mainZone.cellid,
-                  cells: mainZone.subCells,
-                  dir: mainZone.dir
-                }
-            "
-          ></ng-container>
-        </ng-container>
-        <ng-template #btn>
-            <ng-container
-              *ngTemplateOutlet="zoonbtns;context: { id: mainZone.cellid, cell: mainZone }"
-            ></ng-container>
-        </ng-template>
-      </div>
+    <div class="div mb-5 mt-5">
+      <ng-container *ngIf="mainZone.subCells.length; else btn">
+        <ng-container
+          *ngTemplateOutlet="
+            splitterTemplate;
+            context: {
+              parentId: mainZone.cellid,
+              cells: mainZone.subCells,
+              dir: mainZone.dir
+            }
+          "
+        ></ng-container>
+      </ng-container>
+      <ng-template #btn>
+        <ng-container
+          *ngTemplateOutlet="
+            zoonbtns;
+            context: { id: mainZone.cellid, cell: mainZone }
+          "
+        ></ng-container>
+      </ng-template>
     </div>
+  </div>
 </container>
 
 <ng-template #zoonbtns let-id="id" let-parentId="parentId" let-cell="cell">
   <div class="h-w-100 md-dots-bg auto-container">
-    <button class="remove-this-zon" (click)="removeZoon(id,parentId)">
+    <button class="remove-this-zon" (click)="removeZoon(id, parentId)">
       <i class="remove pi pi-times-circle"></i>
     </button>
     <button class="add-btn-top" (click)="addZoon('top', id, parentId, cell)">
@@ -127,7 +122,8 @@ zoneMap:: {{zoneMap.get('0')|json}}<br><br><br><br>
     <button
       class="add-btn-right"
       (click)="addZoon('right', id, parentId, cell)"
-    > <i class="pi pi-plus-circle"></i>
+    >
+      <i class="pi pi-plus-circle"></i>
     </button>
     <button class="add-btn-left" (click)="addZoon('left', id, parentId, cell)">
       <i class="pi pi-plus-circle"></i>
@@ -154,62 +150,40 @@ zoneMap:: {{zoneMap.get('0')|json}}<br><br><br><br>
   let-cells="cells"
 >
   <p-splitter
-   *ngIf="refrshSplitter!=parentId"
-    [panelSizes]="cells|readDataTable:(dir=='horizontal'?'width':'height')"
+    *ngIf="refrshSplitter != parentId"
+    [panelSizes]="
+      cells | readDataTable : (dir == 'horizontal' ? 'width' : 'height')
+    "
     styleClass="mb-5"
-    (onResizeStart)="onResizeStart($event,parentId ,dir ,cells )"
-    (onResizeEnd)="onResizeEnd($event,parentId,dir ,cells )"
+    (onResizeStart)="onResizeStart($event, parentId, dir, cells)"
+    (onResizeEnd)="onResizeEnd($event, parentId, dir, cells)"
     [style]="{ height: '100%' }"
     [layout]="dir"
   >
-      <ng-template  *ngFor="let cell of cells; let i = index" pTemplate>
-        <ng-container *ngIf="cell.subCells.length; else recallBtns">
-           <ng-container
-              *ngTemplateOutlet="
-                splitterTemplate;
-                context: {
-                parentId: cell.cellid,
-                cells: cell.subCells,
-                dir: cell.dir 
-              }
-            "
-          ></ng-container>
-        </ng-container>
-        <ng-template #recallBtns>
-            <ng-container
-              *ngTemplateOutlet="zoonbtns;context: { parentId, id: cell.cellid, cell }"
-            ></ng-container>
-        </ng-template>
+    <ng-template *ngFor="let cell of cells; let i = index" pTemplate>
+      <ng-container *ngIf="cell.subCells.length; else recallBtns">
+        <ng-container
+          *ngTemplateOutlet="
+            splitterTemplate;
+            context: {
+              parentId: cell.cellid,
+              cells: cell.subCells,
+              dir: cell.dir
+            }
+          "
+        ></ng-container>
+      </ng-container>
+      <ng-template #recallBtns>
+        <ng-container
+          *ngTemplateOutlet="
+            zoonbtns;
+            context: { parentId, id: cell.cellid, cell }
+          "
+        ></ng-container>
       </ng-template>
+    </ng-template>
   </p-splitter>
 </ng-template>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!-- 
 -----------------------------------------------------------------------------------------------------
@@ -225,113 +199,69 @@ zoneMap:: {{zoneMap.get('0')|json}}<br><br><br><br>
 ----------------------------------------------------------------------------------------------------- 
 -->
 
-
-
-
-
-
 <div class="mt-5 md-5">
-<container>
-  <div class="row">
+  <container>
+    <div class="row">
       <div class="div mb-5 mt-5">
-        <ng-container *ngIf="mainZone.subCells.length; else div">
+        <div
+          class="d"
+          [ngClass]="{
+            'd-coll': mainZone.dir == 'vertical',
+            'd-row': mainZone.dir == 'horizontal'
+          }"
+          [ngStyle]="{
+            width: mainZone.width + '%',
+            height: mainZone.height + '%',
+            border: 'solid 1px #333'
+          }"
+        >
           <ng-container
             *ngTemplateOutlet="
               divTemplate;
-                context: {
-                  parentId: mainZone.cellid,
-                  cells: mainZone.subCells,
-                  dir: mainZone.dir
-                }
+              context: {
+                cells: mainZone.subCells
+              }
             "
           ></ng-container>
-        </ng-container>
-        <ng-template #div>
-            <ng-container
-              *ngTemplateOutlet="emptydev;context: { id: mainZone.cellid, cell: mainZone }"
-            ></ng-container>
-        </ng-template>
+        </div>
       </div>
     </div>
-</container>
+  </container>
 </div>
-<ng-template #emptydev let-id="id" let-parentId="parentId" let-cell="cell">
- <div
- [ngStyle]="{
-        background: '#3333332b',
-        border:'solid 1px red'
- }"
- ></div>
-</ng-template>
-
-
-
-
-
-
 
 <ng-template
   #divTemplate
-  let-parentId="parentId"
-  let-dir="dir"
   let-cells="cells"
 >
 
-  <div
-   *ngIf="refrshSplitter!=parentId"
-      [ngStyle]=" 
-                {
-                  width:  100+'%',
-                  height: 100+'%'
-                } 
-               "
-      [ngClass]=" 
-          {
-            'd-coll': dir=='vertical',
-            'd-row': dir=='horizontal'
-     
-          }
+
+      <div
+       *ngFor="let cell of cells; let i = index"
+        class="d"
+        [ngClass]="{
+          'd-coll': cell.dir == 'vertical',
+          'd-row': cell.dir == 'horizontal'
+        }"
+        [ngStyle]="{
+          width: cell.width + '%',
+          height: cell.height + '%',
+          border: 'solid 1px #333'
+        }"
+      >
+        <ng-container
+          *ngTemplateOutlet="
+            divTemplate;
+            context: {
+              cells: cell.subCells
+            }
           "
-      
-  > 
-      <ng-container *ngFor="let cell of cells; let i = index" >
-           <ng-container *ngIf="cell.subCells.length; else recalldiv">
-            <ng-container
-                *ngTemplateOutlet="
-                  divTemplate;
-                  context: {
-                    parentId: cell.cellid,
-                    cells: cell.subCells,
-                    dir: cell.dir 
-                  }
-                "
-              ></ng-container>
-            </ng-container>
-            <ng-template #recalldiv>      
-              <div   
-                 [ngStyle]=" 
-                        {
-                          width: dir=='horizontal'? cell.height+'%':cell.width+'%',
-                          height:dir=='horizontal'? cell.width+'%':cell.height+'%',
-                          border:'solid 1px #333'
-                        } 
-                    ">
-                
-                    {{cell.height}} <br>
-                    {{ cell.width}} 
-              </div>
-            </ng-template>
-      </ng-container>
-  </div>
+        ></ng-container>
+      </div>
+ 
+
+
+  <!-- </div> -->
 </ng-template>
-
-
-
-
-
-
-
-
 
 <!-- 
 -----------------------------------------------------------------------------------------------------
@@ -346,16 +276,6 @@ zoneMap:: {{zoneMap.get('0')|json}}<br><br><br><br>
 -----------------------------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------------------------
  -->
-
-
-
-
-
-
-
-
-
-
 
 <!-- 
 <ng-template #splitterRow let-row let-index let-updateValue>
@@ -424,7 +344,7 @@ zoneMap:: {{zoneMap.get('0')|json}}<br><br><br><br>
 
         
       -->
-      <!--  
+<!--  
 <br class="m-5" />
 <container>
   <ng-container
@@ -581,4 +501,4 @@ zoneMap:: {{zoneMap.get('0')|json}}<br><br><br><br>
               </div>
             </ng-container>
     </ng-container>   
-</ng-template>  --> 
+</ng-template>  -->

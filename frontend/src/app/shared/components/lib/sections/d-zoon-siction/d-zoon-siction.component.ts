@@ -28,6 +28,13 @@ class Cell {
     let index = this.subCells.findIndex((cell) => cell.cellid == id);
     if (index > -1) this.subCells.splice(index, 1);
   }
+  changeDirection() {
+    this.dir = this.dir == 'horizontal' ? 'vertical' : 'horizontal';
+    [this.width, this.height] = [this.height, this.width]
+    this.subCells.forEach((item) => {
+       item.changeDirection();
+    })
+  }
 }
 
 
@@ -74,15 +81,15 @@ export class DZoonSictionComponent {
   ngOnInit() {
     this.zoneMap.set('0', this.mainZone);
     let cell0 = new Cell(
-      100,
       50,
+      100,
       this.getUniceId(),
       this.paramiter[0].d_zoonDiraction,
       '0'
     );
     let cell1 = new Cell(
-      100,
       50,
+      100,
       this.getUniceId(),
       this.paramiter[0].d_zoonDiraction,
       '0'
@@ -105,8 +112,13 @@ export class DZoonSictionComponent {
     });
 
     this.ResizeEndVal = event;
+        setTimeout(() => {
+          console.warn(this.mainZone);
+          this.refrshSplitter = '';
+        }, 500);
   }
   removeZoon(id: any, parentId: any) {
+        this.refrshSplitter = parentId;
     this.refrshSplitter = parentId;
     let parent = this.zoneMap.get(parentId);
     parent?.removeSubCell(id);
@@ -120,12 +132,10 @@ export class DZoonSictionComponent {
     }, 500);
   }
   changeDiraction() {
-    this.mainZone.dir =
-      this.mainZone.dir == 'horizontal' ? 'vertical' : 'horizontal';
-    this.paramiter[0].d_zoonDiraction =
-      this.paramiter[0].d_zoonDiraction == 'horizontal'
-        ? 'vertical'
-        : 'horizontal';
+    this.mainZone.changeDirection()
+
+    this.paramiter[0].d_zoonDiraction = this.mainZone.dir;
+  
   }
   addZoon(type: string, id: string, parentId: string, cell: Cell) {
     this.refrshSplitter = parentId;
@@ -133,22 +143,27 @@ export class DZoonSictionComponent {
     let index = parent?.subCells.findIndex((cell) => cell.cellid == id)!;
     switch (type) {
       case 'main':
+
         let newDir: any = cell.dir == 'horizontal' ? 'vertical' : 'horizontal';
-        let cell0 = new Cell(50, 100, this.getUniceId(), newDir);
-        let cell1 = new Cell(50, 100, this.getUniceId(), newDir);
-        let cell00 = new Cell(100, 50, this.getUniceId(), cell.dir);
-        let cell01 = new Cell(100, 50, this.getUniceId(), cell.dir);
-        let cell10 = new Cell(100, 50, this.getUniceId(), cell.dir);
-        let cell11 = new Cell(100, 50, this.getUniceId(), cell.dir);
+        let W = cell.dir == 'horizontal' ? 50 : 100;
+        let H = cell.dir == 'horizontal' ? 100 : 50;
+        
+        let cell0 = new Cell(H, W, this.getUniceId(), cell.dir);
+        let cell1 = new Cell(H, W, this.getUniceId(), cell.dir);
+        let cell00 = new Cell(W, H, this.getUniceId(), cell.dir);
+        let cell01 = new Cell(W, H, this.getUniceId(), cell.dir);
+        let cell10 = new Cell(W, H, this.getUniceId(), cell.dir);
+        let cell11 = new Cell(W, H, this.getUniceId(), cell.dir);
         cell0.addSubCell(0, cell00, cell01);
         cell1.addSubCell(0, cell10, cell11);
-        this.zoneMap.get(id)?.addSubCell(0, cell0, cell1);
-        this.zoneMap.set(cell0.cellid, cell0);
-        this.zoneMap.set(cell1.cellid, cell1);
-        this.zoneMap.set(cell00.cellid, cell00);
-        this.zoneMap.set(cell01.cellid, cell01);
-        this.zoneMap.set(cell10.cellid, cell10);
-        this.zoneMap.set(cell11.cellid, cell11);
+          this.zoneMap.get(id)?.addSubCell(0, cell0, cell1);
+          this.zoneMap.get(id)!.dir = newDir;
+          this.zoneMap.set(cell0.cellid, cell0);
+          this.zoneMap.set(cell1.cellid, cell1);
+          this.zoneMap.set(cell00.cellid, cell00);
+          this.zoneMap.set(cell01.cellid, cell01);
+          this.zoneMap.set(cell10.cellid, cell10);
+          this.zoneMap.set(cell11.cellid, cell11);
         break;
       case 'left':
       case 'right':
