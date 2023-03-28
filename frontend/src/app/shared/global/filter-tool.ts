@@ -38,6 +38,14 @@ function addArrays<T = any>(arr1: T[], arr2: T[], merge = true): T[] {
 }
 
 
+  function getRandomColor(): string {
+  const letters: string = "0123456789ABCDEF";
+  let color: string = "#";
+  for (let i: number = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
 
  function UniceId() {
    let count = 0;
@@ -81,4 +89,4 @@ function calcPercent(defaultValue: number, newValue: number): number {
 
 }
 
-export { removeAccent, g, addArrays, calcPercent, UniceId };
+export { removeAccent, g, addArrays, calcPercent, UniceId, getRandomColor };

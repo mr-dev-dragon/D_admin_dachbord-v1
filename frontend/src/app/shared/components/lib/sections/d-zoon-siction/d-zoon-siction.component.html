@@ -6,7 +6,7 @@ ResizeEndVal::  {{ResizeEndVal |json}} <br><br><br><br>
 
 
 mainZone::{{mainZone |json}} <br><br><br><br>
-zoneMap:: {{zoneMap.get('0')|json}}<br><br><br><br>
+zoneMap:: {{zoneMap.get('0')|json}}<br><br><br><br> 
 <div class="box">
   <div class="tool d-flex">
     <div class="input-group input_Bluk mb-3">
@@ -86,6 +86,12 @@ zoneMap:: {{zoneMap.get('0')|json}}<br><br><br><br>
 </div>
 
 
+
+
+
+
+
+
 <container>
   <div class="row">
       <div class="div mb-5 mt-5">
@@ -93,11 +99,11 @@ zoneMap:: {{zoneMap.get('0')|json}}<br><br><br><br>
           <ng-container
             *ngTemplateOutlet="
               splitterTemplate;
-              context: {
-                parentId: mainZone.cellid,
-                cells: mainZone.subCells,
-                dir: mainZone.dir
-              }
+                context: {
+                  parentId: mainZone.cellid,
+                  cells: mainZone.subCells,
+                  dir: mainZone.dir
+                }
             "
           ></ng-container>
         </ng-container>
@@ -157,17 +163,14 @@ zoneMap:: {{zoneMap.get('0')|json}}<br><br><br><br>
     [layout]="dir"
   >
       <ng-template  *ngFor="let cell of cells; let i = index" pTemplate>
-     <!-- net::{{cells|readDataTable:(dir=='horizontal'?'width':'height')|json}} -->
-      <ng-container *ngIf="cell.subCells.length; else recallBtns">
-         <ng-container
-            *ngTemplateOutlet="
-              splitterTemplate;
-              context: {
-
+        <ng-container *ngIf="cell.subCells.length; else recallBtns">
+           <ng-container
+              *ngTemplateOutlet="
+                splitterTemplate;
+                context: {
                 parentId: cell.cellid,
                 cells: cell.subCells,
                 dir: cell.dir 
-
               }
             "
           ></ng-container>
@@ -208,6 +211,119 @@ zoneMap:: {{zoneMap.get('0')|json}}<br><br><br><br>
 
 
 
+<!-- 
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------- 
+-->
+
+
+
+
+
+
+<div class="mt-5 md-5">
+<container>
+  <div class="row">
+      <div class="div mb-5 mt-5">
+        <ng-container *ngIf="mainZone.subCells.length; else div">
+          <ng-container
+            *ngTemplateOutlet="
+              divTemplate;
+                context: {
+                  parentId: mainZone.cellid,
+                  cells: mainZone.subCells,
+                  dir: mainZone.dir
+                }
+            "
+          ></ng-container>
+        </ng-container>
+        <ng-template #div>
+            <ng-container
+              *ngTemplateOutlet="emptydev;context: { id: mainZone.cellid, cell: mainZone }"
+            ></ng-container>
+        </ng-template>
+      </div>
+    </div>
+</container>
+</div>
+<ng-template #emptydev let-id="id" let-parentId="parentId" let-cell="cell">
+ <div
+ [ngStyle]="{
+        background: '#3333332b',
+        border:'solid 1px red'
+ }"
+ ></div>
+</ng-template>
+
+
+
+
+
+
+
+<ng-template
+  #divTemplate
+  let-parentId="parentId"
+  let-dir="dir"
+  let-cells="cells"
+>
+
+  <div
+   *ngIf="refrshSplitter!=parentId"
+      [ngStyle]=" 
+                {
+                  width:  100+'%',
+                  height: 100+'%'
+                } 
+               "
+      [ngClass]=" 
+          {
+            'd-coll': dir=='vertical',
+            'd-row': dir=='horizontal'
+     
+          }
+          "
+      
+  > 
+      <ng-container *ngFor="let cell of cells; let i = index" >
+           <ng-container *ngIf="cell.subCells.length; else recalldiv">
+            <ng-container
+                *ngTemplateOutlet="
+                  divTemplate;
+                  context: {
+                    parentId: cell.cellid,
+                    cells: cell.subCells,
+                    dir: cell.dir 
+                  }
+                "
+              ></ng-container>
+            </ng-container>
+            <ng-template #recalldiv>      
+              <div   
+                 [ngStyle]=" 
+                        {
+                          width: dir=='horizontal'? cell.height+'%':cell.width+'%',
+                          height:dir=='horizontal'? cell.width+'%':cell.height+'%',
+                          border:'solid 1px #333'
+                        } 
+                    ">
+                
+                    {{cell.height}} <br>
+                    {{ cell.width}} 
+              </div>
+            </ng-template>
+      </ng-container>
+  </div>
+</ng-template>
 
 
 
@@ -217,9 +333,19 @@ zoneMap:: {{zoneMap.get('0')|json}}<br><br><br><br>
 
 
 
-
-
-
+<!-- 
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------
+ -->
 
 
 

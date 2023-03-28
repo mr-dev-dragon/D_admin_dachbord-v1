@@ -61,39 +61,50 @@ export class DZoonSictionComponent {
       d_zoonDiraction: 'horizontal',
     },
   ];
+
+  getRandomColor(): string {
+    const letters: string = '0123456789ABCDEF';
+    let color: string = '#';
+    for (let i: number = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
   ngOnInit() {
-    this.zoneMap.set('0', this.mainZone); let cell0 = new Cell(   100,   50,   this.getUniceId(),   this.paramiter[0].d_zoonDiraction,   '0' );
-    let cell1 = new Cell( 100, 50, this.getUniceId(), this.paramiter[0].d_zoonDiraction, '0' );
+    this.zoneMap.set('0', this.mainZone);
+    let cell0 = new Cell(
+      100,
+      50,
+      this.getUniceId(),
+      this.paramiter[0].d_zoonDiraction,
+      '0'
+    );
+    let cell1 = new Cell(
+      100,
+      50,
+      this.getUniceId(),
+      this.paramiter[0].d_zoonDiraction,
+      '0'
+    );
     this.mainZone.addSubCell(0, cell0, cell1);
     this.zoneMap.set(cell0.cellid, cell0);
     this.zoneMap.set(cell1.cellid, cell1);
   }
 
-  onResizeStart(event: any, parentId: any,dir:any, cells: any) {
-
+  onResizeStart(event: any, parentId: any, dir: any, cells: any) {
     this.ResizeStartVal = cells;
-
   }
   onResizeEnd(event: any, parentId: any, dir: any, cells: Cell[]) {
-    
     cells.forEach((cell, i) => {
-   
-  if (dir == 'horizontal') {
-
-   cell.width = event.sizes[i];
-      
-   }
-   else {
-   cell.height = event.sizes[i];
+      if (dir == 'horizontal') {
+        cell.width = event.sizes[i];
+      } else {
+        cell.height = event.sizes[i];
       }
-      
-     })
+    });
 
-
-    
-      
     this.ResizeEndVal = event;
-
   }
   removeZoon(id: any, parentId: any) {
     this.refrshSplitter = parentId;
@@ -123,8 +134,8 @@ export class DZoonSictionComponent {
     switch (type) {
       case 'main':
         let newDir: any = cell.dir == 'horizontal' ? 'vertical' : 'horizontal';
-        let cell0 =  new Cell(50, 100, this.getUniceId(), newDir);
-        let cell1 =  new Cell(50, 100, this.getUniceId(), newDir);
+        let cell0 = new Cell(50, 100, this.getUniceId(), newDir);
+        let cell1 = new Cell(50, 100, this.getUniceId(), newDir);
         let cell00 = new Cell(100, 50, this.getUniceId(), cell.dir);
         let cell01 = new Cell(100, 50, this.getUniceId(), cell.dir);
         let cell10 = new Cell(100, 50, this.getUniceId(), cell.dir);
@@ -161,9 +172,9 @@ export class DZoonSictionComponent {
           this.zoneMap.set(cell0.cellid, cell0);
           this.zoneMap.set(cell1.cellid, cell1);
         } else {
-          let size = (this.zoneMap.get(id)?.width || 1) / 2
+          let size = (this.zoneMap.get(id)?.width || 1) / 2;
           //@ts-ignore
-          this.zoneMap.get(id).width =size
+          this.zoneMap.get(id).width = size;
           let cell = new Cell(
             size,
             100,
@@ -219,4 +230,6 @@ export class DZoonSictionComponent {
       this.refrshSplitter = '';
     }, 500);
   }
+
+
 }
