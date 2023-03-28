@@ -1,4 +1,4 @@
-<body>
+<section>
 
   <div *ngIf="name == '1'" class="menu">
     <ul class="menu-list">
@@ -73,7 +73,7 @@
     </ul>
   </div>
   <!-- break -->
-  <div *ngIf="name == '2'"  style="padding-left: 250px;">
+  <div *ngIf="name == '2'"  >
     <div class="menu">
       <ul class="menu-list">
         <li class="menu-item"><button class="menu-button">
@@ -124,7 +124,7 @@
     </div>
   </div>
   <!-- break -->
-  <div *ngIf="name == '3'" style="padding-left: 500px;">
+  <div *ngIf="name == '3'" >
     <div class="menu">
       <ul class="menu-list">
         <li class="menu-item"><button class="menu-button">
@@ -186,7 +186,7 @@
     </div>
   </div>
   <!-- break -->
-  <div  *ngIf="name == '4'" style="padding-left: 750px;">
+  <div  *ngIf="name == '4'" >
     <div class="menu settings">
       <ul class="menu-list">
         <li class="menu-item"><button class="menu-button">
@@ -524,7 +524,7 @@
     </div>
   </div>
   <!-- break  -->
-  <div *ngIf="name == '5'"  style="padding-top: 350px;">
+  <div *ngIf="name == '5'"  >
     <div class="menu settings">
       <ul class="menu-list">
         <li class="menu-item"><button disabled class="menu-button">
@@ -669,7 +669,7 @@
       </ul>
     </div>
   </div>
-  <div *ngIf="name == '6'"  style="padding-left: 350px;">
+  <div *ngIf="name == '6'"  >
     <div class="menu settings">
       <ul class="menu-list">
         <li id="dark-mode" class="menu-item context-buttons">
@@ -722,12 +722,4 @@
       </ul>
     </div>
   </div>
-</body>
-<script>
-  lightMode = () => {
-    document.documentElement.setAttribute('data-theme', 'light')
-  }
-  darkMode = () => {
-    document.documentElement.setAttribute('data-theme', 'dark')
-  }
-</script>
+</section>

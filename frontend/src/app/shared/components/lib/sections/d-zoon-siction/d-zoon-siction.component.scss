@@ -65,6 +65,7 @@ uniteLable {
   position: relative;
   button {
     position: absolute;
+
     border: none;
     background: none;
     z-index: 22222;
@@ -84,6 +85,27 @@ uniteLable {
         top: 1%;
        right: 1%;
        i{color: rgba(255, 0, 0, 0.144);}
+  }
+
+
+    .config-in-this-zon{
+
+        top: 1%;
+      left: 1%;
+       i{color: rgba(255, 0, 55, 0.253);}
+  }
+      .hestory-in-this-zon{
+
+        top: 1%;
+      left: 4%;
+       i{color: rgba(0, 26, 255, 0.253);}
+  }
+    .add-an-item-in-this-zon{
+
+
+        top: 1%;
+      left: 8%;
+       i{color: rgba(247, 0, 255, 0.253);}
   }
   .add-btn-top {
     top: 0;
@@ -136,6 +158,12 @@ uniteLable {
       color: rgba(255, 0, 0, 0.342);
       &:hover {
           color:rgba(255, 0, 0, 0.76);
+        }
+      }    
+       .add {
+      color: rgba(234, 0, 255, 0.342);
+      &:hover {
+          color:rgba(234, 0, 255, 0.76);
         }
       }
     }

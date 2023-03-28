@@ -10,7 +10,12 @@ export class ConfigeUiComponent {
 
   constructor() {}
   ngDoCheck(): void {}
-
+  lightMode = () => {
+    document.documentElement.setAttribute('data-theme', 'light');
+  };
+  darkMode = () => {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  };
 
   ngOnInit(): void {}
 }

@@ -116,6 +116,25 @@ zoneMap:: {{ zoneMap.get("0") | json }}<br /><br /><br /><br />
     <button class="remove-this-zon" (click)="removeZoon(id, parentId)">
       <i class="remove pi pi-times-circle"></i>
     </button>
+  
+        <button class="config-in-this-zon" (click)="zoneConfigs(id, parentId, cell)">
+      <i class="add pi pi-cog"></i>
+        <div  *ngIf="zoneConfigsPopUp">
+       44   <confige name="4"></confige>
+        </div>
+    </button>
+        <button class="hestory-in-this-zon" (click)="zoneHistory(id, parentId, cell)">
+      <i class="add pi pi-bookmark-fill"></i>
+        <div  *ngIf="zoneHistoryPopUp">
+           <!-- 55 <confige name="5"></confige> -->
+        </div>
+    </button>
+      <button class="add-an-item-in-this-zon" (click)="zoneElement(id, parentId, cell)">
+      <i class="add pi pi-pencil"></i>
+        <div  *ngIf="zoneElementPopUp">
+              66 <!-- <confige name="3"></confige> -->
+        </div > 
+    </button>
     <button class="add-btn-top" (click)="addZoon('top', id, parentId, cell)">
       <i class="pi pi-plus-circle"></i>
     </button>

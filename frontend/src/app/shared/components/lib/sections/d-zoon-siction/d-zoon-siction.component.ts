@@ -50,6 +50,15 @@ import { paramiter } from 'src/app/shared/models/d_zoon.model';
   styleUrls: ['./d-zoon-siction.component.scss'],
 })
 export class DZoonSictionComponent {
+  zoneConfigsPopUp=false
+  zoneHistoryPopUp=false
+  zoneElementPopUp=false
+  zoneConfigs(_t124: any, _t125: any,cell:any) 
+       { this.zoneConfigsPopUp =!this. zoneConfigsPopUp}
+  zoneHistory(_t124: any, _t125: any,cell:any) 
+       { this.zoneHistoryPopUp =!this. zoneHistoryPopUp}
+  zoneElement(_t124: any, _t125: any,cell:any) 
+       { this.zoneElementPopUp =!this. zoneElementPopUp}
   mainZone = new Cell(100, 100, '0');
   zoneMap = new Map<string, Cell>();
 
@@ -102,36 +111,33 @@ export class DZoonSictionComponent {
   onResizeStart(event: any, parentId: any, dir: any, cells: any) {
     this.ResizeStartVal = event.sizes;
     console.log('ResizeStartVal: ', this.ResizeStartVal);
-
-
   }
   onResizeEnd(event: any, parentId: any, dir: any, cells: Cell[]) {
-  
-    let aaa :number=0
-    this.ResizeStartVal.forEach((i:number) => {
-      aaa+=i
-    })
-    let waistedPersonage: number = (100 - aaa )/ this.ResizeStartVal.length;
+    let aaa: number = 0;
+    this.ResizeStartVal.forEach((i: number) => {
+      aaa += i;
+    });
+    let waistedPersonage: number = (100 - aaa) / this.ResizeStartVal.length;
     console.log('waistedPersonage: ', waistedPersonage);
-
-
 
     cells.forEach((cell, i) => {
       if (dir == 'horizontal') {
-        cell.width = event.sizes[i] + (event.sizes.length - 1) * ( waistedPersonage);
+        cell.width =
+          event.sizes[i] + (event.sizes.length - 1) * waistedPersonage;
       } else {
-        cell.height = event.sizes[i] + (event.sizes.length - 1) * (waistedPersonage);
+        cell.height =
+          event.sizes[i] + (event.sizes.length - 1) * waistedPersonage;
       }
     });
 
     this.ResizeEndVal = event;
-        setTimeout(() => {
-          console.warn(this.mainZone);
-          this.refrshSplitter = '';
-        }, 500);
+    setTimeout(() => {
+      console.warn(this.mainZone);
+      this.refrshSplitter = '';
+    }, 500);
   }
   removeZoon(id: any, parentId: any) {
-        this.refrshSplitter = parentId;
+    this.refrshSplitter = parentId;
     this.refrshSplitter = parentId;
     let parent = this.zoneMap.get(parentId);
     parent?.removeSubCell(id);
@@ -145,10 +151,9 @@ export class DZoonSictionComponent {
     }, 500);
   }
   changeDiraction() {
-    this.mainZone.changeDirection()
+    this.mainZone.changeDirection();
 
     this.paramiter[0].d_zoonDiraction = this.mainZone.dir;
-  
   }
   addZoon(type: string, id: string, parentId: string, cell: Cell) {
     this.refrshSplitter = parentId;
@@ -156,11 +161,10 @@ export class DZoonSictionComponent {
     let index = parent?.subCells.findIndex((cell) => cell.cellid == id)!;
     switch (type) {
       case 'main':
-
         let newDir: any = cell.dir == 'horizontal' ? 'vertical' : 'horizontal';
         let W = cell.dir == 'horizontal' ? 50 : 100;
         let H = cell.dir == 'horizontal' ? 100 : 50;
-        
+
         let cell0 = new Cell(H, W, this.getUniceId(), cell.dir);
         let cell1 = new Cell(H, W, this.getUniceId(), cell.dir);
         let cell00 = new Cell(W, H, this.getUniceId(), cell.dir);
@@ -169,14 +173,14 @@ export class DZoonSictionComponent {
         let cell11 = new Cell(W, H, this.getUniceId(), cell.dir);
         cell0.addSubCell(0, cell00, cell01);
         cell1.addSubCell(0, cell10, cell11);
-          this.zoneMap.get(id)?.addSubCell(0, cell0, cell1);
-          this.zoneMap.get(id)!.dir = newDir;
-          this.zoneMap.set(cell0.cellid, cell0);
-          this.zoneMap.set(cell1.cellid, cell1);
-          this.zoneMap.set(cell00.cellid, cell00);
-          this.zoneMap.set(cell01.cellid, cell01);
-          this.zoneMap.set(cell10.cellid, cell10);
-          this.zoneMap.set(cell11.cellid, cell11);
+        this.zoneMap.get(id)?.addSubCell(0, cell0, cell1);
+        this.zoneMap.get(id)!.dir = newDir;
+        this.zoneMap.set(cell0.cellid, cell0);
+        this.zoneMap.set(cell1.cellid, cell1);
+        this.zoneMap.set(cell00.cellid, cell00);
+        this.zoneMap.set(cell01.cellid, cell01);
+        this.zoneMap.set(cell10.cellid, cell10);
+        this.zoneMap.set(cell11.cellid, cell11);
         break;
       case 'left':
       case 'right':
@@ -238,7 +242,7 @@ export class DZoonSictionComponent {
         } else {
           let size = (this.zoneMap.get(id)?.height || 1) / 2;
           //@ts-ignore
-          this.zoneMap.get(id).height =  size;
+          this.zoneMap.get(id).height = size;
           let cell = new Cell(
             100,
             size,
@@ -258,6 +262,4 @@ export class DZoonSictionComponent {
       this.refrshSplitter = '';
     }, 100);
   }
-
-
 }
