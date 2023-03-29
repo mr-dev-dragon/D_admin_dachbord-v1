@@ -42,6 +42,7 @@ class Cell {
 
 
 import { Component } from '@angular/core';
+import { PaginationInstance } from 'ngx-pagination';
 import { UniceId } from 'src/app/shared/global/filter-tool';
 import { paramiter } from 'src/app/shared/models/d_zoon.model';
 @Component({
@@ -50,15 +51,19 @@ import { paramiter } from 'src/app/shared/models/d_zoon.model';
   styleUrls: ['./d-zoon-siction.component.scss'],
 })
 export class DZoonSictionComponent {
-  zoneConfigsPopUp=false
-  zoneHistoryPopUp=false
-  zoneElementPopUp=false
-  zoneConfigs(_t124: any, _t125: any,cell:any) 
-       { this.zoneConfigsPopUp =!this. zoneConfigsPopUp}
-  zoneHistory(_t124: any, _t125: any,cell:any) 
-       { this.zoneHistoryPopUp =!this. zoneHistoryPopUp}
-  zoneElement(_t124: any, _t125: any,cell:any) 
-       { this.zoneElementPopUp =!this. zoneElementPopUp}
+  zoneConfigsPopUp = false;
+  zoneHistoryPopUp = false;
+  zoneElementPopUp = false;
+
+  zoneConfigs(_t124: any, _t125: any, cell: any) {
+    this.zoneConfigsPopUp = !this.zoneConfigsPopUp;
+  }
+  zoneHistory(_t124: any, _t125: any, cell: any) {
+    this.zoneHistoryPopUp = !this.zoneHistoryPopUp;
+  }
+  zoneElement(_t124: any, _t125: any, cell: any) {
+    this.zoneElementPopUp = !this.zoneElementPopUp;
+  }
   mainZone = new Cell(100, 100, '0');
   zoneMap = new Map<string, Cell>();
 
@@ -66,7 +71,7 @@ export class DZoonSictionComponent {
   ResizeEndVal: any;
   refrshSplitter: string = '';
   getUniceId = UniceId();
-  paramiter: paramiter[] = [
+  parameter: paramiter[] = [
     {
       d_zoonHeight: 0,
       d_zoonWidth: 0,
@@ -93,14 +98,14 @@ export class DZoonSictionComponent {
       50,
       100,
       this.getUniceId(),
-      this.paramiter[0].d_zoonDiraction,
+      this.parameter[0].d_zoonDiraction,
       '0'
     );
     let cell1 = new Cell(
       50,
       100,
       this.getUniceId(),
-      this.paramiter[0].d_zoonDiraction,
+      this.parameter[0].d_zoonDiraction,
       '0'
     );
     this.mainZone.addSubCell(0, cell0, cell1);
@@ -150,10 +155,10 @@ export class DZoonSictionComponent {
       this.refrshSplitter = '';
     }, 500);
   }
-  changeDiraction() {
+  changeDirection() {
     this.mainZone.changeDirection();
 
-    this.paramiter[0].d_zoonDiraction = this.mainZone.dir;
+    this.parameter[0].d_zoonDiraction = this.mainZone.dir;
   }
   addZoon(type: string, id: string, parentId: string, cell: Cell) {
     this.refrshSplitter = parentId;
@@ -164,7 +169,6 @@ export class DZoonSictionComponent {
         let newDir: any = cell.dir == 'horizontal' ? 'vertical' : 'horizontal';
         let W = cell.dir == 'horizontal' ? 50 : 100;
         let H = cell.dir == 'horizontal' ? 100 : 50;
-
         let cell0 = new Cell(H, W, this.getUniceId(), cell.dir);
         let cell1 = new Cell(H, W, this.getUniceId(), cell.dir);
         let cell00 = new Cell(W, H, this.getUniceId(), cell.dir);
@@ -262,4 +266,78 @@ export class DZoonSictionComponent {
       this.refrshSplitter = '';
     }, 100);
   }
+
+  public o_config: PaginationInstance = {
+    id: 'custom',
+    itemsPerPage: 21,
+    currentPage: 1,
+  };
+
+  ItemsForAdding: any[] = [
+    'image',
+    'paragraphe',
+    'print',
+    'chart',
+    'link',
+    'card',
+    'calendar',
+    'map',
+    'text',
+    'image',
+    'paragraphe',
+    'print',
+    'chart',
+    'link',
+    'card',
+    'calendar',
+    'map',
+    'text',
+    'image',
+    'paragraphe',
+    'print',
+    'chart',
+    'link',
+    'card',
+    'calendar',
+    'map',
+    'text',
+    'image',
+    'paragraphe',
+    'print',
+    'chart',
+    'link',
+    'card',
+    'calendar',
+    'map',
+    'text',
+    'image',
+    'paragraphe',
+    'print',
+    'chart',
+    'link',
+    'card',
+    'calendar',
+    'map',
+    'text',
+    'image',
+    'paragraphe',
+    'print',
+    'chart',
+    'link',
+    'card',
+    'calendar',
+    'map',
+    'text',
+    'image',
+    'paragraphe',
+    'print',
+    'chart',
+    'link',
+    'card',
+    'calendar',
+    'map',
+    'text',
+  ];
+  imgUrl: string = '../../../../../../assets/images/google-logs/add-';
+  imgExtension: string = 'svg';
 }
