@@ -5,15 +5,32 @@
 
 
 
+<div class="example-container">
+  <div
+    cdkDropList
+    #todoList="cdkDropList"
+    [cdkDropListData]="todo"
+    [cdkDropListConnectedTo]="[doneList]"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item}}</div>
+  </div>
+</div>
 
 
 
 
-
-
-
-
-
+            <div class="example-container">
+              <div
+                cdkDropList
+                #doneList="cdkDropList"
+                [cdkDropListData]="done"
+                [cdkDropListConnectedTo]="[todoList]"
+                class="example-list"
+                (cdkDropListDropped)="drop($event)">
+                <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+              </div>
+            </div>
 
 
 
@@ -87,7 +104,7 @@
         >
           <option id="option" [value]="'px'">px</option>
           <option id="option" [value]="'rem'">rem</option>
-          <option id="option" [value]="'%'">%</option>
+          <option id="option" [value]="'%'"> % </option>
           <option id="option" [value]="'rem'">rem</option>
         </select>
       </div>
@@ -104,49 +121,53 @@
     </button>
   </div>
 </div>
+
+
 <container>
   <div class="sec">
  
-         <p-button icon="pi pi-bars" (click)="this.showItemMenu= !this.showItemMenu" styleClass="p-ab p-button-secondary">
-               
-         </p-button>
 
-    <div >
-        <div class="row">
-          <div class="div mb-5 mt-2">
-            <ng-container *ngIf="mainZone.subCells.length; else btn">
-              <ng-container
-                *ngTemplateOutlet="
-                  splitterTemplate;
-                  context: {
-                    parentId: mainZone.cellid,
-                    cells: mainZone.subCells,
-                    dir: mainZone.dir
-                  }
-                "
-              ></ng-container>
-            </ng-container>
-            <ng-template #btn>
-              <ng-container
-                *ngTemplateOutlet="
-                  zoonbtns;
-                  context: { id: mainZone.cellid, cell: mainZone }
-                "
-              ></ng-container>
-            </ng-template>
-          </div>
-        </div>
-    </div>
-        <div class="kkkk">
-
-        <span class="ElementShop" cdkDrag>
-          <div class="in_the_element_shop">
-            <ng-container *ngIf="showItemMenu">
-              <ng-container *ngTemplateOutlet="itemMenu"></ng-container>
-            </ng-container>
-          </div>
-        </span>
-    </div>
+              <div>
+                  <div class="row">
+                    <div class="div mb-5 mt-3">
+                      <ng-container *ngIf="mainZone.subCells.length; else btn">
+                        <ng-container
+                          *ngTemplateOutlet="
+                            splitterTemplate;
+                            context: {
+                              parentId: mainZone.cellid,
+                              cells: mainZone.subCells,
+                              dir: mainZone.dir
+                            }
+                          "
+                        ></ng-container>
+                      </ng-container>
+                      <ng-template #btn>
+                        <ng-container
+                          *ngTemplateOutlet="
+                            zoonbtns;
+                            context: { id: mainZone.cellid, cell: mainZone }
+                          "
+                        ></ng-container>
+                      </ng-template>
+                    </div>
+                  </div>
+              </div>
+              <div class="kkkk">
+                  <span class="ElementShop"  cdkDrag>
+                    <div class="example-handle" (click)="this.showItemMenu= !this.showItemMenu" cdkDragHandle>
+                      <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
+                        <path d="M0 0h24v24H0z" fill="none"></path>
+                      </svg>
+                    </div>
+                    <div class="in_the_element_shop">
+                      <ng-container *ngIf="showItemMenu">
+                        <ng-container *ngTemplateOutlet="itemMenu"></ng-container>
+                      </ng-container>
+                    </div>
+                  </span>
+              </div>
   </div>
 </container>
 

@@ -40,11 +40,14 @@ class Cell {
 
 
 
-
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
 import { PaginationInstance } from 'ngx-pagination';
 import { UniceId } from 'src/app/shared/global/filter-tool';
 import { paramiter } from 'src/app/shared/models/d_zoon.model';
+/**
+ * @title Drag&Drop connected sorting
+ */
 @Component({
   selector: 'd-zoon-siction',
   templateUrl: './d-zoon-siction.component.html',
@@ -54,6 +57,7 @@ export class DZoonSictionComponent {
   zoneConfigsPopUp = false;
   zoneHistoryPopUp = false;
   zoneElementPopUp = false;
+
   zoneConfigs(_t124: any, _t125: any, cell: any) {
     this.zoneConfigsPopUp = !this.zoneConfigsPopUp;
   }
@@ -271,6 +275,37 @@ export class DZoonSictionComponent {
     itemsPerPage: 21,
     currentPage: 1,
   };
+
+
+
+
+
+
+
+
+  todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
+  done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
+
+  
+  drop(event: CdkDragDrop<string[]>) {
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    } else {
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex,
+      );
+    }
+  }
+
+
+
+
+
+
+
 
   ItemsForAdding: any[] = [
     'image',
