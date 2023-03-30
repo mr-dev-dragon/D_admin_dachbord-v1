@@ -1,0 +1,59 @@
+
+
+
+
+
+<div class="mt-5 md-5">
+
+    <div class="row">
+      <div class="div mb-5 mt-5">
+        <div
+          class="d"
+          [ngClass]="{
+            'd-coll': data.dir == 'vertical',
+            'd-row':  data.dir == 'horizontal'
+          }"
+          [ngStyle]="{
+            width: data.width + '%',
+            height: data.height + '%',
+            border: 'solid 1px #333'
+          }"
+        >
+          <ng-container
+            *ngTemplateOutlet="
+              divTemplate;
+              context: {
+                cells: data.subCells
+              }
+            "
+          ></ng-container>
+
+        </div>
+      </div>
+    </div>
+
+</div>
+<ng-template #divTemplate let-cells="cells">
+  <div
+    *ngFor="let cell of cells; let i = index"
+    class="d"
+    [ngClass]="{
+      'd-coll': cell.dir == 'vertical',
+      'd-row': cell.dir == 'horizontal'
+    }"
+    [ngStyle]="{
+      width: cell.width + '%',
+      height: cell.height + '%',
+      border: 'solid 1px #333'
+    }"
+  >
+      <ng-container
+        *ngTemplateOutlet="
+          divTemplate;
+            context: {
+              cells: cell.subCells
+            }
+        "
+      ></ng-container>
+  </div>
+</ng-template>

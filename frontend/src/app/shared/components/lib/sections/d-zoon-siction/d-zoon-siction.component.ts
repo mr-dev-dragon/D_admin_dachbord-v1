@@ -41,7 +41,7 @@ class Cell {
 
 
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import { Component } from '@angular/core';
+import { Component, ViewChild, ViewChildren } from '@angular/core';
 import { PaginationInstance } from 'ngx-pagination';
 import { UniceId } from 'src/app/shared/global/filter-tool';
 import { paramiter } from 'src/app/shared/models/d_zoon.model';
@@ -276,36 +276,28 @@ export class DZoonSictionComponent {
     currentPage: 1,
   };
 
-
-
-
-
-
-
+  @ViewChildren('dzoneDropZones') dropZones: any;
+  @ViewChild('nenuElementsForDzoneDropZones') menu: any;
 
   todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
   done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
 
-  
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      moveItemInArray(
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
     } else {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
-        event.currentIndex,
+        event.currentIndex
       );
     }
   }
-
-
-
-
-
-
-
 
   ItemsForAdding: any[] = [
     'image',

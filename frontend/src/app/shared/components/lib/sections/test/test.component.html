@@ -1,0 +1,48 @@
+<ng-template  #menu_1>
+  <ng-container *ngTemplateOutlet="menu_2"></ng-container>
+  <ng-template  #menu_2>
+    <ng-container *ngTemplateOutlet="menu_3"></ng-container>
+  <ng-template  #menu_3>
+    <div class="example-container">
+      <div
+        cdkDropList
+        #doneList="cdkDropList"
+        [cdkDropListData]="done"
+        [cdkDropListConnectedTo]="dropZones?._results"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div class="example-box" *ngFor="let item of done" cdkDrag>{{ item }}</div>
+      </div>
+    </div>
+</ng-template>
+  </ng-template>
+</ng-template>
+
+
+<ng-container *ngTemplateOutlet="dropZone_1"></ng-container>
+<ng-container *ngTemplateOutlet="menu_1"></ng-container>
+<ng-template  #dropZone_1>
+
+  <ng-container *ngTemplateOutlet="dropZone_2"></ng-container>
+  <ng-template  #dropZone_2>
+    <ng-container *ngTemplateOutlet="dropZone_3"></ng-container>
+  <ng-template  #dropZone_3>
+  <div class="example-container">
+    <div
+      cdkDropList
+      #todoList="cdkDropList"
+      [cdkDropListData]="todo"
+      [cdkDropListConnectedTo]="[menu]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)"
+    >
+      <div class="example-box" *ngFor="let item of todo" cdkDrag>
+        {{ item }}
+      </div>
+    </div>
+
+  </div>
+</ng-template>
+  </ng-template>
+</ng-template>

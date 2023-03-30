@@ -58,6 +58,8 @@ import { SelfCloseSectionExComponent } from './components/section-ex/self-close-
 import { DZoonSictionExComponent } from './components/section-ex/dzoon-siction-ex/dzoon-siction-ex.component';
 
 
+
+
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   url: 'http://localhost:8080/post',
   maxFilesize: 50,
@@ -104,6 +106,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
 
     SelfCloseSectionExComponent,
     DZoonSictionExComponent,
+
+
   ],
   imports: [
 
