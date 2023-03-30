@@ -116,7 +116,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DndModule } from 'ngx-drag-drop';
 import { ExportDataComponent } from './components/lib/others/export/export-excel/export.component';
-
+    
 @NgModule({
   declarations: [
     ExportDataComponent,

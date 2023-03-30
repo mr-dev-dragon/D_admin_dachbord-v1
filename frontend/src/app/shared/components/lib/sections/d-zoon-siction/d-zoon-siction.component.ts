@@ -54,7 +54,6 @@ export class DZoonSictionComponent {
   zoneConfigsPopUp = false;
   zoneHistoryPopUp = false;
   zoneElementPopUp = false;
-
   zoneConfigs(_t124: any, _t125: any, cell: any) {
     this.zoneConfigsPopUp = !this.zoneConfigsPopUp;
   }
@@ -340,4 +339,5 @@ export class DZoonSictionComponent {
   ];
   imgUrl: string = '../../../../../../assets/images/google-logs/add-';
   imgExtension: string = 'svg';
+  showItemMenu = false;
 }
