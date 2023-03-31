@@ -236,11 +236,19 @@ uniteLable {
   // height: 24px;
 }
 
-
 .example-container {
   width: 400px;
   max-width: 100%;
   margin: 0 25px 25px 0;
+  display: inline-block;
+  vertical-align: top;
+}
+.example-container-d-zone {
+
+  position: absolute;
+top: 0;
+left: 0;
+
   display: inline-block;
   vertical-align: top;
 }

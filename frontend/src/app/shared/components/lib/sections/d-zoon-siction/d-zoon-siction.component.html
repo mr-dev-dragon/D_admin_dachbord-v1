@@ -141,22 +141,21 @@
 </container>
 
 <ng-template #zoonbtns let-id="id" let-parentId="parentId" let-cell="cell">
-    <div class="example-container">
-      <div
+  
+  <div 
         cdkDropList
         #dzoneDropZones="cdkDropList"
         [cdkDropListData]="dzoneDropZonesVar"
         [cdkDropListConnectedTo]="[menu]"
-        class="example-list"
         (cdkDropListDropped)="drop($event)"
-      >
+  class="h-w-100 md-dots-bg auto-container">
+
+  
         <div class="example-box" *ngFor="let item of dzoneDropZonesVar" cdkDrag>
           {{ item }}
         </div>
-      </div>
-    </div>
+     
 
-  <div class="h-w-100 md-dots-bg auto-container">
     <button class="remove-this-zon" (click)="removeZoon(id, parentId)">
       <i class="remove pi pi-times-circle"></i>
     </button>
