@@ -143,20 +143,41 @@
 <ng-template #zoonbtns let-id="id" let-parentId="parentId" let-cell="cell">
   
   <div 
-        cdkDropList
-        #dzoneDropZones="cdkDropList"
-        [cdkDropListData]="dzoneDropZonesVar"
-        [cdkDropListConnectedTo]="[menu]"
-        (cdkDropListDropped)="drop($event)"
+  cdkDropList
+  #dzoneDropZones="cdkDropList"
+  [cdkDropListData]="dzoneDropZonesVar"
+  [cdkDropListConnectedTo]="[menu]"
+  (cdkDropListDropped)="drop($event)"
   class="h-w-100 md-dots-bg auto-container">
 
   
-        <div class="example-box" *ngFor="let item of dzoneDropZonesVar" cdkDrag>
+        <!-- <div class="example-box" *ngFor="let item of dzoneDropZonesVar" cdkDrag>
           {{ item }}
-        </div>
+        </div> -->
      
 
-    <button class="remove-this-zon" (click)="removeZoon(id, parentId)">
+
+
+          <div class="parent ">
+              <div   class="add-item-menu" *ngFor="let o of dzoneDropZonesVar | paginate : o_config;" cdkDrag>
+                  <img style="opacity: 0.7"width="28"  height="18" 
+                        [lazyLoad]="imgUrl+o+'.'+imgExtension"
+                        [alt]="o"
+                    >
+                  <span>{{o}}</span>
+              </div>
+         </div>
+      
+
+
+
+
+
+
+
+
+    <button 
+    class="remove-this-zon" (click)="removeZoon(id, parentId)">
       <i class="remove pi pi-times-circle"></i>
     </button>
     <button
@@ -166,20 +187,8 @@
       <i class="add pi pi-cog"></i>
       <!-- <div *ngIf="zoneConfigsPopUp">44 <confige name="7"></confige></div> -->
     </button>
-    <!-- <button
-      class="hestory-in-this-zon"
-      (click)="zoneHistory(id, parentId, cell)"
-    >
-      <i class="add pi pi-bookmark-fill"></i>
-      <div *ngIf="zoneHistoryPopUp">55 <confige name=""></confige></div>
-    </button> -->
-    <!-- <button
-      class="add-an-item-in-this-zon"
-      (click)="zoneElement(id, parentId, cell)"
-    >
-      <i class="add pi pi-pencil"></i>
-    </button> -->
-    <button class="add-btn-top" (click)="addZoon('top', id, parentId, cell)">
+    <button 
+    class="add-btn-top" (click)="addZoon('top', id, parentId, cell)">
       <i class="pi pi-plus-circle"></i>
     </button>
     <button
@@ -188,7 +197,8 @@
     >
       <i class="pi pi-plus-circle"></i>
     </button>
-    <button class="add-btn-left" 
+    <button 
+    class="add-btn-left" 
             (click)="addZoon('left', id, parentId, cell)"
             >
       <i class="pi pi-plus-circle"></i>
@@ -365,32 +375,22 @@
 
 
 
-<div class="example-container">
-  <div
-    cdkDropList
-    #nenuElementsForDzoneDropZones="cdkDropList"
-    [cdkDropListData]="nenuElementsForDzoneDropZonesVar"
-     [cdkDropListConnectedTo]="dropZones?._results"
-    class="example-list"
-    (cdkDropListDropped)="drop($event)"
-  >
-    <div class="example-box" *ngFor="let item of nenuElementsForDzoneDropZonesVar" cdkDrag>{{ item }}</div>
-  </div>
-</div>
 
 
-
-
-
-
-          <div class="parent">
-              <li class="add-item-menu" *ngFor="let o of ItemsForAdding | paginate : o_config;">
+          <div class="parent"
+            cdkDropList
+            #nenuElementsForDzoneDropZones="cdkDropList"
+            [cdkDropListData]="ItemsForAdding"
+            [cdkDropListConnectedTo]="dropZones?._results"
+            (cdkDropListDropped)="drop($event)"
+          >
+              <div   class="add-item-menu" *ngFor="let o of ItemsForAdding | paginate : o_config;" cdkDrag>
                   <img style="opacity: 0.7"width="28"  height="18" 
                         [lazyLoad]="imgUrl+o+'.'+imgExtension"
                         [alt]="o"
                     >
                   <span>{{o}}</span>
-              </li>
+              </div>
           </div> 
 
 

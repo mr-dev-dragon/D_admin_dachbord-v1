@@ -327,6 +327,7 @@ export class DZoonSictionComponent {
     }
   }
 
+  
   ItemsForAdding: any[] = [
     'image',
     'paragraphe',
