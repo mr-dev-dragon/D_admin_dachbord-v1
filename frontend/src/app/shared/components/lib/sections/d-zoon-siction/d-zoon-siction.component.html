@@ -4,7 +4,7 @@
 
 
 
-
+<test></test>
 
 
 
@@ -146,14 +146,12 @@
   cdkDropList
   #dzoneDropZones="cdkDropList"
   [cdkDropListData]="dzoneDropZonesVar"
-  [cdkDropListConnectedTo]="[menu]"
+   [cdkDropListConnectedTo]="dropZones?._results"
   (cdkDropListDropped)="drop($event)"
   class="h-w-100 md-dots-bg auto-container">
 
   
-        <!-- <div class="example-box" *ngFor="let item of dzoneDropZonesVar" cdkDrag>
-          {{ item }}
-        </div> -->
+  <!-- [cdkDropListConnectedTo]="[menu]" -->
      
 
 
@@ -376,15 +374,15 @@
 
 
 
-
           <div class="parent"
             cdkDropList
             #nenuElementsForDzoneDropZones="cdkDropList"
             [cdkDropListData]="ItemsForAdding"
             [cdkDropListConnectedTo]="dropZones?._results"
             (cdkDropListDropped)="drop($event)"
-          >
-              <div   class="add-item-menu" *ngFor="let o of ItemsForAdding | paginate : o_config;" cdkDrag>
+            [cdkDropListEnterPredicate]="noReturnPredicate"
+            >
+              <div   class="add-item-menu" *ngFor="let o of ItemsForAdding | paginate : o_config;"[cdkDragData]="o" cdkDrag>
                   <img style="opacity: 0.7"width="28"  height="18" 
                         [lazyLoad]="imgUrl+o+'.'+imgExtension"
                         [alt]="o"

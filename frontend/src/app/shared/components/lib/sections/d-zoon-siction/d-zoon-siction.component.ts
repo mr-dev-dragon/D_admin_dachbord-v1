@@ -40,7 +40,7 @@ class Cell {
 
 
 
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {CdkDrag, CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { Component, ViewChild, ViewChildren } from '@angular/core';
 import { PaginationInstance } from 'ngx-pagination';
 import { UniceId } from 'src/app/shared/global/filter-tool';
@@ -279,7 +279,9 @@ export class DZoonSictionComponent {
   @ViewChildren('dzoneDropZones') dropZones: any;
   @ViewChild('nenuElementsForDzoneDropZones') menu: any;
 
+  dzoneDropZonesVar2 = [];
   dzoneDropZonesVar = [];
+
   nenuElementsForDzoneDropZonesVar = [
     'Get to work',
     'Pick up groceries',
@@ -311,6 +313,7 @@ export class DZoonSictionComponent {
   ];
 
   drop(event: CdkDragDrop<any>) {
+    
     if (event.previousContainer === event.container) {
       moveItemInArray(
         event.container.data,
@@ -318,6 +321,11 @@ export class DZoonSictionComponent {
         event.currentIndex
       );
     } else {
+      
+      if (event.previousContainer == this.menu) {
+        event.previousContainer.data = event.previousContainer.data.slice();
+      }
+
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
@@ -327,7 +335,16 @@ export class DZoonSictionComponent {
     }
   }
 
-  
+  /** Predicate function that only allows even numbers to be dropped into a list. */
+  evenPredicate(item: CdkDrag<number>) {
+    return item.data % 2 === 0;
+  }
+
+  /** Predicate function that doesn't allow items to be dropped into a list. */
+  noReturnPredicate() {
+    return false;
+  }
+
   ItemsForAdding: any[] = [
     'image',
     'paragraphe',
@@ -335,63 +352,7 @@ export class DZoonSictionComponent {
     'chart',
     'link',
     'card',
-    'calendar',
-    'map',
-    'text',
-    'image',
-    'paragraphe',
-    'print',
-    'chart',
-    'link',
-    'card',
-    'calendar',
-    'map',
-    'text',
-    'image',
-    'paragraphe',
-    'print',
-    'chart',
-    'link',
-    'card',
-    'calendar',
-    'map',
-    'text',
-    'image',
-    'paragraphe',
-    'print',
-    'chart',
-    'link',
-    'card',
-    'calendar',
-    'map',
-    'text',
-    'image',
-    'paragraphe',
-    'print',
-    'chart',
-    'link',
-    'card',
-    'calendar',
-    'map',
-    'text',
-    'image',
-    'paragraphe',
-    'print',
-    'chart',
-    'link',
-    'card',
-    'calendar',
-    'map',
-    'text',
-    'image',
-    'paragraphe',
-    'print',
-    'chart',
-    'link',
-    'card',
-    'calendar',
-    'map',
-    'text',
+
   ];
   imgUrl: string = '../../../../../../assets/images/google-logs/add-';
   imgExtension: string = 'svg';
