@@ -17,6 +17,7 @@ export class TestComponent {
   todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
   done = ['Get up', 'Brush teeth', 'Take a shower'];
   done2 = ['Check e-mail', 'Walk dog'];
+  
   drop(event: CdkDragDrop<string[]>) {
     console.log('event: ', event);
 

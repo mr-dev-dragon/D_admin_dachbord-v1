@@ -5,12 +5,14 @@ class Cell {
   subCells: Cell[] = [];
   cellid: string = '0';
   parentId!: string;
+  meta: any[] = [];
   constructor(
     width: number,
     height: number,
     cellid: string,
     dir: 'vertical' | 'horizontal' = 'horizontal',
-    parentId?: string
+    parentId?: string,
+    meta?:any[]
   ) {
     this.width = width;
     this.height = height;
@@ -19,6 +21,7 @@ class Cell {
     if (parentId) {
       this.parentId = parentId;
     }
+    this.meta = meta || [];
   }
   addSubCell(index: number = Infinity, ...cells: Cell[]) {
     this.subCells.splice(index, 0, ...cells);
@@ -30,10 +33,10 @@ class Cell {
   }
   changeDirection() {
     this.dir = this.dir == 'horizontal' ? 'vertical' : 'horizontal';
-    [this.width, this.height] = [this.height, this.width]
+    [this.width, this.height] = [this.height, this.width];
     this.subCells.forEach((item) => {
-       item.changeDirection();
-    })
+      item.changeDirection();
+    });
   }
 }
 
@@ -42,6 +45,7 @@ class Cell {
 
 import {CdkDrag, CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { Component, ViewChild, ViewChildren } from '@angular/core';
+import { ChildActivationStart } from '@angular/router';
 import { PaginationInstance } from 'ngx-pagination';
 import { UniceId } from 'src/app/shared/global/filter-tool';
 import { paramiter } from 'src/app/shared/models/d_zoon.model';
@@ -57,6 +61,8 @@ export class DZoonSictionComponent {
   zoneConfigsPopUp = false;
   zoneHistoryPopUp = false;
   zoneElementPopUp = false;
+  var: any;
+  calendar: any;
 
   zoneConfigs(_t124: any, _t125: any, cell: any) {
     this.zoneConfigsPopUp = !this.zoneConfigsPopUp;
@@ -150,14 +156,24 @@ export class DZoonSictionComponent {
     let parent = this.zoneMap.get(parentId);
     parent?.removeSubCell(id);
     if (parent?.subCells.length == 1) {
-      parent.removeSubCell(parent.subCells[0].cellid);
-      parent.dir = parent.dir == 'horizontal' ? 'vertical' : 'horizontal';
+      let child = parent.subCells[0];
+      if (parent.subCells[0].subCells.length) {
+        this.zoneMap.delete(child.cellid);
+        parent.subCells = child.subCells;
+        parent.dir = child.dir;
+      } else {
+        parent.meta = child.meta;
+        this.removeZoon(child.cellid, parentId);
+        parent.dir = parent.dir == 'horizontal' ? 'vertical' : 'horizontal';
+      }
     }
+    this.zoneMap.delete(id);
     setTimeout(() => {
       console.warn(this.mainZone);
       this.refrshSplitter = '';
     }, 500);
   }
+
   changeDirection() {
     this.mainZone.changeDirection();
 
@@ -175,7 +191,14 @@ export class DZoonSictionComponent {
         let cell0 = new Cell(H, W, this.getUniceId(), cell.dir);
         let cell1 = new Cell(H, W, this.getUniceId(), cell.dir);
         let cell00 = new Cell(W, H, this.getUniceId(), cell.dir);
-        let cell01 = new Cell(W, H, this.getUniceId(), cell.dir);
+        let cell01 = new Cell(
+          W,
+          H,
+          this.getUniceId(),
+          cell.dir,
+          undefined,
+          parent?.meta
+        );
         let cell10 = new Cell(W, H, this.getUniceId(), cell.dir);
         let cell11 = new Cell(W, H, this.getUniceId(), cell.dir);
         cell0.addSubCell(0, cell00, cell01);
@@ -198,7 +221,8 @@ export class DZoonSictionComponent {
             100,
             this.getUniceId(),
             'horizontal',
-            parentId
+            parentId,
+            parent?.meta
           );
           let cell1 = new Cell(
             50,
@@ -219,7 +243,8 @@ export class DZoonSictionComponent {
             100,
             this.getUniceId(),
             'horizontal',
-            parentId
+            parentId,
+            parent?.meta
           );
           parent?.addSubCell(index + (type == 'right' ? 1 : 0), cell);
           this.zoneMap.set(cell.cellid, cell);
@@ -234,7 +259,8 @@ export class DZoonSictionComponent {
             50,
             this.getUniceId(),
             'vertical',
-            parentId
+            parentId,
+            parent?.meta
           );
           let cell1 = new Cell(
             100,
@@ -255,7 +281,8 @@ export class DZoonSictionComponent {
             size,
             this.getUniceId(),
             'vertical',
-            parentId
+            parentId,
+            parent?.meta
           );
           parent?.addSubCell(index + (type == 'bottom' ? 1 : 0), cell);
           this.zoneMap.set(cell.cellid, cell);
@@ -312,20 +339,22 @@ export class DZoonSictionComponent {
     'Walk dog',
   ];
 
-  drop(event: CdkDragDrop<any>) {
-    
+  drop(event: CdkDragDrop<any>, id?: string) {
     if (event.previousContainer === event.container) {
+      if (id) this.zoneMap.get(id)?.meta.push({ name: event.item.data });
+
       moveItemInArray(
         event.container.data,
         event.previousIndex,
         event.currentIndex
       );
-    } else {
-      
       if (event.previousContainer == this.menu) {
         event.previousContainer.data = event.previousContainer.data.slice();
       }
-
+    } else {
+      if (event.previousContainer == this.menu) {
+        event.previousContainer.data = event.previousContainer.data.slice();
+      }
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
@@ -346,13 +375,14 @@ export class DZoonSictionComponent {
   }
 
   ItemsForAdding: any[] = [
+    'heading',
     'image',
     'paragraphe',
-    'print',
-    'chart',
     'link',
     'card',
-
+    'calendar',
+    'youtube',
+    'iframe',
   ];
   imgUrl: string = '../../../../../../assets/images/google-logs/add-';
   imgExtension: string = 'svg';

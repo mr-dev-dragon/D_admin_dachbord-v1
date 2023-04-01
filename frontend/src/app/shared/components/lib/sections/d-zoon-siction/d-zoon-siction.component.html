@@ -4,12 +4,6 @@
 
 
 
-<test></test>
-
-
-
-
-
 
 
 
@@ -22,10 +16,10 @@
           [(ngModel)]="parameter[0].d_zoonrowUnit"
           class="pagination-active pageRowsOptionsValue"
         >
-          <option id="option" [value]="'px'">px   </option>
-          <option id="option" [value]="'rem'">rem </option>
-          <option id="option" [value]="'%'">%     </option>
-          <option id="option" [value]="'rem'">rem </option>
+          <option id="option" [value]="'px'">px</option>
+          <option id="option" [value]="'rem'">rem</option>
+          <option id="option" [value]="'%'">%</option>
+          <option id="option" [value]="'rem'">rem</option>
         </select>
       </div>
     </div>
@@ -76,7 +70,7 @@
         >
           <option id="option" [value]="'px'">px</option>
           <option id="option" [value]="'rem'">rem</option>
-          <option id="option" [value]="'%'"> % </option>
+          <option id="option" [value]="'%'">%</option>
           <option id="option" [value]="'rem'">rem</option>
         </select>
       </div>
@@ -95,87 +89,74 @@
 </div>
 <container>
   <div class="sec">
-
-              <div>
-                  <div class="row">
-                    <div class="div  mb-5 mt-3">
-                      <ng-container *ngIf="mainZone.subCells.length; else btn">
-                        <ng-container
-                          *ngTemplateOutlet="
-                            splitterTemplate;
-                            context: {
-                              parentId: mainZone.cellid,
-                              cells: mainZone.subCells,
-                              dir: mainZone.dir
-                            }
-                          "
-                        ></ng-container>
-                      </ng-container>
-                      <ng-template #btn>
-                        <ng-container
-                          *ngTemplateOutlet="
-                            zoonbtns;
-                            context: { id: mainZone.cellid, cell: mainZone}
-                          "
-                        ></ng-container>
-                      </ng-template>
-                    </div>
-                  </div>
-              </div>
-              <div class="kkkk">
-                <span class="ElementShop"  cdkDrag>
-                    <div class="example-handle" (click)="this.showItemMenu= !this.showItemMenu"  cdkDragHandle>
-                      <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"></path>
-                        <path d="M0 0h24v24H0z" fill="none"></path>
-                      </svg>
-                    </div>
-                    <div *ngIf="showItemMenu" class="in_the_element_shop">
-                      <ng-container >
-                        <ng-container *ngTemplateOutlet="itemMenu"></ng-container>
-                      </ng-container>
-                    </div>
-                </span>
-              </div>
+    <div>
+      <div class="row">
+        <div class="div mb-5 mt-3">
+          <ng-container *ngIf="mainZone.subCells.length; else btn">
+            <ng-container
+              *ngTemplateOutlet="
+                splitterTemplate;
+                context: {
+                  parentId: mainZone.cellid,
+                  cells: mainZone.subCells,
+                  dir: mainZone.dir
+                }
+              "
+            ></ng-container>
+          </ng-container>
+          <ng-template #btn>
+            <ng-container
+              *ngTemplateOutlet="
+                zoonbtns;
+                context: { id: mainZone.cellid, cell: mainZone }
+              "
+            ></ng-container>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+    <div class="kkkk">
+      <span class="ElementShop" cdkDrag>
+        <div
+          class="example-handle"
+          (click)="this.showItemMenu = !this.showItemMenu"
+          cdkDragHandle
+        >
+          <svg width="24px" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M10 9h4V6h3l-5-5-5 5h3v3zm-1 1H6V7l-5 5 5 5v-3h3v-4zm14 2l-5-5v3h-3v4h3v3l5-5zm-9 3h-4v3H7l5 5 5-5h-3v-3z"
+            ></path>
+            <path d="M0 0h24v24H0z" fill="none"></path>
+          </svg>
+        </div>
+        <div *ngIf="showItemMenu" class="in_the_element_shop">
+          <ng-container>
+            <ng-container *ngTemplateOutlet="itemMenu"></ng-container>
+          </ng-container>
+        </div>
+      </span>
+    </div>
   </div>
 </container>
 
 <ng-template #zoonbtns let-id="id" let-parentId="parentId" let-cell="cell">
-  
-  <div 
-  cdkDropList
-  #dzoneDropZones="cdkDropList"
-  [cdkDropListData]="dzoneDropZonesVar"
-   [cdkDropListConnectedTo]="dropZones?._results"
-  (cdkDropListDropped)="drop($event)"
-  class="h-w-100 md-dots-bg auto-container">
+  <div
+    cdkDropList
+    #dzoneDropZones="cdkDropList"
+    [cdkDropListData]="cell.meta"
+    [cdkDropListConnectedTo]="dropZones?._results"
+    (cdkDropListDropped)="drop($event, id)"
+    class="h-w-100 md-dots-bg auto-container"
+  >
+    <!-- [cdkDropListConnectedTo]="[menu]" -->
 
-  
-  <!-- [cdkDropListConnectedTo]="[menu]" -->
-     
+    <div *ngFor="let o of cell.meta" cdkDrag>
+      <ng-container
+        *ngTemplateOutlet="zoneDroptedElementsGinirator; context: { item: o }"
+      ></ng-container>
+    </div>
 
-
-
-          <div class="parent ">
-              <div   class="add-item-menu" *ngFor="let o of dzoneDropZonesVar | paginate : o_config;" cdkDrag>
-                  <img style="opacity: 0.7"width="28"  height="18" 
-                        [lazyLoad]="imgUrl+o+'.'+imgExtension"
-                        [alt]="o"
-                    >
-                  <span>{{o}}</span>
-              </div>
-         </div>
-      
-
-
-
-
-
-
-
-
-    <button 
-    class="remove-this-zon" (click)="removeZoon(id, parentId)">
+    <button class="remove-this-zon" (click)="removeZoon(id, parentId)">
       <i class="remove pi pi-times-circle"></i>
     </button>
     <button
@@ -185,8 +166,7 @@
       <i class="add pi pi-cog"></i>
       <!-- <div *ngIf="zoneConfigsPopUp">44 <confige name="7"></confige></div> -->
     </button>
-    <button 
-    class="add-btn-top" (click)="addZoon('top', id, parentId, cell)">
+    <button class="add-btn-top" (click)="addZoon('top', id, parentId, cell)">
       <i class="pi pi-plus-circle"></i>
     </button>
     <button
@@ -195,10 +175,7 @@
     >
       <i class="pi pi-plus-circle"></i>
     </button>
-    <button 
-    class="add-btn-left" 
-            (click)="addZoon('left', id, parentId, cell)"
-            >
+    <button class="add-btn-left" (click)="addZoon('left', id, parentId, cell)">
       <i class="pi pi-plus-circle"></i>
     </button>
     <button
@@ -214,7 +191,6 @@
       <p class="pi pi-plus-circle"></p>
     </button>
   </div>
-
 </ng-template>
 
 <ng-template
@@ -248,7 +224,6 @@
         ></ng-container>
       </ng-container>
       <ng-template #recallBtns>
-
         <ng-container
           *ngTemplateOutlet="
             zoonbtns;
@@ -259,7 +234,6 @@
     </ng-template>
   </p-splitter>
 </ng-template>
-
 
 <ng-template #itemMenu>
   <div class="menu-container">
@@ -354,81 +328,106 @@
             </li>
           </ul>
           <ul class="menu-list">
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          <div class="parent"
-            cdkDropList
-            #nenuElementsForDzoneDropZones="cdkDropList"
-            [cdkDropListData]="ItemsForAdding"
-            [cdkDropListConnectedTo]="dropZones?._results"
-            (cdkDropListDropped)="drop($event)"
-            [cdkDropListEnterPredicate]="noReturnPredicate"
+            <div
+              class="parent"
+              cdkDropList
+              #nenuElementsForDzoneDropZones="cdkDropList"
+              [cdkDropListData]="ItemsForAdding"
+              [cdkDropListConnectedTo]="dropZones?._results"
+              (cdkDropListDropped)="drop($event)"
+              [cdkDropListEnterPredicate]="noReturnPredicate"
             >
-              <div   class="add-item-menu" *ngFor="let o of ItemsForAdding | paginate : o_config;"[cdkDragData]="o" cdkDrag>
-                  <img style="opacity: 0.7"width="28"  height="18" 
-                        [lazyLoad]="imgUrl+o+'.'+imgExtension"
+              <div
+                class="add-item-menu"
+                *ngFor="let o of ItemsForAdding | paginate : o_config"
+                [cdkDragData]="o"
+                cdkDrag
+              >
+                <img
+                  style="opacity: 0.7"
+                  width="28"
+                  height="18"
+                  [lazyLoad]="imgUrl + o + '.' + imgExtension"
+                  [alt]="o"
+                />
+                <span>{{ o }}</span>
+                <ng-container *cdkDragPreview>
+                  <span class="placeholderForItemsToZone">
+                    <img
+                      style="opacity: 0.7"
+                      width="35"
+                      height="25"
+                      [lazyLoad]="imgUrl + o + '.' + imgExtension"
+                      [alt]="o"
+                    />
+                    <!-- o==' ' -->
+                    <span>
+                      {{ "&lt;" }}
+                      {{
+                        o == "heading"
+                          ? "h1"
+                          : o == "image"
+                          ? "img"
+                          : o == "paragraphe"
+                          ? "p"
+                          : o == "link"
+                          ? "a"
+                          : ""
+                      }}
+                      {{ o != "image" ? "&gt;" : "" }}
+                      {{ o != "image" ? o : "" }}
+                      {{
+                        o == "image"
+                          ? 'src"../URL'
+                          : o == "paragraphe"
+                          ? "text..."
+                          : o == "link"
+                          ? 'href="http://"'
+                          : ""
+                      }}
+                      {{ o != "image" ? "&lt;" : "" }}
+                      {{ o == "image" && o == "link" ? '"' : "" }}
+                      {{ "/" }}
+                      {{ o == "heading" ? ".." : "" }}
+                      {{
+                        o == "heading"
+                          ? "h1"
+                          : o == "paragraphe"
+                          ? "p"
+                          : o == "link"
+                          ? "a"
+                          : ""
+                      }}
+                      {{ "&gt;" }}
+                    </span>
+                    <span class="placeholderForItemsToZoneExstantion">
+                      <img
+                        style="opacity: 0.7"
+                        width="38"
+                        height="28"
+                        [lazyLoad]="
+                          '../../../../../../assets/images/google-logs/drag_indicator.svg'
+                        "
                         [alt]="o"
-                    >
-                  <span>{{o}}</span>
+                      />
+                    </span>
+                  </span>
+                </ng-container>
               </div>
-          </div> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          </ul >
-          <ul class=" less ulForPagination">
-             <pagination-template
+            </div>
+          </ul>
+          <ul class="less ulForPagination">
+            <pagination-template
               #p="paginationApi"
               [id]="o_config.id"
               (pageChange)="o_config.currentPage = $event"
             >
               <div class="pagination">
                 <div
-                  *ngIf="
-                    ItemsForAdding.length 
-                    >
-                    o_config.itemsPerPage
-                  "
+                  *ngIf="ItemsForAdding.length > o_config.itemsPerPage"
                   class="in-custom-pagination"
                 >
                   <div class="in-in-custom-pagination">
-         
                     <div
                       class="pagination-tiems"
                       *ngFor="let page of p.pages"
@@ -448,22 +447,16 @@
                         <span>{{ page.label }}</span>
                       </div>
                     </div>
-
                   </div>
                 </div>
                 <div
-                  *ngIf="
-                    ItemsForAdding.length <
-                    o_config.itemsPerPage
-                  "
+                  *ngIf="ItemsForAdding.length < o_config.itemsPerPage"
                   class="in-custom-pagination"
                 >
                   <div class="in-in-custom-pagination">
-                    <span class="pagination-active">
-                    </span>
+                    <span class="pagination-active"> </span>
                   </div>
                 </div>
-    
               </div>
             </pagination-template>
           </ul>
@@ -555,90 +548,120 @@
   </div>
 </ng-template>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- 
  
   <read-d-zone [data]="mainZone"></read-d-zone> 
 
 -->
 
-
-
-    <div class="mt-5 md-5">
-      <container>
-        <div class="row">
-          <div class="div mb-5 mt-5">
-            <div
-              class="d"
-              [ngClass]="{
-                'd-coll': mainZone.dir == 'vertical',
-                'd-row': mainZone.dir == 'horizontal'
-              }"
-              [ngStyle]="{
-                width: mainZone.width + '%',
-                height: mainZone.height + '%',
-                border: 'solid 1px #333'
-              }"
-            >
-              <ng-container
-                *ngTemplateOutlet="
-                  divTemplate;
-                  context: {
-                    cells: mainZone.subCells
-                  }
-                "
-              ></ng-container>
-            </div>
-          </div>
-        </div>
-      </container>
-    </div>
-    <ng-template #divTemplate let-cells="cells">
-      <div
-        *ngFor="let cell of cells; let i = index"
-        class="d"
-        [ngClass]="{
-          'd-coll': cell.dir == 'vertical',
-          'd-row': cell.dir == 'horizontal'
-        }"
-        [ngStyle]="{
-          width: cell.width + '%',
-          height: cell.height + '%',
-          border: 'solid 1px #333'
-        }"
-      >
+<div class="mt-5 md-5">
+  <container>
+    <div class="row">
+      <div class="div mb-5 mt-5">
+        <div
+          class="d"
+          [ngClass]="{
+            'd-coll': mainZone.dir == 'vertical',
+            'd-row': mainZone.dir == 'horizontal'
+          }"
+          [ngStyle]="{
+            width: mainZone.width + '%',
+            height: mainZone.height + '%',
+            border: 'solid 1px #333'
+          }"
+        >
           <ng-container
             *ngTemplateOutlet="
               divTemplate;
-                context: {
-                  cells: cell.subCells
-                }
+              context: {
+                cells: mainZone.subCells
+              }
             "
           ></ng-container>
+        </div>
       </div>
-    </ng-template>
+    </div>
+  </container>
+</div>
+<ng-template #divTemplate let-cells="cells">
+  <div
+    *ngFor="let cell of cells; let i = index"
+    class="d"
+    [ngClass]="{
+      'd-coll': cell.dir == 'vertical',
+      'd-row': cell.dir == 'horizontal'
+    }"
+    [ngStyle]="{
+      width: cell.width + '%',
+      height: cell.height + '%',
+      border: 'solid 1px #333'
+    }"
+  >
+    <ng-container
+      *ngTemplateOutlet="
+        divTemplate;
+        context: {
+          cells: cell.subCells
+        }
+      "
+    ></ng-container>
+  </div>
+</ng-template>
 
+<ng-template #zoneDroptedElementsGinirator let-item="item">
+  <container-element [ngSwitch]="item">
+    <span *ngSwitchCase="'image'">
+      <img
+        [defaultImage]="'../../../../../../assets/images/default.jpg'"
+        [lazyLoad]="''"
+        [alt]="item"
+        width="100px"
+        height="100px"
+        alt=""
+      />
+    </span>
+    <span *ngSwitchCase="'heading'">
+      <h1>{{ item }}</h1>
+    </span>
+    <span class="m-5" *ngSwitchCase="'paragraphe'">
+          <span class="m-5" *ngSwitchCase="'paragraphe'">
+            <input width="100%" height="100%" class="input_heden"  value="'paragraphe text ...'" type="text" />
+          </span>
+    </span>
+    <span class="con-iframe" *ngSwitchCase="'youtube'">
+   
+          <iframe  class="iframe" width="100%" src="https://elementor.com/welcome-cloud/kit-summary-blank/" 
+            title="test" frameborder="0"
+           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+           allowfullscreen></iframe>
 
+    </span>
 
+        <span class="con-iframe" *ngSwitchCase="'iframe'">
+   
+          <iframe  class="iframe" width="100%" src="https://elementor.com/welcome-cloud/kit-summary-blank/" 
+            title="test" frameborder="0"
+           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+           allowfullscreen>
+          </iframe>
+
+    </span>
+    <span *ngSwitchCase="'link'">
+      <a>{{ item }}</a>
+    </span>
+    <span *ngSwitchCase="'card'">
+      <s-table-card></s-table-card>
+    </span>
+    <span *ngSwitchCase="'calendar'">
+      <div style="width: 200px; height: 200px">
+      </div>
+      <p-calendar
+        [(ngModel)]="calendar"
+        [inline]="true"
+        [showWeek]="true"
+      ></p-calendar>
+    </span>
+
+    <span *ngSwitchDefault> item :: {{ item | json }} </span>
+  </container-element>
+</ng-template>

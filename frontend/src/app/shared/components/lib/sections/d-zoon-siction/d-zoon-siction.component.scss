@@ -58,11 +58,11 @@ uniteLable {
   height: 60vh;
 }
 .auto-container {
-  text-align: center;
+
   border-radius: 6px;
   width: 300px;
   height: 200px;
-  align-items: center;
+
   background-color: #ffffff;
   position: relative;
 
@@ -934,4 +934,63 @@ $p-color: rgb(38, 132, 234);
 
   position: relative;
  z-index: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.placeholderForItemsToZone{   
+  background-color: #0000002d;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: rgba(106, 155, 197, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    img{
+      color: #ffffff;
+    
+    }
+    .placeholderForItemsToZoneExstantion{
+
+      svg{
+        color: #ffffff;
+      }
+    }
+}
+
+
+
+
+
+
+
+
+.input_heden{
+ width: 100%;
+  border: none;
+    background-color: transparent;
+  &:focus{
+ 
+      outline: none;
+  }
+  &:hover{
+  outline: none;
+  }
+  &:focus-visible {
+  outline: none;
+  }
+}
+
+.iframe{
+  height: 68vh;
+  
+}
+.con-iframe{
+  overflow: auto;
 }
