@@ -4,7 +4,6 @@
 
 
 <div class="mt-5 md-5">
-
     <div class="row">
       <div class="div mb-5 mt-5">
         <div
@@ -27,14 +26,13 @@
               }
             "
           ></ng-container>
-
+          
         </div>
       </div>
     </div>
-
 </div>
 <ng-template #divTemplate let-cells="cells">
-  <div
+  <div 
     *ngFor="let cell of cells; let i = index"
     class="d"
     [ngClass]="{
@@ -46,7 +44,7 @@
       height: cell.height + '%',
       border: 'solid 1px #333'
     }"
-  >
+    >
       <ng-container
         *ngTemplateOutlet="
           divTemplate;

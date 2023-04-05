@@ -12,7 +12,7 @@ class Cell {
     cellid: string,
     dir: 'vertical' | 'horizontal' = 'horizontal',
     parentId?: string,
-    meta?:any[]
+    meta?: any[]
   ) {
     this.width = width;
     this.height = height;
@@ -39,11 +39,12 @@ class Cell {
     });
   }
 }
-
-
-
-
-import {CdkDrag, CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {
+  CdkDrag,
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+} from '@angular/cdk/drag-drop';
 import { Component, ViewChild, ViewChildren } from '@angular/core';
 import { ChildActivationStart } from '@angular/router';
 import { PaginationInstance } from 'ngx-pagination';
@@ -63,7 +64,6 @@ export class DZoonSictionComponent {
   zoneElementPopUp = false;
   var: any;
   calendar: any;
-
   zoneConfigs(_t124: any, _t125: any, cell: any) {
     this.zoneConfigsPopUp = !this.zoneConfigsPopUp;
   }
@@ -75,7 +75,6 @@ export class DZoonSictionComponent {
   }
   mainZone = new Cell(100, 100, '0');
   zoneMap = new Map<string, Cell>();
-
   ResizeStartVal: any;
   ResizeEndVal: any;
   refrshSplitter: string = '';
@@ -91,7 +90,6 @@ export class DZoonSictionComponent {
       d_zoonDiraction: 'horizontal',
     },
   ];
-
   getRandomColor(): string {
     const letters: string = '0123456789ABCDEF';
     let color: string = '#';
@@ -100,7 +98,6 @@ export class DZoonSictionComponent {
     }
     return color;
   }
-
   ngOnInit() {
     this.zoneMap.set('0', this.mainZone);
     let cell0 = new Cell(
@@ -121,7 +118,6 @@ export class DZoonSictionComponent {
     this.zoneMap.set(cell0.cellid, cell0);
     this.zoneMap.set(cell1.cellid, cell1);
   }
-
   onResizeStart(event: any, parentId: any, dir: any, cells: any) {
     this.ResizeStartVal = event.sizes;
     console.log('ResizeStartVal: ', this.ResizeStartVal);
@@ -133,7 +129,6 @@ export class DZoonSictionComponent {
     });
     let waistedPersonage: number = (100 - aaa) / this.ResizeStartVal.length;
     console.log('waistedPersonage: ', waistedPersonage);
-
     cells.forEach((cell, i) => {
       if (dir == 'horizontal') {
         cell.width =
@@ -143,7 +138,6 @@ export class DZoonSictionComponent {
           event.sizes[i] + (event.sizes.length - 1) * waistedPersonage;
       }
     });
-
     this.ResizeEndVal = event;
     setTimeout(() => {
       console.warn(this.mainZone);
@@ -173,10 +167,8 @@ export class DZoonSictionComponent {
       this.refrshSplitter = '';
     }, 500);
   }
-
   changeDirection() {
     this.mainZone.changeDirection();
-
     this.parameter[0].d_zoonDiraction = this.mainZone.dir;
   }
   addZoon(type: string, id: string, parentId: string, cell: Cell) {
@@ -296,20 +288,18 @@ export class DZoonSictionComponent {
       this.refrshSplitter = '';
     }, 100);
   }
-
   public o_config: PaginationInstance = {
     id: 'custom',
     itemsPerPage: 21,
     currentPage: 1,
   };
-
   @ViewChildren('dzoneDropZones') dropZones: any;
   @ViewChild('nenuElementsForDzoneDropZones') menu: any;
-
   dzoneDropZonesVar2 = [];
   dzoneDropZonesVar = [];
-
-  nenuElementsForDzoneDropZonesVar = [
+  nenuElementsForDzoneDropZonesVar =
+    
+  [
     'Get to work',
     'Pick up groceries',
     'Go home',
@@ -339,10 +329,11 @@ export class DZoonSictionComponent {
     'Walk dog',
   ];
 
+
+
   drop(event: CdkDragDrop<any>, id?: string) {
     if (event.previousContainer === event.container) {
       if (id) this.zoneMap.get(id)?.meta.push({ name: event.item.data });
-
       moveItemInArray(
         event.container.data,
         event.previousIndex,
@@ -364,16 +355,15 @@ export class DZoonSictionComponent {
     }
   }
 
+  
   /** Predicate function that only allows even numbers to be dropped into a list. */
   evenPredicate(item: CdkDrag<number>) {
     return item.data % 2 === 0;
   }
-
   /** Predicate function that doesn't allow items to be dropped into a list. */
   noReturnPredicate() {
     return false;
   }
-
   ItemsForAdding: any[] = [
     'heading',
     'image',
@@ -387,4 +377,5 @@ export class DZoonSictionComponent {
   imgUrl: string = '../../../../../../assets/images/google-logs/add-';
   imgExtension: string = 'svg';
   showItemMenu = false;
+
 }

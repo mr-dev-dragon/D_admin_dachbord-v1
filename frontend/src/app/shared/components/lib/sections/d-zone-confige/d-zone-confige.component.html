@@ -1,0 +1,80 @@
+<div class="box">
+  <div class="tool d-flex">
+    <div class="input-group input_Bluk mb-3">
+      <input readonly class="form-control" placeholder="Row Unit" />
+      <div class="input-group-text" id="basic-addon2">
+        <select
+          [(ngModel)]="parameter[0].d_zoonrowUnit"
+          class="pagination-active pageRowsOptionsValue"
+        >
+          <option id="option" [value]="'px'">px</option>
+          <option id="option" [value]="'rem'">rem</option>
+          <option id="option" [value]="'%'">%</option>
+          <option id="option" [value]="'rem'">rem</option>
+        </select>
+      </div>
+    </div>
+    <div class="input-group input_Bluk mb-3">
+      <input readonly class="form-control" placeholder="Row Unit" />
+      <div class="input-group-text" id="basic-addon2">
+        <select
+          [(ngModel)]="parameter[0].d_zoonColUnit"
+          class="pagination-active pageRowsOptionsValue"
+        >
+          <option id="option" [value]="'px'">px</option>
+          <option id="option" [value]="'rem'">rem</option>
+          <option id="option" [value]="'%'">%</option>
+          <option id="option" [value]="'rem'">rem</option>
+        </select>
+      </div>
+    </div>
+    <div class="input-group inputBluk mb-3">
+      <input
+        [(ngModel)]="parameter[0].d_zoonWidth"
+        type="number"
+        class="form-control"
+        placeholder="Zoon Width"
+      />
+      <div class="input-group-text" id="basic-addon2">
+        <select
+          [(ngModel)]="parameter[0].d_zoonWidthUnit"
+          class="pagination-active pageRowsOptionsValue"
+        >
+          <option id="option" [value]="'px'">px</option>
+          <option id="option" [value]="'rem'">rem</option>
+          <option id="option" [value]="'%'">%</option>
+          <option id="option" [value]="'rem'">rem</option>
+        </select>
+      </div>
+    </div>
+    <div class="input-group inputBluk mb-3">
+      <input
+        [(ngModel)]="parameter[0].d_zoonHeight"
+        type="number"
+        class="form-control"
+        placeholder="Zoon height"
+      />
+      <div class="input-group-text" id="basic-addon2">
+        <select
+          [(ngModel)]="parameter[0].d_zoonHeightUnit"
+          class="pagination-active pageRowsOptionsValue"
+        >
+          <option id="option" [value]="'px'">px</option>
+          <option id="option" [value]="'rem'">rem</option>
+          <option id="option" [value]="'%'">%</option>
+          <option id="option" [value]="'rem'">rem</option>
+        </select>
+      </div>
+    </div>
+    <button
+      (click)="changeDirection()"
+      type="button"
+      class="btn btn-primary submit"
+    >
+      dir
+    </button>
+    <button type="button" class="btn btn-outline-primary submit">
+      Primary
+    </button>
+  </div>
+</div>
