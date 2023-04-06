@@ -1,0 +1,32 @@
+<div class="imgSection">
+   <img 
+
+        [ngStyle]=""
+        [ngClass]=""
+        [alt]=" parameter[0].img.alt"
+
+        [defaultImage]="'../../../../../../../assets/images/default.jpg'"
+        [lazyLoad]="''"
+        class="img"
+>
+      <i class="pi pi-pencil edit-icon" *ngIf="! parameter[0].img.showForm" (click)=" parameter[0].img.showForm =true"></i>
+     
+</div>
+
+ 
+
+
+
+<ng-container  *ngIf="  parameter[0].img.showForm">
+
+  <item-menu-config
+      [type]="'image'"
+       [inData]="parameter[0]"
+      (Quit)="Quit()"
+      (outData)="outData($event)"
+      
+  ></item-menu-config>
+
+</ng-container>
+
+      

@@ -3,7 +3,6 @@
 
 
 
-
 <d-zone-confige></d-zone-confige>
 
 
@@ -77,49 +76,49 @@
     [cdkDropListConnectedTo]="dropZones?._results"
     (cdkDropListDropped)="drop($event, id)"
     class="h-w-100 md-dots-bg auto-container"
+
   >
-  
 
-    <div *ngFor="let o of cell.meta" cdkDrag>
-      <ng-container
-        *ngTemplateOutlet="zoneDroptedElementsGinirator; context: { item: o }"
-      ></ng-container>
-    </div>
+        <div *ngFor="let o of cell.meta" cdkDrag>
+          <ng-container
+            *ngTemplateOutlet="zoneDroptedElementsGinirator; context: { item: o }"
+          ></ng-container>
+        </div>
+        <button class="remove-this-zon" (click)="removeZoon(id, parentId)">
+          <i class="remove pi pi-times-circle"></i>
+        </button>
+        <button
+          class="config-in-this-zon"
+          (click)="zoneConfigs(id, parentId, cell)"
+        >
+          <i class="add pi pi-cog"></i>
+          <!-- <div *ngIf="zoneConfigsPopUp">44 <confige name="7"></confige></div> -->
+        </button>
+        <button class="add-btn-top" (click)="addZoon('top', id, parentId, cell)">
+          <i class="pi pi-plus-circle"></i>
+        </button>
+        <button
+          class="add-btn-right"
+          (click)="addZoon('right', id, parentId, cell)"
+        >
+          <i class="pi pi-plus-circle"></i>
+        </button>
+        <button class="add-btn-left" (click)="addZoon('left', id, parentId, cell)">
+          <i class="pi pi-plus-circle"></i>
+        </button>
+        <button
+          class="add-btn-buttom"
+          (click)="addZoon('bottom', id, parentId, cell)"
+        >
+          <i class="pi pi-plus-circle"></i>
+        </button>
+        <button
+          class="add-btn-center"
+          (click)="addZoon('main', id, parentId, cell)"
+        >
+          <p class="pi pi-plus-circle"></p>
+        </button>
 
-    <button class="remove-this-zon" (click)="removeZoon(id, parentId)">
-      <i class="remove pi pi-times-circle"></i>
-    </button>
-    <button
-      class="config-in-this-zon"
-      (click)="zoneConfigs(id, parentId, cell)"
-    >
-      <i class="add pi pi-cog"></i>
-      <!-- <div *ngIf="zoneConfigsPopUp">44 <confige name="7"></confige></div> -->
-    </button>
-    <button class="add-btn-top" (click)="addZoon('top', id, parentId, cell)">
-      <i class="pi pi-plus-circle"></i>
-    </button>
-    <button
-      class="add-btn-right"
-      (click)="addZoon('right', id, parentId, cell)"
-    >
-      <i class="pi pi-plus-circle"></i>
-    </button>
-    <button class="add-btn-left" (click)="addZoon('left', id, parentId, cell)">
-      <i class="pi pi-plus-circle"></i>
-    </button>
-    <button
-      class="add-btn-buttom"
-      (click)="addZoon('bottom', id, parentId, cell)"
-    >
-      <i class="pi pi-plus-circle"></i>
-    </button>
-    <button
-      class="add-btn-center"
-      (click)="addZoon('main', id, parentId, cell)"
-    >
-      <p class="pi pi-plus-circle"></p>
-    </button>
   </div>
 </ng-template>
 
@@ -167,10 +166,7 @@
 
 
 
- 
- 
-  <!-- <read-d-zone [data]="mainZone"></read-d-zone>  -->
-
+<read-d-zone [data]="mainZone"></read-d-zone> 
 
 
 
@@ -195,10 +191,10 @@
     <span *ngSwitchCase="'heading'">
       <h1>{{ item }}</h1>
     </span>
-    <span class="m-5" *ngSwitchCase="'paragraphe'">
-          <span class="m-5" *ngSwitchCase="'paragraphe'">
-            <input width="100%" height="100%" class="input_heden"  value="'paragraphe text ...'" type="text" />
-          </span>
+    <span  *ngSwitchCase="'paragraphe'">
+          <span  *ngSwitchCase="'paragraphe'">
+             <textarea class="input_heden"  [(ngModel)]="paragraphs" name="" id="" cols="100%" rows="100%"></textarea>
+           </span>
     </span>
     <span class="con-iframe" *ngSwitchCase="'youtube'">
    
@@ -223,10 +219,20 @@
           </iframe>
 
     </span>
-    <span *ngSwitchCase="'link'">
-      <a>{{ item }}</a>
+    <span  *ngSwitchCase="'link'" class="link ">
+
+
+
+      &lt;a href=" 
+        <input value="http://..." class="  {{item}}-href-input _hiden" type="url"> " 
+        target="
+         <input value="target..." class="  {{item}}-href-input _hiden" type="url">" &gt;
+         <input value="label..."  class="  {{item}}-label-input _hiden" type="text"> 
+      &lt; /a &gt;
+     
+       
     </span>
-    <span *ngSwitchCase="'card'">
+    <span  [(ngModel)]="paragraphs" *ngSwitchCase="'card'">
       <s-table-card></s-table-card>
     </span>
     <span *ngSwitchCase="'calendar'">
@@ -284,59 +290,6 @@
 
 
 
-<div class="mt-5 md-5">
-  <container>
-    <div class="row">
-      <div class="div mb-5 mt-5">
-        <div
-          class="d"
-          [ngClass]="{
-            'd-coll': mainZone.dir == 'vertical',
-            'd-row': mainZone.dir == 'horizontal'
-          }"
-          [ngStyle]="{
-            width: mainZone.width + '%',
-            height: mainZone.height + '%',
-            border: 'solid 1px #333'
-          }"
-        >
-          <ng-container
-            *ngTemplateOutlet="
-              divTemplate;
-              context: {
-                cells: mainZone.subCells
-              }
-            "
-          ></ng-container>
-        </div>
-      </div>
-    </div>
-  </container>
-</div>
-<ng-template #divTemplate let-cells="cells">
-  <div
-    *ngFor="let cell of cells; let i = index"
-    class="d"
-    [ngClass]="{
-      'd-coll': cell.dir == 'vertical',
-      'd-row': cell.dir == 'horizontal'
-    }"
-    [ngStyle]="{
-      width: cell.width + '%',
-      height: cell.height + '%',
-      border: 'solid 1px #333'
-    }"
-  >
-    <ng-container
-      *ngTemplateOutlet="
-        divTemplate;
-        context: {
-          cells: cell.subCells
-        }
-      "
-    ></ng-container>
-  </div>
-</ng-template>
 
 
 

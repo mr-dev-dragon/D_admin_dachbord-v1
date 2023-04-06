@@ -117,22 +117,12 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { DndModule } from 'ngx-drag-drop';
 import { ExportDataComponent } from './components/lib/others/export/export-excel/export.component';
 import { ReadDZoneComponent } from './components/lib/sections/read-d-zone/read-d-zone.component';
-import { TestComponent } from './components/lib/sections/test/test.component';
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+import { ItemMenuComponent } from './components/lib/sections/item-menu/item-menu.component';
+import { DZoneConfigeComponent } from './components/lib/sections/d-zone-confige/d-zone-confige.component';
+import { EditorModule } from 'primeng/editor';
+import { TextToolBarComponent } from './components/lib/sections/d-zone-tool/text-tool-bar/text-tool-bar.component';
+import { ImgComponent } from './components/lib/sections/d-zone-tool/img/img.component';
+import { ItemMenuConfigComponent } from './components/lib/sections/item-menu-config/item-menu-config.component';
 
 
 @NgModule({
@@ -194,13 +184,24 @@ import { TestComponent } from './components/lib/sections/test/test.component';
     FilterAddressRuleTemplateComponent,
     DZoonSictionComponent,
     ReadDZoneComponent,
-    TestComponent,
-
-
-
+    ItemMenuComponent,
+    DZoneConfigeComponent,
+    TextToolBarComponent,
+    ImgComponent,
+    ItemMenuConfigComponent
 
   ],
   imports: [
+    EditorModule,
+
+
+
+
+
+
+
+
+
     DndModule,
     BrowserModule,
     BrowserAnimationsModule,

@@ -42,23 +42,33 @@
           <div class="col">
             <div class="overflow-hidden flex-nowrap">
               <h6 class="mb-1">
-                <a  class="a" href="#!" class="text-reset">CRM dashboard landing page</a>
+                <p  class="a"  class="text-reset"> <input value="CRM dashboard landing page  Updated 2 Hours Ago" style="width: 100%;" class="  {{item}}-label-input _hiden" type="text">  </p>
               </h6>
               <span class="text-muted d-block mb-2 small">
-                Updated 2 Hours Ago
+                <input value="CRM dashboard landing page  Updated 2 Hours Ago"   style="width: 100%;"class="  {{item}}-label-input _hiden" type="text"> 
               </span>
               <div class="row align-items-center">
                 <div class="col-12">
                   <div class="row align-items-center g-0">
                     <div class="col-auto">
-                      <small class="me-2">45%</small>
+                      <small class="">  
+                        <input [(ngModel)]="percentage"  (keydown)="onPercentageChange()" (keyup)="onPercentageChange()" 
+                        class="_hiden {{color=='red'?'danger':''}}  {{item}}-label-input _hiden" style="width:14%;" type="number"> %
+                      </small>
                     </div>
                     <div class="col">
 
                       <!-- Progress bar -->
                       <div class="progress bg-tint-success" style="height: 4px;">
-                        <div class="progress-bar bg-success" role="progressbar" style="width: 45%;" aria-valuenow="65"
-                          aria-valuemin="0" aria-valuemax="100"></div>
+                        <div 
+                              class="progress-bar  bg-{{color=='red'?'danger':'success'}}"
+                              role="progressbar" 
+                              style="width: {{percentage}}%;" 
+                              aria-valuenow="65"
+                              aria-valuemin="0" 
+                              aria-valuemax="100"
+
+                          ></div>
                       </div>
 
                     </div>

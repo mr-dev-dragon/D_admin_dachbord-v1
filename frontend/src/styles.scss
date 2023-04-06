@@ -1,7 +1,24 @@
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
 @import "./assets/scss/style.scss";
 
+._hiden {
 
+  border: none;
+  background: transparent;
+
+  &:focus {
+
+    outline: none;
+  }
+
+  &:hover {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: none;
+  }
+}
 
 $ahmed : #333;
 

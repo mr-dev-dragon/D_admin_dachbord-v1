@@ -62,6 +62,7 @@ export class DZoonSictionComponent {
   zoneConfigsPopUp = false;
   zoneHistoryPopUp = false;
   zoneElementPopUp = false;
+  paragraphs:any = 'add your text ..';
   var: any;
   calendar: any;
   zoneConfigs(_t124: any, _t125: any, cell: any) {
@@ -297,9 +298,7 @@ export class DZoonSictionComponent {
   @ViewChild('nenuElementsForDzoneDropZones') menu: any;
   dzoneDropZonesVar2 = [];
   dzoneDropZonesVar = [];
-  nenuElementsForDzoneDropZonesVar =
-    
-  [
+  nenuElementsForDzoneDropZonesVar = [
     'Get to work',
     'Pick up groceries',
     'Go home',
@@ -328,8 +327,6 @@ export class DZoonSictionComponent {
     'Check e-mail',
     'Walk dog',
   ];
-
-
 
   drop(event: CdkDragDrop<any>, id?: string) {
     if (event.previousContainer === event.container) {
@@ -355,7 +352,6 @@ export class DZoonSictionComponent {
     }
   }
 
-  
   /** Predicate function that only allows even numbers to be dropped into a list. */
   evenPredicate(item: CdkDrag<number>) {
     return item.data % 2 === 0;
@@ -377,5 +373,4 @@ export class DZoonSictionComponent {
   imgUrl: string = '../../../../../../assets/images/google-logs/add-';
   imgExtension: string = 'svg';
   showItemMenu = false;
-
 }

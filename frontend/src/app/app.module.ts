@@ -60,6 +60,7 @@ import { DZoonSictionExComponent } from './components/section-ex/dzoon-siction-e
 
 
 
+
 const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
   url: 'http://localhost:8080/post',
   maxFilesize: 50,
@@ -103,11 +104,8 @@ const DEFAULT_DROPZONE_CONFIG: DropzoneConfigInterface = {
     TableV4Component,
     TableV5Component,
     DColExComponent,
-
     SelfCloseSectionExComponent,
     DZoonSictionExComponent,
-
-
   ],
   imports: [
 

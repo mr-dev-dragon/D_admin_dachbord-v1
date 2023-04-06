@@ -1,277 +1,273 @@
-
-
-
-
 <div class="menu-container">
-    <section class="sectionSection">
-      <div>
-        <div class="menu settings">
-          <ul class="menu-list">
-            <li class="menu-item context-buttons">
-              <button class="context-button">
-                <svg class="svg2" viewBox="0 0 16 16">
-                  <path
-                    d="M16,7H3.8l5.6-5.6L8,0L0,8l8,8l1.4-1.4L3.8,9H16V7z"
-                  ></path>
-                </svg>
-              </button>
-              <button class="context-button">
-                <svg class="svg2" viewBox="0 0 16 16">
-                  <path
-                    d="M8,0L6.6,1.4L12.2,7H0v2h12.2l-5.6,5.6L8,16l8-8L8,0z"
-                  ></path>
-                </svg>
-              </button>
-              <button class="context-button">
-                <svg class="svg2" viewBox="0 0 16 16">
-                  <path
-                    d="M13.6,2.3C12.2,0.9,10.2,0,8,0C3.6,0,0,3.6,0,8s3.6,8,8,8c3.7,0,6.8-2.5,7.7-6h-2.1c-0.8,2.3-3,4-5.6,4c-3.3,0-6-2.7-6-6
+  <section class="sectionSection">
+    <div>
+      <div class="menu settings">
+        <ul class="menu-list">
+          <li class="menu-item context-buttons">
+            <button class="context-button">
+              <svg class="svg2" viewBox="0 0 16 16">
+                <path
+                  d="M16,7H3.8l5.6-5.6L8,0L0,8l8,8l1.4-1.4L3.8,9H16V7z"
+                ></path>
+              </svg>
+            </button>
+            <button class="context-button">
+              <svg class="svg2" viewBox="0 0 16 16">
+                <path
+                  d="M8,0L6.6,1.4L12.2,7H0v2h12.2l-5.6,5.6L8,16l8-8L8,0z"
+                ></path>
+              </svg>
+            </button>
+            <button class="context-button">
+              <svg class="svg2" viewBox="0 0 16 16">
+                <path
+                  d="M13.6,2.3C12.2,0.9,10.2,0,8,0C3.6,0,0,3.6,0,8s3.6,8,8,8c3.7,0,6.8-2.5,7.7-6h-2.1c-0.8,2.3-3,4-5.6,4c-3.3,0-6-2.7-6-6
                                           s2.7-6,6-6c1.7,0,3.1,0.7,4.2,1.8L9,7h7V0L13.6,2.3z"
-                  ></path>
-                </svg>
-              </button>
-              <button class="context-button">
-                <svg viewBox="0 0 16 16" class="svg2">
-                  <path
-                    d="M8,12.2l4.9,3l-1.3-5.6L16,5.8l-5.8-0.5L8,0L5.8,5.3L0,5.8l4.4,3.8l-1.3,5.6L8,12.2z"
-                  ></path>
-                </svg>
-              </button>
-            </li>
-          </ul>
-          <ul class="menu-list">
-            <li class="menu-item context-buttons">
-              <span class="spanSpan">Zoom</span>
-              <button class="settings-button">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="css-i6dzq1"
-                >
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
-              </button>
-              <button class="settings-button">100%</button>
-              <button class="settings-button">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="css-i6dzq1"
-                >
-                  <line x1="12" y1="5" x2="12" y2="19"></line>
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
-              </button>
-              <button class="settings-button">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="css-i6dzq1"
-                >
-                  <path
-                    d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"
-                  ></path>
-                </svg>
-              </button>
-            </li>
-          </ul>
-          <ul class="menu-list">
-            <div
-              class="parent"
-              cdkDropList
-              #nenuElementsForDzoneDropZones="cdkDropList"
-              [cdkDropListData]="ItemsForAdding"
-              [cdkDropListConnectedTo]="dropZones"
-              (cdkDropListDropped)="drop($event)"
-              [cdkDropListEnterPredicate]="noReturnPredicate"
-            >
-              <div
-                class="add-item-menu"
-                *ngFor="let o of ItemsForAdding | paginate : o_config"
-                [cdkDragData]="o"
-                cdkDrag
+                ></path>
+              </svg>
+            </button>
+            <button class="context-button">
+              <svg viewBox="0 0 16 16" class="svg2">
+                <path
+                  d="M8,12.2l4.9,3l-1.3-5.6L16,5.8l-5.8-0.5L8,0L5.8,5.3L0,5.8l4.4,3.8l-1.3,5.6L8,12.2z"
+                ></path>
+              </svg>
+            </button>
+          </li>
+        </ul>
+        <ul class="menu-list">
+          <li class="menu-item context-buttons">
+            <span class="spanSpan">Zoom</span>
+            <button class="settings-button">
+              <svg
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="css-i6dzq1"
               >
-                <img
-                  style="opacity: 0.7"
-                  width="28"
-                  height="18"
-                  [lazyLoad]="imgUrl + o + '.' + imgExtension"
-                  [alt]="o"
-                />
-                <span>{{ o }}</span>
-                <ng-container *cdkDragPreview>
-                  <span class="placeholderForItemsToZone">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+            <button class="settings-button">100%</button>
+            <button class="settings-button">
+              <svg
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="css-i6dzq1"
+              >
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+            </button>
+            <button class="settings-button">
+              <svg
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="css-i6dzq1"
+              >
+                <path
+                  d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"
+                ></path>
+              </svg>
+            </button>
+          </li>
+        </ul>
+        <ul class="menu-list">
+          <div
+            class="parent"
+            cdkDropList
+            #nenuElementsForDzoneDropZones="cdkDropList"
+            [cdkDropListData]="ItemsForAdding"
+            [cdkDropListConnectedTo]="dropZones"
+            (cdkDropListDropped)="drop($event)"
+            [cdkDropListEnterPredicate]="noReturnPredicate"
+          >
+            <div
+              class="add-item-menu"
+              *ngFor="let o of ItemsForAdding | paginate : o_config"
+              [cdkDragData]="o"
+              cdkDrag
+            >
+              <img
+                style="opacity: 0.7"
+                width="28"
+                height="18"
+                [lazyLoad]="imgUrl + o + '.' + imgExtension"
+                [alt]="o"
+              />
+              <span>{{ o }}</span>
+              <ng-container *cdkDragPreview>
+                <span class="placeholderForItemsToZone">
+                  <img
+                    style="opacity: 0.7"
+                    width="35"
+                    height="25"
+                    [lazyLoad]="imgUrl + o + '.' + imgExtension"
+                    [alt]="o"
+                  />
+                  <span>
+                    {{ dropPlaceholder(o) }}
+                  </span>
+                  <span class="placeholderForItemsToZoneExstantion">
                     <img
                       style="opacity: 0.7"
-                      width="35"
-                      height="25"
-                      [lazyLoad]="imgUrl + o + '.' + imgExtension"
+                      width="38"
+                      height="28"
+                      [lazyLoad]="
+                        '../../../../../../assets/images/google-logs/drag_indicator.svg'
+                      "
                       [alt]="o"
                     />
-                    <span>
-                     {{dropPlaceholder(o)}}
-                    </span>
-                    <span class="placeholderForItemsToZoneExstantion">
-                      <img
-                        style="opacity: 0.7"
-                        width="38"
-                        height="28"
-                        [lazyLoad]="
-                          '../../../../../../assets/images/google-logs/drag_indicator.svg'
-                        "
-                        [alt]="o"
-                      />
-                    </span>
                   </span>
-                </ng-container>
-              </div>
+                </span>
+              </ng-container>
             </div>
-          </ul>
-          <ul class="less ulForPagination">
-            <pagination-template
-              #p="paginationApi"
-              [id]="o_config.id"
-              (pageChange)="o_config.currentPage = $event"
-            >
-              <div class="pagination">
-                <div
-                  *ngIf="ItemsForAdding.length > o_config.itemsPerPage"
-                  class="in-custom-pagination"
-                >
-                  <div class="in-in-custom-pagination">
-                    <div
-                      class="pagination-tiems"
-                      *ngFor="let page of p.pages"
-                      [class.current]="p.getCurrent() === page.value"
+          </div>
+        </ul>
+        <ul class="less ulForPagination">
+          <pagination-template
+            #p="paginationApi"
+            [id]="o_config.id"
+            (pageChange)="o_config.currentPage = $event"
+          >
+            <div class="pagination">
+              <div
+                *ngIf="ItemsForAdding.length > o_config.itemsPerPage"
+                class="in-custom-pagination"
+              >
+                <div class="in-in-custom-pagination">
+                  <div
+                    class="pagination-tiems"
+                    *ngFor="let page of p.pages"
+                    [class.current]="p.getCurrent() === page.value"
+                  >
+                    <a
+                      class="pagination-a"
+                      (click)="p.setCurrent(page.value)"
+                      *ngIf="p.getCurrent() !== page.value"
                     >
-                      <a
-                        class="pagination-a"
-                        (click)="p.setCurrent(page.value)"
-                        *ngIf="p.getCurrent() !== page.value"
-                      >
-                        <span>{{ page.label }}</span>
-                      </a>
-                      <div
-                        class="pagination-active"
-                        *ngIf="p.getCurrent() === page.value"
-                      >
-                        <span>{{ page.label }}</span>
-                      </div>
+                      <span>{{ page.label }}</span>
+                    </a>
+                    <div
+                      class="pagination-active"
+                      *ngIf="p.getCurrent() === page.value"
+                    >
+                      <span>{{ page.label }}</span>
                     </div>
                   </div>
                 </div>
-                <div
-                  *ngIf="ItemsForAdding.length < o_config.itemsPerPage"
-                  class="in-custom-pagination"
-                >
-                  <div class="in-in-custom-pagination">
-                    <span class="pagination-active"> </span>
-                  </div>
+              </div>
+              <div
+                *ngIf="ItemsForAdding.length < o_config.itemsPerPage"
+                class="in-custom-pagination"
+              >
+                <div class="in-in-custom-pagination">
+                  <span class="pagination-active"> </span>
                 </div>
               </div>
-            </pagination-template>
-          </ul>
-          <ul class="menu-list">
-            <li class="menu-item context-buttons">
-              <span style="padding-right: 30px">Edit</span>
-              <button class="settings-button">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="css-i6dzq1"
-                >
-                  <circle cx="6" cy="6" r="3"></circle>
-                  <circle cx="6" cy="18" r="3"></circle>
-                  <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
-                  <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
-                  <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
-                </svg>
-              </button>
-              <button class="settings-button">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="css-i6dzq1"
-                >
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                  <path
-                    d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
-                  ></path>
-                </svg>
-              </button>
-              <button class="settings-button">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="css-i6dzq1"
-                >
-                  <path
-                    d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
-                  ></path>
-                  <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-                </svg>
-              </button>
-            </li>
-          </ul>
-          <ul class="menu-list">
-            <li class="menu-item">
-              <button class="menu-button menu-button--delete">
-                <svg
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="css-i6dzq1"
-                >
-                  <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
-                  <line x1="12" y1="2" x2="12" y2="12"></line>
-                </svg>
-                <span class="spanSpan">Quit </span>
-                <span class="spanSpan">CTRL+Q </span>
-              </button>
-            </li>
-          </ul>
-        </div>
+            </div>
+          </pagination-template>
+        </ul>
+        <ul class="menu-list">
+          <li class="menu-item context-buttons">
+            <span style="padding-right: 30px">Edit</span>
+            <button class="settings-button">
+              <svg
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="css-i6dzq1"
+              >
+                <circle cx="6" cy="6" r="3"></circle>
+                <circle cx="6" cy="18" r="3"></circle>
+                <line x1="20" y1="4" x2="8.12" y2="15.88"></line>
+                <line x1="14.47" y1="14.48" x2="20" y2="20"></line>
+                <line x1="8.12" y1="8.12" x2="12" y2="12"></line>
+              </svg>
+            </button>
+            <button class="settings-button">
+              <svg
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="css-i6dzq1"
+              >
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path
+                  d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+                ></path>
+              </svg>
+            </button>
+            <button class="settings-button">
+              <svg
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="css-i6dzq1"
+              >
+                <path
+                  d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
+                ></path>
+                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+              </svg>
+            </button>
+          </li>
+        </ul>
+        <ul class="menu-list">
+          <li class="menu-item">
+            <button class="menu-button menu-button--delete">
+              <svg
+                viewBox="0 0 24 24"
+                width="24"
+                height="24"
+                stroke="currentColor"
+                stroke-width="2"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="css-i6dzq1"
+              >
+                <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                <line x1="12" y1="2" x2="12" y2="12"></line>
+              </svg>
+              <span class="spanSpan">Quit </span>
+              <span class="spanSpan">CTRL+Q </span>
+            </button>
+          </li>
+        </ul>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
+</div>
